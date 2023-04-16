@@ -8,7 +8,8 @@
 #include <atomic>
 #include <string>
 #include <vector>
-#include <windows.h>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -21,9 +22,9 @@ void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphor
 {
     string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
 
-    string vdaPath = dataPath + sysFileChar + "data" + sysFileChar + date + sysFileChar + "VDA_SIMPLIFIED.txt";
-    string cpaPath = dataPath + sysFileChar + "data" + sysFileChar + date + sysFileChar + "CPA_SIMPLIFIED.txt";
-    string negPath = dataPath + sysFileChar + "data" + sysFileChar + date + sysFileChar + "NEG_SIMPLIFIED.txt";
+    string vdaPath = dataPath + sysFileChar + date + sysFileChar + "VDA_SIMPLIFIED.txt";
+    string cpaPath = dataPath + sysFileChar + date + sysFileChar + "CPA_SIMPLIFIED.txt";
+    string negPath = dataPath + sysFileChar + date + sysFileChar + "NEG_SIMPLIFIED.txt";
     
     ifstream negFile(negPath);
     ifstream vdaFile(vdaPath);
@@ -47,10 +48,11 @@ void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphor
     string cpaBuffer;
     int idx = 0;
 
+    chrono::milliseconds timespan(1000);
+
     while (true) {
-
         semaphore->acquire();
-
+        
         getline(cpaFile, cpaBuffer);
         //getline(vdaFile, vdaBuffer);
         //getline(negFile, negBuffer);
@@ -59,7 +61,7 @@ void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphor
         //eventsToBeProcessed->push_back(vdaBuffer+";VDA");
         //eventsToBeProcessed->push_back(negBuffer+";NEG");
         semaphore->release();
-        //Sleep(1);
+        this_thread::sleep_for(timespan);
     }
 
     vdaFile.close();

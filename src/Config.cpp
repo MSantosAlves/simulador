@@ -1,13 +1,21 @@
+#include "Config.h"
+#include "StringUtils.h"
+
 #include <iostream>
 #include <fstream>
-
-#include "Config.h"
+#include <filesystem>
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
+using namespace std;
 
 Config::Config() {
-    ifstream jsonFile("C:\\Users\\Matheus Alves\\Documents\\UnB\\TG\\code\\simulador\\config.json");
+    filesystem::path pwd = filesystem::current_path();
+    StringUtils stringUtils;
+    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
+    string fullPath = stringUtils.pathToString(pwd) + sysFileChar + "config.json";
+   
+    ifstream jsonFile(fullPath);
     json jsonData = json::parse(jsonFile);
 
     string date = jsonData["date"];

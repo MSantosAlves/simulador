@@ -20,8 +20,9 @@ FetchContent_MakeAvailable(json)
 set(SOURCES
     src/Config.cpp
     src/DataService.cpp
-    src/Event.cpp
     src/EventService.cpp
+    src/LogService.cpp
+    src/Event.cpp
     src/Semaphore.cpp
     utils/StringUtils.cpp
     src/main.cpp

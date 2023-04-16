@@ -1,5 +1,6 @@
 #include "DataService.h"
 #include "EventService.h"
+#include "LogService.h"
 #include "Semaphore.h"
 #include "Config.h"
 
@@ -34,13 +35,15 @@ int main(int argc, char* argv[])
     // Instantiate services
     DataService* dataService = new DataService(date, dataPath);
     EventService* eventService = new EventService(stocks);
+    LogService* logService = new LogService();
     
     thread dataAcquisitionThread(&DataService::startAcquisition, dataService, &eventsToBeProcessed, semaphore);
     thread eventsProcessorThread(&EventService::startProcessEvents, eventService, &eventsToBeProcessed, &offersBook, semaphore, &processedEvents);
+    thread logSystemThread(&LogService::startLogSystem, logService, &eventsToBeProcessed, &offersBook, semaphore, &processedEvents);
 
     dataAcquisitionThread.join();
     eventsProcessorThread.join();
-
+    logSystemThread.join();
 
     return 0;
 }

@@ -8,7 +8,8 @@
 #include <atomic>
 #include <string>
 #include <vector>
-//#include <windows.h>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -39,6 +40,7 @@ Event processEvent(string event, vector<Event>* processedEvents)
     stringSize = splitedString.size();
     Event* eventBuffer = new Event();
 
+    // stringSize <= 2 => Data header
     if (stringSize > 2) {
         type = splitedString[stringSize - 1];
         if (type == "VDA" || type == "CPA") {
@@ -100,6 +102,8 @@ EventService::EventService(vector<string> _targetStocks) {
 void EventService::startProcessEvents(vector<string>* eventsToBeProcessed, vector<string>* offerBook, Semaphore* semaphore, vector<Event>* processedEvents)
 {
     Event eventBuffer;
+    chrono::milliseconds timespan(1000);
+
     while (true) {
         semaphore->acquire();
 
@@ -115,6 +119,6 @@ void EventService::startProcessEvents(vector<string>* eventsToBeProcessed, vecto
         }
 
         semaphore->release();
-        //Sleep(1);
+        this_thread::sleep_for(timespan);
     }
 }
