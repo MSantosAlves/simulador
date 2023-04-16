@@ -11,14 +11,23 @@ endif()
 
 project ("simulador")
 
+include(FetchContent)
+
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
 # Create a sources variable with a link to all cpp files to compile
 set(SOURCES
+    src/Config.cpp
     src/DataService.cpp
+    src/Semaphore.cpp
     src/main.cpp
 )
 
 # Adicione a origem ao executável deste projeto.
 add_executable (simulador ${SOURCES})
+
+target_link_libraries(simulador PRIVATE nlohmann_json::nlohmann_json)
 
 # Set the directories that should be included in the build command for this target
 # when running g++ these will be included as -I/directory/path/
