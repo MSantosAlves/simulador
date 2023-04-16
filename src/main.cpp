@@ -1,5 +1,7 @@
 #include "DataService.h"
+#include "EventService.h"
 #include "Semaphore.h"
+#include "Config.h"
 
 #include <thread>
 #include <filesystem>
@@ -14,18 +16,30 @@
 int main(int argc, char* argv[])
 {
 
+    // Instantiate application semaphore
     Semaphore* semaphore = new Semaphore();
     semaphore->release();
 
-    // Shared variables
-    vector<string> unprocessedEventsBuffer;
+    // Instantiate shared variables
+    vector<string> eventsToBeProcessed;
+    vector<string> offersBook;
+    vector<Event> processedEvents;
+
+    // Get custom configs
+    Config* config = new Config();
+    string date = config->getDate();
+    string dataPath = config->getDataPath();
+    vector<string> stocks = config->getTargetStocks();
 
     // Instantiate services
-    DataService* data = new DataService();
-
-    thread dataAcquisitionThread(&DataService::startAcquisition, data, &unprocessedEventsBuffer, semaphore);
+    DataService* dataService = new DataService(date, dataPath);
+    EventService* eventService = new EventService(stocks);
+    
+    thread dataAcquisitionThread(&DataService::startAcquisition, dataService, &eventsToBeProcessed, semaphore);
+    thread eventsProcessorThread(&EventService::startProcessEvents, eventService, &eventsToBeProcessed, &offersBook, semaphore, &processedEvents);
 
     dataAcquisitionThread.join();
+    eventsProcessorThread.join();
 
 
     return 0;

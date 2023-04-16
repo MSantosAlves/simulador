@@ -8,21 +8,22 @@
 #include <atomic>
 #include <string>
 #include <vector>
+#include <windows.h>
 
 using namespace std;
 
-DataService::DataService() {}
+DataService::DataService(string _date, string _dataPath) {
+    date = _date;
+    dataPath = _dataPath;
+}
 
-void DataService::startAcquisition(vector<string>* events, Semaphore* semaphore)
+void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphore* semaphore)
 {
-    Config* config = new Config();
-    string date = config->getDate();
-    string path = config->getDataPath();
     string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
 
-    string vdaPath = path + sysFileChar + "data" + sysFileChar + date + sysFileChar + "VDA_SIMPLIFIED.txt";
-    string cpaPath = path + sysFileChar + "data" + sysFileChar + date + sysFileChar + "CPA_SIMPLIFIED.txt";
-    string negPath = path + sysFileChar + "data" + sysFileChar + date + sysFileChar + "NEG_SIMPLIFIED.txt";
+    string vdaPath = dataPath + sysFileChar + "data" + sysFileChar + date + sysFileChar + "VDA_SIMPLIFIED.txt";
+    string cpaPath = dataPath + sysFileChar + "data" + sysFileChar + date + sysFileChar + "CPA_SIMPLIFIED.txt";
+    string negPath = dataPath + sysFileChar + "data" + sysFileChar + date + sysFileChar + "NEG_SIMPLIFIED.txt";
     
     ifstream negFile(negPath);
     ifstream vdaFile(vdaPath);
@@ -46,16 +47,18 @@ void DataService::startAcquisition(vector<string>* events, Semaphore* semaphore)
     string cpaBuffer;
     int idx = 0;
 
-    while (false) {
-        cout << "Running..." << endl;
-        //semaphore->acquire();
-        //getline(cpaFile, cpaBuffer);
-        // getline(vdaFile, vdaBuffer);
-        // getline(negFile, negBuffer);
-        //events->push_back(cpaBuffer + ";CPA");
-        // events->push_back(vdaBuffer+";VDA");
-        // events->push_back(negBuffer+";NEG");
-        //semaphore->release();
+    while (true) {
+
+        semaphore->acquire();
+
+        getline(cpaFile, cpaBuffer);
+        //getline(vdaFile, vdaBuffer);
+        //getline(negFile, negBuffer);
+        
+        eventsToBeProcessed->push_back(cpaBuffer + ";CPA");
+        //eventsToBeProcessed->push_back(vdaBuffer+";VDA");
+        //eventsToBeProcessed->push_back(negBuffer+";NEG");
+        semaphore->release();
         //Sleep(1);
     }
 
