@@ -54,12 +54,14 @@ void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphor
         semaphore->acquire();
         
         getline(cpaFile, cpaBuffer);
-        //getline(vdaFile, vdaBuffer);
-        //getline(negFile, negBuffer);
+        getline(vdaFile, vdaBuffer);
         
         eventsToBeProcessed->push_back(cpaBuffer + ";CPA");
-        //eventsToBeProcessed->push_back(vdaBuffer+";VDA");
-        //eventsToBeProcessed->push_back(negBuffer+";NEG");
+        eventsToBeProcessed->push_back(vdaBuffer+";VDA");
+
+        cpaBuffer = "";
+        vdaBuffer = "";
+        
         semaphore->release();
         this_thread::sleep_for(timespan);
     }

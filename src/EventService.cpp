@@ -10,6 +10,7 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <map>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ vector<string> removeWithSpacesFromSplitedString(vector<string> splitedString)
     return splitedString;
 }
 
-Event processEvent(string event, vector<Event>* processedEvents)
+Event processEvent(string event)
 {
     StringUtils stringUtils;
     vector<string> splitedString;
@@ -99,26 +100,41 @@ EventService::EventService(vector<string> _targetStocks) {
     targetStocks = _targetStocks;
 }
 
-void EventService::startProcessEvents(vector<string>* eventsToBeProcessed, vector<string>* offerBook, Semaphore* semaphore, vector<Event>* processedEvents)
+void EventService::startProcessEvents(vector<string>* eventsToBeProcessed, vector<string>* offerBook, Semaphore* semaphore, map<string, vector<PurchaseOffer>>* purchasesOffers, map<string, vector<SaleOffer>>* salesOffers)
 {
     Event eventBuffer;
     chrono::milliseconds timespan(1000);
+    string symbol;
+    string currEvent;
+    PurchaseOffer purchaseOfferBuffer;
+    SaleOffer saleOfferBuffer;
 
     while (true) {
         semaphore->acquire();
 
-        if (!eventsToBeProcessed->empty()) {
+        if (eventsToBeProcessed->size() == 0) {
+			semaphore->release();
+			continue;
+		}
+        currEvent = eventsToBeProcessed->front();
+        eventBuffer = processEvent(currEvent);
+        eventsToBeProcessed->erase(eventsToBeProcessed->begin());
+        symbol = eventBuffer.getInstrumentSymbol();
+        
+        if (symbol != "" && isTargetSymbol(targetStocks, symbol)) {
             
-            for (const string& event : (*eventsToBeProcessed)) {
-                eventBuffer = processEvent(event, processedEvents);
-                if (isTargetSymbol(targetStocks, eventBuffer.getInstrumentSymbol())) {
-                    processedEvents->push_back(eventBuffer);
-                }
+            //TODO: Order each symbol offers by price and priority time
+            if (eventBuffer.getOrderSide() == "1") {
+                purchaseOfferBuffer = *(new PurchaseOffer(eventBuffer.getSequentialOrderNumber(), eventBuffer.getSecondaryOrderID(), eventBuffer.getPriorityTime(), eventBuffer.getOrderPrice(), eventBuffer.getTotalQuantityOfOrder(), eventBuffer.getTradedQuantityOfOrder()));
+                (*purchasesOffers)[symbol].push_back(purchaseOfferBuffer);
             }
-
+            else if (eventBuffer.getOrderSide() == "2") {
+                saleOfferBuffer = *(new SaleOffer(eventBuffer.getSequentialOrderNumber(), eventBuffer.getSecondaryOrderID(), eventBuffer.getPriorityTime(), eventBuffer.getOrderPrice(), eventBuffer.getTotalQuantityOfOrder(), eventBuffer.getTradedQuantityOfOrder()));
+                (*salesOffers)[symbol].push_back(saleOfferBuffer);
+            }
         }
 
         semaphore->release();
-        this_thread::sleep_for(timespan);
+        
     }
 }

@@ -5,6 +5,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 
@@ -71,4 +72,12 @@ string StringUtils::pathToString(filesystem::path path) {
     string pathString = join(splitedPathString, sysFileChar);
 
     return pathString;
+}
+
+long long StringUtils::dateToInt(string date) {
+    date.erase(remove(date.begin(), date.end(), '.'), date.end());
+    date.erase(remove(date.begin(), date.end(), ':'), date.end());
+    long long result = stoll(date);
+   
+	return result;
 }

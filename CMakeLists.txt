@@ -23,6 +23,8 @@ set(SOURCES
     src/EventService.cpp
     src/LogService.cpp
     src/Event.cpp
+    src/PurchaseOffer.cpp
+    src/SaleOffer.cpp
     src/Semaphore.cpp
     utils/StringUtils.cpp
     src/main.cpp

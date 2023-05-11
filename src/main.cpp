@@ -12,6 +12,7 @@
 #include <atomic>
 #include <string>
 #include <vector>
+#include <map>
 
 
 int main(int argc, char* argv[])
@@ -25,6 +26,8 @@ int main(int argc, char* argv[])
     vector<string> eventsToBeProcessed;
     vector<string> offersBook;
     vector<Event> processedEvents;
+    map<string, vector<PurchaseOffer>> purchasesOffers;
+    map<string, vector<SaleOffer>> salesOffers;
 
     // Get custom configs
     Config* config = new Config();
@@ -38,12 +41,12 @@ int main(int argc, char* argv[])
     LogService* logService = new LogService();
     
     thread dataAcquisitionThread(&DataService::startAcquisition, dataService, &eventsToBeProcessed, semaphore);
-    thread eventsProcessorThread(&EventService::startProcessEvents, eventService, &eventsToBeProcessed, &offersBook, semaphore, &processedEvents);
+    thread eventsProcessorThread(&EventService::startProcessEvents, eventService, &eventsToBeProcessed, &offersBook, semaphore, &purchasesOffers, &salesOffers);
     thread logSystemThread(&LogService::startLogSystem, logService, &eventsToBeProcessed, &offersBook, semaphore, &processedEvents);
 
     dataAcquisitionThread.join();
     eventsProcessorThread.join();
-    logSystemThread.join();
+    //logSystemThread.join();
 
     return 0;
 }
