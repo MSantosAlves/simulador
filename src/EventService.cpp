@@ -11,6 +11,7 @@
 #include <chrono>
 #include <thread>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -93,6 +94,44 @@ Event processEvent(string event)
     return (*eventBuffer);
 }
 
+bool comparePurchaseOffers(const PurchaseOffer& a, const PurchaseOffer& b) {
+    if (a.getOrderPrice() != b.getOrderPrice()) {
+        return a.getOrderPrice() > b.getOrderPrice();
+    }
+    else {
+        return a.getPriorityTimeInteger() < b.getPriorityTimeInteger();
+    }
+}
+
+void insertPurchaseOffer(vector<PurchaseOffer>& offers, const PurchaseOffer& newOffer) {
+    auto it = lower_bound(offers.begin(), offers.end(), newOffer, comparePurchaseOffers);
+    if (offers.size() == 0) {
+        cout << "New Bid price: " << newOffer.getOrderPrice() << endl;
+    }
+    else if (newOffer.getOrderPrice() > offers[0].getOrderPrice()) {
+        cout << "New Bid price: " << newOffer.getOrderPrice() << endl;
+    }
+    offers.insert(it, newOffer);
+}
+
+bool compareSaleOffers(const SaleOffer& a, const SaleOffer& b) {
+    if (a.getOrderPrice() != b.getOrderPrice()) {
+        return a.getOrderPrice() < b.getOrderPrice();
+    }
+    else {
+        return a.getPriorityTimeInteger() < b.getPriorityTimeInteger();
+    }
+}
+
+void insertSaleOffer(vector<SaleOffer>& offers, const SaleOffer& newOffer) {
+    auto it = lower_bound(offers.begin(), offers.end(), newOffer, compareSaleOffers);
+    if (offers.size() == 0 ) {
+        cout << "New Ask price: " << newOffer.getOrderPrice() << endl;
+    }else if(newOffer.getOrderPrice() < offers[0].getOrderPrice()){
+        cout << "New Ask price: " << newOffer.getOrderPrice() << endl;
+    }
+    offers.insert(it, newOffer);
+}
 
 // Class methods
 
@@ -123,14 +162,13 @@ void EventService::startProcessEvents(vector<string>* eventsToBeProcessed, vecto
         
         if (symbol != "" && isTargetSymbol(targetStocks, symbol)) {
             
-            //TODO: Order each symbol offers by price and priority time
             if (eventBuffer.getOrderSide() == "1") {
                 purchaseOfferBuffer = *(new PurchaseOffer(eventBuffer.getSequentialOrderNumber(), eventBuffer.getSecondaryOrderID(), eventBuffer.getPriorityTime(), eventBuffer.getOrderPrice(), eventBuffer.getTotalQuantityOfOrder(), eventBuffer.getTradedQuantityOfOrder()));
-                (*purchasesOffers)[symbol].push_back(purchaseOfferBuffer);
+                insertPurchaseOffer((*purchasesOffers)[symbol], purchaseOfferBuffer);
             }
             else if (eventBuffer.getOrderSide() == "2") {
                 saleOfferBuffer = *(new SaleOffer(eventBuffer.getSequentialOrderNumber(), eventBuffer.getSecondaryOrderID(), eventBuffer.getPriorityTime(), eventBuffer.getOrderPrice(), eventBuffer.getTotalQuantityOfOrder(), eventBuffer.getTradedQuantityOfOrder()));
-                (*salesOffers)[symbol].push_back(saleOfferBuffer);
+                insertSaleOffer((*salesOffers)[symbol], saleOfferBuffer);
             }
         }
 

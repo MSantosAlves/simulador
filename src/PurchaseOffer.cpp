@@ -16,3 +16,59 @@ PurchaseOffer::PurchaseOffer(string _sequentialOrderNumber, string _secondaryOrd
     totalQuantityOfOrder = stoi(_totalQuantityOfOrder);
     tradedQuantityOfOrder = stoi(_tradedQuantityOfOrder);
 };
+
+string PurchaseOffer::getSequentialOrderNumber(){
+    return sequentialOrderNumber;
+}
+
+void PurchaseOffer::setSequentialOrderNumber(string _sequentialOrderNumber){
+    sequentialOrderNumber = _sequentialOrderNumber;
+}
+
+string PurchaseOffer::getSecondaryOrderID() {
+    return secondaryOrderID;
+}
+
+void PurchaseOffer::setSecondaryOrderID(string _secondaryOrderID){
+    secondaryOrderID = _secondaryOrderID;
+}
+
+string PurchaseOffer::getPriorityTime() {
+    return priorityTime;
+}
+
+void PurchaseOffer::setPriorityTime(string _priorityTime){
+    priorityTime = _priorityTime;
+}
+
+double PurchaseOffer::getOrderPrice() const {
+    return orderPrice;
+}
+
+void PurchaseOffer::setOrderPrice(string _orderPrice){
+    orderPrice = stod(_orderPrice);
+}
+
+long long PurchaseOffer::getPriorityTimeInteger() const {
+    return priorityTimeInteger;
+}
+
+void PurchaseOffer::setPriorityTimeInteger(long long _priorityTimeInteger){
+    priorityTimeInteger = _priorityTimeInteger;
+}
+
+int PurchaseOffer::getTotalQuantityOfOrder() {
+    return totalQuantityOfOrder;
+}
+
+void PurchaseOffer::setTotalQuantityOfOrder(int _totalQuantityOfOrder){
+    totalQuantityOfOrder = _totalQuantityOfOrder;
+}
+
+int PurchaseOffer::getTradedQuantityOfOrder() {
+    return tradedQuantityOfOrder;
+}
+
+void PurchaseOffer::setTradedQuantityOfOrder(int _tradedQuantityOfOrder){
+    tradedQuantityOfOrder = _tradedQuantityOfOrder;
+}
