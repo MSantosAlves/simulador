@@ -1,6 +1,7 @@
 #include "EventService.h"
 #include "Event.h"
 #include "StringUtils.h"
+#include "ArrayUtils.h"
 
 #include <iostream>
 #include <fstream>
@@ -94,45 +95,6 @@ Event processEvent(string event)
     return (*eventBuffer);
 }
 
-bool comparePurchaseOffers(const PurchaseOffer& a, const PurchaseOffer& b) {
-    if (a.getOrderPrice() != b.getOrderPrice()) {
-        return a.getOrderPrice() > b.getOrderPrice();
-    }
-    else {
-        return a.getPriorityTimeInteger() < b.getPriorityTimeInteger();
-    }
-}
-
-void insertPurchaseOffer(vector<PurchaseOffer>& offers, const PurchaseOffer& newOffer) {
-    auto it = lower_bound(offers.begin(), offers.end(), newOffer, comparePurchaseOffers);
-    if (offers.size() == 0) {
-        cout << "New Bid price: " << newOffer.getOrderPrice() << endl;
-    }
-    else if (newOffer.getOrderPrice() > offers[0].getOrderPrice()) {
-        cout << "New Bid price: " << newOffer.getOrderPrice() << endl;
-    }
-    offers.insert(it, newOffer);
-}
-
-bool compareSaleOffers(const SaleOffer& a, const SaleOffer& b) {
-    if (a.getOrderPrice() != b.getOrderPrice()) {
-        return a.getOrderPrice() < b.getOrderPrice();
-    }
-    else {
-        return a.getPriorityTimeInteger() < b.getPriorityTimeInteger();
-    }
-}
-
-void insertSaleOffer(vector<SaleOffer>& offers, const SaleOffer& newOffer) {
-    auto it = lower_bound(offers.begin(), offers.end(), newOffer, compareSaleOffers);
-    if (offers.size() == 0 ) {
-        cout << "New Ask price: " << newOffer.getOrderPrice() << endl;
-    }else if(newOffer.getOrderPrice() < offers[0].getOrderPrice()){
-        cout << "New Ask price: " << newOffer.getOrderPrice() << endl;
-    }
-    offers.insert(it, newOffer);
-}
-
 // Class methods
 
 EventService::EventService(vector<string> _targetStocks) {
@@ -142,6 +104,7 @@ EventService::EventService(vector<string> _targetStocks) {
 void EventService::startProcessEvents(vector<string>* eventsToBeProcessed, vector<string>* offerBook, Semaphore* semaphore, map<string, vector<PurchaseOffer>>* purchasesOffers, map<string, vector<SaleOffer>>* salesOffers)
 {
     Event eventBuffer;
+    ArrayUtils arrayUtils;
     chrono::milliseconds timespan(1000);
     string symbol;
     string currEvent;
@@ -164,11 +127,17 @@ void EventService::startProcessEvents(vector<string>* eventsToBeProcessed, vecto
             
             if (eventBuffer.getOrderSide() == "1") {
                 purchaseOfferBuffer = *(new PurchaseOffer(eventBuffer.getSequentialOrderNumber(), eventBuffer.getSecondaryOrderID(), eventBuffer.getPriorityTime(), eventBuffer.getOrderPrice(), eventBuffer.getTotalQuantityOfOrder(), eventBuffer.getTradedQuantityOfOrder()));
-                insertPurchaseOffer((*purchasesOffers)[symbol], purchaseOfferBuffer);
+                if ((*purchasesOffers)[symbol].size() == 0 || purchaseOfferBuffer.getOrderPrice() > (*purchasesOffers)[symbol][0].getOrderPrice()) {
+                    cout << "New Bid price: " << purchaseOfferBuffer.getOrderPrice() << endl;
+                }
+                arrayUtils.insertPurchaseOffer((*purchasesOffers)[symbol], purchaseOfferBuffer);
             }
             else if (eventBuffer.getOrderSide() == "2") {
                 saleOfferBuffer = *(new SaleOffer(eventBuffer.getSequentialOrderNumber(), eventBuffer.getSecondaryOrderID(), eventBuffer.getPriorityTime(), eventBuffer.getOrderPrice(), eventBuffer.getTotalQuantityOfOrder(), eventBuffer.getTradedQuantityOfOrder()));
-                insertSaleOffer((*salesOffers)[symbol], saleOfferBuffer);
+                if ((*salesOffers)[symbol].size() == 0 || saleOfferBuffer.getOrderPrice() < (*salesOffers)[symbol][0].getOrderPrice()) {
+                    cout << "New Ask price: " << purchaseOfferBuffer.getOrderPrice() << endl;
+                }
+                arrayUtils.insertSaleOffer((*salesOffers)[symbol], saleOfferBuffer);
             }
         }
 

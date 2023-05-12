@@ -1,6 +1,7 @@
 #include "DataService.h"
 #include "Semaphore.h"
 #include "Config.h"
+#include "StringUtils.h"
 
 #include <iostream>
 #include <fstream>
@@ -26,27 +27,41 @@ void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphor
     string cpaPath = dataPath + sysFileChar + date + sysFileChar + "CPA_SIMPLIFIED.txt";
     string negPath = dataPath + sysFileChar + date + sysFileChar + "NEG_SIMPLIFIED.txt";
     
-    ifstream negFile(negPath);
     ifstream vdaFile(vdaPath);
     ifstream cpaFile(cpaPath);
 
-    if (!negFile.is_open()) {
-        cerr << "Error opening negotiations file." << endl;
-        return;
-    }
-    else if (!vdaFile.is_open()) {
+    if (!vdaFile.is_open()) {
         cerr << "Error opening sell orders file." << endl;
         return;
     }
-    else if (!cpaFile.is_open()) {
+    
+    if (!cpaFile.is_open()) {
         cerr << "Error opening purchases orders file." << endl;
         return;
     }
 
-    string negBuffer;
+    StringUtils stringUtils;
+    string cpaHeader;
+    string vdaHeader;
+    vector<string> splitedCpaHeader;
+    vector<string> splitedVdaHeader;
+
+    getline(cpaFile, cpaHeader);
+    getline(vdaFile, vdaHeader);
+
+    splitedCpaHeader = stringUtils.split(cpaHeader, " ");
+    int nbOfCpaOffers = stoi(splitedCpaHeader[splitedCpaHeader.size() - 1]);
+
+    splitedVdaHeader = stringUtils.split(vdaHeader, " ");
+    int nbOfVdaOffers = stoi(splitedVdaHeader[splitedVdaHeader.size() - 1]);
+
+    cout << "Number of purchase offers: " << nbOfCpaOffers << endl;
+    cout << "Number of sale offers: " << nbOfVdaOffers << endl;
+    cout << "Total number of offers: " << (nbOfCpaOffers + nbOfVdaOffers) << endl;
+
+    int countReadOffers = 0;
     string vdaBuffer;
     string cpaBuffer;
-    int idx = 0;
 
     chrono::milliseconds timespan(1000);
 
@@ -57,17 +72,15 @@ void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphor
         getline(vdaFile, vdaBuffer);
         
         eventsToBeProcessed->push_back(cpaBuffer + ";CPA");
+        countReadOffers += 1;
         eventsToBeProcessed->push_back(vdaBuffer+";VDA");
+        countReadOffers += 1;
 
-        cpaBuffer = "";
-        vdaBuffer = "";
-        
         semaphore->release();
         this_thread::sleep_for(timespan);
     }
 
     vdaFile.close();
     cpaFile.close();
-    negFile.close();
 
 }

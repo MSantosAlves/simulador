@@ -27,6 +27,7 @@ set(SOURCES
     src/SaleOffer.cpp
     src/Semaphore.cpp
     utils/StringUtils.cpp
+    utils/ArrayUtils.cpp
     src/main.cpp
 )
 
