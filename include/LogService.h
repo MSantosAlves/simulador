@@ -1,5 +1,5 @@
 #include "Semaphore.h"
-#include "Event.h"
+#include "Order.h"
 
 #include <string>
 #include <atomic>
@@ -14,7 +14,7 @@ class LogService
 {
 public:
 	LogService();
-	void startLogSystem(vector<string>* event, vector<string>* book, Semaphore* semaphore, vector<Event>* processedEvents);
+	void startLogSystem(vector<string>* order, vector<string>* book, Semaphore* semaphore, vector<Order>* processedOrders);
 };
 
 #endif

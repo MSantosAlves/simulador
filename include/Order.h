@@ -3,13 +3,13 @@
 
 using namespace std;
 
-#ifndef __EVENT_H__
-#define __EVENT_H__
+#ifndef __Order_H__
+#define __Order_H__
 
-class Event
+class Order
 {
 private:
-    // EventOrdem fields
+    // Order fields
     string type;
     string sessionDate;
     string instrumentSymbol;
@@ -28,7 +28,7 @@ private:
     string aggressorIndicator;
     string member;
 
-    // EventNeg fields
+    // OrderNeg fields
     string iradeNumber;
     string iradePrice;
     string iradedQuantity;
@@ -48,7 +48,7 @@ private:
 
     vector<string> arrayOfCalculatedFields;
 public:
-    Event();
+    Order();
 
     string getType();
     void setType(string type);

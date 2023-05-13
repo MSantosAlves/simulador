@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool comparePurchaseOffers(const PurchaseOffer& a, const PurchaseOffer& b) {
+bool comparePurchaseOrders(const PurchaseOrder& a, const PurchaseOrder& b) {
     if (a.getOrderPrice() != b.getOrderPrice()) {
         return a.getOrderPrice() > b.getOrderPrice();
     }
@@ -17,7 +17,7 @@ bool comparePurchaseOffers(const PurchaseOffer& a, const PurchaseOffer& b) {
     }
 }
 
-bool compareSaleOffers(const SaleOffer& a, const SaleOffer& b) {
+bool compareSaleOrders(const SaleOrder& a, const SaleOrder& b) {
     if (a.getOrderPrice() != b.getOrderPrice()) {
         return a.getOrderPrice() < b.getOrderPrice();
     }
@@ -28,13 +28,13 @@ bool compareSaleOffers(const SaleOffer& a, const SaleOffer& b) {
 
 ArrayUtils::ArrayUtils() {}
 
-void ArrayUtils::insertPurchaseOffer(vector<PurchaseOffer>& offers, const PurchaseOffer& newOffer) {
-    auto it = lower_bound(offers.begin(), offers.end(), newOffer, comparePurchaseOffers);
-    offers.insert(it, newOffer);
+void ArrayUtils::insertPurchaseOrder(vector<PurchaseOrder>& orders, const PurchaseOrder& newOrder) {
+    auto it = lower_bound(orders.begin(), orders.end(), newOrder, comparePurchaseOrders);
+    orders.insert(it, newOrder);
 }
 
-void ArrayUtils::insertSaleOffer(vector<SaleOffer>& offers, const SaleOffer& newOffer) {
-    auto it = lower_bound(offers.begin(), offers.end(), newOffer, compareSaleOffers);
+void ArrayUtils::insertSaleOrder(vector<SaleOrder>& orders, const SaleOrder& newOrder) {
+    auto it = lower_bound(orders.begin(), orders.end(), newOrder, compareSaleOrders);
     bool newAskPrice = false;
-    offers.insert(it, newOffer);
+    orders.insert(it, newOrder);
 }

@@ -1,7 +1,7 @@
-#ifndef _EVENT_FIELDS_ENUM_H_
-#define _EVENT_FIELDS_ENUM_H_
+#ifndef _ORDER_FIELDS_ENUM_H_
+#define _ORDER_FIELDS_ENUM_H_
 
-class EventFields
+class OrderFields
 {
 public:
     enum Enum {

@@ -20,11 +20,11 @@ FetchContent_MakeAvailable(json)
 set(SOURCES
     src/Config.cpp
     src/DataService.cpp
-    src/EventService.cpp
+    src/OrderService.cpp
     src/LogService.cpp
-    src/Event.cpp
-    src/PurchaseOffer.cpp
-    src/SaleOffer.cpp
+    src/Order.cpp
+    src/PurchaseOrder.cpp
+    src/SaleOrder.cpp
     src/Semaphore.cpp
     utils/StringUtils.cpp
     utils/ArrayUtils.cpp

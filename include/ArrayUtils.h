@@ -1,7 +1,7 @@
 #include <vector>
 #include <vector>
-#include "PurchaseOffer.h"
-#include "SaleOffer.h"
+#include "PurchaseOrder.h"
+#include "SaleOrder.h"
 
 using namespace std;
 
@@ -12,8 +12,8 @@ class ArrayUtils
 {
 public:
     ArrayUtils();
-    void insertPurchaseOffer(vector<PurchaseOffer>& offers, const PurchaseOffer& newOffer);
-    void insertSaleOffer(vector<SaleOffer>& offers, const SaleOffer& newOffer);
+    void insertPurchaseOrder(vector<PurchaseOrder>& offers, const PurchaseOrder& newOffer);
+    void insertSaleOrder(vector<SaleOrder>& offers, const SaleOrder& newOffer);
 };
 
 #endif

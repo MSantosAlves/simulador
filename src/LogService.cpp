@@ -1,6 +1,6 @@
 
 #include "LogService.h"
-#include "EventFieldsEnum.h"
+#include "OrderFieldsEnum.h"
 
 #include <iostream>
 #include <fstream>
@@ -88,21 +88,21 @@ void printTable(const vector<string>& headers, const vector<vector<string>>& dat
     cout << "\n";
 }
 
-void printEvents(vector<Event>* processedEvents)
+void printOrders(vector<Order>* processedOrders)
 {
-    EventFields* eventFields = new EventFields();
+    OrderFields* orderFields = new OrderFields();
     vector<string> headers = { "Symbol", "Price", "Total Qty.", "Member", "Type" };
     vector<vector<string>> data;
     vector<int> desiredFields = {
-        EventFields::Enum::INSTRUMENT_SYMBOL,
-        EventFields::Enum::ORDER_PRICE,
-        EventFields::Enum::TOTAL_QUANTITY_OF_ORDER,
-        EventFields::Enum::MEMBER,
-        EventFields::Enum::TYPE_ORDER
+        OrderFields::Enum::INSTRUMENT_SYMBOL,
+        OrderFields::Enum::ORDER_PRICE,
+        OrderFields::Enum::TOTAL_QUANTITY_OF_ORDER,
+        OrderFields::Enum::MEMBER,
+        OrderFields::Enum::TYPE_ORDER
     };
 
-    for (int i = 0; i < processedEvents->size(); i++) {
-        data.push_back(processedEvents->at(i).getArrayOfCalculatedFields(false, desiredFields));
+    for (int i = 0; i < processedOrders->size(); i++) {
+        data.push_back(processedOrders->at(i).getArrayOfCalculatedFields(false, desiredFields));
     }
 
     if (data.size() > 0) {
@@ -114,12 +114,12 @@ void printEvents(vector<Event>* processedEvents)
 
 LogService::LogService() {}
 
-void LogService::startLogSystem(vector<string>* events, vector<string>* book, Semaphore* semaphore, vector<Event>* processedEvents)
+void LogService::startLogSystem(vector<string>* orders, vector<string>* book, Semaphore* semaphore, vector<Order>* processedOrders)
 {
     chrono::milliseconds timespan(3000);
     while (true) {
         semaphore->acquire();
-        printEvents(processedEvents);
+        printOrders(processedOrders);
         semaphore->release();
         this_thread::sleep_for(timespan);
     }

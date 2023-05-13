@@ -1,13 +1,13 @@
-#include "SaleOffer.h"
+#include "SaleOrder.h"
 #include "StringUtils.h"
 
 #include <string>
 
 using namespace std;
 
-SaleOffer::SaleOffer() {}
+SaleOrder::SaleOrder() {}
 
-SaleOffer::SaleOffer(string _sequentialOrderNumber, string _secondaryOrderID, string _priorityTime, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder) {
+SaleOrder::SaleOrder(string _sequentialOrderNumber, string _secondaryOrderID, string _priorityTime, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder) {
     StringUtils stringUtils;
 
     sequentialOrderNumber = _sequentialOrderNumber;
@@ -19,58 +19,58 @@ SaleOffer::SaleOffer(string _sequentialOrderNumber, string _secondaryOrderID, st
     tradedQuantityOfOrder = stoi(_tradedQuantityOfOrder);
 }
 
-string SaleOffer::getSequentialOrderNumber() {
+string SaleOrder::getSequentialOrderNumber() {
     return sequentialOrderNumber;
 }
 
-void SaleOffer::setSequentialOrderNumber(string _sequentialOrderNumber) {
+void SaleOrder::setSequentialOrderNumber(string _sequentialOrderNumber) {
     sequentialOrderNumber = _sequentialOrderNumber;
 }
 
-string SaleOffer::getSecondaryOrderID() {
+string SaleOrder::getSecondaryOrderID() {
     return secondaryOrderID;
 }
 
-void SaleOffer::setSecondaryOrderID(string _secondaryOrderID) {
+void SaleOrder::setSecondaryOrderID(string _secondaryOrderID) {
     secondaryOrderID = _secondaryOrderID;
 }
 
-string SaleOffer::getPriorityTime() {
+string SaleOrder::getPriorityTime() {
     return priorityTime;
 }
 
-void SaleOffer::setPriorityTime(string _priorityTime) {
+void SaleOrder::setPriorityTime(string _priorityTime) {
     priorityTime = _priorityTime;
 }
 
-double SaleOffer::getOrderPrice() const {
+double SaleOrder::getOrderPrice() const {
     return orderPrice;
 }
 
-void SaleOffer::setOrderPrice(string _orderPrice) {
+void SaleOrder::setOrderPrice(string _orderPrice) {
     orderPrice = stod(_orderPrice);
 }
 
-long long SaleOffer::getPriorityTimeInteger() const {
+long long SaleOrder::getPriorityTimeInteger() const {
     return priorityTimeInteger;
 }
 
-void SaleOffer::setPriorityTimeInteger(long long _priorityTimeInteger) {
+void SaleOrder::setPriorityTimeInteger(long long _priorityTimeInteger) {
     priorityTimeInteger = _priorityTimeInteger;
 }
 
-int SaleOffer::getTotalQuantityOfOrder() {
+int SaleOrder::getTotalQuantityOfOrder() {
     return totalQuantityOfOrder;
 }
 
-void SaleOffer::setTotalQuantityOfOrder(int _totalQuantityOfOrder) {
+void SaleOrder::setTotalQuantityOfOrder(int _totalQuantityOfOrder) {
     totalQuantityOfOrder = _totalQuantityOfOrder;
 }
 
-int SaleOffer::getTradedQuantityOfOrder() {
+int SaleOrder::getTradedQuantityOfOrder() {
     return tradedQuantityOfOrder;
 }
 
-void SaleOffer::setTradedQuantityOfOrder(int _tradedQuantityOfOrder) {
+void SaleOrder::setTradedQuantityOfOrder(int _tradedQuantityOfOrder) {
     tradedQuantityOfOrder = _tradedQuantityOfOrder;
 }

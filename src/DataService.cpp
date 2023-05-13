@@ -19,7 +19,7 @@ DataService::DataService(string _date, string _dataPath) {
     dataPath = _dataPath;
 }
 
-void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphore* semaphore)
+void DataService::startAcquisition(vector<string>* ordersToBeProcessed, Semaphore* semaphore)
 {
     string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
 
@@ -71,9 +71,9 @@ void DataService::startAcquisition(vector<string>* eventsToBeProcessed, Semaphor
         getline(cpaFile, cpaBuffer);
         getline(vdaFile, vdaBuffer);
         
-        eventsToBeProcessed->push_back(cpaBuffer + ";CPA");
+        ordersToBeProcessed->push_back(cpaBuffer + ";CPA");
         countReadOffers += 1;
-        eventsToBeProcessed->push_back(vdaBuffer+";VDA");
+        ordersToBeProcessed->push_back(vdaBuffer+";VDA");
         countReadOffers += 1;
 
         semaphore->release();

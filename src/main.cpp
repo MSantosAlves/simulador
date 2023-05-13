@@ -1,5 +1,5 @@
 #include "DataService.h"
-#include "EventService.h"
+#include "OrderService.h"
 #include "LogService.h"
 #include "Semaphore.h"
 #include "Config.h"
@@ -23,11 +23,11 @@ int main(int argc, char* argv[])
     semaphore->release();
 
     // Instantiate shared variables
-    vector<string> eventsToBeProcessed;
+    vector<string> ordersToBeProcessed;
     vector<string> offersBook;
-    vector<Event> processedEvents;
-    map<string, vector<PurchaseOffer>> purchasesOffers;
-    map<string, vector<SaleOffer>> salesOffers;
+    vector<Order> processedOrders;
+    map<string, vector<PurchaseOrder>> purchasesOrders;
+    map<string, vector<SaleOrder>> salesOrders;
 
     // Get custom configs
     Config* config = new Config();
@@ -37,15 +37,15 @@ int main(int argc, char* argv[])
 
     // Instantiate services
     DataService* dataService = new DataService(date, dataPath);
-    EventService* eventService = new EventService(stocks);
+    OrderService* orderService = new OrderService(stocks);
     LogService* logService = new LogService();
     
-    thread dataAcquisitionThread(&DataService::startAcquisition, dataService, &eventsToBeProcessed, semaphore);
-    thread eventsProcessorThread(&EventService::startProcessEvents, eventService, &eventsToBeProcessed, &offersBook, semaphore, &purchasesOffers, &salesOffers);
-    thread logSystemThread(&LogService::startLogSystem, logService, &eventsToBeProcessed, &offersBook, semaphore, &processedEvents);
+    thread dataAcquisitionThread(&DataService::startAcquisition, dataService, &ordersToBeProcessed, semaphore);
+    thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &ordersToBeProcessed, &offersBook, semaphore, &purchasesOrders, &salesOrders);
+    thread logSystemThread(&LogService::startLogSystem, logService, &ordersToBeProcessed, &offersBook, semaphore, &processedOrders);
 
     dataAcquisitionThread.join();
-    eventsProcessorThread.join();
+    ordersProcessorThread.join();
     //logSystemThread.join();
 
     return 0;
