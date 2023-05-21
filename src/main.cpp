@@ -4,6 +4,7 @@
 #include "Semaphore.h"
 #include "Config.h"
 #include "StockInfo.h"
+#include "Trader.h"
 
 #include <thread>
 #include <filesystem>
@@ -22,6 +23,9 @@ int main(int argc, char* argv[])
     Semaphore* semaphore = new Semaphore();
     semaphore->release();
 
+    // Trader class (strategy)
+    Trader* traderAccount = new Trader(5000.00);
+
     // Instantiate shared variables
     vector<string> rawOrdersQueue;
     map<string, StockInfo> offersBook;
@@ -39,7 +43,7 @@ int main(int argc, char* argv[])
 
     thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
     thread readPurchasesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "PURCHASES");
-    thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore);
+    thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, traderAccount);
     thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
 
     readSalesThread.join();

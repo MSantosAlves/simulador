@@ -25,6 +25,7 @@ set(SOURCES
     src/Order.cpp
     src/PurchaseOrder.cpp
     src/SaleOrder.cpp
+    src/Trader.cpp
     src/Semaphore.cpp
     utils/StringUtils.cpp
     utils/ArrayUtils.cpp

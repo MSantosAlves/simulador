@@ -1,6 +1,7 @@
 #include "Semaphore.h"
 #include "Order.h"
 #include "StockInfo.h"
+#include "Trader.h"
 
 #include <vector>
 #include <string>
@@ -17,7 +18,7 @@ private:
 	vector<string> targetStocks;
 public:
 	OrderService(vector<string> targetStocks);
-	void startProcessOrders(vector<string>* rawOrdersQueue, map<string, StockInfo>* offersBook, Semaphore* semaphore);
+	void startProcessOrders(vector<string>* rawOrdersQueue, map<string, StockInfo>* offersBook, Semaphore* semaphore, Trader* traderAccount);
 };
 
 #endif

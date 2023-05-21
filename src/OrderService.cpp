@@ -94,7 +94,7 @@ Order parseOrder(string order, StringUtils stringUtils)
     return (*orderBuffer);
 }
 
-void processNewOrder(string symbol, Order order, map<string, StockInfo>* offersBook, ArrayUtils arrayUtils) {
+void processNewOrder(string symbol, Order order, map<string, StockInfo>* offersBook, ArrayUtils arrayUtils, Trader* traderAccount) {
     const string PURCHASE_ORDER = "1";
     const string SALE_ORDER = "2";
     if (order.getOrderSide() == PURCHASE_ORDER) {
@@ -136,13 +136,24 @@ void processNewOrder(string symbol, Order order, map<string, StockInfo>* offersB
 			(*offersBook)[symbol].saleOrders.erase(remove_if((*offersBook)[symbol].saleOrders.begin(), (*offersBook)[symbol].saleOrders.end(), [](SaleOrder& saleOrder) { return saleOrder.getTotalQuantityOfOrder() == 0; }), (*offersBook)[symbol].saleOrders.end());
 
             // Update bid & ask prices
-            (*offersBook)[symbol].bid = (*offersBook)[symbol].purchaseOrders.size() > 0 ? (*offersBook)[symbol].purchaseOrders[0].getOrderPrice() : 0;
-			(*offersBook)[symbol].ask = (*offersBook)[symbol].saleOrders.size() > 0 ? (*offersBook)[symbol].saleOrders[0].getOrderPrice() : 0;
+            if ((*offersBook)[symbol].purchaseOrders.size() > 0) {
+                (*offersBook)[symbol].bid = (*offersBook)[symbol].purchaseOrders[0].getOrderPrice();
+                traderAccount->onTick(symbol, (*offersBook)[symbol].bid, "BID", offersBook);
+            }else {
+                (*offersBook)[symbol].bid = 0;
+            }
 
+            if ((*offersBook)[symbol].saleOrders.size() > 0) {
+                (*offersBook)[symbol].ask = (*offersBook)[symbol].saleOrders[0].getOrderPrice();
+                traderAccount->onTick(symbol, (*offersBook)[symbol].ask, "ASK", offersBook);
+            }else {
+                (*offersBook)[symbol].ask = 0;
+            }
         }else {
             // Add purchase order to symbol queue
             arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
             (*offersBook)[symbol].bid = purchaseOrderBuffer.getOrderPrice();
+            traderAccount->onTick(symbol, (*offersBook)[symbol].bid, "BID", offersBook);
         }
 
     }else if (order.getOrderSide() == SALE_ORDER) {
@@ -183,9 +194,24 @@ void processNewOrder(string symbol, Order order, map<string, StockInfo>* offersB
 			// Update purchase orders (erase all orders where totalQuantityOfOrder = 0)
             (*offersBook)[symbol].purchaseOrders.erase(remove_if((*offersBook)[symbol].purchaseOrders.begin(), (*offersBook)[symbol].purchaseOrders.end(), [](PurchaseOrder& purchaseOrder) { return purchaseOrder.getTotalQuantityOfOrder() == 0; }), (*offersBook)[symbol].purchaseOrders.end());
 
+            // Update bid & ask prices
+            if ((*offersBook)[symbol].purchaseOrders.size() > 0) {
+                (*offersBook)[symbol].bid = (*offersBook)[symbol].purchaseOrders[0].getOrderPrice();
+                traderAccount->onTick(symbol, (*offersBook)[symbol].bid, "BID", offersBook);
+            }else {
+                (*offersBook)[symbol].bid = 0;
+            }
+
+            if ((*offersBook)[symbol].saleOrders.size() > 0) {
+                (*offersBook)[symbol].ask = (*offersBook)[symbol].saleOrders[0].getOrderPrice();
+                traderAccount->onTick(symbol, (*offersBook)[symbol].ask, "ASK", offersBook);
+            }else {
+                (*offersBook)[symbol].ask = 0;
+            }
         }else {
             arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
             (*offersBook)[symbol].ask = saleOrderBuffer.getOrderPrice();
+            traderAccount->onTick(symbol, (*offersBook)[symbol].ask, "ASK", offersBook);
         }
     }
 }
@@ -196,7 +222,7 @@ OrderService::OrderService(vector<string> _targetStocks) {
     targetStocks = _targetStocks;
 }
 
-void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string, StockInfo>* offersBook, Semaphore* semaphore)
+void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string, StockInfo>* offersBook, Semaphore* semaphore, Trader* traderAccount)
 {
     StringUtils stringUtils;
     Order orderBuffer;
@@ -220,7 +246,7 @@ void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string
      
         if (symbol != "" && isTargetSymbol(targetStocks, symbol)) {
             orderBuffer = parseOrder(currOrder, stringUtils);
-            processNewOrder(symbol, orderBuffer, offersBook, arrayUtils);
+            processNewOrder(symbol, orderBuffer, offersBook, arrayUtils, traderAccount);
         }else {
             symbol = "";
         }
