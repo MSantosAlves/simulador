@@ -1,9 +1,8 @@
 #include "Semaphore.h"
-#include "Order.h"
+#include "StockInfo.h"
 
 #include <string>
-#include <atomic>
-#include <vector>
+#include <map>
 
 using namespace std;
 
@@ -14,7 +13,7 @@ class LogService
 {
 public:
 	LogService();
-	void startLogSystem(vector<string>* order, vector<string>* book, Semaphore* semaphore, vector<Order>* processedOrders);
+	void startLogSystem(map<string, StockInfo>* offersBook, Semaphore* semaphore);
 };
 
 #endif

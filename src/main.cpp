@@ -3,6 +3,7 @@
 #include "LogService.h"
 #include "Semaphore.h"
 #include "Config.h"
+#include "StockInfo.h"
 
 #include <thread>
 #include <filesystem>
@@ -17,36 +18,34 @@
 
 int main(int argc, char* argv[])
 {
-
     // Instantiate application semaphore
     Semaphore* semaphore = new Semaphore();
     semaphore->release();
 
     // Instantiate shared variables
-    vector<string> ordersToBeProcessed;
-    vector<string> offersBook;
-    vector<Order> processedOrders;
-    map<string, vector<PurchaseOrder>> purchasesOrders;
-    map<string, vector<SaleOrder>> salesOrders;
+    vector<string> rawOrdersQueue;
+    map<string, StockInfo> offersBook;
 
     // Get custom configs
     Config* config = new Config();
-    string date = config->getDate();
+    string dataTargetDate = config->getDate();
     string dataPath = config->getDataPath();
-    vector<string> stocks = config->getTargetStocks();
+    vector<string> targetStocks = config->getTargetStocks();
 
     // Instantiate services
-    DataService* dataService = new DataService(date, dataPath);
-    OrderService* orderService = new OrderService(stocks);
+    DataService* dataService = new DataService(dataTargetDate, dataPath);
+    OrderService* orderService = new OrderService(targetStocks);
     LogService* logService = new LogService();
-    
-    thread dataAcquisitionThread(&DataService::startAcquisition, dataService, &ordersToBeProcessed, semaphore);
-    thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &ordersToBeProcessed, &offersBook, semaphore, &purchasesOrders, &salesOrders);
-    thread logSystemThread(&LogService::startLogSystem, logService, &ordersToBeProcessed, &offersBook, semaphore, &processedOrders);
 
-    dataAcquisitionThread.join();
+    thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
+    thread readPurchasesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "PURCHASES");
+    thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore);
+    thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
+
+    readSalesThread.join();
+    readPurchasesThread.join();
     ordersProcessorThread.join();
-    //logSystemThread.join();
+    logSystemThread.join();
 
     return 0;
 }

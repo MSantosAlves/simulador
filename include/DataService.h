@@ -15,7 +15,7 @@ private:
     string dataPath;   
 public:
     DataService(string date, string dataPath);
-    void startAcquisition(vector<string>* ordersToBeProcessed, Semaphore* semaphore);
+    void startAcquisition(vector<string>* rawOrdersQueue, Semaphore* semaphore, string offerType);
 };
 
 #endif

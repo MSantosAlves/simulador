@@ -19,68 +19,48 @@ DataService::DataService(string _date, string _dataPath) {
     dataPath = _dataPath;
 }
 
-void DataService::startAcquisition(vector<string>* ordersToBeProcessed, Semaphore* semaphore)
+void DataService::startAcquisition(vector<string>* rawOrdersQueue, Semaphore* semaphore, string orderType)
 {
     string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
+    string filePath = dataPath + sysFileChar + date + sysFileChar;
 
-    string vdaPath = dataPath + sysFileChar + date + sysFileChar + "VDA_SIMPLIFIED.txt";
-    string cpaPath = dataPath + sysFileChar + date + sysFileChar + "CPA_SIMPLIFIED.txt";
-    string negPath = dataPath + sysFileChar + date + sysFileChar + "NEG_SIMPLIFIED.txt";
-    
-    ifstream vdaFile(vdaPath);
-    ifstream cpaFile(cpaPath);
+    const int nbOfChunkOffers = 1000;
+    const int nbOfOfferBytes = 230;
 
-    if (!vdaFile.is_open()) {
-        cerr << "Error opening sell orders file." << endl;
-        return;
+    const size_t chunkSize = nbOfOfferBytes * nbOfChunkOffers;
+    char chunkBuffer[chunkSize];
+    string orderBuffer;
+    string orderSufix = ";VDA";
+    chrono::nanoseconds timespan(1);
+
+    if (orderType == "SALES") {
+        filePath += "OFER_VDA_BMF_20191220_1";
     }
-    
-    if (!cpaFile.is_open()) {
-        cerr << "Error opening purchases orders file." << endl;
-        return;
+    else if (orderType == "PURCHASES") {
+        filePath += "OFER_CPA_BMF_20191220_1";
+        orderSufix = ";CPA";
     }
 
-    StringUtils stringUtils;
-    string cpaHeader;
-    string vdaHeader;
-    vector<string> splitedCpaHeader;
-    vector<string> splitedVdaHeader;
+    ifstream dataFile(filePath);
 
-    getline(cpaFile, cpaHeader);
-    getline(vdaFile, vdaHeader);
-
-    splitedCpaHeader = stringUtils.split(cpaHeader, " ");
-    int nbOfCpaOffers = stoi(splitedCpaHeader[splitedCpaHeader.size() - 1]);
-
-    splitedVdaHeader = stringUtils.split(vdaHeader, " ");
-    int nbOfVdaOffers = stoi(splitedVdaHeader[splitedVdaHeader.size() - 1]);
-
-    cout << "Number of purchase offers: " << nbOfCpaOffers << endl;
-    cout << "Number of sale offers: " << nbOfVdaOffers << endl;
-    cout << "Total number of offers: " << (nbOfCpaOffers + nbOfVdaOffers) << endl;
-
-    int countReadOffers = 0;
-    string vdaBuffer;
-    string cpaBuffer;
-
-    chrono::milliseconds timespan(1000);
-
-    while (true) {
-        semaphore->acquire();
+    while (dataFile)
+    {
+        dataFile.read(chunkBuffer, chunkSize);
         
-        getline(cpaFile, cpaBuffer);
-        getline(vdaFile, vdaBuffer);
-        
-        ordersToBeProcessed->push_back(cpaBuffer + ";CPA");
-        countReadOffers += 1;
-        ordersToBeProcessed->push_back(vdaBuffer+";VDA");
-        countReadOffers += 1;
+        for (int i = 0;  i < nbOfChunkOffers; i++) {
 
-        semaphore->release();
-        this_thread::sleep_for(timespan);
+            orderBuffer = string(chunkBuffer).substr(i * nbOfOfferBytes, nbOfOfferBytes) + orderSufix;
+            semaphore->acquire();
+            rawOrdersQueue->push_back(orderBuffer);
+            semaphore->release();
+
+            this_thread::sleep_for(timespan);
+        }
+
     }
 
-    vdaFile.close();
-    cpaFile.close();
+
+    dataFile.close();
+
 
 }

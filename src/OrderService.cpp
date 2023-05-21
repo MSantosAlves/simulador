@@ -2,6 +2,7 @@
 #include "Order.h"
 #include "StringUtils.h"
 #include "ArrayUtils.h"
+#include "StockInfo.h"
 
 #include <iostream>
 #include <fstream>
@@ -22,23 +23,21 @@ bool isTargetSymbol(vector<string> targetsStocks, string stock) {
     return stringUtils.include(targetsStocks, stock) != -1;
 }
 
-vector<string> removeWithSpacesFromSplitedString(vector<string> splitedString)
+vector<string> removeWithSpacesFromSplitedString(vector<string> splitedString, StringUtils stringUtils)
 {
-    StringUtils stringUtils;
     for (int i = 0; i < splitedString.size(); i++) {
         splitedString[i] = stringUtils.removeWhiteSpaces(splitedString[i]);
     }
     return splitedString;
 }
 
-Order processOrder(string order)
+Order processOrder(string order, StringUtils stringUtils)
 {
-    StringUtils stringUtils;
     vector<string> splitedString;
     char const* delimiter = ";";
     int stringSize;
     string type;
-    splitedString = removeWithSpacesFromSplitedString(stringUtils.split(order, (*delimiter)));
+    splitedString = removeWithSpacesFromSplitedString(stringUtils.split(order, (*delimiter)), stringUtils);
 
     stringSize = splitedString.size();
     Order* orderBuffer = new Order();
@@ -101,12 +100,13 @@ OrderService::OrderService(vector<string> _targetStocks) {
     targetStocks = _targetStocks;
 }
 
-void OrderService::startProcessOrders(vector<string>* ordersToBeProcessed, vector<string>* offerBook, Semaphore* semaphore, map<string, vector<PurchaseOrder>>* purchasesOrders, map<string, vector<SaleOrder>>* salesOrders)
+void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string, StockInfo>* offersBook, Semaphore* semaphore)
 {
+    StringUtils stringUtils;
     Order orderBuffer;
     ArrayUtils arrayUtils;
-    chrono::milliseconds timespan(1000);
-    string symbol;
+    chrono::nanoseconds timespan(1);
+    string symbol = "";
     string currOrder;
     PurchaseOrder purchaseOrderBuffer;
     SaleOrder saleOrderBuffer;
@@ -114,34 +114,38 @@ void OrderService::startProcessOrders(vector<string>* ordersToBeProcessed, vecto
     while (true) {
         semaphore->acquire();
 
-        if (ordersToBeProcessed->size() == 0) {
-			semaphore->release();
-			continue;
-		}
-        currOrder = ordersToBeProcessed->front();
-        orderBuffer = processOrder(currOrder);
-        ordersToBeProcessed->erase(ordersToBeProcessed->begin());
-        symbol = orderBuffer.getInstrumentSymbol();
-        
+        if (rawOrdersQueue->size() == 0) {
+            semaphore->release();
+            continue;
+        }
+        currOrder = rawOrdersQueue->front();
+        symbol = stringUtils.removeWhiteSpaces(stringUtils.split(currOrder, ';')[1]);
+        rawOrdersQueue->erase(rawOrdersQueue->begin());
+     
         if (symbol != "" && isTargetSymbol(targetStocks, symbol)) {
-            
+            orderBuffer = processOrder(currOrder, stringUtils);
             if (orderBuffer.getOrderSide() == "1") {
                 purchaseOrderBuffer = *(new PurchaseOrder(orderBuffer.getSequentialOrderNumber(), orderBuffer.getSecondaryOrderID(), orderBuffer.getPriorityTime(), orderBuffer.getOrderPrice(), orderBuffer.getTotalQuantityOfOrder(), orderBuffer.getTradedQuantityOfOrder()));
-                if ((*purchasesOrders)[symbol].size() == 0 || purchaseOrderBuffer.getOrderPrice() > (*purchasesOrders)[symbol][0].getOrderPrice()) {
-                    cout << "New Bid price: " << purchaseOrderBuffer.getOrderPrice() << endl;
+                if ((*offersBook)[symbol].purchaseOrders.size() == 0 || purchaseOrderBuffer.getOrderPrice() > (*offersBook)[symbol].purchaseOrders[0].getOrderPrice()) {
+                    (*offersBook)[symbol].bid = purchaseOrderBuffer.getOrderPrice();
                 }
-                arrayUtils.insertPurchaseOrder((*purchasesOrders)[symbol], purchaseOrderBuffer);
+                arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
             }
             else if (orderBuffer.getOrderSide() == "2") {
                 saleOrderBuffer = *(new SaleOrder(orderBuffer.getSequentialOrderNumber(), orderBuffer.getSecondaryOrderID(), orderBuffer.getPriorityTime(), orderBuffer.getOrderPrice(), orderBuffer.getTotalQuantityOfOrder(), orderBuffer.getTradedQuantityOfOrder()));
-                if ((*salesOrders)[symbol].size() == 0 || saleOrderBuffer.getOrderPrice() < (*salesOrders)[symbol][0].getOrderPrice()) {
-                    cout << "New Ask price: " << purchaseOrderBuffer.getOrderPrice() << endl;
+                if ((*offersBook)[symbol].saleOrders.size() == 0 || saleOrderBuffer.getOrderPrice() < (*offersBook)[symbol].saleOrders[0].getOrderPrice()) {
+                    (*offersBook)[symbol].ask = saleOrderBuffer.getOrderPrice();
                 }
-                arrayUtils.insertSaleOrder((*salesOrders)[symbol], saleOrderBuffer);
+                arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
             }
         }
-
+        else {
+            symbol = "";
+        }
+        
+  
         semaphore->release();
+        this_thread::sleep_for(timespan);
         
     }
 }

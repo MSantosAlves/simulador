@@ -1,6 +1,7 @@
 
 #include "LogService.h"
 #include "OrderFieldsEnum.h"
+#include "StockInfo.h"
 
 #include <iostream>
 #include <fstream>
@@ -88,38 +89,58 @@ void printTable(const vector<string>& headers, const vector<vector<string>>& dat
     cout << "\n";
 }
 
-void printOrders(vector<Order>* processedOrders)
-{
-    OrderFields* orderFields = new OrderFields();
-    vector<string> headers = { "Symbol", "Price", "Total Qty.", "Member", "Type" };
-    vector<vector<string>> data;
-    vector<int> desiredFields = {
-        OrderFields::Enum::INSTRUMENT_SYMBOL,
-        OrderFields::Enum::ORDER_PRICE,
-        OrderFields::Enum::TOTAL_QUANTITY_OF_ORDER,
-        OrderFields::Enum::MEMBER,
-        OrderFields::Enum::TYPE_ORDER
-    };
+//void printOrders(vector<Order>* processedOrders)
+//{
+//    OrderFields* orderFields = new OrderFields();
+//    vector<string> headers = { "Symbol", "Price", "Total Qty.", "Member", "Type" };
+//    vector<vector<string>> data;
+//    vector<int> desiredFields = {
+//        OrderFields::Enum::INSTRUMENT_SYMBOL,
+//        OrderFields::Enum::ORDER_PRICE,
+//        OrderFields::Enum::TOTAL_QUANTITY_OF_ORDER,
+//        OrderFields::Enum::MEMBER,
+//        OrderFields::Enum::TYPE_ORDER
+//    };
+//
+//    for (int i = 0; i < processedOrders->size(); i++) {
+//        data.push_back(processedOrders->at(i).getArrayOfCalculatedFields(false, desiredFields));
+//    }
+//
+//    if (data.size() > 0) {
+//        printTable(headers, data);
+//    }
+//
+//}
 
-    for (int i = 0; i < processedOrders->size(); i++) {
-        data.push_back(processedOrders->at(i).getArrayOfCalculatedFields(false, desiredFields));
-    }
+void printOffersBook(map<string, StockInfo>* offersBook)
+{
+	OrderFields* orderFields = new OrderFields();
+	vector<string> headers = { "Symbol", "Bid Price", "Ask Price", "Total orders"};
+    vector<string> lineBuffer;
+	vector<vector<string>> data;
+
+    for (auto it = offersBook->begin(); it != offersBook->end(); it++) {
+        lineBuffer.push_back(it->first);
+        lineBuffer.push_back(to_string(it->second.bid));
+        lineBuffer.push_back(to_string(it->second.ask));
+        lineBuffer.push_back(to_string(it->second.purchaseOrders.size() + it->second.saleOrders.size()));
+		data.push_back(lineBuffer);
+		lineBuffer.clear();
+	}
 
     if (data.size() > 0) {
-        printTable(headers, data);
-    }
-
+		printTable(headers, data);
+	}
 }
-
 
 LogService::LogService() {}
 
-void LogService::startLogSystem(vector<string>* orders, vector<string>* book, Semaphore* semaphore, vector<Order>* processedOrders)
+void LogService::startLogSystem(map<string, StockInfo>* offersBook, Semaphore* semaphore)
 {
     chrono::milliseconds timespan(3000);
     while (true) {
         semaphore->acquire();
-        printOrders(processedOrders);
+        printOffersBook(offersBook);
         semaphore->release();
         this_thread::sleep_for(timespan);
     }
