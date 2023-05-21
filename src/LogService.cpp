@@ -11,6 +11,7 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <fstream>
 
 using namespace std;
 
@@ -115,7 +116,7 @@ void printTable(const vector<string>& headers, const vector<vector<string>>& dat
 void printOffersBook(map<string, StockInfo>* offersBook)
 {
 	OrderFields* orderFields = new OrderFields();
-	vector<string> headers = { "Symbol", "Bid Price", "Ask Price", "Total orders"};
+	vector<string> headers = { "Symbol", "Bid Price", "Ask Price", "Total orders", "Total traded"};
     vector<string> lineBuffer;
 	vector<vector<string>> data;
 
@@ -124,6 +125,7 @@ void printOffersBook(map<string, StockInfo>* offersBook)
         lineBuffer.push_back(to_string(it->second.bid));
         lineBuffer.push_back(to_string(it->second.ask));
         lineBuffer.push_back(to_string(it->second.purchaseOrders.size() + it->second.saleOrders.size()));
+        lineBuffer.push_back(to_string(it->second.totalTradedQuantity));
 		data.push_back(lineBuffer);
 		lineBuffer.clear();
 	}
@@ -140,8 +142,30 @@ void LogService::startLogSystem(map<string, StockInfo>* offersBook, Semaphore* s
     chrono::milliseconds timespan(3000);
     while (true) {
         semaphore->acquire();
+        //cout << "Deseja encerrar o programa? (s/n): ";
+       /* char answer = getchar();
+        if(answer == 's'){
+            ofstream pricesFile("./historicalPrices.txt");
+            string lineBuffer = "";
+
+            for(auto it = offersBook->begin(); it != offersBook->end(); it++) {
+                if (it->first == "AFSF20") {
+                    for (auto i = it->second.historicalPrices.begin(); i != it->second.historicalPrices.end(); i++) {
+                        lineBuffer += to_string(*i) + ",";
+                    }
+                    lineBuffer += "\n";
+                    pricesFile << lineBuffer;
+                }
+            }
+           
+            pricesFile.close();
+            semaphore->release();
+            break;
+        }*/
         printOffersBook(offersBook);
         semaphore->release();
         this_thread::sleep_for(timespan);
     }
+
+    return;
 }

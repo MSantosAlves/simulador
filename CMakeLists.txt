@@ -28,6 +28,7 @@ set(SOURCES
     src/Semaphore.cpp
     utils/StringUtils.cpp
     utils/ArrayUtils.cpp
+    utils/DataUtils.cpp
     src/main.cpp
 )
 

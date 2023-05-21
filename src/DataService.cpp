@@ -59,7 +59,6 @@ void DataService::startAcquisition(vector<string>* rawOrdersQueue, Semaphore* se
 
     }
 
-
     dataFile.close();
 
 

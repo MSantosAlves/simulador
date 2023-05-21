@@ -12,10 +12,10 @@ private:
     string sequentialOrderNumber;
     string secondaryOrderID;
     string priorityTime;
-    double orderPrice;
+    double orderPrice = -1;
     long long priorityTimeInteger;
-    int totalQuantityOfOrder;
-    int tradedQuantityOfOrder;
+    int totalQuantityOfOrder = 0;
+    int tradedQuantityOfOrder = 0;
 
 public:
     SaleOrder();

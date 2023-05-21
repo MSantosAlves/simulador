@@ -31,7 +31,7 @@ vector<string> removeWithSpacesFromSplitedString(vector<string> splitedString, S
     return splitedString;
 }
 
-Order processOrder(string order, StringUtils stringUtils)
+Order parseOrder(string order, StringUtils stringUtils)
 {
     vector<string> splitedString;
     char const* delimiter = ";";
@@ -94,6 +94,102 @@ Order processOrder(string order, StringUtils stringUtils)
     return (*orderBuffer);
 }
 
+void processNewOrder(string symbol, Order order, map<string, StockInfo>* offersBook, ArrayUtils arrayUtils) {
+    const string PURCHASE_ORDER = "1";
+    const string SALE_ORDER = "2";
+    if (order.getOrderSide() == PURCHASE_ORDER) {
+        PurchaseOrder purchaseOrderBuffer;
+        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+        
+        if (purchaseOrderBuffer.getOrderPrice() >= 0 && purchaseOrderBuffer.getOrderPrice() <= (*offersBook)[symbol].ask) {
+
+            SaleOrder currSaleOrder;
+            int tradedQty;
+            int i = 0;
+            do {
+                currSaleOrder = (*offersBook)[symbol].saleOrders[i];
+
+                if (purchaseOrderBuffer.getTotalQuantityOfOrder() >= currSaleOrder.getTotalQuantityOfOrder()) {
+                    tradedQty = currSaleOrder.getTotalQuantityOfOrder();
+                    purchaseOrderBuffer.setTotalQuantityOfOrder(purchaseOrderBuffer.getTotalQuantityOfOrder() - tradedQty);
+                    purchaseOrderBuffer.setTradedQuantityOfOrder(purchaseOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
+                    currSaleOrder.setTotalQuantityOfOrder(0);
+                }else {
+                    tradedQty = purchaseOrderBuffer.getTotalQuantityOfOrder();
+                    purchaseOrderBuffer.setTotalQuantityOfOrder(0);
+                    purchaseOrderBuffer.setTradedQuantityOfOrder(purchaseOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
+                    currSaleOrder.setTotalQuantityOfOrder(currSaleOrder.getTotalQuantityOfOrder() - tradedQty);
+                }
+
+                (*offersBook)[symbol].saleOrders[i] = currSaleOrder;
+                (*offersBook)[symbol].totalTradedQuantity += tradedQty;
+                (*offersBook)[symbol].historicalPrices.push_back(purchaseOrderBuffer.getOrderPrice());
+
+                i++;
+            } while (purchaseOrderBuffer.getTotalQuantityOfOrder() > 0 && currSaleOrder.getOrderPrice() <= purchaseOrderBuffer.getOrderPrice());
+
+            // Update purchase orders
+            if (purchaseOrderBuffer.getTotalQuantityOfOrder() > 0) {
+                (*offersBook)[symbol].purchaseOrders.insert((*offersBook)[symbol].purchaseOrders.begin(), purchaseOrderBuffer);
+            }
+            // Update sale orders (erase all sales where totalQuantityOfOrder = 0)
+			(*offersBook)[symbol].saleOrders.erase(remove_if((*offersBook)[symbol].saleOrders.begin(), (*offersBook)[symbol].saleOrders.end(), [](SaleOrder& saleOrder) { return saleOrder.getTotalQuantityOfOrder() == 0; }), (*offersBook)[symbol].saleOrders.end());
+
+            // Update bid & ask prices
+            (*offersBook)[symbol].bid = (*offersBook)[symbol].purchaseOrders.size() > 0 ? (*offersBook)[symbol].purchaseOrders[0].getOrderPrice() : 0;
+			(*offersBook)[symbol].ask = (*offersBook)[symbol].saleOrders.size() > 0 ? (*offersBook)[symbol].saleOrders[0].getOrderPrice() : 0;
+
+        }else {
+            // Add purchase order to symbol queue
+            arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
+            (*offersBook)[symbol].bid = purchaseOrderBuffer.getOrderPrice();
+        }
+
+    }else if (order.getOrderSide() == SALE_ORDER) {
+        SaleOrder saleOrderBuffer;
+        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+        
+        if (saleOrderBuffer.getOrderPrice() >= 0 && saleOrderBuffer.getOrderPrice() <= (*offersBook)[symbol].bid) {
+
+			PurchaseOrder currPurchaseOrder;
+			int tradedQty;
+			int i = 0;
+            do {
+				currPurchaseOrder = (*offersBook)[symbol].purchaseOrders[i];
+
+                if (saleOrderBuffer.getTotalQuantityOfOrder() >= currPurchaseOrder.getTotalQuantityOfOrder()) {
+					tradedQty = currPurchaseOrder.getTotalQuantityOfOrder();
+					saleOrderBuffer.setTotalQuantityOfOrder(saleOrderBuffer.getTotalQuantityOfOrder() - tradedQty);
+					saleOrderBuffer.setTradedQuantityOfOrder(saleOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
+					currPurchaseOrder.setTotalQuantityOfOrder(0);
+				}else {
+					tradedQty = saleOrderBuffer.getTotalQuantityOfOrder();
+					saleOrderBuffer.setTotalQuantityOfOrder(0);
+					saleOrderBuffer.setTradedQuantityOfOrder(saleOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
+					currPurchaseOrder.setTotalQuantityOfOrder(currPurchaseOrder.getTotalQuantityOfOrder() - tradedQty);
+				}
+
+                (*offersBook)[symbol].purchaseOrders[i] = currPurchaseOrder;
+                (*offersBook)[symbol].totalTradedQuantity += tradedQty;
+                (*offersBook)[symbol].historicalPrices.push_back(saleOrderBuffer.getOrderPrice());
+
+				i++;
+			} while (saleOrderBuffer.getTotalQuantityOfOrder() > 0 && currPurchaseOrder.getOrderPrice() >= saleOrderBuffer.getOrderPrice());
+
+			// Update sale orders
+            if (saleOrderBuffer.getTotalQuantityOfOrder() > 0) {
+				(*offersBook)[symbol].saleOrders.insert((*offersBook)[symbol].saleOrders.begin(), saleOrderBuffer);
+			}
+			// Update purchase orders (erase all orders where totalQuantityOfOrder = 0)
+            (*offersBook)[symbol].purchaseOrders.erase(remove_if((*offersBook)[symbol].purchaseOrders.begin(), (*offersBook)[symbol].purchaseOrders.end(), [](PurchaseOrder& purchaseOrder) { return purchaseOrder.getTotalQuantityOfOrder() == 0; }), (*offersBook)[symbol].purchaseOrders.end());
+
+        }else {
+            arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
+            (*offersBook)[symbol].ask = saleOrderBuffer.getOrderPrice();
+        }
+    }
+}
+
 // Class methods
 
 OrderService::OrderService(vector<string> _targetStocks) {
@@ -123,29 +219,14 @@ void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string
         rawOrdersQueue->erase(rawOrdersQueue->begin());
      
         if (symbol != "" && isTargetSymbol(targetStocks, symbol)) {
-            orderBuffer = processOrder(currOrder, stringUtils);
-            if (orderBuffer.getOrderSide() == "1") {
-                purchaseOrderBuffer = *(new PurchaseOrder(orderBuffer.getSequentialOrderNumber(), orderBuffer.getSecondaryOrderID(), orderBuffer.getPriorityTime(), orderBuffer.getOrderPrice(), orderBuffer.getTotalQuantityOfOrder(), orderBuffer.getTradedQuantityOfOrder()));
-                if ((*offersBook)[symbol].purchaseOrders.size() == 0 || purchaseOrderBuffer.getOrderPrice() > (*offersBook)[symbol].purchaseOrders[0].getOrderPrice()) {
-                    (*offersBook)[symbol].bid = purchaseOrderBuffer.getOrderPrice();
-                }
-                arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
-            }
-            else if (orderBuffer.getOrderSide() == "2") {
-                saleOrderBuffer = *(new SaleOrder(orderBuffer.getSequentialOrderNumber(), orderBuffer.getSecondaryOrderID(), orderBuffer.getPriorityTime(), orderBuffer.getOrderPrice(), orderBuffer.getTotalQuantityOfOrder(), orderBuffer.getTradedQuantityOfOrder()));
-                if ((*offersBook)[symbol].saleOrders.size() == 0 || saleOrderBuffer.getOrderPrice() < (*offersBook)[symbol].saleOrders[0].getOrderPrice()) {
-                    (*offersBook)[symbol].ask = saleOrderBuffer.getOrderPrice();
-                }
-                arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
-            }
-        }
-        else {
+            orderBuffer = parseOrder(currOrder, stringUtils);
+            processNewOrder(symbol, orderBuffer, offersBook, arrayUtils);
+        }else {
             symbol = "";
         }
         
-  
         semaphore->release();
         this_thread::sleep_for(timespan);
-        
+
     }
 }

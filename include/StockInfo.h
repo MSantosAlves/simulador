@@ -7,8 +7,10 @@
 
 struct StockInfo
 {
-    double bid;
-    double ask;
+    double bid = 0;
+    double ask = 0;
+    int totalTradedQuantity = 0;
+    vector<double> historicalPrices;
     vector<PurchaseOrder> purchaseOrders;
     vector<SaleOrder> saleOrders;
 };
