@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <algorithm>
+#include <string>
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -13,13 +15,15 @@ Config::Config() {
     filesystem::path pwd = filesystem::current_path();
     StringUtils stringUtils;
     string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
-    string fullPath = stringUtils.pathToString(pwd) + sysFileChar + "config.json";
+    string targetChar = (_WIN64 || _WIN32) ? "/" : "\\";
+    string pwdString = stringUtils.pathToString(pwd);
+    string fullPath = pwdString + sysFileChar + "config.json";
    
     ifstream jsonFile(fullPath);
     json jsonData = json::parse(jsonFile);
 
     string date = jsonData["date"];
-    string dataPath = jsonData["dataPath"];
+    string dataPath = pwdString + stringUtils.replaceAllstring(jsonData["dataPath"], targetChar, sysFileChar);
     vector<string> stocks = jsonData["targetStocks"];
     int size = stocks.size();
     vector<string> targetStocks = {};

@@ -17,6 +17,7 @@ public:
     int include(vector<string> vector, string str);
     string join(vector<string> vector, string token);
     string pathToString(filesystem::path path);
+    string replaceAllstring(string str, const string& from, const string& to);
     long long dateToInt(string date);
 };
 

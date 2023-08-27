@@ -34,10 +34,10 @@ void DataService::startAcquisition(vector<string>* rawOrdersQueue, Semaphore* se
     chrono::nanoseconds timespan(1);
 
     if (orderType == "SALES") {
-        filePath += "OFER_VDA_BMF_20191220_1";
+        filePath += "VDA" + sysFileChar + "OFER_VDA_BMF_20191220_00.txt";
     }
     else if (orderType == "PURCHASES") {
-        filePath += "OFER_CPA_BMF_20191220_1";
+        filePath += "CPA" + sysFileChar + "OFER_CPA_BMF_20191220_00.txt";
         orderSufix = ";CPA";
     }
 
