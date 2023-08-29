@@ -14,6 +14,7 @@ public:
     vector<string> split(string str, char segment);
     vector<string> split(string str, string delimiter);
     string removeWhiteSpaces(string str);
+    vector<string> removeWitheSpacesFromSplitedString(vector<string> splitedString);
     int include(vector<string> vector, string str);
     string join(vector<string> vector, string token);
     string pathToString(filesystem::path path);

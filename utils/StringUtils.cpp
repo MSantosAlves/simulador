@@ -43,6 +43,14 @@ string StringUtils::removeWhiteSpaces(string str) {
     return str;
 }
 
+vector<string> StringUtils::removeWitheSpacesFromSplitedString(vector<string> splitedString)
+{
+    for (int i = 0; i < splitedString.size(); i++) {
+        splitedString[i] = removeWhiteSpaces(splitedString[i]);
+    }
+    return splitedString;
+}
+
 int StringUtils::include(vector<string> vector, string str) {
     for (int i = 0; i < vector.size(); i++)
     {

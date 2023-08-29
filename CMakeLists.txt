@@ -30,6 +30,7 @@ set(SOURCES
     utils/StringUtils.cpp
     utils/ArrayUtils.cpp
     utils/DataUtils.cpp
+    utils/OrderUtils.cpp
     src/main.cpp
 )
 

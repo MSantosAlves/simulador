@@ -41,13 +41,13 @@ int main(int argc, char* argv[])
     OrderService* orderService = new OrderService(targetStocks);
     LogService* logService = new LogService();
 
-    thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
     thread readPurchasesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "PURCHASES");
+    thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
     thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, traderAccount);
     thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
 
-    readSalesThread.join();
     readPurchasesThread.join();
+    readSalesThread.join();
     ordersProcessorThread.join();
     logSystemThread.join();
 
