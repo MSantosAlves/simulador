@@ -67,9 +67,10 @@ Order OrderUtils::parseOrder(string order, StringUtils stringUtils)
     return (*orderBuffer);
 }
 
-void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo>* offersBook, ArrayUtils arrayUtils, Trader* traderAccount) {
+void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo>* offersBook, ArrayUtils arrayUtils, Trader* traderAccount, ofstream& trade_history_file) {
     const string PURCHASE_ORDER = "1";
     const string SALE_ORDER = "2";
+    string trade_string = "";
 
     // BID: highest price a buyer will pay to buy a stock
     // ASK: lowest price a seller watns to sell a stock
@@ -95,6 +96,8 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                     purchaseOrderBuffer.setTradedQuantityOfOrder(purchaseOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
                     currSaleOrder.setTotalQuantityOfOrder(0);
                     currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
+                    trade_string = symbol + ";" + to_string(purchaseOrderBuffer.getOrderPrice()) + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
+                    trade_history_file << trade_string + "\n";
                 }
                 else {
                     tradedQty = purchaseOrderBuffer.getTotalQuantityOfOrder();
@@ -102,6 +105,8 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                     purchaseOrderBuffer.setTradedQuantityOfOrder(purchaseOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
                     currSaleOrder.setTotalQuantityOfOrder(currSaleOrder.getTotalQuantityOfOrder() - tradedQty);
                     currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
+                    trade_string = symbol + ";" + to_string(purchaseOrderBuffer.getOrderPrice()) + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
+                    trade_history_file << trade_string + "\n";
                 }
 
                 (*offersBook)[symbol].totalTradedQuantity += tradedQty;
@@ -178,6 +183,8 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                     saleOrderBuffer.setTradedQuantityOfOrder(saleOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
                     currPurchaseOrder.setTotalQuantityOfOrder(0);
                     currPurchaseOrder.setTradedQuantityOfOrder(currPurchaseOrder.getTradedQuantityOfOrder() + tradedQty);
+                    trade_string = symbol + ";" + to_string(currPurchaseOrder.getOrderPrice()) + ";" + to_string(saleOrderBuffer.getOrderPrice()) + ";" + to_string(tradedQty);
+                    trade_history_file << trade_string + "\n";
                 }
                 else {
                     tradedQty = saleOrderBuffer.getTotalQuantityOfOrder();
@@ -185,6 +192,8 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                     saleOrderBuffer.setTradedQuantityOfOrder(saleOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
                     currPurchaseOrder.setTotalQuantityOfOrder(currPurchaseOrder.getTotalQuantityOfOrder() - tradedQty);
                     currPurchaseOrder.setTradedQuantityOfOrder(currPurchaseOrder.getTradedQuantityOfOrder() + tradedQty);
+                    trade_string = symbol + ";" + to_string(currPurchaseOrder.getOrderPrice()) + ";" + to_string(saleOrderBuffer.getOrderPrice()) + ";" + to_string(tradedQty);
+                    trade_history_file << trade_string + "\n";
                 }
 
                

@@ -6,6 +6,7 @@
 
 #include <string>
 #include <map>
+#include <fstream>
 
 using namespace std;
 
@@ -17,7 +18,7 @@ class OrderUtils
 public:
 	OrderUtils();
 	Order parseOrder(string order, StringUtils stringUtils);
-	void orderMatching(string symbol, Order order, map<string, StockInfo>* offersBook, ArrayUtils arrayUtils, Trader* traderAccount);
+	void orderMatching(string symbol, Order order, map<string, StockInfo>* offersBook, ArrayUtils arrayUtils, Trader* traderAccount, ofstream& trade_history_file);
 };
 
 #endif

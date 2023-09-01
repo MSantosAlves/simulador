@@ -24,6 +24,12 @@ bool isTargetSymbol(vector<string> targetsStocks, string stock) {
     return stringUtils.include(targetsStocks, stock) != -1;
 }
 
+string generateFilename() {
+    string timestamp = to_string(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
+    string file_name = "trade_history_" + timestamp + ".txt";
+    return file_name;
+}
+
 // Class methods
 
 OrderService::OrderService(vector<string> _targetStocks) {
@@ -31,7 +37,7 @@ OrderService::OrderService(vector<string> _targetStocks) {
 }
 
 void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string, StockInfo>* offersBook, Semaphore* semaphore, Trader* traderAccount)
-{
+{       
     StringUtils stringUtils;
     OrderUtils orderUtils;
     Order orderBuffer;
@@ -41,6 +47,16 @@ void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string
     string currOrder;
     PurchaseOrder purchaseOrderBuffer;
     SaleOrder saleOrderBuffer;
+
+   
+    filesystem::path pwd = filesystem::current_path();
+    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
+    string pwdString = stringUtils.pathToString(pwd);
+    string file_name = generateFilename();
+    string fullPath = pwdString + sysFileChar + "data" + sysFileChar + "history" + sysFileChar + file_name;
+
+    ofstream tradesHistoryFile;
+    tradesHistoryFile.open(fullPath);
     
     while (true) {
         semaphore->acquire();
@@ -55,7 +71,7 @@ void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string
      
         if (symbol != "" && isTargetSymbol(targetStocks, symbol)) {
             orderBuffer = orderUtils.parseOrder(currOrder, stringUtils);
-            orderUtils.orderMatching(symbol, orderBuffer, offersBook, arrayUtils, traderAccount);
+            orderUtils.orderMatching(symbol, orderBuffer, offersBook, arrayUtils, traderAccount, tradesHistoryFile);
         }else {
             symbol = "";
         }
@@ -64,4 +80,6 @@ void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string
         this_thread::sleep_for(timespan);
 
     }
+
+    tradesHistoryFile.close();
 }

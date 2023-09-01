@@ -30,11 +30,12 @@ void DataService::startAcquisition(vector<string>* rawOrdersQueue, Semaphore* se
     const size_t chunkSize = nbOfOfferBytes * nbOfChunkOffers;
     char chunkBuffer[chunkSize];
     string orderBuffer;
-    string orderSufix = ";VDA";
+    string orderSufix = "";
     chrono::nanoseconds timespan(1);
 
     if (orderType == "SALES") {
         filePath += "VDA" + sysFileChar + "OFER_VDA_BMF_20191220_00.txt";
+        orderSufix = ";VDA";
     }
     else if (orderType == "PURCHASES") {
         filePath += "CPA" + sysFileChar + "OFER_CPA_BMF_20191220_00.txt";
