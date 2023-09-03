@@ -1,7 +1,9 @@
 #include <string>
 #include <vector>
+#include <map>
 
 #include "Semaphore.h"
+#include "StockDataInfo.h"
 
 using namespace std;
 
@@ -12,9 +14,11 @@ class DataService
 {
 private:    
     string date;
-    string dataPath;   
+    string dataPath;
+    map<string, StockDataInfo> targetStocksDataInfo;
+    vector<string> targetStocks;
 public:
-    DataService(string date, string dataPath);
+    DataService(string date, string dataPath, map<string, StockDataInfo> targetStocksDataInfo, vector<string> targetStocks);
     void startAcquisition(vector<string>* rawOrdersQueue, Semaphore* semaphore, string offerType);
 };
 

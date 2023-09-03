@@ -1,5 +1,7 @@
 #include <string>
 #include <vector>
+#include <map>
+#include <StockDataInfo.h>
 using namespace std;
 
 #ifndef __CONFIG_H__
@@ -11,6 +13,7 @@ private:
 	string date;
 	string dataPath;
 	vector<string> targetStocks;
+	map<string, StockDataInfo> targetStocksDataInfo;
 
 public:
 	Config();
@@ -20,6 +23,8 @@ public:
 	string getDataPath();
 	void setTargetStocks(vector<string> targetStocks);
 	vector<string> getTargetStocks();
+	map<string, StockDataInfo> getTargetStocksDataInfo();
+	void setTargetStocksDataInfo(map<string, StockDataInfo> targetStocksDataInfo);
 };
 
 #endif

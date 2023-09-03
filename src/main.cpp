@@ -5,6 +5,7 @@
 #include "Config.h"
 #include "StockInfo.h"
 #include "Trader.h"
+#include "StockDataInfo.h"
 
 #include <thread>
 #include <filesystem>
@@ -35,21 +36,22 @@ int main(int argc, char* argv[])
     string dataTargetDate = config->getDate();
     string dataPath = config->getDataPath();
     vector<string> targetStocks = config->getTargetStocks();
+    map<string, StockDataInfo> targetStocksDataInfo = config->getTargetStocksDataInfo();
 
     // Instantiate services
-    DataService* dataService = new DataService(dataTargetDate, dataPath);
+    DataService* dataService = new DataService(dataTargetDate, dataPath, targetStocksDataInfo, targetStocks);
     OrderService* orderService = new OrderService(targetStocks);
     LogService* logService = new LogService();
 
-    thread readPurchasesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "PURCHASES");
-    thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
-    thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, traderAccount);
-    thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
+    //thread readPurchasesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "PURCHASES");
+    //thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
+    //thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, traderAccount);
+    //thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
 
-    readPurchasesThread.join();
-    readSalesThread.join();
-    ordersProcessorThread.join();
-    logSystemThread.join();
+    //readPurchasesThread.join();
+    //readSalesThread.join();
+    //ordersProcessorThread.join();
+    //logSystemThread.join();
 
     return 0;
 }

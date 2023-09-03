@@ -25,6 +25,7 @@ for data_dir in target_data_directories:
         line_data = []
 
         with open(file_path, 'r') as file:
+            line_idx = 1
             for line in file:
                 line_data = line.split(";")
 
@@ -40,8 +41,14 @@ for data_dir in target_data_directories:
                         "min_sale_price": -1,
                         "max_sale_price": -1,
                         "buy_offers": 0,
-                        "sales_offers": 0
+                        "sales_offers": 0,
+                        "first_line_index": line_idx,
+                        "last_line_index": line_idx
                     }
+                else:
+                    file_info[stock_symbol]["last_line_index"] = line_idx
+
+                line_idx += 1
 
                 if stock_direction == 1:
                     file_info[stock_symbol]["buy_offers"] += 1

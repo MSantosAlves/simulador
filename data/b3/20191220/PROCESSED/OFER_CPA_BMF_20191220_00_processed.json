@@ -1,0 +1,2152 @@
+{
+    "AFSF20": {
+        "min_buy_price": 14177.0,
+        "max_buy_price": 14291.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2592,
+        "sales_offers": 0,
+        "first_line_index": 1,
+        "last_line_index": 2592
+    },
+    "AFSG20": {
+        "min_buy_price": 14228.0,
+        "max_buy_price": 14342.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2546,
+        "sales_offers": 0,
+        "first_line_index": 2593,
+        "last_line_index": 5138
+    },
+    "AUDG20": {
+        "min_buy_price": 2832.2,
+        "max_buy_price": 2832.2,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 6,
+        "sales_offers": 0,
+        "first_line_index": 5139,
+        "last_line_index": 5144
+    },
+    "AUSF20": {
+        "min_buy_price": 688.5,
+        "max_buy_price": 690.1,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 996,
+        "sales_offers": 0,
+        "first_line_index": 5145,
+        "last_line_index": 6140
+    },
+    "AUSG20": {
+        "min_buy_price": 688.8,
+        "max_buy_price": 690.7,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 940,
+        "sales_offers": 0,
+        "first_line_index": 6141,
+        "last_line_index": 7080
+    },
+    "B3SAOF20": {
+        "min_buy_price": 48.17,
+        "max_buy_price": 49.36,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 33707,
+        "sales_offers": 0,
+        "first_line_index": 7081,
+        "last_line_index": 40787
+    },
+    "B3SAOG20": {
+        "min_buy_price": 48.38,
+        "max_buy_price": 49.37,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 3823,
+        "sales_offers": 0,
+        "first_line_index": 40788,
+        "last_line_index": 44610
+    },
+    "BGIF20": {
+        "min_buy_price": 192.0,
+        "max_buy_price": 201.05,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 587,
+        "sales_offers": 0,
+        "first_line_index": 44611,
+        "last_line_index": 45197
+    },
+    "BGIF20C020800": {
+        "min_buy_price": 1.45,
+        "max_buy_price": 1.45,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 45198,
+        "last_line_index": 45199
+    },
+    "BGIF20P019000": {
+        "min_buy_price": 1.4,
+        "max_buy_price": 1.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 45200,
+        "last_line_index": 45201
+    },
+    "BGIF20P019500": {
+        "min_buy_price": 2.6,
+        "max_buy_price": 2.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 45202,
+        "last_line_index": 45203
+    },
+    "BGIG20": {
+        "min_buy_price": 191.5,
+        "max_buy_price": 198.9,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 52,
+        "sales_offers": 0,
+        "first_line_index": 45204,
+        "last_line_index": 45255
+    },
+    "BGIH20": {
+        "min_buy_price": 190.0,
+        "max_buy_price": 195.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 10,
+        "sales_offers": 0,
+        "first_line_index": 45256,
+        "last_line_index": 45265
+    },
+    "BGIJ20": {
+        "min_buy_price": 185.0,
+        "max_buy_price": 188.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 45266,
+        "last_line_index": 45269
+    },
+    "BGIK20": {
+        "min_buy_price": 185.65,
+        "max_buy_price": 190.9,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 88,
+        "sales_offers": 0,
+        "first_line_index": 45270,
+        "last_line_index": 45357
+    },
+    "BGIV20": {
+        "min_buy_price": 192.35,
+        "max_buy_price": 201.75,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 302,
+        "sales_offers": 0,
+        "first_line_index": 45358,
+        "last_line_index": 45659
+    },
+    "BGIV20C021500": {
+        "min_buy_price": 5.15,
+        "max_buy_price": 5.15,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 45660,
+        "last_line_index": 45661
+    },
+    "BGIV20C022000": {
+        "min_buy_price": 4.23,
+        "max_buy_price": 4.23,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 45662,
+        "last_line_index": 45663
+    },
+    "BGIV20P018500": {
+        "min_buy_price": 2.65,
+        "max_buy_price": 2.65,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 45664,
+        "last_line_index": 45665
+    },
+    "BGIV20P019000": {
+        "min_buy_price": 1.0,
+        "max_buy_price": 1.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 45666,
+        "last_line_index": 45667
+    },
+    "BGIV20P020000": {
+        "min_buy_price": 1.98,
+        "max_buy_price": 10.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 45668,
+        "last_line_index": 45671
+    },
+    "BGIV20P021000": {
+        "min_buy_price": 1.0,
+        "max_buy_price": 14.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 45672,
+        "last_line_index": 45675
+    },
+    "BGIZ19": {
+        "min_buy_price": 196.3,
+        "max_buy_price": 206.3,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 794,
+        "sales_offers": 0,
+        "first_line_index": 45676,
+        "last_line_index": 46469
+    },
+    "BGIZ19C017700": {
+        "min_buy_price": 26.15,
+        "max_buy_price": 26.15,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 46470,
+        "last_line_index": 46471
+    },
+    "BGIZ19C018100": {
+        "min_buy_price": 22.45,
+        "max_buy_price": 22.45,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 46472,
+        "last_line_index": 46473
+    },
+    "BGIZ19P022800": {
+        "min_buy_price": 18.0,
+        "max_buy_price": 24.1,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 46474,
+        "last_line_index": 46477
+    },
+    "BRIG20": {
+        "min_buy_price": 18700.0,
+        "max_buy_price": 18934.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 15361,
+        "sales_offers": 0,
+        "first_line_index": 46478,
+        "last_line_index": 61838
+    },
+    "BRIJ20": {
+        "min_buy_price": 18932.0,
+        "max_buy_price": 19020.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 19318,
+        "sales_offers": 0,
+        "first_line_index": 61839,
+        "last_line_index": 81156
+    },
+    "CADF20": {
+        "min_buy_price": 3096.0,
+        "max_buy_price": 3096.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 81157,
+        "last_line_index": 81158
+    },
+    "CANF20": {
+        "min_buy_price": 1312.9,
+        "max_buy_price": 1317.3,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1749,
+        "sales_offers": 0,
+        "first_line_index": 81159,
+        "last_line_index": 82907
+    },
+    "CANG20": {
+        "min_buy_price": 1312.2,
+        "max_buy_price": 1316.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1715,
+        "sales_offers": 0,
+        "first_line_index": 82908,
+        "last_line_index": 84622
+    },
+    "CCMF20": {
+        "min_buy_price": 46.0,
+        "max_buy_price": 48.95,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2857,
+        "sales_offers": 0,
+        "first_line_index": 84623,
+        "last_line_index": 87479
+    },
+    "CCMH20": {
+        "min_buy_price": 46.05,
+        "max_buy_price": 48.9,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 677,
+        "sales_offers": 0,
+        "first_line_index": 87480,
+        "last_line_index": 88156
+    },
+    "CCMK20": {
+        "min_buy_price": 43.0,
+        "max_buy_price": 45.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 269,
+        "sales_offers": 0,
+        "first_line_index": 88157,
+        "last_line_index": 88425
+    },
+    "CCMN20": {
+        "min_buy_price": 40.2,
+        "max_buy_price": 41.3,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 240,
+        "sales_offers": 0,
+        "first_line_index": 88426,
+        "last_line_index": 88665
+    },
+    "CCMU20": {
+        "min_buy_price": 39.8,
+        "max_buy_price": 41.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 222,
+        "sales_offers": 0,
+        "first_line_index": 88666,
+        "last_line_index": 88887
+    },
+    "CCMU20C004200": {
+        "min_buy_price": 2.0,
+        "max_buy_price": 2.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 88888,
+        "last_line_index": 88891
+    },
+    "CCMU20C004500": {
+        "min_buy_price": 0.9,
+        "max_buy_price": 0.9,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 6,
+        "sales_offers": 0,
+        "first_line_index": 88892,
+        "last_line_index": 88897
+    },
+    "CCMU20P003700": {
+        "min_buy_price": 1.1,
+        "max_buy_price": 1.2,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 6,
+        "sales_offers": 0,
+        "first_line_index": 88898,
+        "last_line_index": 88903
+    },
+    "CCMU20P003850": {
+        "min_buy_price": 1.1,
+        "max_buy_price": 1.1,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 88904,
+        "last_line_index": 88907
+    },
+    "CCMX20": {
+        "min_buy_price": 40.0,
+        "max_buy_price": 41.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 21,
+        "sales_offers": 0,
+        "first_line_index": 88908,
+        "last_line_index": 88928
+    },
+    "CCROOF20": {
+        "min_buy_price": 18.58,
+        "max_buy_price": 18.94,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 11120,
+        "sales_offers": 0,
+        "first_line_index": 88929,
+        "last_line_index": 100048
+    },
+    "CCROOG20": {
+        "min_buy_price": 18.67,
+        "max_buy_price": 18.97,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1425,
+        "sales_offers": 0,
+        "first_line_index": 100049,
+        "last_line_index": 101473
+    },
+    "CIELOF20": {
+        "min_buy_price": 8.37,
+        "max_buy_price": 8.55,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1426,
+        "sales_offers": 0,
+        "first_line_index": 101474,
+        "last_line_index": 102899
+    },
+    "CIELOG20": {
+        "min_buy_price": 8.39,
+        "max_buy_price": 8.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 160,
+        "sales_offers": 0,
+        "first_line_index": 102900,
+        "last_line_index": 103059
+    },
+    "CMIGPF20": {
+        "min_buy_price": 13.48,
+        "max_buy_price": 13.7,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4193,
+        "sales_offers": 0,
+        "first_line_index": 103060,
+        "last_line_index": 107252
+    },
+    "CMIGPG20": {
+        "min_buy_price": 13.53,
+        "max_buy_price": 13.71,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 572,
+        "sales_offers": 0,
+        "first_line_index": 107253,
+        "last_line_index": 107824
+    },
+    "CNHF20": {
+        "min_buy_price": 6997.0,
+        "max_buy_price": 7003.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 532,
+        "sales_offers": 0,
+        "first_line_index": 107825,
+        "last_line_index": 108356
+    },
+    "CNHG20": {
+        "min_buy_price": 7000.0,
+        "max_buy_price": 7005.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 480,
+        "sales_offers": 0,
+        "first_line_index": 108357,
+        "last_line_index": 108836
+    },
+    "COGNOF20": {
+        "min_buy_price": 10.85,
+        "max_buy_price": 11.3,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4721,
+        "sales_offers": 0,
+        "first_line_index": 108837,
+        "last_line_index": 113557
+    },
+    "COGNOG20": {
+        "min_buy_price": 10.91,
+        "max_buy_price": 11.29,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 708,
+        "sales_offers": 0,
+        "first_line_index": 113558,
+        "last_line_index": 114265
+    },
+    "CR1H20U20": {
+        "min_buy_price": 7.0,
+        "max_buy_price": 8.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 12,
+        "sales_offers": 0,
+        "first_line_index": 114266,
+        "last_line_index": 114277
+    },
+    "CR1U20Z20": {
+        "min_buy_price": 2.0,
+        "max_buy_price": 3.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 14,
+        "sales_offers": 0,
+        "first_line_index": 114278,
+        "last_line_index": 114291
+    },
+    "DAPF20": {
+        "min_buy_price": -10.0,
+        "max_buy_price": -10.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 11,
+        "sales_offers": 0,
+        "first_line_index": 114292,
+        "last_line_index": 114302
+    },
+    "DAPF21": {
+        "min_buy_price": 0.1,
+        "max_buy_price": 0.32,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 49,
+        "sales_offers": 0,
+        "first_line_index": 114303,
+        "last_line_index": 114351
+    },
+    "DAPK21": {
+        "min_buy_price": 0.52,
+        "max_buy_price": 0.7,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 41,
+        "sales_offers": 0,
+        "first_line_index": 114352,
+        "last_line_index": 114392
+    },
+    "DAPK23": {
+        "min_buy_price": 1.89,
+        "max_buy_price": 2.17,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 484,
+        "sales_offers": 0,
+        "first_line_index": 114393,
+        "last_line_index": 114876
+    },
+    "DAPQ20": {
+        "min_buy_price": -0.5,
+        "max_buy_price": -0.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 46,
+        "sales_offers": 0,
+        "first_line_index": 114877,
+        "last_line_index": 114922
+    },
+    "DAPQ22": {
+        "min_buy_price": 1.59,
+        "max_buy_price": 1.81,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 110,
+        "sales_offers": 0,
+        "first_line_index": 114923,
+        "last_line_index": 115032
+    },
+    "DAPQ24": {
+        "min_buy_price": 2.29,
+        "max_buy_price": 2.56,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 126,
+        "sales_offers": 0,
+        "first_line_index": 115033,
+        "last_line_index": 115158
+    },
+    "DAPQ26": {
+        "min_buy_price": 2.88,
+        "max_buy_price": 2.97,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 32,
+        "sales_offers": 0,
+        "first_line_index": 115159,
+        "last_line_index": 115190
+    },
+    "DAPQ28": {
+        "min_buy_price": 3.22,
+        "max_buy_price": 3.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 77,
+        "sales_offers": 0,
+        "first_line_index": 115191,
+        "last_line_index": 115267
+    },
+    "DDIF20": {
+        "min_buy_price": -6.68,
+        "max_buy_price": -6.68,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 115268,
+        "last_line_index": 115269
+    },
+    "DI1F20": {
+        "min_buy_price": 4.375,
+        "max_buy_price": 4.749,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 155,
+        "sales_offers": 0,
+        "first_line_index": 115270,
+        "last_line_index": 115424
+    },
+    "DI1F21": {
+        "min_buy_price": 4.18,
+        "max_buy_price": 5.63,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 29206,
+        "sales_offers": 0,
+        "first_line_index": 115425,
+        "last_line_index": 144630
+    },
+    "DI1F22": {
+        "min_buy_price": 5.12,
+        "max_buy_price": 6.58,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 276514,
+        "sales_offers": 0,
+        "first_line_index": 144631,
+        "last_line_index": 421144
+    },
+    "DI1F23": {
+        "min_buy_price": 5.7,
+        "max_buy_price": 7.25,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 65502,
+        "sales_offers": 0,
+        "first_line_index": 421145,
+        "last_line_index": 486646
+    },
+    "DI1F24": {
+        "min_buy_price": 6.0,
+        "max_buy_price": 7.67,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 42265,
+        "sales_offers": 0,
+        "first_line_index": 486647,
+        "last_line_index": 528911
+    },
+    "DI1F25": {
+        "min_buy_price": 5.8,
+        "max_buy_price": 7.95,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 43285,
+        "sales_offers": 0,
+        "first_line_index": 528912,
+        "last_line_index": 572196
+    },
+    "DI1F26": {
+        "min_buy_price": 6.0,
+        "max_buy_price": 6.97,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 16187,
+        "sales_offers": 0,
+        "first_line_index": 572197,
+        "last_line_index": 588383
+    },
+    "DI1F27": {
+        "min_buy_price": 6.55,
+        "max_buy_price": 8.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 38308,
+        "sales_offers": 0,
+        "first_line_index": 588384,
+        "last_line_index": 626691
+    },
+    "DI1F28": {
+        "min_buy_price": 6.51,
+        "max_buy_price": 7.23,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 11736,
+        "sales_offers": 0,
+        "first_line_index": 626692,
+        "last_line_index": 638427
+    },
+    "DI1F29": {
+        "min_buy_price": 6.95,
+        "max_buy_price": 8.53,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 20983,
+        "sales_offers": 0,
+        "first_line_index": 638428,
+        "last_line_index": 659410
+    },
+    "DI1F30": {
+        "min_buy_price": 7.22,
+        "max_buy_price": 7.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 3845,
+        "sales_offers": 0,
+        "first_line_index": 659411,
+        "last_line_index": 663255
+    },
+    "DI1G20": {
+        "min_buy_price": 4.388,
+        "max_buy_price": 4.837,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 80,
+        "sales_offers": 0,
+        "first_line_index": 663256,
+        "last_line_index": 663335
+    },
+    "DI1H20": {
+        "min_buy_price": 4.36,
+        "max_buy_price": 4.385,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 35,
+        "sales_offers": 0,
+        "first_line_index": 663336,
+        "last_line_index": 663370
+    },
+    "DI1J20": {
+        "min_buy_price": 4.11,
+        "max_buy_price": 4.925,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 3277,
+        "sales_offers": 0,
+        "first_line_index": 663371,
+        "last_line_index": 666647
+    },
+    "DI1J21": {
+        "min_buy_price": 4.37,
+        "max_buy_price": 5.88,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 12527,
+        "sales_offers": 0,
+        "first_line_index": 666648,
+        "last_line_index": 679174
+    },
+    "DI1J22": {
+        "min_buy_price": 5.49,
+        "max_buy_price": 6.79,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 8084,
+        "sales_offers": 0,
+        "first_line_index": 679175,
+        "last_line_index": 687258
+    },
+    "DI1J23": {
+        "min_buy_price": 6.02,
+        "max_buy_price": 7.37,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 11672,
+        "sales_offers": 0,
+        "first_line_index": 687259,
+        "last_line_index": 698930
+    },
+    "DI1J24": {
+        "min_buy_price": 6.4,
+        "max_buy_price": 6.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 12465,
+        "sales_offers": 0,
+        "first_line_index": 698931,
+        "last_line_index": 711395
+    },
+    "DI1K20": {
+        "min_buy_price": 4.295,
+        "max_buy_price": 4.35,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1452,
+        "sales_offers": 0,
+        "first_line_index": 711396,
+        "last_line_index": 712847
+    },
+    "DI1M20": {
+        "min_buy_price": 4.305,
+        "max_buy_price": 4.35,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 666,
+        "sales_offers": 0,
+        "first_line_index": 712848,
+        "last_line_index": 713513
+    },
+    "DI1N20": {
+        "min_buy_price": 3.965,
+        "max_buy_price": 5.095,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 14309,
+        "sales_offers": 0,
+        "first_line_index": 713514,
+        "last_line_index": 727822
+    },
+    "DI1N21": {
+        "min_buy_price": 4.65,
+        "max_buy_price": 6.12,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 30412,
+        "sales_offers": 0,
+        "first_line_index": 727823,
+        "last_line_index": 758234
+    },
+    "DI1N22": {
+        "min_buy_price": 4.96,
+        "max_buy_price": 6.94,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 31481,
+        "sales_offers": 0,
+        "first_line_index": 758235,
+        "last_line_index": 789715
+    },
+    "DI1N23": {
+        "min_buy_price": 5.98,
+        "max_buy_price": 7.48,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 36374,
+        "sales_offers": 0,
+        "first_line_index": 789716,
+        "last_line_index": 826089
+    },
+    "DI1N24": {
+        "min_buy_price": 6.46,
+        "max_buy_price": 7.83,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 17581,
+        "sales_offers": 0,
+        "first_line_index": 826090,
+        "last_line_index": 843670
+    },
+    "DI1N25": {
+        "min_buy_price": 6.65,
+        "max_buy_price": 6.87,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 6784,
+        "sales_offers": 0,
+        "first_line_index": 843671,
+        "last_line_index": 850454
+    },
+    "DI1N26": {
+        "min_buy_price": 6.73,
+        "max_buy_price": 7.03,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 6022,
+        "sales_offers": 0,
+        "first_line_index": 850455,
+        "last_line_index": 856476
+    },
+    "DI1Q20": {
+        "min_buy_price": 4.35,
+        "max_buy_price": 4.395,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 3458,
+        "sales_offers": 0,
+        "first_line_index": 856477,
+        "last_line_index": 859934
+    },
+    "DI1U20": {
+        "min_buy_price": 4.39,
+        "max_buy_price": 4.435,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1947,
+        "sales_offers": 0,
+        "first_line_index": 859935,
+        "last_line_index": 861881
+    },
+    "DI1V20": {
+        "min_buy_price": 3.825,
+        "max_buy_price": 5.34,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 11186,
+        "sales_offers": 0,
+        "first_line_index": 861882,
+        "last_line_index": 873067
+    },
+    "DI1V21": {
+        "min_buy_price": 5.15,
+        "max_buy_price": 6.37,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 19069,
+        "sales_offers": 0,
+        "first_line_index": 873068,
+        "last_line_index": 892136
+    },
+    "DI1V22": {
+        "min_buy_price": 5.77,
+        "max_buy_price": 7.11,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 9245,
+        "sales_offers": 0,
+        "first_line_index": 892137,
+        "last_line_index": 901381
+    },
+    "DI1V23": {
+        "min_buy_price": 6.23,
+        "max_buy_price": 6.45,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 15288,
+        "sales_offers": 0,
+        "first_line_index": 901382,
+        "last_line_index": 916669
+    },
+    "DI1V24": {
+        "min_buy_price": 6.52,
+        "max_buy_price": 6.71,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 7763,
+        "sales_offers": 0,
+        "first_line_index": 916670,
+        "last_line_index": 924432
+    },
+    "DI1X20": {
+        "min_buy_price": 4.495,
+        "max_buy_price": 4.565,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2146,
+        "sales_offers": 0,
+        "first_line_index": 924433,
+        "last_line_index": 926578
+    },
+    "DI1Z20": {
+        "min_buy_price": 4.525,
+        "max_buy_price": 4.63,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4399,
+        "sales_offers": 0,
+        "first_line_index": 926579,
+        "last_line_index": 930977
+    },
+    "DOLF20": {
+        "min_buy_price": 3817.0,
+        "max_buy_price": 4141.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 246765,
+        "sales_offers": 0,
+        "first_line_index": 930978,
+        "last_line_index": 1177742
+    },
+    "DOLF20C004050": {
+        "min_buy_price": 32.1,
+        "max_buy_price": 54.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2249,
+        "sales_offers": 0,
+        "first_line_index": 1177743,
+        "last_line_index": 1179991
+    },
+    "DOLF20C004075": {
+        "min_buy_price": 19.4,
+        "max_buy_price": 35.8,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2203,
+        "sales_offers": 0,
+        "first_line_index": 1179992,
+        "last_line_index": 1182194
+    },
+    "DOLF20C004100": {
+        "min_buy_price": 10.7,
+        "max_buy_price": 21.857,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2168,
+        "sales_offers": 0,
+        "first_line_index": 1182195,
+        "last_line_index": 1184362
+    },
+    "DOLF20C004125": {
+        "min_buy_price": 5.1,
+        "max_buy_price": 12.393,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1585,
+        "sales_offers": 0,
+        "first_line_index": 1184363,
+        "last_line_index": 1185947
+    },
+    "DOLF20C004150": {
+        "min_buy_price": 2.1,
+        "max_buy_price": 7.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 775,
+        "sales_offers": 0,
+        "first_line_index": 1185948,
+        "last_line_index": 1186722
+    },
+    "DOLF20C004175": {
+        "min_buy_price": 0.1,
+        "max_buy_price": 3.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1297,
+        "sales_offers": 0,
+        "first_line_index": 1186723,
+        "last_line_index": 1188019
+    },
+    "DOLF20C004200": {
+        "min_buy_price": 1.575,
+        "max_buy_price": 1.8,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 1188020,
+        "last_line_index": 1188023
+    },
+    "DOLF20C004225": {
+        "min_buy_price": 0.8,
+        "max_buy_price": 0.8,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1188024,
+        "last_line_index": 1188025
+    },
+    "DOLF20C004300": {
+        "min_buy_price": 0.03,
+        "max_buy_price": 0.03,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1188026,
+        "last_line_index": 1188027
+    },
+    "DOLF20P003750": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1188028,
+        "last_line_index": 1188029
+    },
+    "DOLF20P003850": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1188030,
+        "last_line_index": 1188031
+    },
+    "DOLF20P003900": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 1188032,
+        "last_line_index": 1188035
+    },
+    "DOLF20P003950": {
+        "min_buy_price": 1.4,
+        "max_buy_price": 1.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1188036,
+        "last_line_index": 1188037
+    },
+    "DOLF20P004000": {
+        "min_buy_price": 0.1,
+        "max_buy_price": 4.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 389,
+        "sales_offers": 0,
+        "first_line_index": 1188038,
+        "last_line_index": 1188426
+    },
+    "DOLF20P004025": {
+        "min_buy_price": 1.1,
+        "max_buy_price": 6.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 692,
+        "sales_offers": 0,
+        "first_line_index": 1188427,
+        "last_line_index": 1189118
+    },
+    "DOLF20P004050": {
+        "min_buy_price": 4.3,
+        "max_buy_price": 14.731,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1403,
+        "sales_offers": 0,
+        "first_line_index": 1189119,
+        "last_line_index": 1190521
+    },
+    "DOLF20P004075": {
+        "min_buy_price": 10.7,
+        "max_buy_price": 26.7,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1562,
+        "sales_offers": 0,
+        "first_line_index": 1190522,
+        "last_line_index": 1192083
+    },
+    "DOLF20P004100": {
+        "min_buy_price": 21.3,
+        "max_buy_price": 46.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2259,
+        "sales_offers": 0,
+        "first_line_index": 1192084,
+        "last_line_index": 1194342
+    },
+    "DOLF20P004125": {
+        "min_buy_price": 37.46,
+        "max_buy_price": 61.11,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 632,
+        "sales_offers": 0,
+        "first_line_index": 1194343,
+        "last_line_index": 1194974
+    },
+    "DOLF20P004150": {
+        "min_buy_price": 78.79,
+        "max_buy_price": 87.2,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 1194975,
+        "last_line_index": 1194978
+    },
+    "DOLF20P004175": {
+        "min_buy_price": 107.4,
+        "max_buy_price": 109.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 5,
+        "sales_offers": 0,
+        "first_line_index": 1194979,
+        "last_line_index": 1194983
+    },
+    "DOLG20": {
+        "min_buy_price": 4058.5,
+        "max_buy_price": 4105.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 11349,
+        "sales_offers": 0,
+        "first_line_index": 1194984,
+        "last_line_index": 1206332
+    },
+    "DOLG20C004000": {
+        "min_buy_price": 105.56,
+        "max_buy_price": 119.43,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 302,
+        "sales_offers": 0,
+        "first_line_index": 1206333,
+        "last_line_index": 1206634
+    },
+    "DOLG20C004025": {
+        "min_buy_price": 88.0,
+        "max_buy_price": 100.82,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 312,
+        "sales_offers": 0,
+        "first_line_index": 1206635,
+        "last_line_index": 1206946
+    },
+    "DOLG20C004050": {
+        "min_buy_price": 64.8,
+        "max_buy_price": 84.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1959,
+        "sales_offers": 0,
+        "first_line_index": 1206947,
+        "last_line_index": 1208905
+    },
+    "DOLG20C004075": {
+        "min_buy_price": 52.4,
+        "max_buy_price": 69.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1976,
+        "sales_offers": 0,
+        "first_line_index": 1208906,
+        "last_line_index": 1210881
+    },
+    "DOLG20C004100": {
+        "min_buy_price": 41.9,
+        "max_buy_price": 56.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1996,
+        "sales_offers": 0,
+        "first_line_index": 1210882,
+        "last_line_index": 1212877
+    },
+    "DOLG20C004125": {
+        "min_buy_price": 33.1,
+        "max_buy_price": 45.619,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1978,
+        "sales_offers": 0,
+        "first_line_index": 1212878,
+        "last_line_index": 1214855
+    },
+    "DOLG20C004150": {
+        "min_buy_price": 25.9,
+        "max_buy_price": 36.638,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1377,
+        "sales_offers": 0,
+        "first_line_index": 1214856,
+        "last_line_index": 1216232
+    },
+    "DOLG20C004175": {
+        "min_buy_price": 18.2,
+        "max_buy_price": 28.82,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4264,
+        "sales_offers": 0,
+        "first_line_index": 1216233,
+        "last_line_index": 1220496
+    },
+    "DOLG20C004200": {
+        "min_buy_price": 13.8,
+        "max_buy_price": 22.92,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 3760,
+        "sales_offers": 0,
+        "first_line_index": 1220497,
+        "last_line_index": 1224256
+    },
+    "DOLG20C004225": {
+        "min_buy_price": 10.4,
+        "max_buy_price": 16.7,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2962,
+        "sales_offers": 0,
+        "first_line_index": 1224257,
+        "last_line_index": 1227218
+    },
+    "DOLG20C004250": {
+        "min_buy_price": 7.8,
+        "max_buy_price": 13.94,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2474,
+        "sales_offers": 0,
+        "first_line_index": 1227219,
+        "last_line_index": 1229692
+    },
+    "DOLG20C004275": {
+        "min_buy_price": 5.8,
+        "max_buy_price": 9.9,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2123,
+        "sales_offers": 0,
+        "first_line_index": 1229693,
+        "last_line_index": 1231815
+    },
+    "DOLG20C004300": {
+        "min_buy_price": 4.3,
+        "max_buy_price": 7.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1690,
+        "sales_offers": 0,
+        "first_line_index": 1231816,
+        "last_line_index": 1233505
+    },
+    "DOLG20C004325": {
+        "min_buy_price": 3.1,
+        "max_buy_price": 6.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1308,
+        "sales_offers": 0,
+        "first_line_index": 1233506,
+        "last_line_index": 1234813
+    },
+    "DOLG20P003900": {
+        "min_buy_price": 2.7,
+        "max_buy_price": 4.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1045,
+        "sales_offers": 0,
+        "first_line_index": 1234814,
+        "last_line_index": 1235858
+    },
+    "DOLG20P003925": {
+        "min_buy_price": 4.2,
+        "max_buy_price": 6.8,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1512,
+        "sales_offers": 0,
+        "first_line_index": 1235859,
+        "last_line_index": 1237370
+    },
+    "DOLG20P003950": {
+        "min_buy_price": 6.4,
+        "max_buy_price": 10.2,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2042,
+        "sales_offers": 0,
+        "first_line_index": 1237371,
+        "last_line_index": 1239412
+    },
+    "DOLG20P003975": {
+        "min_buy_price": 9.6,
+        "max_buy_price": 15.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2749,
+        "sales_offers": 0,
+        "first_line_index": 1239413,
+        "last_line_index": 1242161
+    },
+    "DOLG20P004000": {
+        "min_buy_price": 14.8,
+        "max_buy_price": 25.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1203,
+        "sales_offers": 0,
+        "first_line_index": 1242162,
+        "last_line_index": 1243364
+    },
+    "DOLG20P004025": {
+        "min_buy_price": 21.1,
+        "max_buy_price": 31.3,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1261,
+        "sales_offers": 0,
+        "first_line_index": 1243365,
+        "last_line_index": 1244625
+    },
+    "DOLG20P004050": {
+        "min_buy_price": 29.2,
+        "max_buy_price": 41.7,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1361,
+        "sales_offers": 0,
+        "first_line_index": 1244626,
+        "last_line_index": 1245986
+    },
+    "DOLG20P004075": {
+        "min_buy_price": 39.2,
+        "max_buy_price": 54.2,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1958,
+        "sales_offers": 0,
+        "first_line_index": 1245987,
+        "last_line_index": 1247944
+    },
+    "DOLG20P004100": {
+        "min_buy_price": 51.1,
+        "max_buy_price": 68.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1996,
+        "sales_offers": 0,
+        "first_line_index": 1247945,
+        "last_line_index": 1249940
+    },
+    "DOLG20P004125": {
+        "min_buy_price": 65.9,
+        "max_buy_price": 76.56,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 353,
+        "sales_offers": 0,
+        "first_line_index": 1249941,
+        "last_line_index": 1250293
+    },
+    "DOLG20P004150": {
+        "min_buy_price": 81.67,
+        "max_buy_price": 93.55,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 389,
+        "sales_offers": 0,
+        "first_line_index": 1250294,
+        "last_line_index": 1250682
+    },
+    "DOLG20P004175": {
+        "min_buy_price": 99.13,
+        "max_buy_price": 112.09,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 389,
+        "sales_offers": 0,
+        "first_line_index": 1250683,
+        "last_line_index": 1251071
+    },
+    "DOLG20P004200": {
+        "min_buy_price": 118.05,
+        "max_buy_price": 131.94,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 314,
+        "sales_offers": 0,
+        "first_line_index": 1251072,
+        "last_line_index": 1251385
+    },
+    "DOLH20C003975": {
+        "min_buy_price": 137.67,
+        "max_buy_price": 152.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 214,
+        "sales_offers": 0,
+        "first_line_index": 1251386,
+        "last_line_index": 1251599
+    },
+    "DOLH20C004000": {
+        "min_buy_price": 119.75,
+        "max_buy_price": 133.65,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 213,
+        "sales_offers": 0,
+        "first_line_index": 1251600,
+        "last_line_index": 1251812
+    },
+    "DOLH20C004025": {
+        "min_buy_price": 103.3,
+        "max_buy_price": 116.25,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 222,
+        "sales_offers": 0,
+        "first_line_index": 1251813,
+        "last_line_index": 1252034
+    },
+    "DOLH20C004050": {
+        "min_buy_price": 88.41,
+        "max_buy_price": 100.34,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 270,
+        "sales_offers": 0,
+        "first_line_index": 1252035,
+        "last_line_index": 1252304
+    },
+    "DOLH20C004075": {
+        "min_buy_price": 75.13,
+        "max_buy_price": 85.97,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 265,
+        "sales_offers": 0,
+        "first_line_index": 1252305,
+        "last_line_index": 1252569
+    },
+    "DOLH20C004100": {
+        "min_buy_price": 63.47,
+        "max_buy_price": 73.2,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 264,
+        "sales_offers": 0,
+        "first_line_index": 1252570,
+        "last_line_index": 1252833
+    },
+    "DOLH20C004125": {
+        "min_buy_price": 53.37,
+        "max_buy_price": 61.99,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 272,
+        "sales_offers": 0,
+        "first_line_index": 1252834,
+        "last_line_index": 1253105
+    },
+    "DOLH20C004150": {
+        "min_buy_price": 44.74,
+        "max_buy_price": 52.29,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 265,
+        "sales_offers": 0,
+        "first_line_index": 1253106,
+        "last_line_index": 1253370
+    },
+    "DOLH20C004175": {
+        "min_buy_price": 37.43,
+        "max_buy_price": 43.98,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 255,
+        "sales_offers": 0,
+        "first_line_index": 1253371,
+        "last_line_index": 1253625
+    },
+    "DOLH20C004200": {
+        "min_buy_price": 31.31,
+        "max_buy_price": 36.95,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 255,
+        "sales_offers": 0,
+        "first_line_index": 1253626,
+        "last_line_index": 1253880
+    },
+    "DOLH20C004225": {
+        "min_buy_price": 26.2,
+        "max_buy_price": 31.04,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 253,
+        "sales_offers": 0,
+        "first_line_index": 1253881,
+        "last_line_index": 1254133
+    },
+    "DOLH20P003900": {
+        "min_buy_price": 10.2,
+        "max_buy_price": 10.267,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 4,
+        "sales_offers": 0,
+        "first_line_index": 1254134,
+        "last_line_index": 1254137
+    },
+    "DOLH20P003950": {
+        "min_buy_price": 18.0,
+        "max_buy_price": 18.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1254138,
+        "last_line_index": 1254139
+    },
+    "DOLH20P003975": {
+        "min_buy_price": 20.26,
+        "max_buy_price": 24.47,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 189,
+        "sales_offers": 0,
+        "first_line_index": 1254140,
+        "last_line_index": 1254328
+    },
+    "DOLH20P004000": {
+        "min_buy_price": 26.26,
+        "max_buy_price": 30.71,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 186,
+        "sales_offers": 0,
+        "first_line_index": 1254329,
+        "last_line_index": 1254514
+    },
+    "DOLH20P004025": {
+        "min_buy_price": 33.62,
+        "max_buy_price": 38.99,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 189,
+        "sales_offers": 0,
+        "first_line_index": 1254515,
+        "last_line_index": 1254703
+    },
+    "DOLH20P004050": {
+        "min_buy_price": 42.45,
+        "max_buy_price": 48.82,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 201,
+        "sales_offers": 0,
+        "first_line_index": 1254704,
+        "last_line_index": 1254904
+    },
+    "DOLH20P004075": {
+        "min_buy_price": 52.83,
+        "max_buy_price": 60.24,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 207,
+        "sales_offers": 0,
+        "first_line_index": 1254905,
+        "last_line_index": 1255111
+    },
+    "DOLH20P004100": {
+        "min_buy_price": 64.8,
+        "max_buy_price": 73.26,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 232,
+        "sales_offers": 0,
+        "first_line_index": 1255112,
+        "last_line_index": 1255343
+    },
+    "DOLH20P004125": {
+        "min_buy_price": 78.34,
+        "max_buy_price": 87.83,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 234,
+        "sales_offers": 0,
+        "first_line_index": 1255344,
+        "last_line_index": 1255577
+    },
+    "DOLH20P004150": {
+        "min_buy_price": 93.39,
+        "max_buy_price": 103.88,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 238,
+        "sales_offers": 0,
+        "first_line_index": 1255578,
+        "last_line_index": 1255815
+    },
+    "DOLH20P004175": {
+        "min_buy_price": 109.83,
+        "max_buy_price": 121.33,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 249,
+        "sales_offers": 0,
+        "first_line_index": 1255816,
+        "last_line_index": 1256064
+    },
+    "DOLH20P004200": {
+        "min_buy_price": 127.56,
+        "max_buy_price": 139.97,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 249,
+        "sales_offers": 0,
+        "first_line_index": 1256065,
+        "last_line_index": 1256313
+    },
+    "DOLH20P004225": {
+        "min_buy_price": 146.4,
+        "max_buy_price": 159.62,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 249,
+        "sales_offers": 0,
+        "first_line_index": 1256314,
+        "last_line_index": 1256562
+    },
+    "DOLH20P004250": {
+        "min_buy_price": 166.22,
+        "max_buy_price": 180.15,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 215,
+        "sales_offers": 0,
+        "first_line_index": 1256563,
+        "last_line_index": 1256777
+    },
+    "DOLK20P003700": {
+        "min_buy_price": 4.0,
+        "max_buy_price": 4.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1256778,
+        "last_line_index": 1256779
+    },
+    "DOLK20P003800": {
+        "min_buy_price": 11.0,
+        "max_buy_price": 11.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1256780,
+        "last_line_index": 1256781
+    },
+    "DOLK20P003900": {
+        "min_buy_price": 23.859,
+        "max_buy_price": 30.064,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 8818,
+        "sales_offers": 0,
+        "first_line_index": 1256782,
+        "last_line_index": 1265599
+    },
+    "DOLK20P004100": {
+        "min_buy_price": 96.51,
+        "max_buy_price": 96.51,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1265600,
+        "last_line_index": 1265601
+    },
+    "DOLN20C004200": {
+        "min_buy_price": 95.0,
+        "max_buy_price": 95.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1265602,
+        "last_line_index": 1265603
+    },
+    "DOLN20P003800": {
+        "min_buy_price": 18.0,
+        "max_buy_price": 18.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1265604,
+        "last_line_index": 1265605
+    },
+    "DOLN20P004100": {
+        "min_buy_price": 106.6,
+        "max_buy_price": 106.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1265606,
+        "last_line_index": 1265607
+    },
+    "DOLU20P004100": {
+        "min_buy_price": 121.1,
+        "max_buy_price": 121.1,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1265608,
+        "last_line_index": 1265609
+    },
+    "DOLX20P004400": {
+        "min_buy_price": 296.8,
+        "max_buy_price": 321.9,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 5454,
+        "sales_offers": 0,
+        "first_line_index": 1265610,
+        "last_line_index": 1271063
+    },
+    "DR1F20G20": {
+        "min_buy_price": 3.9,
+        "max_buy_price": 5.19,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 201,
+        "sales_offers": 0,
+        "first_line_index": 1271064,
+        "last_line_index": 1271264
+    },
+    "DS1F20C004050": {
+        "min_buy_price": 51.296,
+        "max_buy_price": 57.65,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1279,
+        "sales_offers": 0,
+        "first_line_index": 1271265,
+        "last_line_index": 1272543
+    },
+    "DS1F20C004075": {
+        "min_buy_price": 35.174,
+        "max_buy_price": 40.418,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1275,
+        "sales_offers": 0,
+        "first_line_index": 1272544,
+        "last_line_index": 1273818
+    },
+    "DS1F20C004100": {
+        "min_buy_price": 22.925,
+        "max_buy_price": 26.967,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1276,
+        "sales_offers": 0,
+        "first_line_index": 1273819,
+        "last_line_index": 1275094
+    },
+    "DS1F20C004125": {
+        "min_buy_price": 14.359,
+        "max_buy_price": 17.294,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 117,
+        "sales_offers": 0,
+        "first_line_index": 1275095,
+        "last_line_index": 1275211
+    },
+    "DS1F20C004150": {
+        "min_buy_price": 8.733,
+        "max_buy_price": 10.648,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 81,
+        "sales_offers": 0,
+        "first_line_index": 1275212,
+        "last_line_index": 1275292
+    },
+    "DS1F20P004000": {
+        "min_buy_price": 1.321,
+        "max_buy_price": 1.821,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 22,
+        "sales_offers": 0,
+        "first_line_index": 1275293,
+        "last_line_index": 1275314
+    },
+    "DS1F20P004025": {
+        "min_buy_price": 3.868,
+        "max_buy_price": 4.955,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 44,
+        "sales_offers": 0,
+        "first_line_index": 1275315,
+        "last_line_index": 1275358
+    },
+    "DS1F20P004050": {
+        "min_buy_price": 8.445,
+        "max_buy_price": 10.461,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 73,
+        "sales_offers": 0,
+        "first_line_index": 1275359,
+        "last_line_index": 1275431
+    },
+    "DS1F20P004075": {
+        "min_buy_price": 16.057,
+        "max_buy_price": 19.301,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 113,
+        "sales_offers": 0,
+        "first_line_index": 1275432,
+        "last_line_index": 1275544
+    },
+    "DS1F20P004100": {
+        "min_buy_price": 27.568,
+        "max_buy_price": 32.014,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1277,
+        "sales_offers": 0,
+        "first_line_index": 1275545,
+        "last_line_index": 1276821
+    },
+    "DS2F20C004050": {
+        "min_buy_price": 59.643,
+        "max_buy_price": 65.587,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1279,
+        "sales_offers": 0,
+        "first_line_index": 1276822,
+        "last_line_index": 1278100
+    },
+    "DS2F20C004075": {
+        "min_buy_price": 44.506,
+        "max_buy_price": 49.568,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1280,
+        "sales_offers": 0,
+        "first_line_index": 1278101,
+        "last_line_index": 1279380
+    },
+    "DS2F20C004100": {
+        "min_buy_price": 32.32,
+        "max_buy_price": 36.468,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1274,
+        "sales_offers": 0,
+        "first_line_index": 1279381,
+        "last_line_index": 1280654
+    },
+    "DS2F20C004125": {
+        "min_buy_price": 22.971,
+        "max_buy_price": 26.255,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 157,
+        "sales_offers": 0,
+        "first_line_index": 1280655,
+        "last_line_index": 1280811
+    },
+    "DS2F20C004150": {
+        "min_buy_price": 16.137,
+        "max_buy_price": 18.671,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 117,
+        "sales_offers": 0,
+        "first_line_index": 1280812,
+        "last_line_index": 1280928
+    },
+    "DS2F20P004000": {
+        "min_buy_price": 4.911,
+        "max_buy_price": 6.018,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 42,
+        "sales_offers": 0,
+        "first_line_index": 1280929,
+        "last_line_index": 1280970
+    },
+    "DS2F20P004025": {
+        "min_buy_price": 8.923,
+        "max_buy_price": 10.7,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 77,
+        "sales_offers": 0,
+        "first_line_index": 1280971,
+        "last_line_index": 1281047
+    },
+    "DS2F20P004050": {
+        "min_buy_price": 15.085,
+        "max_buy_price": 17.624,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 117,
+        "sales_offers": 0,
+        "first_line_index": 1281048,
+        "last_line_index": 1281164
+    },
+    "DS2F20P004075": {
+        "min_buy_price": 24.007,
+        "max_buy_price": 27.427,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 445,
+        "sales_offers": 0,
+        "first_line_index": 1281165,
+        "last_line_index": 1281609
+    },
+    "DS2F20P004100": {
+        "min_buy_price": 35.848,
+        "max_buy_price": 40.182,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1277,
+        "sales_offers": 0,
+        "first_line_index": 1281610,
+        "last_line_index": 1282886
+    },
+    "ETHF20": {
+        "min_buy_price": 2025.0,
+        "max_buy_price": 2095.5,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 17,
+        "sales_offers": 0,
+        "first_line_index": 1282887,
+        "last_line_index": 1282903
+    },
+    "ETHG20": {
+        "min_buy_price": 2030.0,
+        "max_buy_price": 2075.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 21,
+        "sales_offers": 0,
+        "first_line_index": 1282904,
+        "last_line_index": 1282924
+    },
+    "ETHH20": {
+        "min_buy_price": 1900.0,
+        "max_buy_price": 1915.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 7,
+        "sales_offers": 0,
+        "first_line_index": 1282925,
+        "last_line_index": 1282931
+    },
+    "ETHJ20": {
+        "min_buy_price": 1720.0,
+        "max_buy_price": 1720.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1282932,
+        "last_line_index": 1282933
+    },
+    "ETHK20": {
+        "min_buy_price": 1710.0,
+        "max_buy_price": 1710.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1282934,
+        "last_line_index": 1282935
+    },
+    "ETHM20": {
+        "min_buy_price": 1690.0,
+        "max_buy_price": 1690.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1282936,
+        "last_line_index": 1282937
+    },
+    "ETHN20": {
+        "min_buy_price": 1690.0,
+        "max_buy_price": 1690.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2,
+        "sales_offers": 0,
+        "first_line_index": 1282938,
+        "last_line_index": 1282939
+    },
+    "ETHZ19": {
+        "min_buy_price": 2015.0,
+        "max_buy_price": 2050.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 16,
+        "sales_offers": 0,
+        "first_line_index": 1282940,
+        "last_line_index": 1282955
+    },
+    "EUPF20": {
+        "min_buy_price": 1107.0,
+        "max_buy_price": 1111.6,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1383,
+        "sales_offers": 0,
+        "first_line_index": 1282956,
+        "last_line_index": 1284338
+    },
+    "EUPG20": {
+        "min_buy_price": 1109.1,
+        "max_buy_price": 1112.4,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 1240,
+        "sales_offers": 0,
+        "first_line_index": 1284339,
+        "last_line_index": 1285578
+    },
+    "EURF20": {
+        "min_buy_price": 4408.0,
+        "max_buy_price": 4527.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 993934,
+        "sales_offers": 0,
+        "first_line_index": 1285579,
+        "last_line_index": 2279512
+    }
+}
