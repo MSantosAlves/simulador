@@ -5,6 +5,7 @@
 #include "Config.h"
 #include "StockInfo.h"
 #include "Trader.h"
+#include "StockDataInfo.h"
 
 #include <thread>
 #include <filesystem>
@@ -35,9 +36,10 @@ int main(int argc, char* argv[])
     string dataTargetDate = config->getDate();
     string dataPath = config->getDataPath();
     vector<string> targetStocks = config->getTargetStocks();
+    map<string, StockDataInfo> targetStocksDataInfo = config->getTargetStocksDataInfo();
 
     // Instantiate services
-    DataService* dataService = new DataService(dataTargetDate, dataPath);
+    DataService* dataService = new DataService(dataTargetDate, dataPath, targetStocksDataInfo, targetStocks);
     OrderService* orderService = new OrderService(targetStocks);
     LogService* logService = new LogService();
 

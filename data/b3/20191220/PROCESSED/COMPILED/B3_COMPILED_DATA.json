@@ -1,0 +1,3842 @@
+{
+    "AFSF20": {
+        "min_buy_price": 14177.0,
+        "max_buy_price": 14291.0,
+        "min_sale_price": 14187.0,
+        "max_sale_price": 14301.0,
+        "buy_offers": 2592,
+        "sales_offers": 2592
+    },
+    "AFSG20": {
+        "min_buy_price": 14228.0,
+        "max_buy_price": 14342.0,
+        "min_sale_price": 14263.0,
+        "max_sale_price": 14377.0,
+        "buy_offers": 2546,
+        "sales_offers": 2546
+    },
+    "AUDG20": {
+        "min_buy_price": 2832.2,
+        "max_buy_price": 2832.2,
+        "min_sale_price": 2832.2,
+        "max_sale_price": 2832.2,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "AUSF20": {
+        "min_buy_price": 688.5,
+        "max_buy_price": 690.1,
+        "min_sale_price": 690.0,
+        "max_sale_price": 691.6,
+        "buy_offers": 996,
+        "sales_offers": 996
+    },
+    "AUSG20": {
+        "min_buy_price": 688.8,
+        "max_buy_price": 690.7,
+        "min_sale_price": 690.7,
+        "max_sale_price": 692.4,
+        "buy_offers": 940,
+        "sales_offers": 940
+    },
+    "B3SAOF20": {
+        "min_buy_price": 48.17,
+        "max_buy_price": 49.36,
+        "min_sale_price": 48.49,
+        "max_sale_price": 49.69,
+        "buy_offers": 33707,
+        "sales_offers": 36240
+    },
+    "B3SAOG20": {
+        "min_buy_price": 48.38,
+        "max_buy_price": 49.37,
+        "min_sale_price": 48.79,
+        "max_sale_price": 49.75,
+        "buy_offers": 3823,
+        "sales_offers": 5108
+    },
+    "BGIF20": {
+        "min_buy_price": 192.0,
+        "max_buy_price": 201.05,
+        "min_sale_price": 197.55,
+        "max_sale_price": 208.55,
+        "buy_offers": 587,
+        "sales_offers": 632
+    },
+    "BGIF20C020800": {
+        "min_buy_price": 1.45,
+        "max_buy_price": 1.45,
+        "min_sale_price": 1.45,
+        "max_sale_price": 1.45,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "BGIF20P019000": {
+        "min_buy_price": 1.4,
+        "max_buy_price": 1.4,
+        "min_sale_price": 1.4,
+        "max_sale_price": 1.4,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "BGIF20P019500": {
+        "min_buy_price": 2.6,
+        "max_buy_price": 2.6,
+        "min_sale_price": 2.6,
+        "max_sale_price": 2.6,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "BGIG20": {
+        "min_buy_price": 191.5,
+        "max_buy_price": 198.9,
+        "min_sale_price": 197.0,
+        "max_sale_price": 202.85,
+        "buy_offers": 52,
+        "sales_offers": 428
+    },
+    "BGIH20": {
+        "min_buy_price": 190.0,
+        "max_buy_price": 195.0,
+        "min_sale_price": 194.5,
+        "max_sale_price": 202.0,
+        "buy_offers": 10,
+        "sales_offers": 62
+    },
+    "BGIJ20": {
+        "min_buy_price": 185.0,
+        "max_buy_price": 188.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 4,
+        "sales_offers": 0
+    },
+    "BGIK20": {
+        "min_buy_price": 185.65,
+        "max_buy_price": 190.9,
+        "min_sale_price": 188.3,
+        "max_sale_price": 193.5,
+        "buy_offers": 88,
+        "sales_offers": 62
+    },
+    "BGIV20": {
+        "min_buy_price": 192.35,
+        "max_buy_price": 201.75,
+        "min_sale_price": 199.0,
+        "max_sale_price": 210.0,
+        "buy_offers": 302,
+        "sales_offers": 520
+    },
+    "BGIV20C021500": {
+        "min_buy_price": 5.15,
+        "max_buy_price": 5.15,
+        "min_sale_price": 5.15,
+        "max_sale_price": 5.15,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "BGIV20C022000": {
+        "min_buy_price": 4.23,
+        "max_buy_price": 4.23,
+        "min_sale_price": 4.23,
+        "max_sale_price": 30.0,
+        "buy_offers": 2,
+        "sales_offers": 4
+    },
+    "BGIV20P018500": {
+        "min_buy_price": 2.65,
+        "max_buy_price": 2.65,
+        "min_sale_price": 2.65,
+        "max_sale_price": 2.65,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "BGIV20P019000": {
+        "min_buy_price": 1.0,
+        "max_buy_price": 1.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 2,
+        "sales_offers": 0
+    },
+    "BGIV20P020000": {
+        "min_buy_price": 1.98,
+        "max_buy_price": 10.0,
+        "min_sale_price": 10.0,
+        "max_sale_price": 10.0,
+        "buy_offers": 4,
+        "sales_offers": 2
+    },
+    "BGIV20P021000": {
+        "min_buy_price": 1.0,
+        "max_buy_price": 14.4,
+        "min_sale_price": 14.4,
+        "max_sale_price": 14.4,
+        "buy_offers": 4,
+        "sales_offers": 2
+    },
+    "BGIZ19": {
+        "min_buy_price": 196.3,
+        "max_buy_price": 206.3,
+        "min_sale_price": 202.15,
+        "max_sale_price": 214.5,
+        "buy_offers": 794,
+        "sales_offers": 659
+    },
+    "BGIZ19C017700": {
+        "min_buy_price": 26.15,
+        "max_buy_price": 26.15,
+        "min_sale_price": 26.15,
+        "max_sale_price": 26.15,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "BGIZ19C018100": {
+        "min_buy_price": 22.45,
+        "max_buy_price": 22.45,
+        "min_sale_price": 22.45,
+        "max_sale_price": 22.45,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "BGIZ19P022800": {
+        "min_buy_price": 18.0,
+        "max_buy_price": 24.1,
+        "min_sale_price": 24.1,
+        "max_sale_price": 24.1,
+        "buy_offers": 4,
+        "sales_offers": 2
+    },
+    "BRIG20": {
+        "min_buy_price": 18700.0,
+        "max_buy_price": 18934.0,
+        "min_sale_price": 18853.0,
+        "max_sale_price": 18941.0,
+        "buy_offers": 15361,
+        "sales_offers": 15359
+    },
+    "BRIJ20": {
+        "min_buy_price": 18932.0,
+        "max_buy_price": 19020.0,
+        "min_sale_price": 18982.0,
+        "max_sale_price": 19070.0,
+        "buy_offers": 19318,
+        "sales_offers": 19318
+    },
+    "CADF20": {
+        "min_buy_price": 3096.0,
+        "max_buy_price": 3096.0,
+        "min_sale_price": 3096.0,
+        "max_sale_price": 3096.0,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "CANF20": {
+        "min_buy_price": 1312.9,
+        "max_buy_price": 1317.3,
+        "min_sale_price": 1314.4,
+        "max_sale_price": 1318.8,
+        "buy_offers": 1749,
+        "sales_offers": 1749
+    },
+    "CANG20": {
+        "min_buy_price": 1312.2,
+        "max_buy_price": 1316.6,
+        "min_sale_price": 1314.2,
+        "max_sale_price": 1318.6,
+        "buy_offers": 1715,
+        "sales_offers": 1715
+    },
+    "CCMF20": {
+        "min_buy_price": 46.0,
+        "max_buy_price": 48.95,
+        "min_sale_price": 47.25,
+        "max_sale_price": 50.41,
+        "buy_offers": 2857,
+        "sales_offers": 6210
+    },
+    "CCMH20": {
+        "min_buy_price": 46.05,
+        "max_buy_price": 48.9,
+        "min_sale_price": 47.75,
+        "max_sale_price": 50.49,
+        "buy_offers": 677,
+        "sales_offers": 7467
+    },
+    "CCMK20": {
+        "min_buy_price": 43.0,
+        "max_buy_price": 45.6,
+        "min_sale_price": 45.11,
+        "max_sale_price": 47.2,
+        "buy_offers": 269,
+        "sales_offers": 184
+    },
+    "CCMN20": {
+        "min_buy_price": 40.2,
+        "max_buy_price": 41.3,
+        "min_sale_price": 41.3,
+        "max_sale_price": 42.5,
+        "buy_offers": 240,
+        "sales_offers": 80
+    },
+    "CCMU20": {
+        "min_buy_price": 39.8,
+        "max_buy_price": 41.0,
+        "min_sale_price": 40.72,
+        "max_sale_price": 42.0,
+        "buy_offers": 222,
+        "sales_offers": 754
+    },
+    "CCMU20C004200": {
+        "min_buy_price": 2.0,
+        "max_buy_price": 2.0,
+        "min_sale_price": 2.0,
+        "max_sale_price": 2.0,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "CCMU20C004500": {
+        "min_buy_price": 0.9,
+        "max_buy_price": 0.9,
+        "min_sale_price": 0.9,
+        "max_sale_price": 0.9,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "CCMU20P003700": {
+        "min_buy_price": 1.1,
+        "max_buy_price": 1.2,
+        "min_sale_price": 1.1,
+        "max_sale_price": 1.2,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "CCMU20P003850": {
+        "min_buy_price": 1.1,
+        "max_buy_price": 1.1,
+        "min_sale_price": 1.1,
+        "max_sale_price": 1.1,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "CCMX20": {
+        "min_buy_price": 40.0,
+        "max_buy_price": 41.6,
+        "min_sale_price": 42.5,
+        "max_sale_price": 42.5,
+        "buy_offers": 21,
+        "sales_offers": 2
+    },
+    "CCROOF20": {
+        "min_buy_price": 18.58,
+        "max_buy_price": 18.94,
+        "min_sale_price": 18.69,
+        "max_sale_price": 19.03,
+        "buy_offers": 11120,
+        "sales_offers": 11200
+    },
+    "CCROOG20": {
+        "min_buy_price": 18.67,
+        "max_buy_price": 18.97,
+        "min_sale_price": 18.77,
+        "max_sale_price": 19.07,
+        "buy_offers": 1425,
+        "sales_offers": 1486
+    },
+    "CIELOF20": {
+        "min_buy_price": 8.37,
+        "max_buy_price": 8.55,
+        "min_sale_price": 8.46,
+        "max_sale_price": 8.62,
+        "buy_offers": 1426,
+        "sales_offers": 1422
+    },
+    "CIELOG20": {
+        "min_buy_price": 8.39,
+        "max_buy_price": 8.5,
+        "min_sale_price": 8.48,
+        "max_sale_price": 8.59,
+        "buy_offers": 160,
+        "sales_offers": 266
+    },
+    "CMIGPF20": {
+        "min_buy_price": 13.48,
+        "max_buy_price": 13.7,
+        "min_sale_price": 13.57,
+        "max_sale_price": 13.85,
+        "buy_offers": 4193,
+        "sales_offers": 4920
+    },
+    "CMIGPG20": {
+        "min_buy_price": 13.53,
+        "max_buy_price": 13.71,
+        "min_sale_price": 13.67,
+        "max_sale_price": 13.85,
+        "buy_offers": 572,
+        "sales_offers": 792
+    },
+    "CNHF20": {
+        "min_buy_price": 6997.0,
+        "max_buy_price": 7003.0,
+        "min_sale_price": 7003.5,
+        "max_sale_price": 7009.0,
+        "buy_offers": 532,
+        "sales_offers": 455
+    },
+    "CNHG20": {
+        "min_buy_price": 7000.0,
+        "max_buy_price": 7005.5,
+        "min_sale_price": 7015.5,
+        "max_sale_price": 7021.0,
+        "buy_offers": 480,
+        "sales_offers": 506
+    },
+    "COGNOF20": {
+        "min_buy_price": 10.85,
+        "max_buy_price": 11.3,
+        "min_sale_price": 10.97,
+        "max_sale_price": 11.44,
+        "buy_offers": 4721,
+        "sales_offers": 4671
+    },
+    "COGNOG20": {
+        "min_buy_price": 10.91,
+        "max_buy_price": 11.29,
+        "min_sale_price": 11.04,
+        "max_sale_price": 11.42,
+        "buy_offers": 708,
+        "sales_offers": 707
+    },
+    "CR1H20U20": {
+        "min_buy_price": 7.0,
+        "max_buy_price": 8.5,
+        "min_sale_price": 9.0,
+        "max_sale_price": 9.65,
+        "buy_offers": 12,
+        "sales_offers": 9
+    },
+    "CR1U20Z20": {
+        "min_buy_price": 2.0,
+        "max_buy_price": 3.0,
+        "min_sale_price": 3.0,
+        "max_sale_price": 4.35,
+        "buy_offers": 14,
+        "sales_offers": 13
+    },
+    "DAPF20": {
+        "min_buy_price": -10.0,
+        "max_buy_price": -10.0,
+        "min_sale_price": -9.5,
+        "max_sale_price": -9.5,
+        "buy_offers": 11,
+        "sales_offers": 18
+    },
+    "DAPF21": {
+        "min_buy_price": 0.1,
+        "max_buy_price": 0.32,
+        "min_sale_price": 0.12,
+        "max_sale_price": 0.29,
+        "buy_offers": 49,
+        "sales_offers": 50
+    },
+    "DAPK21": {
+        "min_buy_price": 0.52,
+        "max_buy_price": 0.7,
+        "min_sale_price": 0.5,
+        "max_sale_price": 0.73,
+        "buy_offers": 41,
+        "sales_offers": 38
+    },
+    "DAPK23": {
+        "min_buy_price": 1.89,
+        "max_buy_price": 2.17,
+        "min_sale_price": 1.8,
+        "max_sale_price": 2.22,
+        "buy_offers": 484,
+        "sales_offers": 132
+    },
+    "DAPQ20": {
+        "min_buy_price": -0.5,
+        "max_buy_price": -0.5,
+        "min_sale_price": -0.5,
+        "max_sale_price": -0.5,
+        "buy_offers": 46,
+        "sales_offers": 46
+    },
+    "DAPQ22": {
+        "min_buy_price": 1.59,
+        "max_buy_price": 1.81,
+        "min_sale_price": 1.44,
+        "max_sale_price": 1.83,
+        "buy_offers": 110,
+        "sales_offers": 121
+    },
+    "DAPQ24": {
+        "min_buy_price": 2.29,
+        "max_buy_price": 2.56,
+        "min_sale_price": 2.15,
+        "max_sale_price": 2.72,
+        "buy_offers": 126,
+        "sales_offers": 141
+    },
+    "DAPQ26": {
+        "min_buy_price": 2.88,
+        "max_buy_price": 2.97,
+        "min_sale_price": 2.45,
+        "max_sale_price": 3.17,
+        "buy_offers": 32,
+        "sales_offers": 32
+    },
+    "DAPQ28": {
+        "min_buy_price": 3.22,
+        "max_buy_price": 3.4,
+        "min_sale_price": 3.22,
+        "max_sale_price": 3.5,
+        "buy_offers": 77,
+        "sales_offers": 77
+    },
+    "DDIF20": {
+        "min_buy_price": -6.68,
+        "max_buy_price": -6.68,
+        "min_sale_price": -6.68,
+        "max_sale_price": -6.68,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DI1F20": {
+        "min_buy_price": 4.375,
+        "max_buy_price": 4.749,
+        "min_sale_price": 4.049,
+        "max_sale_price": 4.688,
+        "buy_offers": 155,
+        "sales_offers": 195
+    },
+    "DI1F21": {
+        "min_buy_price": 4.18,
+        "max_buy_price": 5.63,
+        "min_sale_price": 3.92,
+        "max_sale_price": 4.95,
+        "buy_offers": 29206,
+        "sales_offers": 37353
+    },
+    "DI1F22": {
+        "min_buy_price": 5.12,
+        "max_buy_price": 6.58,
+        "min_sale_price": 4.61,
+        "max_sale_price": 5.8,
+        "buy_offers": 276514,
+        "sales_offers": 55041
+    },
+    "DI1F23": {
+        "min_buy_price": 5.7,
+        "max_buy_price": 7.25,
+        "min_sale_price": 5.15,
+        "max_sale_price": 6.4,
+        "buy_offers": 65502,
+        "sales_offers": 87065
+    },
+    "DI1F24": {
+        "min_buy_price": 6.0,
+        "max_buy_price": 7.67,
+        "min_sale_price": 5.52,
+        "max_sale_price": 7.18,
+        "buy_offers": 42265,
+        "sales_offers": 33565
+    },
+    "DI1F25": {
+        "min_buy_price": 5.8,
+        "max_buy_price": 7.95,
+        "min_sale_price": 5.77,
+        "max_sale_price": 7.06,
+        "buy_offers": 43285,
+        "sales_offers": 53869
+    },
+    "DI1F26": {
+        "min_buy_price": 6.0,
+        "max_buy_price": 6.97,
+        "min_sale_price": 6.81,
+        "max_sale_price": 7.67,
+        "buy_offers": 16187,
+        "sales_offers": 25573
+    },
+    "DI1F27": {
+        "min_buy_price": 6.55,
+        "max_buy_price": 8.0,
+        "min_sale_price": 6.25,
+        "max_sale_price": 7.38,
+        "buy_offers": 38308,
+        "sales_offers": 36672
+    },
+    "DI1F28": {
+        "min_buy_price": 6.51,
+        "max_buy_price": 7.23,
+        "min_sale_price": 7.1,
+        "max_sale_price": 7.38,
+        "buy_offers": 11736,
+        "sales_offers": 9191
+    },
+    "DI1F29": {
+        "min_buy_price": 6.95,
+        "max_buy_price": 8.53,
+        "min_sale_price": 6.5,
+        "max_sale_price": 7.85,
+        "buy_offers": 20983,
+        "sales_offers": 19047
+    },
+    "DI1F30": {
+        "min_buy_price": 7.22,
+        "max_buy_price": 7.4,
+        "min_sale_price": 7.26,
+        "max_sale_price": 7.47,
+        "buy_offers": 3845,
+        "sales_offers": 1876
+    },
+    "DI1G20": {
+        "min_buy_price": 4.388,
+        "max_buy_price": 4.837,
+        "min_sale_price": 4.403,
+        "max_sale_price": 4.41,
+        "buy_offers": 80,
+        "sales_offers": 55
+    },
+    "DI1H20": {
+        "min_buy_price": 4.36,
+        "max_buy_price": 4.385,
+        "min_sale_price": 4.375,
+        "max_sale_price": 4.385,
+        "buy_offers": 35,
+        "sales_offers": 21
+    },
+    "DI1J20": {
+        "min_buy_price": 4.11,
+        "max_buy_price": 4.925,
+        "min_sale_price": 3.815,
+        "max_sale_price": 4.435,
+        "buy_offers": 3277,
+        "sales_offers": 5168
+    },
+    "DI1J21": {
+        "min_buy_price": 4.37,
+        "max_buy_price": 5.88,
+        "min_sale_price": 4.09,
+        "max_sale_price": 5.05,
+        "buy_offers": 12527,
+        "sales_offers": 13708
+    },
+    "DI1J22": {
+        "min_buy_price": 5.49,
+        "max_buy_price": 6.79,
+        "min_sale_price": 4.78,
+        "max_sale_price": 5.79,
+        "buy_offers": 8084,
+        "sales_offers": 14140
+    },
+    "DI1J23": {
+        "min_buy_price": 6.02,
+        "max_buy_price": 7.37,
+        "min_sale_price": 5.26,
+        "max_sale_price": 6.31,
+        "buy_offers": 11672,
+        "sales_offers": 9669
+    },
+    "DI1J24": {
+        "min_buy_price": 6.4,
+        "max_buy_price": 6.6,
+        "min_sale_price": 6.44,
+        "max_sale_price": 6.64,
+        "buy_offers": 12465,
+        "sales_offers": 8198
+    },
+    "DI1K20": {
+        "min_buy_price": 4.295,
+        "max_buy_price": 4.35,
+        "min_sale_price": 4.34,
+        "max_sale_price": 4.38,
+        "buy_offers": 1452,
+        "sales_offers": 784
+    },
+    "DI1M20": {
+        "min_buy_price": 4.305,
+        "max_buy_price": 4.35,
+        "min_sale_price": 4.35,
+        "max_sale_price": 4.385,
+        "buy_offers": 666,
+        "sales_offers": 1745
+    },
+    "DI1N20": {
+        "min_buy_price": 3.965,
+        "max_buy_price": 5.095,
+        "min_sale_price": 3.735,
+        "max_sale_price": 4.49,
+        "buy_offers": 14309,
+        "sales_offers": 15949
+    },
+    "DI1N21": {
+        "min_buy_price": 4.65,
+        "max_buy_price": 6.12,
+        "min_sale_price": 4.26,
+        "max_sale_price": 5.33,
+        "buy_offers": 30412,
+        "sales_offers": 28113
+    },
+    "DI1N22": {
+        "min_buy_price": 4.96,
+        "max_buy_price": 6.94,
+        "min_sale_price": 4.89,
+        "max_sale_price": 6.07,
+        "buy_offers": 31481,
+        "sales_offers": 23638
+    },
+    "DI1N23": {
+        "min_buy_price": 5.98,
+        "max_buy_price": 7.48,
+        "min_sale_price": 5.36,
+        "max_sale_price": 6.57,
+        "buy_offers": 36374,
+        "sales_offers": 38297
+    },
+    "DI1N24": {
+        "min_buy_price": 6.46,
+        "max_buy_price": 7.83,
+        "min_sale_price": 5.66,
+        "max_sale_price": 6.7,
+        "buy_offers": 17581,
+        "sales_offers": 16410
+    },
+    "DI1N25": {
+        "min_buy_price": 6.65,
+        "max_buy_price": 6.87,
+        "min_sale_price": 6.72,
+        "max_sale_price": 6.91,
+        "buy_offers": 6784,
+        "sales_offers": 6451
+    },
+    "DI1N26": {
+        "min_buy_price": 6.73,
+        "max_buy_price": 7.03,
+        "min_sale_price": 6.9,
+        "max_sale_price": 7.32,
+        "buy_offers": 6022,
+        "sales_offers": 5794
+    },
+    "DI1Q20": {
+        "min_buy_price": 4.35,
+        "max_buy_price": 4.395,
+        "min_sale_price": 4.38,
+        "max_sale_price": 4.445,
+        "buy_offers": 3458,
+        "sales_offers": 1028
+    },
+    "DI1U20": {
+        "min_buy_price": 4.39,
+        "max_buy_price": 4.435,
+        "min_sale_price": 4.425,
+        "max_sale_price": 4.49,
+        "buy_offers": 1947,
+        "sales_offers": 1473
+    },
+    "DI1V20": {
+        "min_buy_price": 3.825,
+        "max_buy_price": 5.34,
+        "min_sale_price": 3.82,
+        "max_sale_price": 4.58,
+        "buy_offers": 11186,
+        "sales_offers": 9989
+    },
+    "DI1V21": {
+        "min_buy_price": 5.15,
+        "max_buy_price": 6.37,
+        "min_sale_price": 4.44,
+        "max_sale_price": 5.41,
+        "buy_offers": 19069,
+        "sales_offers": 15868
+    },
+    "DI1V22": {
+        "min_buy_price": 5.77,
+        "max_buy_price": 7.11,
+        "min_sale_price": 5.03,
+        "max_sale_price": 6.07,
+        "buy_offers": 9245,
+        "sales_offers": 9108
+    },
+    "DI1V23": {
+        "min_buy_price": 6.23,
+        "max_buy_price": 6.45,
+        "min_sale_price": 6.28,
+        "max_sale_price": 6.51,
+        "buy_offers": 15288,
+        "sales_offers": 12256
+    },
+    "DI1V24": {
+        "min_buy_price": 6.52,
+        "max_buy_price": 6.71,
+        "min_sale_price": 6.58,
+        "max_sale_price": 6.76,
+        "buy_offers": 7763,
+        "sales_offers": 10359
+    },
+    "DI1X20": {
+        "min_buy_price": 4.495,
+        "max_buy_price": 4.565,
+        "min_sale_price": 4.515,
+        "max_sale_price": 4.65,
+        "buy_offers": 2146,
+        "sales_offers": 3754
+    },
+    "DI1Z20": {
+        "min_buy_price": 4.525,
+        "max_buy_price": 4.63,
+        "min_sale_price": 4.565,
+        "max_sale_price": 4.655,
+        "buy_offers": 4399,
+        "sales_offers": 4659
+    },
+    "DOLF20": {
+        "min_buy_price": 3817.0,
+        "max_buy_price": 4141.5,
+        "min_sale_price": 4018.0,
+        "max_sale_price": 4300.0,
+        "buy_offers": 246765,
+        "sales_offers": 245375
+    },
+    "DOLF20C004050": {
+        "min_buy_price": 32.1,
+        "max_buy_price": 54.4,
+        "min_sale_price": 34.6,
+        "max_sale_price": 56.9,
+        "buy_offers": 2249,
+        "sales_offers": 2250
+    },
+    "DOLF20C004075": {
+        "min_buy_price": 19.4,
+        "max_buy_price": 35.8,
+        "min_sale_price": 21.5,
+        "max_sale_price": 38.3,
+        "buy_offers": 2203,
+        "sales_offers": 2236
+    },
+    "DOLF20C004100": {
+        "min_buy_price": 10.7,
+        "max_buy_price": 21.857,
+        "min_sale_price": 11.75,
+        "max_sale_price": 25.0,
+        "buy_offers": 2168,
+        "sales_offers": 2218
+    },
+    "DOLF20C004125": {
+        "min_buy_price": 5.1,
+        "max_buy_price": 12.393,
+        "min_sale_price": 5.75,
+        "max_sale_price": 14.893,
+        "buy_offers": 1585,
+        "sales_offers": 1601
+    },
+    "DOLF20C004150": {
+        "min_buy_price": 2.1,
+        "max_buy_price": 7.6,
+        "min_sale_price": 3.5,
+        "max_sale_price": 9.068,
+        "buy_offers": 775,
+        "sales_offers": 776
+    },
+    "DOLF20C004175": {
+        "min_buy_price": 0.1,
+        "max_buy_price": 3.6,
+        "min_sale_price": 3.4,
+        "max_sale_price": 5.4,
+        "buy_offers": 1297,
+        "sales_offers": 1376
+    },
+    "DOLF20C004200": {
+        "min_buy_price": 1.575,
+        "max_buy_price": 1.8,
+        "min_sale_price": 1.575,
+        "max_sale_price": 1.8,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "DOLF20C004225": {
+        "min_buy_price": 0.8,
+        "max_buy_price": 0.8,
+        "min_sale_price": 0.8,
+        "max_sale_price": 0.8,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLF20C004300": {
+        "min_buy_price": 0.03,
+        "max_buy_price": 0.03,
+        "min_sale_price": 0.03,
+        "max_sale_price": 0.03,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLF20P003750": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLF20P003850": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLF20P003900": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.5,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.5,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "DOLF20P003950": {
+        "min_buy_price": 1.4,
+        "max_buy_price": 1.4,
+        "min_sale_price": 1.4,
+        "max_sale_price": 1.4,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLF20P004000": {
+        "min_buy_price": 0.1,
+        "max_buy_price": 4.4,
+        "min_sale_price": 1.5,
+        "max_sale_price": 4.7,
+        "buy_offers": 389,
+        "sales_offers": 390
+    },
+    "DOLF20P004025": {
+        "min_buy_price": 1.1,
+        "max_buy_price": 6.5,
+        "min_sale_price": 3.0,
+        "max_sale_price": 9.0,
+        "buy_offers": 692,
+        "sales_offers": 694
+    },
+    "DOLF20P004050": {
+        "min_buy_price": 4.3,
+        "max_buy_price": 14.731,
+        "min_sale_price": 6.61,
+        "max_sale_price": 16.9,
+        "buy_offers": 1403,
+        "sales_offers": 1477
+    },
+    "DOLF20P004075": {
+        "min_buy_price": 10.7,
+        "max_buy_price": 26.7,
+        "min_sale_price": 13.2,
+        "max_sale_price": 29.2,
+        "buy_offers": 1562,
+        "sales_offers": 1593
+    },
+    "DOLF20P004100": {
+        "min_buy_price": 21.3,
+        "max_buy_price": 46.0,
+        "min_sale_price": 23.8,
+        "max_sale_price": 46.0,
+        "buy_offers": 2259,
+        "sales_offers": 2261
+    },
+    "DOLF20P004125": {
+        "min_buy_price": 37.46,
+        "max_buy_price": 61.11,
+        "min_sale_price": 35.0,
+        "max_sale_price": 63.18,
+        "buy_offers": 632,
+        "sales_offers": 632
+    },
+    "DOLF20P004150": {
+        "min_buy_price": 78.79,
+        "max_buy_price": 87.2,
+        "min_sale_price": 78.79,
+        "max_sale_price": 87.2,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "DOLF20P004175": {
+        "min_buy_price": 107.4,
+        "max_buy_price": 109.0,
+        "min_sale_price": 107.4,
+        "max_sale_price": 109.0,
+        "buy_offers": 5,
+        "sales_offers": 5
+    },
+    "DOLG20": {
+        "min_buy_price": 4058.5,
+        "max_buy_price": 4105.0,
+        "min_sale_price": 4065.5,
+        "max_sale_price": 4111.5,
+        "buy_offers": 11349,
+        "sales_offers": 8762
+    },
+    "DOLG20C004000": {
+        "min_buy_price": 105.56,
+        "max_buy_price": 119.43,
+        "min_sale_price": 107.1,
+        "max_sale_price": 121.61,
+        "buy_offers": 302,
+        "sales_offers": 331
+    },
+    "DOLG20C004025": {
+        "min_buy_price": 88.0,
+        "max_buy_price": 100.82,
+        "min_sale_price": 89.98,
+        "max_sale_price": 103.42,
+        "buy_offers": 312,
+        "sales_offers": 355
+    },
+    "DOLG20C004050": {
+        "min_buy_price": 64.8,
+        "max_buy_price": 84.5,
+        "min_sale_price": 67.8,
+        "max_sale_price": 87.5,
+        "buy_offers": 1959,
+        "sales_offers": 2011
+    },
+    "DOLG20C004075": {
+        "min_buy_price": 52.4,
+        "max_buy_price": 69.6,
+        "min_sale_price": 55.4,
+        "max_sale_price": 72.6,
+        "buy_offers": 1976,
+        "sales_offers": 2008
+    },
+    "DOLG20C004100": {
+        "min_buy_price": 41.9,
+        "max_buy_price": 56.5,
+        "min_sale_price": 44.9,
+        "max_sale_price": 59.74,
+        "buy_offers": 1996,
+        "sales_offers": 2027
+    },
+    "DOLG20C004125": {
+        "min_buy_price": 33.1,
+        "max_buy_price": 45.619,
+        "min_sale_price": 36.1,
+        "max_sale_price": 48.94,
+        "buy_offers": 1978,
+        "sales_offers": 2000
+    },
+    "DOLG20C004150": {
+        "min_buy_price": 25.9,
+        "max_buy_price": 36.638,
+        "min_sale_price": 28.9,
+        "max_sale_price": 39.89,
+        "buy_offers": 1377,
+        "sales_offers": 1395
+    },
+    "DOLG20C004175": {
+        "min_buy_price": 18.2,
+        "max_buy_price": 28.82,
+        "min_sale_price": 24.0,
+        "max_sale_price": 32.7,
+        "buy_offers": 4264,
+        "sales_offers": 4299
+    },
+    "DOLG20C004200": {
+        "min_buy_price": 13.8,
+        "max_buy_price": 22.92,
+        "min_sale_price": 19.1,
+        "max_sale_price": 26.3,
+        "buy_offers": 3760,
+        "sales_offers": 3790
+    },
+    "DOLG20C004225": {
+        "min_buy_price": 10.4,
+        "max_buy_price": 16.7,
+        "min_sale_price": 15.3,
+        "max_sale_price": 20.8,
+        "buy_offers": 2962,
+        "sales_offers": 2984
+    },
+    "DOLG20C004250": {
+        "min_buy_price": 7.8,
+        "max_buy_price": 13.94,
+        "min_sale_price": 12.2,
+        "max_sale_price": 16.6,
+        "buy_offers": 2474,
+        "sales_offers": 2547
+    },
+    "DOLG20C004275": {
+        "min_buy_price": 5.8,
+        "max_buy_price": 9.9,
+        "min_sale_price": 9.7,
+        "max_sale_price": 13.3,
+        "buy_offers": 2123,
+        "sales_offers": 2063
+    },
+    "DOLG20C004300": {
+        "min_buy_price": 4.3,
+        "max_buy_price": 7.6,
+        "min_sale_price": 7.9,
+        "max_sale_price": 10.7,
+        "buy_offers": 1690,
+        "sales_offers": 1642
+    },
+    "DOLG20C004325": {
+        "min_buy_price": 3.1,
+        "max_buy_price": 6.5,
+        "min_sale_price": 6.4,
+        "max_sale_price": 8.6,
+        "buy_offers": 1308,
+        "sales_offers": 1450
+    },
+    "DOLG20P003900": {
+        "min_buy_price": 2.7,
+        "max_buy_price": 4.5,
+        "min_sale_price": 5.4,
+        "max_sale_price": 8.2,
+        "buy_offers": 1045,
+        "sales_offers": 1060
+    },
+    "DOLG20P003925": {
+        "min_buy_price": 4.2,
+        "max_buy_price": 6.8,
+        "min_sale_price": 6.0,
+        "max_sale_price": 11.1,
+        "buy_offers": 1512,
+        "sales_offers": 1499
+    },
+    "DOLG20P003950": {
+        "min_buy_price": 6.4,
+        "max_buy_price": 10.2,
+        "min_sale_price": 9.8,
+        "max_sale_price": 15.2,
+        "buy_offers": 2042,
+        "sales_offers": 2113
+    },
+    "DOLG20P003975": {
+        "min_buy_price": 9.6,
+        "max_buy_price": 15.0,
+        "min_sale_price": 13.4,
+        "max_sale_price": 20.6,
+        "buy_offers": 2749,
+        "sales_offers": 2742
+    },
+    "DOLG20P004000": {
+        "min_buy_price": 14.8,
+        "max_buy_price": 25.0,
+        "min_sale_price": 17.5,
+        "max_sale_price": 25.7,
+        "buy_offers": 1203,
+        "sales_offers": 1925
+    },
+    "DOLG20P004025": {
+        "min_buy_price": 21.1,
+        "max_buy_price": 31.3,
+        "min_sale_price": 24.1,
+        "max_sale_price": 34.3,
+        "buy_offers": 1261,
+        "sales_offers": 1321
+    },
+    "DOLG20P004050": {
+        "min_buy_price": 29.2,
+        "max_buy_price": 41.7,
+        "min_sale_price": 32.2,
+        "max_sale_price": 44.7,
+        "buy_offers": 1361,
+        "sales_offers": 1365
+    },
+    "DOLG20P004075": {
+        "min_buy_price": 39.2,
+        "max_buy_price": 54.2,
+        "min_sale_price": 42.2,
+        "max_sale_price": 57.2,
+        "buy_offers": 1958,
+        "sales_offers": 1992
+    },
+    "DOLG20P004100": {
+        "min_buy_price": 51.1,
+        "max_buy_price": 68.6,
+        "min_sale_price": 54.1,
+        "max_sale_price": 71.6,
+        "buy_offers": 1996,
+        "sales_offers": 2001
+    },
+    "DOLG20P004125": {
+        "min_buy_price": 65.9,
+        "max_buy_price": 76.56,
+        "min_sale_price": 69.71,
+        "max_sale_price": 79.7,
+        "buy_offers": 353,
+        "sales_offers": 389
+    },
+    "DOLG20P004150": {
+        "min_buy_price": 81.67,
+        "max_buy_price": 93.55,
+        "min_sale_price": 85.6,
+        "max_sale_price": 96.74,
+        "buy_offers": 389,
+        "sales_offers": 389
+    },
+    "DOLG20P004175": {
+        "min_buy_price": 99.13,
+        "max_buy_price": 112.09,
+        "min_sale_price": 103.05,
+        "max_sale_price": 115.24,
+        "buy_offers": 389,
+        "sales_offers": 389
+    },
+    "DOLG20P004200": {
+        "min_buy_price": 118.05,
+        "max_buy_price": 131.94,
+        "min_sale_price": 121.87,
+        "max_sale_price": 135.0,
+        "buy_offers": 314,
+        "sales_offers": 314
+    },
+    "DOLH20C003975": {
+        "min_buy_price": 137.67,
+        "max_buy_price": 152.4,
+        "min_sale_price": 140.77,
+        "max_sale_price": 155.32,
+        "buy_offers": 214,
+        "sales_offers": 241
+    },
+    "DOLH20C004000": {
+        "min_buy_price": 119.75,
+        "max_buy_price": 133.65,
+        "min_sale_price": 123.41,
+        "max_sale_price": 137.1,
+        "buy_offers": 213,
+        "sales_offers": 232
+    },
+    "DOLH20C004025": {
+        "min_buy_price": 103.3,
+        "max_buy_price": 116.25,
+        "min_sale_price": 107.47,
+        "max_sale_price": 120.22,
+        "buy_offers": 222,
+        "sales_offers": 238
+    },
+    "DOLH20C004050": {
+        "min_buy_price": 88.41,
+        "max_buy_price": 100.34,
+        "min_sale_price": 92.95,
+        "max_sale_price": 104.78,
+        "buy_offers": 270,
+        "sales_offers": 261
+    },
+    "DOLH20C004075": {
+        "min_buy_price": 75.13,
+        "max_buy_price": 85.97,
+        "min_sale_price": 79.97,
+        "max_sale_price": 90.81,
+        "buy_offers": 265,
+        "sales_offers": 289
+    },
+    "DOLH20C004100": {
+        "min_buy_price": 63.47,
+        "max_buy_price": 73.2,
+        "min_sale_price": 68.51,
+        "max_sale_price": 78.33,
+        "buy_offers": 264,
+        "sales_offers": 281
+    },
+    "DOLH20C004125": {
+        "min_buy_price": 53.37,
+        "max_buy_price": 61.99,
+        "min_sale_price": 58.5,
+        "max_sale_price": 67.31,
+        "buy_offers": 272,
+        "sales_offers": 268
+    },
+    "DOLH20C004150": {
+        "min_buy_price": 44.74,
+        "max_buy_price": 52.29,
+        "min_sale_price": 49.85,
+        "max_sale_price": 57.68,
+        "buy_offers": 265,
+        "sales_offers": 261
+    },
+    "DOLH20C004175": {
+        "min_buy_price": 37.43,
+        "max_buy_price": 43.98,
+        "min_sale_price": 42.44,
+        "max_sale_price": 49.33,
+        "buy_offers": 255,
+        "sales_offers": 256
+    },
+    "DOLH20C004200": {
+        "min_buy_price": 31.31,
+        "max_buy_price": 36.95,
+        "min_sale_price": 36.13,
+        "max_sale_price": 42.16,
+        "buy_offers": 255,
+        "sales_offers": 256
+    },
+    "DOLH20C004225": {
+        "min_buy_price": 26.2,
+        "max_buy_price": 31.04,
+        "min_sale_price": 30.77,
+        "max_sale_price": 36.03,
+        "buy_offers": 253,
+        "sales_offers": 254
+    },
+    "DOLH20P003900": {
+        "min_buy_price": 10.2,
+        "max_buy_price": 10.267,
+        "min_sale_price": 10.2,
+        "max_sale_price": 10.267,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "DOLH20P003950": {
+        "min_buy_price": 18.0,
+        "max_buy_price": 18.0,
+        "min_sale_price": 18.0,
+        "max_sale_price": 18.0,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLH20P003975": {
+        "min_buy_price": 20.26,
+        "max_buy_price": 24.47,
+        "min_sale_price": 22.61,
+        "max_sale_price": 26.17,
+        "buy_offers": 189,
+        "sales_offers": 220
+    },
+    "DOLH20P004000": {
+        "min_buy_price": 26.26,
+        "max_buy_price": 30.71,
+        "min_sale_price": 29.23,
+        "max_sale_price": 33.66,
+        "buy_offers": 186,
+        "sales_offers": 223
+    },
+    "DOLH20P004025": {
+        "min_buy_price": 33.62,
+        "max_buy_price": 38.99,
+        "min_sale_price": 37.2,
+        "max_sale_price": 42.59,
+        "buy_offers": 189,
+        "sales_offers": 234
+    },
+    "DOLH20P004050": {
+        "min_buy_price": 42.45,
+        "max_buy_price": 48.82,
+        "min_sale_price": 46.61,
+        "max_sale_price": 53.02,
+        "buy_offers": 201,
+        "sales_offers": 227
+    },
+    "DOLH20P004075": {
+        "min_buy_price": 52.83,
+        "max_buy_price": 60.24,
+        "min_sale_price": 57.5,
+        "max_sale_price": 64.96,
+        "buy_offers": 207,
+        "sales_offers": 236
+    },
+    "DOLH20P004100": {
+        "min_buy_price": 64.8,
+        "max_buy_price": 73.26,
+        "min_sale_price": 69.87,
+        "max_sale_price": 78.41,
+        "buy_offers": 232,
+        "sales_offers": 252
+    },
+    "DOLH20P004125": {
+        "min_buy_price": 78.34,
+        "max_buy_price": 87.83,
+        "min_sale_price": 83.71,
+        "max_sale_price": 93.29,
+        "buy_offers": 234,
+        "sales_offers": 252
+    },
+    "DOLH20P004150": {
+        "min_buy_price": 93.39,
+        "max_buy_price": 103.88,
+        "min_sale_price": 98.92,
+        "max_sale_price": 109.52,
+        "buy_offers": 238,
+        "sales_offers": 250
+    },
+    "DOLH20P004175": {
+        "min_buy_price": 109.83,
+        "max_buy_price": 121.33,
+        "min_sale_price": 115.43,
+        "max_sale_price": 126.96,
+        "buy_offers": 249,
+        "sales_offers": 250
+    },
+    "DOLH20P004200": {
+        "min_buy_price": 127.56,
+        "max_buy_price": 139.97,
+        "min_sale_price": 133.1,
+        "max_sale_price": 145.49,
+        "buy_offers": 249,
+        "sales_offers": 250
+    },
+    "DOLH20P004225": {
+        "min_buy_price": 146.4,
+        "max_buy_price": 159.62,
+        "min_sale_price": 151.81,
+        "max_sale_price": 164.96,
+        "buy_offers": 249,
+        "sales_offers": 250
+    },
+    "DOLH20P004250": {
+        "min_buy_price": 166.22,
+        "max_buy_price": 180.15,
+        "min_sale_price": 171.42,
+        "max_sale_price": 185.25,
+        "buy_offers": 215,
+        "sales_offers": 216
+    },
+    "DOLK20P003700": {
+        "min_buy_price": 4.0,
+        "max_buy_price": 4.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 2,
+        "sales_offers": 0
+    },
+    "DOLK20P003800": {
+        "min_buy_price": 11.0,
+        "max_buy_price": 11.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 2,
+        "sales_offers": 0
+    },
+    "DOLK20P003900": {
+        "min_buy_price": 23.859,
+        "max_buy_price": 30.064,
+        "min_sale_price": 26.0,
+        "max_sale_price": 35.2,
+        "buy_offers": 8818,
+        "sales_offers": 2772
+    },
+    "DOLK20P004100": {
+        "min_buy_price": 96.51,
+        "max_buy_price": 96.51,
+        "min_sale_price": 96.51,
+        "max_sale_price": 96.51,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLN20C004200": {
+        "min_buy_price": 95.0,
+        "max_buy_price": 95.0,
+        "min_sale_price": 95.0,
+        "max_sale_price": 95.0,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLN20P003800": {
+        "min_buy_price": 18.0,
+        "max_buy_price": 18.0,
+        "min_sale_price": 18.0,
+        "max_sale_price": 18.0,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLN20P004100": {
+        "min_buy_price": 106.6,
+        "max_buy_price": 106.6,
+        "min_sale_price": 106.6,
+        "max_sale_price": 106.6,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLU20P004100": {
+        "min_buy_price": 121.1,
+        "max_buy_price": 121.1,
+        "min_sale_price": 121.1,
+        "max_sale_price": 121.1,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "DOLX20P004400": {
+        "min_buy_price": 296.8,
+        "max_buy_price": 321.9,
+        "min_sale_price": 329.8,
+        "max_sale_price": 363.8,
+        "buy_offers": 5454,
+        "sales_offers": 5536
+    },
+    "DR1F20G20": {
+        "min_buy_price": 3.9,
+        "max_buy_price": 5.19,
+        "min_sale_price": 4.74,
+        "max_sale_price": 8.1,
+        "buy_offers": 201,
+        "sales_offers": 217
+    },
+    "DS1F20C004050": {
+        "min_buy_price": 51.296,
+        "max_buy_price": 57.65,
+        "min_sale_price": 54.296,
+        "max_sale_price": 60.65,
+        "buy_offers": 1279,
+        "sales_offers": 1279
+    },
+    "DS1F20C004075": {
+        "min_buy_price": 35.174,
+        "max_buy_price": 40.418,
+        "min_sale_price": 38.174,
+        "max_sale_price": 43.418,
+        "buy_offers": 1275,
+        "sales_offers": 1276
+    },
+    "DS1F20C004100": {
+        "min_buy_price": 22.925,
+        "max_buy_price": 26.967,
+        "min_sale_price": 25.925,
+        "max_sale_price": 29.967,
+        "buy_offers": 1276,
+        "sales_offers": 1276
+    },
+    "DS1F20C004125": {
+        "min_buy_price": 14.359,
+        "max_buy_price": 17.294,
+        "min_sale_price": 17.359,
+        "max_sale_price": 20.294,
+        "buy_offers": 117,
+        "sales_offers": 117
+    },
+    "DS1F20C004150": {
+        "min_buy_price": 8.733,
+        "max_buy_price": 10.648,
+        "min_sale_price": 11.733,
+        "max_sale_price": 13.648,
+        "buy_offers": 81,
+        "sales_offers": 81
+    },
+    "DS1F20P004000": {
+        "min_buy_price": 1.321,
+        "max_buy_price": 1.821,
+        "min_sale_price": 4.321,
+        "max_sale_price": 4.821,
+        "buy_offers": 22,
+        "sales_offers": 22
+    },
+    "DS1F20P004025": {
+        "min_buy_price": 3.868,
+        "max_buy_price": 4.955,
+        "min_sale_price": 6.868,
+        "max_sale_price": 7.955,
+        "buy_offers": 44,
+        "sales_offers": 44
+    },
+    "DS1F20P004050": {
+        "min_buy_price": 8.445,
+        "max_buy_price": 10.461,
+        "min_sale_price": 11.445,
+        "max_sale_price": 13.461,
+        "buy_offers": 73,
+        "sales_offers": 73
+    },
+    "DS1F20P004075": {
+        "min_buy_price": 16.057,
+        "max_buy_price": 19.301,
+        "min_sale_price": 19.057,
+        "max_sale_price": 22.301,
+        "buy_offers": 113,
+        "sales_offers": 113
+    },
+    "DS1F20P004100": {
+        "min_buy_price": 27.568,
+        "max_buy_price": 32.014,
+        "min_sale_price": 30.568,
+        "max_sale_price": 35.014,
+        "buy_offers": 1277,
+        "sales_offers": 1276
+    },
+    "DS2F20C004050": {
+        "min_buy_price": 59.643,
+        "max_buy_price": 65.587,
+        "min_sale_price": 62.643,
+        "max_sale_price": 68.587,
+        "buy_offers": 1279,
+        "sales_offers": 1279
+    },
+    "DS2F20C004075": {
+        "min_buy_price": 44.506,
+        "max_buy_price": 49.568,
+        "min_sale_price": 47.506,
+        "max_sale_price": 52.568,
+        "buy_offers": 1280,
+        "sales_offers": 1280
+    },
+    "DS2F20C004100": {
+        "min_buy_price": 32.32,
+        "max_buy_price": 36.468,
+        "min_sale_price": 35.32,
+        "max_sale_price": 39.468,
+        "buy_offers": 1274,
+        "sales_offers": 1274
+    },
+    "DS2F20C004125": {
+        "min_buy_price": 22.971,
+        "max_buy_price": 26.255,
+        "min_sale_price": 25.971,
+        "max_sale_price": 29.255,
+        "buy_offers": 157,
+        "sales_offers": 157
+    },
+    "DS2F20C004150": {
+        "min_buy_price": 16.137,
+        "max_buy_price": 18.671,
+        "min_sale_price": 19.137,
+        "max_sale_price": 21.671,
+        "buy_offers": 117,
+        "sales_offers": 117
+    },
+    "DS2F20P004000": {
+        "min_buy_price": 4.911,
+        "max_buy_price": 6.018,
+        "min_sale_price": 7.911,
+        "max_sale_price": 9.018,
+        "buy_offers": 42,
+        "sales_offers": 42
+    },
+    "DS2F20P004025": {
+        "min_buy_price": 8.923,
+        "max_buy_price": 10.7,
+        "min_sale_price": 11.923,
+        "max_sale_price": 13.7,
+        "buy_offers": 77,
+        "sales_offers": 77
+    },
+    "DS2F20P004050": {
+        "min_buy_price": 15.085,
+        "max_buy_price": 17.624,
+        "min_sale_price": 18.085,
+        "max_sale_price": 20.624,
+        "buy_offers": 117,
+        "sales_offers": 117
+    },
+    "DS2F20P004075": {
+        "min_buy_price": 24.007,
+        "max_buy_price": 27.427,
+        "min_sale_price": 27.007,
+        "max_sale_price": 30.427,
+        "buy_offers": 445,
+        "sales_offers": 445
+    },
+    "DS2F20P004100": {
+        "min_buy_price": 35.848,
+        "max_buy_price": 40.182,
+        "min_sale_price": 38.848,
+        "max_sale_price": 43.182,
+        "buy_offers": 1277,
+        "sales_offers": 1276
+    },
+    "ETHF20": {
+        "min_buy_price": 2025.0,
+        "max_buy_price": 2095.5,
+        "min_sale_price": 2070.0,
+        "max_sale_price": 2090.0,
+        "buy_offers": 17,
+        "sales_offers": 15
+    },
+    "ETHG20": {
+        "min_buy_price": 2030.0,
+        "max_buy_price": 2075.0,
+        "min_sale_price": 2070.0,
+        "max_sale_price": 2095.0,
+        "buy_offers": 21,
+        "sales_offers": 21
+    },
+    "ETHH20": {
+        "min_buy_price": 1900.0,
+        "max_buy_price": 1915.0,
+        "min_sale_price": 1960.0,
+        "max_sale_price": 1960.0,
+        "buy_offers": 7,
+        "sales_offers": 2
+    },
+    "ETHJ20": {
+        "min_buy_price": 1720.0,
+        "max_buy_price": 1720.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 2,
+        "sales_offers": 0
+    },
+    "ETHK20": {
+        "min_buy_price": 1710.0,
+        "max_buy_price": 1710.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 2,
+        "sales_offers": 0
+    },
+    "ETHM20": {
+        "min_buy_price": 1690.0,
+        "max_buy_price": 1690.0,
+        "min_sale_price": 1857.0,
+        "max_sale_price": 1857.0,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "ETHN20": {
+        "min_buy_price": 1690.0,
+        "max_buy_price": 1690.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 2,
+        "sales_offers": 0
+    },
+    "ETHZ19": {
+        "min_buy_price": 2015.0,
+        "max_buy_price": 2050.0,
+        "min_sale_price": 2050.0,
+        "max_sale_price": 2100.0,
+        "buy_offers": 16,
+        "sales_offers": 13
+    },
+    "EUPF20": {
+        "min_buy_price": 1107.0,
+        "max_buy_price": 1111.6,
+        "min_sale_price": 1108.1,
+        "max_sale_price": 1111.9,
+        "buy_offers": 1383,
+        "sales_offers": 1383
+    },
+    "EUPG20": {
+        "min_buy_price": 1109.1,
+        "max_buy_price": 1112.4,
+        "min_sale_price": 1111.1,
+        "max_sale_price": 1114.4,
+        "buy_offers": 1240,
+        "sales_offers": 1240
+    },
+    "EURF20": {
+        "min_buy_price": 4408.0,
+        "max_buy_price": 4543.6,
+        "min_sale_price": 4521.0,
+        "max_sale_price": 4654.0,
+        "buy_offers": 3056328,
+        "sales_offers": 2912528
+    },
+    "EURG20": {
+        "min_buy_price": 4552.0,
+        "max_buy_price": 4552.0,
+        "min_sale_price": 4552.0,
+        "max_sale_price": 4552.0,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "FRCF21": {
+        "min_buy_price": 2.4,
+        "max_buy_price": 2.44,
+        "min_sale_price": 2.41,
+        "max_sale_price": 2.46,
+        "buy_offers": 19,
+        "sales_offers": 24
+    },
+    "FRCF22": {
+        "min_buy_price": 2.33,
+        "max_buy_price": 2.38,
+        "min_sale_price": 2.36,
+        "max_sale_price": 2.38,
+        "buy_offers": 23,
+        "sales_offers": 16
+    },
+    "FRCF23": {
+        "min_buy_price": 2.39,
+        "max_buy_price": 2.44,
+        "min_sale_price": 2.37,
+        "max_sale_price": 2.48,
+        "buy_offers": 60,
+        "sales_offers": 54
+    },
+    "FRCF24": {
+        "min_buy_price": 2.5,
+        "max_buy_price": 2.53,
+        "min_sale_price": 2.51,
+        "max_sale_price": 2.56,
+        "buy_offers": 29,
+        "sales_offers": 24
+    },
+    "FRCF25": {
+        "min_buy_price": 2.65,
+        "max_buy_price": 2.72,
+        "min_sale_price": 2.68,
+        "max_sale_price": 2.75,
+        "buy_offers": 29,
+        "sales_offers": 26
+    },
+    "FRCF26": {
+        "min_buy_price": 2.76,
+        "max_buy_price": 2.8,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 4,
+        "sales_offers": 0
+    },
+    "FRCG20": {
+        "min_buy_price": 2.8,
+        "max_buy_price": 2.93,
+        "min_sale_price": 2.8,
+        "max_sale_price": 2.95,
+        "buy_offers": 413,
+        "sales_offers": 470
+    },
+    "FRCH20": {
+        "min_buy_price": 2.68,
+        "max_buy_price": 2.7,
+        "min_sale_price": 2.68,
+        "max_sale_price": 2.74,
+        "buy_offers": 11,
+        "sales_offers": 18
+    },
+    "FRCJ20": {
+        "min_buy_price": 2.54,
+        "max_buy_price": 2.6,
+        "min_sale_price": 2.56,
+        "max_sale_price": 2.62,
+        "buy_offers": 75,
+        "sales_offers": 51
+    },
+    "FRCJ21": {
+        "min_buy_price": 2.38,
+        "max_buy_price": 2.4,
+        "min_sale_price": 2.4,
+        "max_sale_price": 2.42,
+        "buy_offers": 12,
+        "sales_offers": 4
+    },
+    "FRCJ22": {
+        "min_buy_price": 2.35,
+        "max_buy_price": 2.37,
+        "min_sale_price": 2.35,
+        "max_sale_price": 2.4,
+        "buy_offers": 10,
+        "sales_offers": 12
+    },
+    "FRCK20": {
+        "min_buy_price": 2.54,
+        "max_buy_price": 2.58,
+        "min_sale_price": 2.57,
+        "max_sale_price": 2.58,
+        "buy_offers": 28,
+        "sales_offers": 17
+    },
+    "FRCM20": {
+        "min_buy_price": 2.47,
+        "max_buy_price": 2.55,
+        "min_sale_price": 2.5,
+        "max_sale_price": 2.55,
+        "buy_offers": 29,
+        "sales_offers": 34
+    },
+    "FRCN20": {
+        "min_buy_price": 2.47,
+        "max_buy_price": 2.5,
+        "min_sale_price": 2.46,
+        "max_sale_price": 2.54,
+        "buy_offers": 50,
+        "sales_offers": 59
+    },
+    "FRCN21": {
+        "min_buy_price": 2.34,
+        "max_buy_price": 2.37,
+        "min_sale_price": 2.36,
+        "max_sale_price": 2.4,
+        "buy_offers": 37,
+        "sales_offers": 12
+    },
+    "FRCN22": {
+        "min_buy_price": 2.37,
+        "max_buy_price": 2.4,
+        "min_sale_price": 2.38,
+        "max_sale_price": 2.4,
+        "buy_offers": 4,
+        "sales_offers": 16
+    },
+    "FRCN23": {
+        "min_buy_price": 2.44,
+        "max_buy_price": 2.45,
+        "min_sale_price": 2.44,
+        "max_sale_price": 2.46,
+        "buy_offers": 5,
+        "sales_offers": 19
+    },
+    "FRCN24": {
+        "min_buy_price": 2.55,
+        "max_buy_price": 2.55,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 4,
+        "sales_offers": 0
+    },
+    "FRCQ20": {
+        "min_buy_price": 2.44,
+        "max_buy_price": 2.44,
+        "min_sale_price": 2.46,
+        "max_sale_price": 2.48,
+        "buy_offers": 2,
+        "sales_offers": 7
+    },
+    "FRCU20": {
+        "min_buy_price": 2.4,
+        "max_buy_price": 2.42,
+        "min_sale_price": 2.4,
+        "max_sale_price": 2.45,
+        "buy_offers": 23,
+        "sales_offers": 22
+    },
+    "FRCV20": {
+        "min_buy_price": 2.37,
+        "max_buy_price": 2.42,
+        "min_sale_price": 2.37,
+        "max_sale_price": 2.45,
+        "buy_offers": 24,
+        "sales_offers": 17
+    },
+    "FRCV21": {
+        "min_buy_price": 2.35,
+        "max_buy_price": 2.4,
+        "min_sale_price": 2.38,
+        "max_sale_price": 2.4,
+        "buy_offers": 11,
+        "sales_offers": 25
+    },
+    "FRCV23": {
+        "min_buy_price": 2.46,
+        "max_buy_price": 2.46,
+        "min_sale_price": 2.47,
+        "max_sale_price": 2.5,
+        "buy_offers": 2,
+        "sales_offers": 6
+    },
+    "FRCV24": {
+        "min_buy_price": 2.58,
+        "max_buy_price": 2.58,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 2,
+        "sales_offers": 0
+    },
+    "FRCX20": {
+        "min_buy_price": 2.36,
+        "max_buy_price": 2.4,
+        "min_sale_price": 2.35,
+        "max_sale_price": 2.43,
+        "buy_offers": 30,
+        "sales_offers": 25
+    },
+    "FRCZ20": {
+        "min_buy_price": 2.39,
+        "max_buy_price": 2.41,
+        "min_sale_price": 2.41,
+        "max_sale_price": 2.44,
+        "buy_offers": 4,
+        "sales_offers": 6
+    },
+    "FRP0": {
+        "min_buy_price": 0.1,
+        "max_buy_price": 0.8,
+        "min_sale_price": 0.1,
+        "max_sale_price": 1.2,
+        "buy_offers": 243,
+        "sales_offers": 223
+    },
+    "FRP1": {
+        "min_buy_price": 0.2,
+        "max_buy_price": 0.2,
+        "min_sale_price": 0.2,
+        "max_sale_price": 0.2,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "GBRF20": {
+        "min_buy_price": 1300.5,
+        "max_buy_price": 1308.1,
+        "min_sale_price": 1302.0,
+        "max_sale_price": 1309.6,
+        "buy_offers": 3445,
+        "sales_offers": 3445
+    },
+    "GBRG20": {
+        "min_buy_price": 1301.5,
+        "max_buy_price": 1309.1,
+        "min_sale_price": 1303.5,
+        "max_sale_price": 1311.1,
+        "buy_offers": 3388,
+        "sales_offers": 3388
+    },
+    "HYPEOF20": {
+        "min_buy_price": 34.79,
+        "max_buy_price": 35.67,
+        "min_sale_price": 34.98,
+        "max_sale_price": 35.84,
+        "buy_offers": 38544,
+        "sales_offers": 42523
+    },
+    "HYPEOG20": {
+        "min_buy_price": 34.93,
+        "max_buy_price": 35.72,
+        "min_sale_price": 35.12,
+        "max_sale_price": 35.91,
+        "buy_offers": 3980,
+        "sales_offers": 5900
+    },
+    "ICFH20": {
+        "min_buy_price": 135.0,
+        "max_buy_price": 150.05,
+        "min_sale_price": 145.25,
+        "max_sale_price": 157.8,
+        "buy_offers": 12465,
+        "sales_offers": 9666
+    },
+    "ICFK20": {
+        "min_buy_price": 147.0,
+        "max_buy_price": 151.7,
+        "min_sale_price": 148.25,
+        "max_sale_price": 155.2,
+        "buy_offers": 2259,
+        "sales_offers": 1485
+    },
+    "ICFU20": {
+        "min_buy_price": 141.0,
+        "max_buy_price": 159.75,
+        "min_sale_price": 154.45,
+        "max_sale_price": 160.85,
+        "buy_offers": 9784,
+        "sales_offers": 9855
+    },
+    "ICFU20P015000": {
+        "min_buy_price": 11.13,
+        "max_buy_price": 11.22,
+        "min_sale_price": 11.13,
+        "max_sale_price": 11.22,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "ICFU21": {
+        "min_buy_price": 159.9,
+        "max_buy_price": 165.7,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 3382,
+        "sales_offers": 0
+    },
+    "ICFZ20": {
+        "min_buy_price": 151.0,
+        "max_buy_price": 161.5,
+        "min_sale_price": 157.05,
+        "max_sale_price": 163.35,
+        "buy_offers": 8962,
+        "sales_offers": 2103
+    },
+    "ICFZ21": {
+        "min_buy_price": 161.8,
+        "max_buy_price": 167.65,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 4215,
+        "sales_offers": 0
+    },
+    "IDIF20C279500": {
+        "min_buy_price": 27.38,
+        "max_buy_price": 27.38,
+        "min_sale_price": 27.38,
+        "max_sale_price": 27.38,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C279525": {
+        "min_buy_price": 2.51,
+        "max_buy_price": 2.51,
+        "min_sale_price": 2.51,
+        "max_sale_price": 2.51,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C279550": {
+        "min_buy_price": 0.04,
+        "max_buy_price": 0.04,
+        "min_sale_price": 0.04,
+        "max_sale_price": 0.04,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C279600": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C279900": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C280000": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C280100": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C280200": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C280300": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C280500": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C280600": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C280800": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C280900": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C281000": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C281100": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C281300": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C281500": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C282800": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C282900": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C283000": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C283300": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20C285000": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P279400": {
+        "min_buy_price": 0.02,
+        "max_buy_price": 0.02,
+        "min_sale_price": 0.02,
+        "max_sale_price": 0.02,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P279550": {
+        "min_buy_price": 22.59,
+        "max_buy_price": 22.59,
+        "min_sale_price": 22.59,
+        "max_sale_price": 22.59,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P279600": {
+        "min_buy_price": 72.48,
+        "max_buy_price": 72.48,
+        "min_sale_price": 72.48,
+        "max_sale_price": 72.48,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P279700": {
+        "min_buy_price": 172.34,
+        "max_buy_price": 172.34,
+        "min_sale_price": 172.34,
+        "max_sale_price": 172.34,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P279800": {
+        "min_buy_price": 272.21,
+        "max_buy_price": 272.21,
+        "min_sale_price": 272.21,
+        "max_sale_price": 272.21,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P279900": {
+        "min_buy_price": 372.07,
+        "max_buy_price": 372.07,
+        "min_sale_price": 372.07,
+        "max_sale_price": 372.07,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280000": {
+        "min_buy_price": 471.93,
+        "max_buy_price": 471.93,
+        "min_sale_price": 471.93,
+        "max_sale_price": 471.93,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280100": {
+        "min_buy_price": 571.8,
+        "max_buy_price": 571.8,
+        "min_sale_price": 571.8,
+        "max_sale_price": 571.8,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280200": {
+        "min_buy_price": 671.66,
+        "max_buy_price": 671.66,
+        "min_sale_price": 671.66,
+        "max_sale_price": 671.66,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280300": {
+        "min_buy_price": 771.54,
+        "max_buy_price": 771.54,
+        "min_sale_price": 771.54,
+        "max_sale_price": 771.54,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280400": {
+        "min_buy_price": 871.59,
+        "max_buy_price": 871.59,
+        "min_sale_price": 871.59,
+        "max_sale_price": 871.59,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280500": {
+        "min_buy_price": 971.45,
+        "max_buy_price": 971.45,
+        "min_sale_price": 971.45,
+        "max_sale_price": 971.45,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280600": {
+        "min_buy_price": 1071.31,
+        "max_buy_price": 1071.31,
+        "min_sale_price": 1071.31,
+        "max_sale_price": 1071.31,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280700": {
+        "min_buy_price": 1171.18,
+        "max_buy_price": 1171.18,
+        "min_sale_price": 1171.18,
+        "max_sale_price": 1171.18,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280800": {
+        "min_buy_price": 1271.04,
+        "max_buy_price": 1271.04,
+        "min_sale_price": 1271.04,
+        "max_sale_price": 1271.04,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P280900": {
+        "min_buy_price": 1371.0,
+        "max_buy_price": 1371.0,
+        "min_sale_price": 1371.0,
+        "max_sale_price": 1371.0,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P281000": {
+        "min_buy_price": 1470.87,
+        "max_buy_price": 1470.87,
+        "min_sale_price": 1470.87,
+        "max_sale_price": 1470.87,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P281200": {
+        "min_buy_price": 1670.59,
+        "max_buy_price": 1670.59,
+        "min_sale_price": 1670.59,
+        "max_sale_price": 1670.59,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P281400": {
+        "min_buy_price": 1870.32,
+        "max_buy_price": 1870.32,
+        "min_sale_price": 1870.32,
+        "max_sale_price": 1870.32,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P281500": {
+        "min_buy_price": 1970.28,
+        "max_buy_price": 1970.28,
+        "min_sale_price": 1970.28,
+        "max_sale_price": 1970.28,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P281600": {
+        "min_buy_price": 2070.15,
+        "max_buy_price": 2070.15,
+        "min_sale_price": 2070.15,
+        "max_sale_price": 2070.15,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P281800": {
+        "min_buy_price": 2269.88,
+        "max_buy_price": 2269.88,
+        "min_sale_price": 2269.88,
+        "max_sale_price": 2269.88,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P282000": {
+        "min_buy_price": 2469.6,
+        "max_buy_price": 2469.6,
+        "min_sale_price": 2469.6,
+        "max_sale_price": 2469.6,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF20P282500": {
+        "min_buy_price": 2969.02,
+        "max_buy_price": 2969.02,
+        "min_sale_price": 2969.02,
+        "max_sale_price": 2969.02,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF21C289000": {
+        "min_buy_price": 3333.44,
+        "max_buy_price": 3333.44,
+        "min_sale_price": 3333.44,
+        "max_sale_price": 3333.44,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF21C289100": {
+        "min_buy_price": 3237.99,
+        "max_buy_price": 3237.99,
+        "min_sale_price": 3237.99,
+        "max_sale_price": 3237.99,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF21C289200": {
+        "min_buy_price": 3142.54,
+        "max_buy_price": 3142.54,
+        "min_sale_price": 3142.54,
+        "max_sale_price": 3142.54,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF21C291200": {
+        "min_buy_price": 1276.91,
+        "max_buy_price": 1276.91,
+        "min_sale_price": 1276.91,
+        "max_sale_price": 1276.91,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF21C291700": {
+        "min_buy_price": 850.0,
+        "max_buy_price": 932.0,
+        "min_sale_price": 850.0,
+        "max_sale_price": 932.0,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "IDIF21C292000": {
+        "min_buy_price": 731.55,
+        "max_buy_price": 753.0,
+        "min_sale_price": 731.55,
+        "max_sale_price": 753.0,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21C292600": {
+        "min_buy_price": 583.29,
+        "max_buy_price": 583.29,
+        "min_sale_price": 583.29,
+        "max_sale_price": 583.29,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF21C293000": {
+        "min_buy_price": 415.07,
+        "max_buy_price": 415.07,
+        "min_sale_price": 415.07,
+        "max_sale_price": 415.07,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIF21C295700": {
+        "min_buy_price": 90.0,
+        "max_buy_price": 99.0,
+        "min_sale_price": 90.0,
+        "max_sale_price": 99.0,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "IDIF21P289000": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P289100": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P289200": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P291200": {
+        "min_buy_price": 32.0,
+        "max_buy_price": 43.45,
+        "min_sale_price": 32.0,
+        "max_sale_price": 43.45,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P291300": {
+        "min_buy_price": 51.0,
+        "max_buy_price": 58.45,
+        "min_sale_price": 51.0,
+        "max_sale_price": 58.45,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P291800": {
+        "min_buy_price": 146.0,
+        "max_buy_price": 161.71,
+        "min_sale_price": 146.0,
+        "max_sale_price": 161.71,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P291900": {
+        "min_buy_price": 179.0,
+        "max_buy_price": 203.0,
+        "min_sale_price": 179.0,
+        "max_sale_price": 203.0,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P292000": {
+        "min_buy_price": 229.0,
+        "max_buy_price": 261.71,
+        "min_sale_price": 229.0,
+        "max_sale_price": 261.71,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P296800": {
+        "min_buy_price": 4113.0,
+        "max_buy_price": 4165.47,
+        "min_sale_price": 4113.0,
+        "max_sale_price": 4165.47,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P296900": {
+        "min_buy_price": 4205.0,
+        "max_buy_price": 4257.71,
+        "min_sale_price": 4205.0,
+        "max_sale_price": 4257.71,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIF21P297000": {
+        "min_buy_price": 4297.0,
+        "max_buy_price": 4349.92,
+        "min_sale_price": 4297.0,
+        "max_sale_price": 4349.92,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20C282400": {
+        "min_buy_price": 75.86,
+        "max_buy_price": 75.86,
+        "min_sale_price": 75.86,
+        "max_sale_price": 75.86,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20C282500": {
+        "min_buy_price": 21.53,
+        "max_buy_price": 21.53,
+        "min_sale_price": 21.53,
+        "max_sale_price": 21.53,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20C282600": {
+        "min_buy_price": 15.12,
+        "max_buy_price": 15.12,
+        "min_sale_price": 15.12,
+        "max_sale_price": 15.12,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20C282700": {
+        "min_buy_price": 6.89,
+        "max_buy_price": 13.18,
+        "min_sale_price": 6.89,
+        "max_sale_price": 13.18,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20C282800": {
+        "min_buy_price": 4.1,
+        "max_buy_price": 5.07,
+        "min_sale_price": 4.1,
+        "max_sale_price": 5.07,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20C282900": {
+        "min_buy_price": 3.99,
+        "max_buy_price": 3.99,
+        "min_sale_price": 3.99,
+        "max_sale_price": 3.99,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20C283000": {
+        "min_buy_price": 3.42,
+        "max_buy_price": 3.42,
+        "min_sale_price": 3.42,
+        "max_sale_price": 3.42,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20C284200": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20C285200": {
+        "min_buy_price": 0.01,
+        "max_buy_price": 0.01,
+        "min_sale_price": 0.01,
+        "max_sale_price": 0.01,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20P282000": {
+        "min_buy_price": 0.05,
+        "max_buy_price": 0.05,
+        "min_sale_price": 0.05,
+        "max_sale_price": 0.05,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20P282100": {
+        "min_buy_price": 0.2,
+        "max_buy_price": 0.2,
+        "min_sale_price": 0.2,
+        "max_sale_price": 0.2,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20P282200": {
+        "min_buy_price": 0.95,
+        "max_buy_price": 0.95,
+        "min_sale_price": 0.95,
+        "max_sale_price": 0.95,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20P282300": {
+        "min_buy_price": 2.45,
+        "max_buy_price": 2.75,
+        "min_sale_price": 2.45,
+        "max_sale_price": 2.75,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20P282400": {
+        "min_buy_price": 5.95,
+        "max_buy_price": 7.0,
+        "min_sale_price": 5.95,
+        "max_sale_price": 7.0,
+        "buy_offers": 8,
+        "sales_offers": 8
+    },
+    "IDIJ20P282500": {
+        "min_buy_price": 50.45,
+        "max_buy_price": 58.03,
+        "min_sale_price": 50.45,
+        "max_sale_price": 58.03,
+        "buy_offers": 8,
+        "sales_offers": 8
+    },
+    "IDIJ20P282600": {
+        "min_buy_price": 136.95,
+        "max_buy_price": 136.95,
+        "min_sale_price": 136.95,
+        "max_sale_price": 136.95,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20P282700": {
+        "min_buy_price": 233.45,
+        "max_buy_price": 233.45,
+        "min_sale_price": 233.45,
+        "max_sale_price": 233.45,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20P282800": {
+        "min_buy_price": 330.45,
+        "max_buy_price": 330.45,
+        "min_sale_price": 330.45,
+        "max_sale_price": 330.45,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20P282900": {
+        "min_buy_price": 428.2,
+        "max_buy_price": 428.2,
+        "min_sale_price": 428.2,
+        "max_sale_price": 428.2,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20P283000": {
+        "min_buy_price": 526.45,
+        "max_buy_price": 526.45,
+        "min_sale_price": 526.45,
+        "max_sale_price": 526.45,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20P283100": {
+        "min_buy_price": 625.25,
+        "max_buy_price": 625.25,
+        "min_sale_price": 625.25,
+        "max_sale_price": 625.25,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20P283200": {
+        "min_buy_price": 724.1,
+        "max_buy_price": 728.51,
+        "min_sale_price": 724.1,
+        "max_sale_price": 728.51,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIJ20P283300": {
+        "min_buy_price": 826.9,
+        "max_buy_price": 826.9,
+        "min_sale_price": 826.9,
+        "max_sale_price": 826.9,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20P283500": {
+        "min_buy_price": 1020.6,
+        "max_buy_price": 1020.6,
+        "min_sale_price": 1020.6,
+        "max_sale_price": 1020.6,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIJ20P283600": {
+        "min_buy_price": 1119.4,
+        "max_buy_price": 1119.4,
+        "min_sale_price": 1119.4,
+        "max_sale_price": 1119.4,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIN20C285300": {
+        "min_buy_price": 175.92,
+        "max_buy_price": 175.92,
+        "min_sale_price": 175.92,
+        "max_sale_price": 175.92,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIN20C285400": {
+        "min_buy_price": 121.61,
+        "max_buy_price": 121.61,
+        "min_sale_price": 121.61,
+        "max_sale_price": 121.61,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIN20C285500": {
+        "min_buy_price": 80.8,
+        "max_buy_price": 80.8,
+        "min_sale_price": 80.8,
+        "max_sale_price": 80.8,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIN20C285600": {
+        "min_buy_price": 62.99,
+        "max_buy_price": 117.61,
+        "min_sale_price": 62.99,
+        "max_sale_price": 117.61,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20C285900": {
+        "min_buy_price": 35.0,
+        "max_buy_price": 36.56,
+        "min_sale_price": 35.0,
+        "max_sale_price": 36.56,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "IDIN20P284600": {
+        "min_buy_price": 0.39,
+        "max_buy_price": 0.39,
+        "min_sale_price": 0.39,
+        "max_sale_price": 0.39,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIN20P284700": {
+        "min_buy_price": 0.79,
+        "max_buy_price": 0.79,
+        "min_sale_price": 0.79,
+        "max_sale_price": 0.79,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIN20P284800": {
+        "min_buy_price": 1.29,
+        "max_buy_price": 1.29,
+        "min_sale_price": 1.29,
+        "max_sale_price": 1.29,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIN20P284900": {
+        "min_buy_price": 2.04,
+        "max_buy_price": 2.04,
+        "min_sale_price": 2.04,
+        "max_sale_price": 2.04,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20P285000": {
+        "min_buy_price": 4.04,
+        "max_buy_price": 4.04,
+        "min_sale_price": 4.04,
+        "max_sale_price": 4.04,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "IDIN20P285100": {
+        "min_buy_price": 19.04,
+        "max_buy_price": 19.04,
+        "min_sale_price": 19.04,
+        "max_sale_price": 19.04,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "IDIN20P285200": {
+        "min_buy_price": 35.54,
+        "max_buy_price": 35.54,
+        "min_sale_price": 35.54,
+        "max_sale_price": 35.54,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20P285300": {
+        "min_buy_price": 77.54,
+        "max_buy_price": 77.54,
+        "min_sale_price": 77.54,
+        "max_sale_price": 77.54,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20P285400": {
+        "min_buy_price": 121.04,
+        "max_buy_price": 121.04,
+        "min_sale_price": 121.04,
+        "max_sale_price": 121.04,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20P285500": {
+        "min_buy_price": 178.04,
+        "max_buy_price": 178.04,
+        "min_sale_price": 178.04,
+        "max_sale_price": 178.04,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20P285600": {
+        "min_buy_price": 258.04,
+        "max_buy_price": 258.04,
+        "min_sale_price": 258.04,
+        "max_sale_price": 258.04,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20P285700": {
+        "min_buy_price": 343.04,
+        "max_buy_price": 343.04,
+        "min_sale_price": 343.04,
+        "max_sale_price": 343.04,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20P285800": {
+        "min_buy_price": 432.04,
+        "max_buy_price": 432.04,
+        "min_sale_price": 432.04,
+        "max_sale_price": 432.04,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "IDIN20P285900": {
+        "min_buy_price": 525.04,
+        "max_buy_price": 525.04,
+        "min_sale_price": 525.04,
+        "max_sale_price": 525.04,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "IDIN20P286000": {
+        "min_buy_price": 620.04,
+        "max_buy_price": 620.04,
+        "min_sale_price": 620.04,
+        "max_sale_price": 620.04,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "INDG20": {
+        "min_buy_price": 105000.0,
+        "max_buy_price": 118000.0,
+        "min_sale_price": 110000.0,
+        "max_sale_price": 120000.0,
+        "buy_offers": 531589,
+        "sales_offers": 516654
+    },
+    "INDJ20": {
+        "min_buy_price": 107000.0,
+        "max_buy_price": 107000.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 2,
+        "sales_offers": 0
+    },
+    "INDM20": {
+        "min_buy_price": 107155.0,
+        "max_buy_price": 117160.0,
+        "min_sale_price": 117100.0,
+        "max_sale_price": 117160.0,
+        "buy_offers": 7,
+        "sales_offers": 4
+    },
+    "ISPH20": {
+        "min_buy_price": 2997.0,
+        "max_buy_price": 3300.0,
+        "min_sale_price": 3179.0,
+        "max_sale_price": 3300.0,
+        "buy_offers": 1484361,
+        "sales_offers": 975817
+    },
+    "ISPH20C003150": {
+        "min_buy_price": 107.5,
+        "max_buy_price": 130.25,
+        "min_sale_price": 121.25,
+        "max_sale_price": 134.0,
+        "buy_offers": 31,
+        "sales_offers": 60
+    },
+    "ISPH20C003250": {
+        "min_buy_price": 45.0,
+        "max_buy_price": 64.0,
+        "min_sale_price": 56.25,
+        "max_sale_price": 80.5,
+        "buy_offers": 1156,
+        "sales_offers": 3472
+    },
+    "ISPH20C003300": {
+        "min_buy_price": 32.25,
+        "max_buy_price": 38.75,
+        "min_sale_price": 33.75,
+        "max_sale_price": 47.75,
+        "buy_offers": 347,
+        "sales_offers": 449
+    },
+    "ISPM20": {
+        "min_buy_price": 3206.25,
+        "max_buy_price": 3229.25,
+        "min_sale_price": 3214.5,
+        "max_sale_price": 3230.5,
+        "buy_offers": 9083,
+        "sales_offers": 14447
+    },
+    "ISPZ19": {
+        "min_buy_price": 3000.0,
+        "max_buy_price": 3218.25,
+        "min_sale_price": 3050.0,
+        "max_sale_price": 3300.0,
+        "buy_offers": 3302,
+        "sales_offers": 2867
+    },
+    "ISPZ19C003050E": {
+        "min_buy_price": 3050.0,
+        "max_buy_price": 3050.0,
+        "min_sale_price": 3050.0,
+        "max_sale_price": 3050.0,
+        "buy_offers": 1,
+        "sales_offers": 1
+    },
+    "ISPZ20P002500": {
+        "min_buy_price": 44.75,
+        "max_buy_price": 45.0,
+        "min_sale_price": 44.75,
+        "max_sale_price": 45.0,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "JAPF20": {
+        "min_buy_price": 109070.0,
+        "max_buy_price": 109320.0,
+        "min_sale_price": 109220.0,
+        "max_sale_price": 109460.0,
+        "buy_offers": 839,
+        "sales_offers": 926
+    },
+    "JAPG20": {
+        "min_buy_price": 108870.0,
+        "max_buy_price": 109110.0,
+        "min_sale_price": 109080.0,
+        "max_sale_price": 109320.0,
+        "buy_offers": 891,
+        "sales_offers": 860
+    },
+    "JPYF20": {
+        "min_buy_price": 3748.4,
+        "max_buy_price": 3748.4,
+        "min_sale_price": 3748.4,
+        "max_sale_price": 3748.4,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "JPYG20": {
+        "min_buy_price": 3754.3,
+        "max_buy_price": 3754.3,
+        "min_sale_price": 3754.3,
+        "max_sale_price": 3754.3,
+        "buy_offers": 6,
+        "sales_offers": 6
+    },
+    "MEXF20": {
+        "min_buy_price": 18887.0,
+        "max_buy_price": 18961.0,
+        "min_sale_price": 18937.0,
+        "max_sale_price": 19011.0,
+        "buy_offers": 3625,
+        "sales_offers": 3625
+    },
+    "MEXG20": {
+        "min_buy_price": 18985.0,
+        "max_buy_price": 19060.0,
+        "min_sale_price": 19025.0,
+        "max_sale_price": 19100.0,
+        "buy_offers": 3536,
+        "sales_offers": 3536
+    },
+    "MXNF20": {
+        "min_buy_price": 2139.0,
+        "max_buy_price": 2160.0,
+        "min_sale_price": 2145.0,
+        "max_sale_price": 2166.0,
+        "buy_offers": 1257,
+        "sales_offers": 1276
+    },
+    "OZ1D": {
+        "min_buy_price": 191.0,
+        "max_buy_price": 203.52,
+        "min_sale_price": 198.0,
+        "max_sale_price": 224.0,
+        "buy_offers": 227,
+        "sales_offers": 167
+    },
+    "OZ2D": {
+        "min_buy_price": 187.0,
+        "max_buy_price": 204.49,
+        "min_sale_price": 200.0,
+        "max_sale_price": 225.0,
+        "buy_offers": 100,
+        "sales_offers": 78
+    },
+    "OZ3D": {
+        "min_buy_price": 196.1,
+        "max_buy_price": 210.0,
+        "min_sale_price": 200.99,
+        "max_sale_price": 210.0,
+        "buy_offers": 22,
+        "sales_offers": 32
+    },
+    "PCARPF20": {
+        "min_buy_price": 87.0,
+        "max_buy_price": 88.07,
+        "min_sale_price": 87.4,
+        "max_sale_price": 88.5,
+        "buy_offers": 18078,
+        "sales_offers": 19179
+    },
+    "PCARPG20": {
+        "min_buy_price": 87.32,
+        "max_buy_price": 88.16,
+        "min_sale_price": 87.88,
+        "max_sale_price": 88.69,
+        "buy_offers": 2276,
+        "sales_offers": 2720
+    },
+    "PETRPF20": {
+        "min_buy_price": 29.3,
+        "max_buy_price": 30.64,
+        "min_sale_price": 30.15,
+        "max_sale_price": 30.75,
+        "buy_offers": 31092,
+        "sales_offers": 32336
+    },
+    "PETRPG20": {
+        "min_buy_price": 30.13,
+        "max_buy_price": 30.64,
+        "min_sale_price": 30.31,
+        "max_sale_price": 30.82,
+        "buy_offers": 4273,
+        "sales_offers": 3666
+    },
+    "PSSAOF20": {
+        "min_buy_price": 61.84,
+        "max_buy_price": 63.42,
+        "min_sale_price": 62.44,
+        "max_sale_price": 64.04,
+        "buy_offers": 15287,
+        "sales_offers": 18671
+    },
+    "PSSAOG20": {
+        "min_buy_price": 62.45,
+        "max_buy_price": 63.56,
+        "min_sale_price": 62.77,
+        "max_sale_price": 63.91,
+        "buy_offers": 1445,
+        "sales_offers": 2663
+    },
+    "RSPZ19H20": {
+        "min_buy_price": -17.4,
+        "max_buy_price": 4.25,
+        "min_sale_price": 3.7,
+        "max_sale_price": 16.4,
+        "buy_offers": 1874,
+        "sales_offers": 4849
+    },
+    "SJCF20": {
+        "min_buy_price": 19.5,
+        "max_buy_price": 20.75,
+        "min_sale_price": 19.5,
+        "max_sale_price": 20.65,
+        "buy_offers": 594,
+        "sales_offers": 446
+    },
+    "SJCF20C001950E": {
+        "min_buy_price": 19.5,
+        "max_buy_price": 19.5,
+        "min_sale_price": 19.5,
+        "max_sale_price": 19.5,
+        "buy_offers": 1,
+        "sales_offers": 1
+    },
+    "SJCH20": {
+        "min_buy_price": 20.5,
+        "max_buy_price": 20.71,
+        "min_sale_price": 20.42,
+        "max_sale_price": 20.78,
+        "buy_offers": 429,
+        "sales_offers": 585
+    },
+    "SJCK20": {
+        "min_buy_price": 20.99,
+        "max_buy_price": 20.99,
+        "min_sale_price": 20.99,
+        "max_sale_price": 21.05,
+        "buy_offers": 2,
+        "sales_offers": 4
+    },
+    "SJCK20P002050": {
+        "min_buy_price": 0.56,
+        "max_buy_price": 0.56,
+        "min_sale_price": 0.56,
+        "max_sale_price": 0.56,
+        "buy_offers": 2,
+        "sales_offers": 2
+    },
+    "SWIF20": {
+        "min_buy_price": 978.9,
+        "max_buy_price": 981.5,
+        "min_sale_price": 980.4,
+        "max_sale_price": 983.6,
+        "buy_offers": 1282,
+        "sales_offers": 1284
+    },
+    "SWIG20": {
+        "min_buy_price": 976.1,
+        "max_buy_price": 978.7,
+        "min_sale_price": 978.1,
+        "max_sale_price": 980.7,
+        "buy_offers": 1317,
+        "sales_offers": 1317
+    },
+    "T10H20": {
+        "min_buy_price": 127.95,
+        "max_buy_price": 128.258,
+        "min_sale_price": 128.046,
+        "max_sale_price": 128.33,
+        "buy_offers": 3597,
+        "sales_offers": 3656
+    },
+    "USIMAF20": {
+        "min_buy_price": 9.18,
+        "max_buy_price": 9.41,
+        "min_sale_price": 9.26,
+        "max_sale_price": 9.48,
+        "buy_offers": 4127,
+        "sales_offers": 4001
+    },
+    "USIMAG20": {
+        "min_buy_price": 9.21,
+        "max_buy_price": 9.4,
+        "min_sale_price": 9.31,
+        "max_sale_price": 9.5,
+        "buy_offers": 564,
+        "sales_offers": 518
+    },
+    "VALEOF20": {
+        "min_buy_price": 54.23,
+        "max_buy_price": 55.09,
+        "min_sale_price": 54.41,
+        "max_sale_price": 55.26,
+        "buy_offers": 32680,
+        "sales_offers": 34312
+    },
+    "VALEOG20": {
+        "min_buy_price": 55.15,
+        "max_buy_price": 55.19,
+        "min_sale_price": 55.35,
+        "max_sale_price": 55.38,
+        "buy_offers": 7,
+        "sales_offers": 6
+    },
+    "VVAROF20": {
+        "min_buy_price": 10.81,
+        "max_buy_price": 12.18,
+        "min_sale_price": 10.21,
+        "max_sale_price": 11.45,
+        "buy_offers": 10045,
+        "sales_offers": 10123
+    },
+    "VVAROG20": {
+        "min_buy_price": 10.88,
+        "max_buy_price": 11.39,
+        "min_sale_price": 10.97,
+        "max_sale_price": 11.48,
+        "buy_offers": 1516,
+        "sales_offers": 1478
+    },
+    "WD1F20G20": {
+        "min_buy_price": 4.0,
+        "max_buy_price": 5.5,
+        "min_sale_price": 4.9,
+        "max_sale_price": 5.5,
+        "buy_offers": 30,
+        "sales_offers": 63
+    },
+    "WDOF20": {
+        "min_buy_price": 3817.0,
+        "max_buy_price": 4172.0,
+        "min_sale_price": 3871.0,
+        "max_sale_price": 4300.0,
+        "buy_offers": 15222361,
+        "sales_offers": 7531795
+    },
+    "WDOF20C004050": {
+        "min_buy_price": 47.368,
+        "max_buy_price": 54.05,
+        "min_sale_price": 49.868,
+        "max_sale_price": 56.55,
+        "buy_offers": 1303,
+        "sales_offers": 1304
+    },
+    "WDOF20C004075": {
+        "min_buy_price": 16.7,
+        "max_buy_price": 35.811,
+        "min_sale_price": 23.3,
+        "max_sale_price": 40.5,
+        "buy_offers": 2226,
+        "sales_offers": 2215
+    },
+    "WDOF20C004100": {
+        "min_buy_price": 9.1,
+        "max_buy_price": 21.984,
+        "min_sale_price": 13.7,
+        "max_sale_price": 25.8,
+        "buy_offers": 2180,
+        "sales_offers": 2197
+    },
+    "WDOF20C004125": {
+        "min_buy_price": 4.5,
+        "max_buy_price": 12.629,
+        "min_sale_price": 8.0,
+        "max_sale_price": 15.4,
+        "buy_offers": 952,
+        "sales_offers": 942
+    },
+    "WDOF20C004150": {
+        "min_buy_price": 5.152,
+        "max_buy_price": 6.76,
+        "min_sale_price": 7.652,
+        "max_sale_price": 9.26,
+        "buy_offers": 84,
+        "sales_offers": 84
+    },
+    "WDOF20P004000": {
+        "min_buy_price": 0.1,
+        "max_buy_price": 1.8,
+        "min_sale_price": 2.1,
+        "max_sale_price": 5.3,
+        "buy_offers": 2673,
+        "sales_offers": 6670
+    },
+    "WDOF20P004025": {
+        "min_buy_price": 0.4,
+        "max_buy_price": 5.2,
+        "min_sale_price": 3.6,
+        "max_sale_price": 10.1,
+        "buy_offers": 9240,
+        "sales_offers": 686
+    },
+    "WDOF20P004050": {
+        "min_buy_price": 2.8,
+        "max_buy_price": 12.2,
+        "min_sale_price": 7.3,
+        "max_sale_price": 18.9,
+        "buy_offers": 9493,
+        "sales_offers": 902
+    },
+    "WDOF20P004075": {
+        "min_buy_price": 8.6,
+        "max_buy_price": 23.9,
+        "min_sale_price": 14.09,
+        "max_sale_price": 32.0,
+        "buy_offers": 9615,
+        "sales_offers": 1034
+    },
+    "WDOF20P004100": {
+        "min_buy_price": 18.6,
+        "max_buy_price": 40.0,
+        "min_sale_price": 25.233,
+        "max_sale_price": 29.739,
+        "buy_offers": 9868,
+        "sales_offers": 1275
+    },
+    "WDOF20P004125": {
+        "min_buy_price": 33.4,
+        "max_buy_price": 59.6,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004150": {
+        "min_buy_price": 52.2,
+        "max_buy_price": 81.5,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004175": {
+        "min_buy_price": 73.9,
+        "max_buy_price": 104.8,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004200": {
+        "min_buy_price": 97.1,
+        "max_buy_price": 128.9,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004225": {
+        "min_buy_price": 121.2,
+        "max_buy_price": 153.4,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004250": {
+        "min_buy_price": 145.7,
+        "max_buy_price": 178.1,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8594,
+        "sales_offers": 0
+    },
+    "WDOF20P004275": {
+        "min_buy_price": 170.5,
+        "max_buy_price": 202.9,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8596,
+        "sales_offers": 0
+    },
+    "WDOF20P004300": {
+        "min_buy_price": 195.3,
+        "max_buy_price": 227.8,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8596,
+        "sales_offers": 0
+    },
+    "WDOF20P004325": {
+        "min_buy_price": 220.3,
+        "max_buy_price": 252.8,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004350": {
+        "min_buy_price": 245.2,
+        "max_buy_price": 277.7,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004375": {
+        "min_buy_price": 270.2,
+        "max_buy_price": 302.7,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004400": {
+        "min_buy_price": 295.1,
+        "max_buy_price": 327.6,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004425": {
+        "min_buy_price": 320.1,
+        "max_buy_price": 352.6,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004450": {
+        "min_buy_price": 345.0,
+        "max_buy_price": 377.5,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004475": {
+        "min_buy_price": 370.0,
+        "max_buy_price": 402.5,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004500": {
+        "min_buy_price": 395.0,
+        "max_buy_price": 427.5,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004525": {
+        "min_buy_price": 420.0,
+        "max_buy_price": 453.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004550": {
+        "min_buy_price": 444.9,
+        "max_buy_price": 477.9,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004575": {
+        "min_buy_price": 469.9,
+        "max_buy_price": 502.9,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004600": {
+        "min_buy_price": 494.9,
+        "max_buy_price": 527.9,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004625": {
+        "min_buy_price": 519.8,
+        "max_buy_price": 552.8,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004650": {
+        "min_buy_price": 544.8,
+        "max_buy_price": 577.8,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004675": {
+        "min_buy_price": 569.8,
+        "max_buy_price": 602.8,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOF20P004700": {
+        "min_buy_price": 594.7,
+        "max_buy_price": 627.7,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 8592,
+        "sales_offers": 0
+    },
+    "WDOG20": {
+        "min_buy_price": 4000.0,
+        "max_buy_price": 4123.5,
+        "min_sale_price": 4026.5,
+        "max_sale_price": 4160.0,
+        "buy_offers": 21682,
+        "sales_offers": 20659
+    },
+    "WDOG20C004050": {
+        "min_buy_price": 78.144,
+        "max_buy_price": 83.671,
+        "min_sale_price": 81.144,
+        "max_sale_price": 86.671,
+        "buy_offers": 1282,
+        "sales_offers": 1281
+    },
+    "WDOG20C004075": {
+        "min_buy_price": 64.016,
+        "max_buy_price": 68.929,
+        "min_sale_price": 67.016,
+        "max_sale_price": 71.929,
+        "buy_offers": 1284,
+        "sales_offers": 1284
+    },
+    "WDOG20C004100": {
+        "min_buy_price": 51.892,
+        "max_buy_price": 56.193,
+        "min_sale_price": 54.892,
+        "max_sale_price": 59.193,
+        "buy_offers": 1280,
+        "sales_offers": 1280
+    },
+    "WDOG20C004125": {
+        "min_buy_price": 41.567,
+        "max_buy_price": 45.408,
+        "min_sale_price": 44.567,
+        "max_sale_price": 48.408,
+        "buy_offers": 1281,
+        "sales_offers": 1280
+    },
+    "WDOG20C004150": {
+        "min_buy_price": 33.1,
+        "max_buy_price": 36.515,
+        "min_sale_price": 36.1,
+        "max_sale_price": 39.515,
+        "buy_offers": 119,
+        "sales_offers": 119
+    },
+    "WDOG20P004000": {
+        "min_buy_price": 15.408,
+        "max_buy_price": 17.148,
+        "min_sale_price": 18.408,
+        "max_sale_price": 20.148,
+        "buy_offers": 83,
+        "sales_offers": 83
+    },
+    "WDOG20P004025": {
+        "min_buy_price": 21.531,
+        "max_buy_price": 23.893,
+        "min_sale_price": 24.531,
+        "max_sale_price": 26.893,
+        "buy_offers": 119,
+        "sales_offers": 119
+    },
+    "WDOG20P004050": {
+        "min_buy_price": 29.634,
+        "max_buy_price": 32.575,
+        "min_sale_price": 32.634,
+        "max_sale_price": 35.575,
+        "buy_offers": 119,
+        "sales_offers": 119
+    },
+    "WDOG20P004075": {
+        "min_buy_price": 39.768,
+        "max_buy_price": 43.324,
+        "min_sale_price": 42.768,
+        "max_sale_price": 46.324,
+        "buy_offers": 1279,
+        "sales_offers": 1279
+    },
+    "WDOG20P004100": {
+        "min_buy_price": 51.909,
+        "max_buy_price": 56.085,
+        "min_sale_price": 54.909,
+        "max_sale_price": 59.085,
+        "buy_offers": 1277,
+        "sales_offers": 1280
+    },
+    "WDOJ20": {
+        "min_buy_price": 4077.0,
+        "max_buy_price": 4107.0,
+        "min_sale_price": 4077.0,
+        "max_sale_price": 4107.0,
+        "buy_offers": 18,
+        "sales_offers": 18
+    },
+    "WDOM20": {
+        "min_buy_price": 4100.0,
+        "max_buy_price": 4120.0,
+        "min_sale_price": 4097.5,
+        "max_sale_price": 4120.0,
+        "buy_offers": 6,
+        "sales_offers": 9
+    },
+    "WDOV20": {
+        "min_buy_price": 4135.0,
+        "max_buy_price": 4152.0,
+        "min_sale_price": 4135.0,
+        "max_sale_price": 4152.0,
+        "buy_offers": 12,
+        "sales_offers": 12
+    },
+    "WING20": {
+        "min_buy_price": 104200.0,
+        "max_buy_price": 122885.0,
+        "min_sale_price": 108000.0,
+        "max_sale_price": 127300.0,
+        "buy_offers": 14212212,
+        "sales_offers": 10130933
+    },
+    "WINJ20": {
+        "min_buy_price": 115000.0,
+        "max_buy_price": 116980.0,
+        "min_sale_price": 116000.0,
+        "max_sale_price": 117100.0,
+        "buy_offers": 4591,
+        "sales_offers": 4432
+    },
+    "WINZ20": {
+        "min_buy_price": 120155.0,
+        "max_buy_price": 120160.0,
+        "min_sale_price": 0,
+        "max_sale_price": 0,
+        "buy_offers": 3,
+        "sales_offers": 0
+    },
+    "WS1Z19H20": {
+        "min_buy_price": 0.5,
+        "max_buy_price": 4.75,
+        "min_sale_price": 3.5,
+        "max_sale_price": 12.0,
+        "buy_offers": 197,
+        "sales_offers": 174
+    },
+    "WSPH20": {
+        "min_buy_price": 3110.0,
+        "max_buy_price": 3300.0,
+        "min_sale_price": 3179.5,
+        "max_sale_price": 3280.0,
+        "buy_offers": 14153,
+        "sales_offers": 14010
+    },
+    "WSPM20": {
+        "min_buy_price": 3206.5,
+        "max_buy_price": 3229.25,
+        "min_sale_price": 3214.5,
+        "max_sale_price": 3230.25,
+        "buy_offers": 4627,
+        "sales_offers": 7062
+    },
+    "WSPZ19": {
+        "min_buy_price": 3185.0,
+        "max_buy_price": 3242.25,
+        "min_sale_price": 3206.25,
+        "max_sale_price": 3300.0,
+        "buy_offers": 945,
+        "sales_offers": 519
+    },
+    "WTIG20": {
+        "min_buy_price": 58.7,
+        "max_buy_price": 61.14,
+        "min_sale_price": 60.08,
+        "max_sale_price": 61.25,
+        "buy_offers": 12633,
+        "sales_offers": 12448
+    },
+    "WTIH20": {
+        "min_buy_price": 59.78,
+        "max_buy_price": 60.86,
+        "min_sale_price": 59.92,
+        "max_sale_price": 61.0,
+        "buy_offers": 10256,
+        "sales_offers": 10589
+    },
+    "ZARG20": {
+        "min_buy_price": 2857.2,
+        "max_buy_price": 2857.2,
+        "min_sale_price": 2857.2,
+        "max_sale_price": 2857.2,
+        "buy_offers": 4,
+        "sales_offers": 4
+    },
+    "BGIN20": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 205.0,
+        "max_sale_price": 205.0,
+        "buy_offers": 0,
+        "sales_offers": 2
+    },
+    "BGIV20C023000": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 25.0,
+        "max_sale_price": 25.0,
+        "buy_offers": 0,
+        "sales_offers": 2
+    },
+    "FRCJ23": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 2.41,
+        "max_sale_price": 2.46,
+        "buy_offers": 0,
+        "sales_offers": 8
+    },
+    "WDOF20P003775": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 1.2,
+        "max_sale_price": 1.3,
+        "buy_offers": 0,
+        "sales_offers": 8596
+    },
+    "WDOF20P003800": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 1.2,
+        "max_sale_price": 1.3,
+        "buy_offers": 0,
+        "sales_offers": 8592
+    },
+    "WDOF20P003825": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 1.2,
+        "max_sale_price": 1.3,
+        "buy_offers": 0,
+        "sales_offers": 8592
+    },
+    "WDOF20P003850": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 1.2,
+        "max_sale_price": 1.3,
+        "buy_offers": 0,
+        "sales_offers": 8592
+    },
+    "WDOF20P003875": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 1.2,
+        "max_sale_price": 1.3,
+        "buy_offers": 0,
+        "sales_offers": 8592
+    },
+    "WDOF20P003900": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 1.3,
+        "max_sale_price": 1.5,
+        "buy_offers": 0,
+        "sales_offers": 8592
+    },
+    "WDOF20P003925": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 1.4,
+        "max_sale_price": 1.7,
+        "buy_offers": 0,
+        "sales_offers": 8592
+    },
+    "WDOF20P003950": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 1.6,
+        "max_sale_price": 2.1,
+        "buy_offers": 0,
+        "sales_offers": 8592
+    },
+    "WDOF20P003975": {
+        "min_buy_price": 0,
+        "max_buy_price": 0,
+        "min_sale_price": 2.1,
+        "max_sale_price": 3.0,
+        "buy_offers": 0,
+        "sales_offers": 8592
+    }
+}

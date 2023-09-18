@@ -1,0 +1,12 @@
+{
+    "WING20": {
+        "min_buy_price": 105000.0,
+        "max_buy_price": 116825.0,
+        "min_sale_price": -1,
+        "max_sale_price": -1,
+        "buy_offers": 2279513,
+        "sales_offers": 0,
+        "first_line_index": 1,
+        "last_line_index": 2279513
+    }
+}
