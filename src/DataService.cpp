@@ -14,163 +14,79 @@
 
 using namespace std;
 
-DataService::DataService(string _date, string _dataPath, map<string, StockDataInfo> _targetStocksDataInfo, vector<string> _targetStocks) {
+DataService::DataService(string _date, string _dataPath, map<string, StockDataInfo> _targetStocksDataInfo, vector<string> _targetStocks)
+{
     date = _date;
     dataPath = _dataPath;
     targetStocks = _targetStocks;
     targetStocksDataInfo = _targetStocksDataInfo;
 }
 
-
-void DataService::startAcquisition(vector<string>* rawOrdersQueue, Semaphore* semaphore, string orderType)
+void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *semaphore, string orderType)
 {
     string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
     string filePath = dataPath + sysFileChar + date + sysFileChar;
 
-    const int nbOfChunkOffers = 1000;
-    const int nbOfOfferBytes = 230;
-
-    const size_t chunkSize = nbOfOfferBytes * nbOfChunkOffers;
-    char chunkBuffer[chunkSize];
-    string orderBuffer;
-    string orderSufix = "";
     chrono::nanoseconds timespan(1);
-    vector<string> remainingStocks = targetStocks;
-    
-    StringUtils stringUtils;
-    string currentStock = "";
-    string currentFile = "";
-    vector<string> filesToRead = {};
-    int fileCurrentLine = 0;
-    int dataOffset = 0;
+
+    const int nbOfOfferBytes = 230;
+    int fileCurrentLine = 0, dataOffset = 0;
+    string currentStock = "", currentFile = "", currentFilePath = "", orderBuffer = "";
     FileDataStockInfo fileInfo;
-    ifstream dataFile;
-    if (orderType == "SALES") {
-        filePath += "VDA" + sysFileChar;
-        orderSufix = ";VDA";
+    vector<string> filesToRead = {};
 
-        for (int i = 0; i < targetStocks.size(); i++)
+    filePath += orderType == "SALES" ? "VDA" : "CPA";
+    string orderSufix = orderType == "SALES" ? ";VDA" : ";CPA";
+
+    for (int i = 0; i < targetStocks.size(); i++)
+    {
+        currentStock = targetStocks[i];
+
+        filesToRead = orderType == "SALES" ? targetStocksDataInfo[currentStock].vdaFiles : targetStocksDataInfo[currentStock].cpaFiles;
+
+        // For each stock, loop through files that contains stock orders
+        for (int j = 0; j < filesToRead.size(); j++)
         {
-            currentStock = targetStocks[i];
-            filesToRead = targetStocksDataInfo[currentStock].vdaFiles;
-            for (int j = 0; j < filesToRead.size(); j++) {
-                fileInfo = targetStocksDataInfo[currentStock].vdaFilesInfo[filesToRead[j]];
+            // First and Last lines where the current stock orders appears in the current file
+            fileInfo = orderType == "SALES" ? targetStocksDataInfo[currentStock].vdaFilesInfo[filesToRead[j]] : targetStocksDataInfo[currentStock].cpaFilesInfo[filesToRead[j]];
 
-                // File does not need to be reopened, only update the index
-                if (currentFile == filesToRead[i]) {
-                    dataOffset = ((fileInfo.firstLineIndex - 1) * nbOfOfferBytes) - dataOffset;
-                    fileCurrentLine = fileInfo.firstLineIndex - fileCurrentLine;
-                }
-                else {
-                    dataOffset = (fileInfo.firstLineIndex - 1) * nbOfOfferBytes;
-                    fileCurrentLine = fileInfo.firstLineIndex;
-                    currentFile = filesToRead[i];
-                    ifstream dataFile(filePath + currentFile);
-                }
-        
-                dataFile.ignore(dataOffset);
-                          
-                while (dataFile && fileCurrentLine <= fileInfo.lastLineIndex) {
-                    dataFile.read(chunkBuffer, chunkSize);
-                    for (int i = 0; i < nbOfChunkOffers; i++) {
-                        
-                        orderBuffer = string(chunkBuffer).substr(i * nbOfOfferBytes, nbOfOfferBytes) + orderSufix;
-                        semaphore->acquire();
-                        rawOrdersQueue->push_back(orderBuffer);
-                        semaphore->release();
-                        
-                        this_thread::sleep_for(timespan);
-                        fileCurrentLine++;
-                        if (fileCurrentLine > fileInfo.lastLineIndex) {
-                            break;
-                        }
-                    }
+            currentFile = filesToRead[j];
+            currentFilePath = filePath + sysFileChar + currentFile;
+            ifstream dataFile(currentFilePath);
+
+            // Where stock orders starts
+            dataOffset = (fileInfo.firstLineIndex - 1) * nbOfOfferBytes;
+            dataFile.ignore(dataOffset);
+            fileCurrentLine = fileInfo.firstLineIndex;
+
+            // Loop until file ends or get the last line for the current stock in the current file
+            while (getline(dataFile, orderBuffer) && fileCurrentLine <= fileInfo.lastLineIndex)
+            {
+
+                semaphore->acquire();
+                rawOrdersQueue->push_back(orderBuffer + orderSufix);
+                semaphore->release();
+
+                orderBuffer = "";
+
+                this_thread::sleep_for(timespan);
+                fileCurrentLine++;
+
+                // File end was reached
+                if (!dataFile)
+                {
+                    dataFile.close();
+                    break;
                 }
 
-                if (!dataFile) {
-                    //Close file and open next
+                // All offers from currentStock in this file where processed and file end was not reached yet
+                if (fileCurrentLine > fileInfo.lastLineIndex)
+                {
                     dataFile.close();
                 }
-                else {
-                    // All offers from currentStock where processed
-
-                    // Last stock
-                    if (targetStocks.size() <= i + 1) {
-                        dataFile.close();
-                        break;
-                    }
-                    else {
-                        string nextStock = targetStocks[i + 1];
-                        if (stringUtils.include(targetStocksDataInfo[nextStock].vdaFiles, nextStock)) {
-                            //Continue reading file
-                        }
-                        else {
-                        }
-                    }
-                    // Close file if targetStocks[i+1] exists and !targetStocks[i+1].files.includes(currentFile)
-                    // Else (?)
-                }
-
-                cout << "";
-               
             }
-
-            cout << "";
         }
-    //    filePath += "VDA" + sysFileChar;
-    //    orderSufix = ";VDA";
-//
-    //    for (int i = 0 ; i < vdaFiles.size() ; i++)
-    //    {  
-//
-    //        ifstream dataFile(filePath + vdaFiles[i]);
-//
-    //        while (dataFile)
-    //        {
-    //            dataFile.read(chunkBuffer, chunkSize);
-//
-    //            for (int i = 0; i < nbOfChunkOffers; i++) {
-//
-    //                orderBuffer = string(chunkBuffer).substr(i * nbOfOfferBytes, nbOfOfferBytes) + orderSufix;
-    //                semaphore->acquire();
-    //                rawOrdersQueue->push_back(orderBuffer);
-    //                semaphore->release();
-//
-    //                this_thread::sleep_for(timespan);
-    //            }
-//
-    //        }
-//
-    //        dataFile.close();
-    //    }
-//
-    }
-    else if (orderType == "PURCHASES") {
-    //    filePath += "CPA" + sysFileChar;
-    //    orderSufix = ";CPA";
-//
-    //    for (int i = 0; i < cpaFiles.size(); i++)
-    //    {
-//
-    //        ifstream dataFile(filePath + cpaFiles[i]);
-    //        while (dataFile)
-    //        {
-    //            dataFile.read(chunkBuffer, chunkSize);
-//
-    //            for (int i = 0; i < nbOfChunkOffers; i++) {
-//
-    //                orderBuffer = string(chunkBuffer).substr(i * nbOfOfferBytes, nbOfOfferBytes) + orderSufix;
-    //                semaphore->acquire();
-    //                rawOrdersQueue->push_back(orderBuffer);
-    //                semaphore->release();
-//
-    //                this_thread::sleep_for(timespan);
-    //            }
-//
-    //        }
-//
-    //        dataFile.close();
-    //    }
     }
 
+    return;
 }
