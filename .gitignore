@@ -364,8 +364,5 @@ FodyWeavers.xsd
 
 # Local folders
 
-/data/b3/20191220/CPA/*
-/data/b3/20191220/VDA/*
-/data/b3/20191220/NEG/*
-data/history/*
+/data/*
 .vscode/settings.json
