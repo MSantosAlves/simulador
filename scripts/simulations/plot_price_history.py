@@ -17,15 +17,15 @@ data_Y = []
 with open(file_path, 'r') as file:
     for line in file:
         data_points = line.strip().split(';')
-        price = float(data_points[2]) / 100
+        price = float(data_points[1]) / 100
         if price > 0:
             data_Y.append(price)
 
 # TODO: improve this logic
 # 540 = Number of data points in a typicall stock plot
-if len(data_Y) > 540:
-    m = math.floor(len(data_Y) / 540)
-    data_Y = np.array(data_Y)[0: m * 540].reshape(-1, m).mean(axis=1)
+#if len(data_Y) > 540:
+#    m = math.floor(len(data_Y) / 540)
+#    data_Y = np.array(data_Y)[0: m * 540].reshape(-1, m).mean(axis=1)
 
 data_X =  [i for i in range(1, len(data_Y) + 1)]
 

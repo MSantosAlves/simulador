@@ -12,8 +12,10 @@ class ArrayUtils
 {
 public:
     ArrayUtils();
-    void insertPurchaseOrder(vector<PurchaseOrder>& offers, const PurchaseOrder& newOffer);
-    void insertSaleOrder(vector<SaleOrder>& offers, const SaleOrder& newOffer);
+    void insertPurchaseOrder(vector<PurchaseOrder> &offers, const PurchaseOrder &newOffer);
+    void insertSaleOrder(vector<SaleOrder> &offers, const SaleOrder &newOffer);
+    int searchPurchaseOrdersFirstMatchingIndex(double price);
+    int searchSaleOrdersFirstMatchingIndex(double price);
 };
 
 #endif

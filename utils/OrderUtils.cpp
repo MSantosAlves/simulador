@@ -70,6 +70,176 @@ Order OrderUtils::parseOrder(string order, StringUtils stringUtils)
     return (*orderBuffer);
 }
 
+void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ofstream& tradeHistoryFile)
+{
+    // bookUpdateDirection = 1 new BID price; bookUpdateDirection = 2 new ASK price
+    vector<SaleOrder> saleOrders = (*offersBook)[symbol].saleOrders;
+    vector<PurchaseOrder> purchaseOrders = (*offersBook)[symbol].purchaseOrders;
+
+    PurchaseOrder currPurchaseOrder;
+    SaleOrder currSaleOrder;
+    int tradedQty = 0;
+    string tradeString;
+
+    // BID changed, but there is no sale order to be processed OR ASK changed, but there is no purchase order to be processed.
+    if ((bookUpdateDirection == 1 && (*offersBook)[symbol].saleOrders.size() == 0) || (bookUpdateDirection == 2 && (*offersBook)[symbol].purchaseOrders.size() == 0))
+    {
+        return;
+    }
+
+    currSaleOrder = (*offersBook)[symbol].saleOrders[0];
+    currPurchaseOrder = (*offersBook)[symbol].purchaseOrders[0];
+
+    // Set negotiations loop stop conditions
+    bool bidIsGreaterThanOrEqToAsk = currPurchaseOrder.getOrderPrice() >= currSaleOrder.getOrderPrice();
+    bool currPurchaseOrderWasNotEntirelyFilled = currPurchaseOrder.getTotalQuantityOfOrder() > 0;
+    bool currSaleOrderWasNotEntirelyFilled = currSaleOrder.getTotalQuantityOfOrder() > 0;
+
+    while (bidIsGreaterThanOrEqToAsk && currPurchaseOrderWasNotEntirelyFilled && currSaleOrderWasNotEntirelyFilled)
+    {
+        /**
+         * Three possible scenarios for the orders beeing traded:
+         *
+         * I)   Both orders have the same totalQuantity available for trade
+         *
+         *  1 - Execute trade
+         *  2 - Remove both orders from book
+         *  3 - Update currSale and currPurchase references
+         *  4 - Update BID and ASK price
+         *
+         * II)  PurchaseTotalQuantity is greater than SaleTotalQuantity
+         *
+         *  1 - Execute trade
+         *  2 - Remove sale order from book
+         *  3 - Update currPurchase reference
+         *  4 - Update ASK price
+         *
+         * III) SaleTotalQuantity is greater than PurchaseTotalQuantity
+         *
+         *  1 - Execute trade
+         *  2 - Remove purchase order from book
+         *  3 - Update currSale reference
+         *  4 - Update BID price
+         */
+
+        bool bothOffersCanBeEntirelyFilled = currPurchaseOrder.getTotalQuantityOfOrder() == currSaleOrder.getTotalQuantityOfOrder();
+        bool currSaleCanBeEntirelyFilled = currPurchaseOrder.getTotalQuantityOfOrder() > currSaleOrder.getTotalQuantityOfOrder();
+
+        if (bothOffersCanBeEntirelyFilled)
+        {
+
+            // Execute the trade
+            tradedQty = currSaleOrder.getTotalQuantityOfOrder();
+            currPurchaseOrder.setTotalQuantityOfOrder(0);
+            currSaleOrder.setTotalQuantityOfOrder(0);
+            currPurchaseOrder.setTradedQuantityOfOrder(currPurchaseOrder.getTradedQuantityOfOrder() + tradedQty);
+            currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
+
+            (*offersBook)[symbol].totalTradedQuantity += tradedQty;
+            (*offersBook)[symbol].historicalPrices.push_back(currSaleOrder.getOrderPrice());
+
+            tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
+            tradeHistoryFile << tradeString + "\n";
+
+            // Remove both orders from book, given that both were entirely filled
+            (*offersBook)[symbol].saleOrders.erase((*offersBook)[symbol].saleOrders.begin());
+            (*offersBook)[symbol].purchaseOrders.erase((*offersBook)[symbol].purchaseOrders.begin());
+
+            // Update ASK value and currSale reference
+            if ((*offersBook)[symbol].saleOrders.size() > 0)
+            {
+                currSaleOrder = (*offersBook)[symbol].saleOrders[0];
+                (*offersBook)[symbol].ask = currSaleOrder.getOrderPrice();
+            }
+
+            // Update BID value and currPurchase reference
+            if ((*offersBook)[symbol].purchaseOrders.size() > 0)
+            {
+                currPurchaseOrder = (*offersBook)[symbol].purchaseOrders[0];
+                (*offersBook)[symbol].bid = currPurchaseOrder.getOrderPrice();
+            }
+
+            // Break loop all sales or all offers were already processed
+            if ((*offersBook)[symbol].saleOrders.size() == 0 || (*offersBook)[symbol].purchaseOrders.size() == 0)
+            {
+                break;
+            }
+        }
+        else if (currSaleCanBeEntirelyFilled)
+        {
+            // Execute the trade
+            tradedQty = currSaleOrder.getTotalQuantityOfOrder();
+            currPurchaseOrder.setTotalQuantityOfOrder(currPurchaseOrder.getTotalQuantityOfOrder() - tradedQty);
+            currPurchaseOrder.setTradedQuantityOfOrder(currPurchaseOrder.getTradedQuantityOfOrder() + tradedQty);
+            currSaleOrder.setTotalQuantityOfOrder(0);
+            currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
+
+            (*offersBook)[symbol].totalTradedQuantity += tradedQty;
+            (*offersBook)[symbol].historicalPrices.push_back(currSaleOrder.getOrderPrice());
+
+            tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
+            tradeHistoryFile << tradeString + "\n";
+
+            // Update currPurchase value given that it was not entirely filled yet
+            (*offersBook)[symbol].purchaseOrders[0] = currPurchaseOrder;
+
+            // Remove sale order from book, given that it was entirely filled
+            (*offersBook)[symbol].saleOrders.erase((*offersBook)[symbol].saleOrders.begin());
+
+            // Update ASK value and currSale reference OR break loop if all sales where already processed
+            if ((*offersBook)[symbol].saleOrders.size() > 0)
+            {
+                currSaleOrder = (*offersBook)[symbol].saleOrders[0];
+                (*offersBook)[symbol].ask = currSaleOrder.getOrderPrice();
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            // currPurchaseCanBeEntirelyFilled = true
+
+            // Execute the trade
+            tradedQty = currPurchaseOrder.getTotalQuantityOfOrder();
+            currPurchaseOrder.setTotalQuantityOfOrder(0);
+            currPurchaseOrder.setTradedQuantityOfOrder(currPurchaseOrder.getTradedQuantityOfOrder() + tradedQty);
+            currSaleOrder.setTotalQuantityOfOrder(currSaleOrder.getTotalQuantityOfOrder() - tradedQty);
+            currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
+
+            (*offersBook)[symbol].totalTradedQuantity += tradedQty;
+            (*offersBook)[symbol].historicalPrices.push_back(currSaleOrder.getOrderPrice());
+
+            tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
+            tradeHistoryFile << tradeString + "\n";
+
+            // Update currSale value given that it was not entirely filled yet
+            (*offersBook)[symbol].saleOrders[0] = currSaleOrder;
+
+            // Remove purchase order from book, given that it was entirely filled
+            (*offersBook)[symbol].purchaseOrders.erase((*offersBook)[symbol].purchaseOrders.begin());
+
+            // Update BID value and currPurchase reference OR break loop if all sales where already processed
+            if ((*offersBook)[symbol].purchaseOrders.size() > 0)
+            {
+                currPurchaseOrder = (*offersBook)[symbol].purchaseOrders[0];
+                (*offersBook)[symbol].bid = currPurchaseOrder.getOrderPrice();
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        bidIsGreaterThanOrEqToAsk = currPurchaseOrder.getOrderPrice() >= currSaleOrder.getOrderPrice();
+        currPurchaseOrderWasNotEntirelyFilled = currPurchaseOrder.getTotalQuantityOfOrder() > 0;
+        currSaleOrderWasNotEntirelyFilled = currSaleOrder.getTotalQuantityOfOrder() > 0;
+    }
+
+    return;
+}
+
 void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, Trader *traderAccount, ofstream &tradeHistoryFile)
 {
     const string PURCHASE_ORDER = "1";

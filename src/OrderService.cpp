@@ -19,67 +19,132 @@
 using namespace std;
 
 // Aux methods
-bool isTargetSymbol(vector<string> targetsStocks, string stock) {
+bool isTargetSymbol(vector<string> targetsStocks, string stock)
+{
     StringUtils stringUtils;
     return stringUtils.include(targetsStocks, stock) != -1;
 }
 
-string generateFilename() {
+string generateFilename()
+{
     string timestamp = to_string(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
     string file_name = "trade_history_" + timestamp + ".txt";
     return file_name;
 }
 
+bool updateBidPrice(PurchaseOrder purchaseOrder, string symbol, map<string, StockInfo> *offersBook)
+{
+    StockInfo stockInfo = (*offersBook)[symbol];
+
+    if (stockInfo.bid == 0 || stockInfo.bid < purchaseOrder.getOrderPrice())
+    {
+        (*offersBook)[symbol].bid = purchaseOrder.getOrderPrice();
+        return true;
+    }
+    return false;
+}
+
+bool updateAskPrice(SaleOrder saleOrder, string symbol, map<string, StockInfo> *offersBook)
+{
+    StockInfo stockInfo = (*offersBook)[symbol];
+
+    if (stockInfo.ask == 0.0 || stockInfo.ask > saleOrder.getOrderPrice())
+    {
+        (*offersBook)[symbol].ask = saleOrder.getOrderPrice();
+        return true;
+    }
+    return false;
+}
+
 // Class methods
 
-OrderService::OrderService(vector<string> _targetStocks) {
+OrderService::OrderService(vector<string> _targetStocks)
+{
     targetStocks = _targetStocks;
 }
 
-void OrderService::startProcessOrders(vector<string>* rawOrdersQueue, map<string, StockInfo>* offersBook, Semaphore* semaphore, Trader* traderAccount)
-{       
+void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, Trader *traderAccount)
+{
     StringUtils stringUtils;
     OrderUtils orderUtils;
-    Order orderBuffer;
+    Order order;
     ArrayUtils arrayUtils;
     chrono::nanoseconds timespan(1);
     string symbol = "";
-    string currOrder;
-    PurchaseOrder purchaseOrderBuffer;
-    SaleOrder saleOrderBuffer;
+    string rawCurrOrder;
 
-   
     filesystem::path pwd = filesystem::current_path();
     string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
     string pwdString = stringUtils.pathToString(pwd);
     string file_name = generateFilename();
     string fullPath = pwdString + sysFileChar + "data" + sysFileChar + "history" + sysFileChar + file_name;
 
-    ofstream tradesHistoryFile;
-    tradesHistoryFile.open(fullPath);
-    
-    while (true) {
+    ofstream tradeHistoryFile;
+    tradeHistoryFile.open(fullPath);
+
+    PurchaseOrder purchaseOrderBuffer;
+    SaleOrder saleOrderBuffer;
+
+    while (true)
+    {
         semaphore->acquire();
 
-        if (rawOrdersQueue->size() == 0) {
+        if (rawOrdersQueue->size() == 0)
+        {
             semaphore->release();
+            this_thread::sleep_for(timespan);
             continue;
         }
-        currOrder = rawOrdersQueue->front();
-        symbol = stringUtils.removeWhiteSpaces(stringUtils.split(currOrder, ';')[1]);
+
+        rawCurrOrder = rawOrdersQueue->front();
+        symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
         rawOrdersQueue->erase(rawOrdersQueue->begin());
-     
-        if (symbol != "" && isTargetSymbol(targetStocks, symbol)) {
-            orderBuffer = orderUtils.parseOrder(currOrder, stringUtils);
-            orderUtils.orderMatching(symbol, orderBuffer, offersBook, arrayUtils, traderAccount, tradesHistoryFile);
-        }else {
+
+        if (symbol != "" && isTargetSymbol(targetStocks, symbol))
+        {
+            order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
+
+            //if (order.getOrderStatus() != "0" || order.getExecutionType() != "1") {
+                //continue;
+            //}
+
+            bool isBuyOrder = order.getOrderSide() == "1";
+
+            if (isBuyOrder)
+            {
+                PurchaseOrder purchaseOrderBuffer;
+                purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+
+                // Insert new offer on purchases orders queue
+                arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
+
+                if (updateBidPrice(purchaseOrderBuffer, symbol, offersBook))
+                {
+                    orderUtils.executePossibleTrades(symbol, offersBook, 1, tradeHistoryFile);
+                }
+            }
+            else
+            {
+                SaleOrder saleOrderBuffer;
+                saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+
+                // Insert new offer on sales orders queue
+                arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
+
+                if (updateAskPrice(saleOrderBuffer, symbol, offersBook))
+                {
+                    orderUtils.executePossibleTrades(symbol, offersBook, 2, tradeHistoryFile);
+                }
+            }
+        }
+        else
+        {
             symbol = "";
         }
-        
+
         semaphore->release();
         this_thread::sleep_for(timespan);
-
     }
 
-    tradesHistoryFile.close();
+    tradeHistoryFile.close();
 }
