@@ -76,7 +76,7 @@ string StringUtils::join(vector<string> vector, string token) {
 string StringUtils::pathToString(filesystem::path path) {
     string aux = split(path.generic_string(), "/out")[0];
     vector<string> splitedPathString = split(aux, "/");
-    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
+    string sysFileChar = "/";// (_WIN64 || _WIN32) ? "\\" : "/";
     string pathString = join(splitedPathString, sysFileChar);
 
     return pathString;

@@ -74,7 +74,7 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
     string rawCurrOrder;
 
     filesystem::path pwd = filesystem::current_path();
-    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
+    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
     string pwdString = stringUtils.pathToString(pwd);
     string file_name = generateFilename();
     string fullPath = pwdString + sysFileChar + "data" + sysFileChar + "history" + sysFileChar + file_name;

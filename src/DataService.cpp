@@ -24,7 +24,7 @@ DataService::DataService(string _date, string _dataPath, map<string, StockDataIn
 
 void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *semaphore, string orderType)
 {
-    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
+    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
     string filePath = dataPath + sysFileChar + date + sysFileChar;
 
     chrono::nanoseconds timespan(1);

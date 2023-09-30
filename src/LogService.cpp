@@ -16,7 +16,7 @@
 using namespace std;
 
 void printTable(const vector<string>& headers, const vector<vector<string>>& data) {
-    if (_WIN64 || _WIN32) {
+    if (false){//_WIN64 || _WIN32) {
         system("cls");
     }else {
         system("clear");

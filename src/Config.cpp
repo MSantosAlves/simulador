@@ -15,8 +15,8 @@ Config::Config()
 {
     filesystem::path pwd = filesystem::current_path();
     StringUtils stringUtils;
-    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
-    string targetChar = (_WIN64 || _WIN32) ? "/" : "\\";
+    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
+    string targetChar = "\\"; //(_WIN64 || _WIN32) ? "/" : "\\";
     string pwdString = stringUtils.pathToString(pwd);
     string fullPath = pwdString + sysFileChar + "config.json";
 
