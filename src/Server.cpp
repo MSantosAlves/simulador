@@ -1,8 +1,11 @@
+#include "Server.h"
+
 #include <iostream>
 #include <cstring>
 #include <unistd.h>
 #include <arpa/inet.h>
-#include "Server.h"
+#include <chrono>
+#include <thread>
 
 Server::Server(int _port)
 {
@@ -42,29 +45,42 @@ Server::Server(int _port)
     }
 }
 
-void Server::acceptConnections()
+int *Server::getClientSocketAddress()
 {
-    int newSocket;
+    return &clientSocket;
+}
+
+void Server::acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaphore)
+{
     int addrlen = sizeof(serverAddress);
     struct sockaddr_in clientAddress;
+    chrono::nanoseconds timespan(1);
+    string orderBuffer = "";
 
     while (true)
     {
         // Accept incoming connections
-        if ((newSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, (socklen_t *)&addrlen)) < 0)
+        if ((clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, (socklen_t *)&addrlen)) < 0)
         {
             perror("Accept failed");
             exit(EXIT_FAILURE);
         }
 
+        std::cout << "New client connected. Socket FD: " << clientSocket << std::endl;
+
         char buffer[1024] = {0};
         int valread;
 
-        valread = read(newSocket, buffer, 1024);
-        std::cout << "Received data: " << buffer << std::endl;
+        valread = read(clientSocket, buffer, 1024);
 
-        send(newSocket, "Message received by the server", strlen("Message received by the server"), 0);
+        orderBuffer = buffer;
+        if (orderBuffer != "")
+        {
+            semaphore->acquire();
+            rawOrdersQueue->push_back(orderBuffer);
+            semaphore->release();
+        }
 
-        close(newSocket);
+        this_thread::sleep_for(timespan);
     }
 }

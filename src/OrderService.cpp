@@ -63,7 +63,7 @@ OrderService::OrderService(vector<string> _targetStocks)
     targetStocks = _targetStocks;
 }
 
-void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, Trader *traderAccount)
+void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ClientResponseSender *responseSender)
 {
     StringUtils stringUtils;
     OrderUtils orderUtils;
@@ -77,7 +77,7 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
     string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
     string pwdString = stringUtils.pathToString(pwd);
     string file_name = generateFilename();
-    string fullPath = pwdString + sysFileChar + "data" + sysFileChar + "history" + sysFileChar + file_name;
+    string fullPath = "data" + sysFileChar + "history" + sysFileChar + file_name;
 
     ofstream tradeHistoryFile;
     tradeHistoryFile.open(fullPath);
@@ -104,9 +104,12 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         {
             order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
 
-            //if (order.getOrderStatus() != "0" || order.getExecutionType() != "1") {
-                //continue;
-            //}
+            if (order.getOrderSource() == 1)
+            {   
+                string orderSide = order.getOrderSide() == "0" ? "Compra" : "Venda";
+                string response = "Nova ordem recebida: " + orderSide + " de " + order.getInstrumentSymbol() + " no valor de " + order.getOrderPrice();
+                responseSender->sendResponse(response);
+            }
 
             bool isBuyOrder = order.getOrderSide() == "1";
 

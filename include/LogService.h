@@ -13,7 +13,7 @@ class LogService
 {
 public:
 	LogService();
-	void startLogSystem(map<string, StockInfo>* offersBook, Semaphore* semaphore);
+	void startLogSystem(map<string, StockInfo> *offersBook, Semaphore *semaphore);
 };
 
 #endif
