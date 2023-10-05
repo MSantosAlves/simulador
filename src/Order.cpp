@@ -8,6 +8,16 @@ using namespace std;
 
 Order::Order() {}
 
+int Order::getOrderSource()
+{
+    return source;
+}
+
+void Order::setOrderSource(int _source)
+{
+    source = _source;
+}
+
 string Order::getType()
 {
     return type;
@@ -340,7 +350,8 @@ void Order::setSellMember(string _sellMember)
 
 vector<string> Order::getArrayOfCalculatedFields(bool allFields, vector<int> fieldsIndexes)
 {
-    if (allFields) return arrayOfCalculatedFields;
+    if (allFields)
+        return arrayOfCalculatedFields;
     vector<string> aux;
     for (int i = 0; i < fieldsIndexes.size(); i++)
     {

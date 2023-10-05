@@ -47,6 +47,8 @@ private:
     string sellMember;
 
     vector<string> arrayOfCalculatedFields;
+    int source; // 0: Data / 1: Client
+
 public:
     Order();
 
@@ -151,6 +153,9 @@ public:
 
     vector<string> getArrayOfCalculatedFields(bool allFields, vector<int> fieldsIndexes);
     void setArrayOfCalculatedFields(vector<string> arrayOfCalculatedFields);
+
+    int getOrderSource();
+    void setOrderSource(int source);
 };
 
 #endif

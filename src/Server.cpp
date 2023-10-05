@@ -50,6 +50,25 @@ int *Server::getClientSocketAddress()
     return &clientSocket;
 }
 
+int waitForConnectionsLoop(int serverSocket, struct sockaddr_in clientAddress, int addrlen) {
+    bool conected = false;
+    int clientSocketConnection;
+
+    while (!conected) {
+        if ((clientSocketConnection = accept(serverSocket, (struct sockaddr*)&clientAddress, (socklen_t*)&addrlen)) < 0)
+        {
+            perror("Accept failed");
+            exit(EXIT_FAILURE);
+        }
+
+        conected = true;
+
+        std::cout << "New client connected. Socket FD: " << clientSocketConnection << std::endl;
+    }
+
+    return clientSocketConnection;
+}
+
 void Server::acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaphore)
 {
     int addrlen = sizeof(serverAddress);
@@ -57,22 +76,14 @@ void Server::acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaph
     chrono::nanoseconds timespan(1);
     string orderBuffer = "";
 
+    clientSocket = waitForConnectionsLoop(serverSocket, clientAddress, addrlen);
+
     while (true)
     {
-        // Accept incoming connections
-        if ((clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, (socklen_t *)&addrlen)) < 0)
-        {
-            perror("Accept failed");
-            exit(EXIT_FAILURE);
-        }
-
-        std::cout << "New client connected. Socket FD: " << clientSocket << std::endl;
-
         char buffer[1024] = {0};
-        int valread;
 
-        valread = read(clientSocket, buffer, 1024);
-
+        read(clientSocket, buffer, 1024);
+ 
         orderBuffer = buffer;
         if (orderBuffer != "")
         {
@@ -81,6 +92,5 @@ void Server::acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaph
             semaphore->release();
         }
 
-        this_thread::sleep_for(timespan);
     }
 }

@@ -1,5 +1,6 @@
 import socket
 import threading
+import json
 
 class Client:
     def __init__(self, server_address, server_port):
@@ -8,6 +9,7 @@ class Client:
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self):
+        print("Server connected")
         self.client_socket.connect((self.server_address, self.server_port))
 
     def send_data(self, data):
@@ -18,6 +20,7 @@ class Client:
         return response.decode()
 
     def close(self):
+        print("Server closed")
         self.client_socket.close()
     
     def start_receive_thread(self):
@@ -28,9 +31,10 @@ class Client:
     def receive_data_thread(self):
         while True:
             try:
-                response = self.client_socket.recv(1024)
+                response = self.client_socket.recv(1024).decode()
                 if response:
-                    print("Simulador says: ", response.decode())
+                    response = json.loads(response)
+                    print(response)
             except socket.error:
                 # Handle socket error (e.g., server closed the connection)
                 print("Server disconnected.")

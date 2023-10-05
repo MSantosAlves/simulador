@@ -28,7 +28,7 @@ set(SOURCES
     src/Trader.cpp
     src/Semaphore.cpp
     src/Server.cpp
-    src/ClientResponseSender.cpp
+    src/ServerResponseSender.cpp
     utils/StringUtils.cpp
     utils/ArrayUtils.cpp
     utils/DataUtils.cpp

@@ -63,7 +63,7 @@ OrderService::OrderService(vector<string> _targetStocks)
     targetStocks = _targetStocks;
 }
 
-void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ClientResponseSender *responseSender)
+void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
 {
     StringUtils stringUtils;
     OrderUtils orderUtils;
@@ -104,39 +104,32 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         {
             order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
 
-            if (order.getOrderSource() == 1)
-            {   
-                string orderSide = order.getOrderSide() == "0" ? "Compra" : "Venda";
-                string response = "Nova ordem recebida: " + orderSide + " de " + order.getInstrumentSymbol() + " no valor de " + order.getOrderPrice();
-                responseSender->sendResponse(response);
-            }
-
             bool isBuyOrder = order.getOrderSide() == "1";
 
             if (isBuyOrder)
             {
                 PurchaseOrder purchaseOrderBuffer;
-                purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+                purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
                 // Insert new offer on purchases orders queue
                 arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
 
                 if (updateBidPrice(purchaseOrderBuffer, symbol, offersBook))
                 {
-                    orderUtils.executePossibleTrades(symbol, offersBook, 1, tradeHistoryFile);
+                    orderUtils.executePossibleTrades(symbol, offersBook, 1, tradeHistoryFile, responseSender);
                 }
             }
             else
             {
                 SaleOrder saleOrderBuffer;
-                saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+                saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
                 // Insert new offer on sales orders queue
                 arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
 
                 if (updateAskPrice(saleOrderBuffer, symbol, offersBook))
                 {
-                    orderUtils.executePossibleTrades(symbol, offersBook, 2, tradeHistoryFile);
+                    orderUtils.executePossibleTrades(symbol, offersBook, 2, tradeHistoryFile, responseSender);
                 }
             }
         }

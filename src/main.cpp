@@ -7,7 +7,7 @@
 #include "Trader.h"
 #include "StockDataInfo.h"
 #include "Server.h"
-#include "ClientResponseSender.h"
+#include "ServerResponseSender.h"
 
 #include <thread>
 #include <filesystem>
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 
     // Setup socket
     Server *server = new Server(PORT);
-    ClientResponseSender *responseSender = new ClientResponseSender(server->getClientSocketAddress());
+    ServerResponseSender *responseSender = new ServerResponseSender(server->getClientSocketAddress());
 
     thread readPurchasesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "PURCHASES");
     thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
