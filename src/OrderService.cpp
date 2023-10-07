@@ -116,6 +116,16 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
 
                 if (updateBidPrice(purchaseOrderBuffer, symbol, offersBook))
                 {
+                    json jsonObject = {
+                        {"event", "UPDATE_BOOK"},
+                        {"symbol", symbol},
+                        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                        {"bid", (*offersBook)[symbol].bid},
+                        {"ask", (*offersBook)[symbol].ask},
+                        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+                    responseSender->sendResponse(jsonObject);
                     orderUtils.executePossibleTrades(symbol, offersBook, 1, tradeHistoryFile, responseSender);
                 }
             }
@@ -129,6 +139,16 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
 
                 if (updateAskPrice(saleOrderBuffer, symbol, offersBook))
                 {
+                    json jsonObject = {
+                        {"event", "UPDATE_BOOK"},
+                        {"symbol", symbol},
+                        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                        {"bid", (*offersBook)[symbol].bid},
+                        {"ask", (*offersBook)[symbol].ask},
+                        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+                    responseSender->sendResponse(jsonObject);
                     orderUtils.executePossibleTrades(symbol, offersBook, 2, tradeHistoryFile, responseSender);
                 }
             }

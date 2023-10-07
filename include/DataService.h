@@ -17,8 +17,9 @@ private:
     string dataPath;
     map<string, StockDataInfo> targetStocksDataInfo;
     vector<string> targetStocks;
+    string simulationSpeed;
 public:
-    DataService(string date, string dataPath, map<string, StockDataInfo> targetStocksDataInfo, vector<string> targetStocks);
+    DataService(string date, string dataPath, map<string, StockDataInfo> targetStocksDataInfo, vector<string> targetStocks, string simulationSpeed);
     void startAcquisition(vector<string>* rawOrdersQueue, Semaphore* semaphore, string offerType);
 };
 

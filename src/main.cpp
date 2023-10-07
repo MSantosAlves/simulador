@@ -38,11 +38,12 @@ int main(int argc, char *argv[])
     Config *config = new Config();
     string dataTargetDate = config->getDate();
     string dataPath = config->getDataPath();
+    string simulationSpeed = config->getSimulationSpeed();
     vector<string> targetStocks = config->getTargetStocks();
     map<string, StockDataInfo> targetStocksDataInfo = config->getTargetStocksDataInfo();
-
+   
     // Instantiate services
-    DataService *dataService = new DataService(dataTargetDate, dataPath, targetStocksDataInfo, targetStocks);
+    DataService *dataService = new DataService(dataTargetDate, dataPath, targetStocksDataInfo, targetStocks, simulationSpeed);
     OrderService *orderService = new OrderService(targetStocks);
     LogService *logService = new LogService();
 
@@ -56,11 +57,11 @@ int main(int argc, char *argv[])
     thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
     thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
 
+    marketServerThread.join();
     readPurchasesThread.join();
     readSalesThread.join();
     ordersProcessorThread.join();
     logSystemThread.join();
-    marketServerThread.join();
 
     return 0;
 }

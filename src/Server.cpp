@@ -7,6 +7,9 @@
 #include <chrono>
 #include <thread>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 Server::Server(int _port)
 {
     port = _port;
@@ -75,8 +78,11 @@ void Server::acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaph
     struct sockaddr_in clientAddress;
     chrono::nanoseconds timespan(1);
     string orderBuffer = "";
+    json jsonData = {};
 
+    semaphore->acquire();
     clientSocket = waitForConnectionsLoop(serverSocket, clientAddress, addrlen);
+    semaphore->release();
 
     while (true)
     {
@@ -84,9 +90,11 @@ void Server::acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaph
 
         read(clientSocket, buffer, 1024);
  
-        orderBuffer = buffer;
-        if (orderBuffer != "")
+        
+        if (buffer != "")
         {
+            jsonData = json::parse(buffer);
+            orderBuffer = jsonData["offer"];
             semaphore->acquire();
             rawOrdersQueue->push_back(orderBuffer);
             semaphore->release();
