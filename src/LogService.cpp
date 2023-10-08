@@ -2,6 +2,7 @@
 #include "LogService.h"
 #include "OrderFieldsEnum.h"
 #include "StockInfo.h"
+#include "StockMarketVolume.h"
 
 #include <iostream>
 #include <fstream>
@@ -12,8 +13,10 @@
 #include <chrono>
 #include <thread>
 #include <fstream>
+#include <nlohmann/json.hpp>
 
 using namespace std;
+using json = nlohmann::json;
 
 void printTable(const vector<string> &headers, const vector<vector<string>> &data)
 {
@@ -166,6 +169,119 @@ void LogService::startLogSystem(map<string, StockInfo> *offersBook, Semaphore *s
         printOffersBook(offersBook);
         semaphore->release();
         this_thread::sleep_for(timespan);
+    }
+
+    return;
+}
+
+map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *offersBook)
+{
+
+    vector<string> symbols;
+
+    for (const auto &pair : *offersBook)
+    {
+        symbols.push_back(pair.first);
+    }
+
+    string symbol = symbols[0];
+
+    vector<PurchaseOrder> purchaseOrders = (*offersBook)[symbol].purchaseOrders;
+    vector<SaleOrder> saleOrders = (*offersBook)[symbol].saleOrders;
+
+    map<string, vector<StockMarketVolume>> marketVolume = {};
+    StockMarketVolume stockMarketVolume;
+    int lastIdx = 0;
+
+    for (int i = purchaseOrders.size() - 1; i >= 0; i--)
+    {
+
+        if (i == purchaseOrders.size() - 1)
+        {
+            stockMarketVolume.price = purchaseOrders[i].getOrderPrice();
+            stockMarketVolume.quantity = purchaseOrders[i].getTotalQuantityOfOrder();
+            stockMarketVolume.direction = "BUY";
+            marketVolume[symbol].push_back(stockMarketVolume);
+        }
+        else
+        {
+            lastIdx = marketVolume[symbol].size() - 1;
+            if (marketVolume[symbol][lastIdx].price == purchaseOrders[i].getOrderPrice())
+            {
+                marketVolume[symbol][lastIdx].quantity += purchaseOrders[i].getTotalQuantityOfOrder();
+            }
+            else
+            {
+                stockMarketVolume.price = purchaseOrders[i].getOrderPrice();
+                stockMarketVolume.quantity = purchaseOrders[i].getTotalQuantityOfOrder();
+                stockMarketVolume.direction = "BUY";
+                marketVolume[symbol].push_back(stockMarketVolume);
+            }
+        }
+    }
+
+    for (int i = 0; i < saleOrders.size(); i++)
+    {
+
+        if (i == 0)
+        {
+            stockMarketVolume.price = saleOrders[i].getOrderPrice();
+            stockMarketVolume.quantity = saleOrders[i].getTotalQuantityOfOrder();
+            stockMarketVolume.direction = "SALE";
+            marketVolume[symbol].push_back(stockMarketVolume);
+        }
+        else
+        {
+            lastIdx = marketVolume[symbol].size() - 1;
+            if (marketVolume[symbol][lastIdx].price == saleOrders[i].getOrderPrice())
+            {
+                marketVolume[symbol][lastIdx].quantity += saleOrders[i].getTotalQuantityOfOrder();
+            }
+            else
+            {
+                stockMarketVolume.price = saleOrders[i].getOrderPrice();
+                stockMarketVolume.quantity = saleOrders[i].getTotalQuantityOfOrder();
+                stockMarketVolume.direction = "SALE";
+                marketVolume[symbol].push_back(stockMarketVolume);
+            }
+        }
+    }
+
+
+    return marketVolume;
+}
+
+void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore* semaphore, ServerResponseSender *responseSender)
+{
+    chrono::milliseconds tick(5000);
+    map<string, vector<StockMarketVolume>> marketVolume;
+
+    while (true)
+    {
+        semaphore->acquire();
+
+        marketVolume = getMarketVolume(offersBook);
+
+        // Construct the JSON object manually
+        json jsonObject;
+        jsonObject["event"] = "UPDATE_MARKET_VOLUME";
+        jsonObject["market_volume"] = json::object();
+
+        for (const auto& entry : marketVolume) {
+            jsonObject["market_volume"][entry.first] = json::array();
+            for (const auto& stockVolume : entry.second) {
+                json volumeJson;
+                volumeJson["quantity"] = stockVolume.quantity;
+                volumeJson["price"] = stockVolume.price;
+                volumeJson["direction"] = stockVolume.direction;
+                jsonObject["market_volume"][entry.first].push_back(volumeJson);
+            }
+        }
+        
+        responseSender->sendResponse(jsonObject);
+
+        semaphore->release();
+        this_thread::sleep_for(tick);
     }
 
     return;

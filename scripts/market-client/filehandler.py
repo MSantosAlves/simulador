@@ -26,6 +26,10 @@ class FileHandler:
             return content
         else:
             return None
+    
+    def truncate(self):
+        if self.file:
+            self.file.truncate()
 
     def close_file(self):
         if self.file:

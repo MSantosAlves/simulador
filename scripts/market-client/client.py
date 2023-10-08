@@ -36,15 +36,27 @@ class Client:
     def receive_data_thread(self):
         while True:
             try:
-                response = self.client_socket.recv(1024)
+                response = self.client_socket.recv(int(1024*1e3))
                 if response:
-                    response = json.loads(response.decode())
+                    responses = response.decode().split("}{")
+                
+                    #TODO: Find the error causing 2 responses at the same time
+                    if len(responses) > 1:
+                        responses = [res if res.startswith("{") else "{" + res for res in responses]
+                        responses = [res if res.endswith("}") else res + "}" for res in responses]
+                        
+                    responses = [json.loads(data) for data in responses]
+
+                    for res in responses:
                     
-                    self.monitor.handle_event(response)
-                    self.trader_account.handle_event(response)
-                    
-                    if response["event"] == "UPDATE_BOOK":
-                        self.book.update_book(response)
+                        self.monitor.handle_event(res)
+                        self.trader_account.handle_event(res)
+
+                        if res["event"] == "UPDATE_BOOK":
+                            self.book.update_book(res)
+
+                        if res["event"] == "UPDATE_MARKET_VOLUME":
+                            self.book.update_market_volume(res)
 
             except socket.error:
                 # Handle socket error (e.g., server closed the connection)

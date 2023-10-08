@@ -1,50 +1,46 @@
-from dash import Dash, dcc, html, Input, Output
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
-import random
+import threading
 import os
-
 from dash import Dash, dcc, html, Input, Output, callback
+import plotly.graph_objects as go
 
 class PlotlibServer:
 
     def __init__(self):
-        directory_path = "./scripts/market-client/execution-history"
-        self.file_path = directory_path + "/" + [filename for filename in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, filename))][0]
+        self.app = Dash()
+        history_directory_path = "./scripts/market-client/execution-history"
+        self.history_file_path = history_directory_path + "/" + [filename for filename in os.listdir(history_directory_path) if os.path.isfile(os.path.join(history_directory_path, filename))][-1]
+
+        volume_directory_path = "./scripts/market-client/market-volume"
+        self.volume_file_path = volume_directory_path + "/" + [filename for filename in os.listdir(volume_directory_path) if os.path.isfile(os.path.join(volume_directory_path, filename))][-1]
+
+    def start_plotting_thread(self):
+        plotting_thread = threading.Thread(target=self.start_plotting)
+        plotting_thread.daemon = True
+        plotting_thread.start()
 
     def start_plotting(self):
-
-        app = Dash(__name__)
-        app.layout = html.Div(
+       
+        self.app.layout = html.Div(
             html.Div([
-                html.H4('Simulador'),
-                html.Div(id='live-update-text'),
-                dcc.Graph(id='live-update-graph'),
+                html.H4('Simulador [B3]'),
+                dcc.Graph(id='stock-price-graph'),
+                dcc.Graph(id='stock-market-offers-graph'),
                 dcc.Interval(
                     id='interval-component',
-                    interval=1*3000, # in milliseconds
+                    interval=3*1000, # in milliseconds
                     n_intervals=0
                 )
             ])
         )
 
-
-        @callback(Output('live-update-text', 'children'),
+        @callback(Output('stock-price-graph', 'figure'),
                       Input('interval-component', 'n_intervals'))
-        def update_metrics(n):
-            info = str(random.randint(0, 2))
-            style = {'padding': '5px', 'fontSize': '16px'}
-            return [
-                html.Span('Teste: {}'.format(info), style=style),
-            ]
+        def update_history_graph_live(n):
 
-
-        # Multiple components can update everytime interval gets fired.
-        @callback(Output('live-update-graph', 'figure'),
-                      Input('interval-component', 'n_intervals'))
-        def update_graph_live(n):
-
-            df = pd.read_csv(self.file_path)
+            df = pd.read_csv(self.history_file_path)
 
             # Filter data for symbol 'AFSF20'
             symbol_data = df[df['Symbol'] == 'AFSF20']
@@ -55,10 +51,34 @@ class PlotlibServer:
 
             # Plot the graph using Plotly Express
             fig = px.line(symbol_data, x='Time', y='Price', title='AFSF20 Price over Time')
-            fig.update_xaxes(title_text='Time', tickformat='%H:%M:%S.%f')#, tickvals=symbol_data['Time'][::100]
+            fig.update_xaxes(title_text='Time', tickformat='%H:%M:%S.%f', tickvals=symbol_data['Time'][::100])
             fig.update_yaxes(title_text='Price')
-
-            #fig = px.line(df, x=df.index, y=df.columns, title='Price variation over time for AFSF20')
+            
             return fig
+        
+        @callback(Output('stock-market-offers-graph', 'figure'),
+                      Input('interval-component', 'n_intervals'))
+        def update_volme_graph_live(n):
 
-        app.run_server(debug=True)
+            df = pd.read_csv(self.volume_file_path)
+
+            df = df[df['Symbol'] == 'AFSF20']
+
+            fig = go.Figure()
+
+            buy_data = df[df['Direction'] == 'BUY']
+            fig.add_trace(go.Scatter(x=buy_data['Price'], y=buy_data['Quantity'], mode='lines', fill='tozeroy',
+                                     line=dict(color='blue'), name='Oferta de Compra'))
+
+            sale_data = df[df['Direction'] == 'SALE']
+            fig.add_trace(go.Scatter(x=sale_data['Price'], y=sale_data['Quantity'], mode='lines', fill='tozeroy',
+                                     line=dict(color='red'), name='Oferta de Venda'))
+
+            fig.update_layout(title='Preço vs Quantidade em oferta',
+                              xaxis_title='Preço',
+                              yaxis_title='Quantidade',
+                              xaxis=dict(tickformat='.2f'))
+
+            return fig
+        
+        self.app.run_server(debug=False)
