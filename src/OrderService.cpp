@@ -63,7 +63,7 @@ OrderService::OrderService(vector<string> _targetStocks)
     targetStocks = _targetStocks;
 }
 
-void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, Trader *traderAccount)
+void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
 {
     StringUtils stringUtils;
     OrderUtils orderUtils;
@@ -74,10 +74,10 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
     string rawCurrOrder;
 
     filesystem::path pwd = filesystem::current_path();
-    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
+    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
     string pwdString = stringUtils.pathToString(pwd);
     string file_name = generateFilename();
-    string fullPath = pwdString + sysFileChar + "data" + sysFileChar + "history" + sysFileChar + file_name;
+    string fullPath = "data" + sysFileChar + "history" + sysFileChar + file_name;
 
     ofstream tradeHistoryFile;
     tradeHistoryFile.open(fullPath);
@@ -104,36 +104,52 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         {
             order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
 
-            //if (order.getOrderStatus() != "0" || order.getExecutionType() != "1") {
-                //continue;
-            //}
-
             bool isBuyOrder = order.getOrderSide() == "1";
 
             if (isBuyOrder)
             {
                 PurchaseOrder purchaseOrderBuffer;
-                purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+                purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
                 // Insert new offer on purchases orders queue
                 arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
 
                 if (updateBidPrice(purchaseOrderBuffer, symbol, offersBook))
                 {
-                    orderUtils.executePossibleTrades(symbol, offersBook, 1, tradeHistoryFile);
+                    json jsonObject = {
+                        {"event", "UPDATE_BOOK"},
+                        {"symbol", symbol},
+                        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                        {"bid", (*offersBook)[symbol].bid},
+                        {"ask", (*offersBook)[symbol].ask},
+                        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+                    responseSender->sendResponse(jsonObject);
+                    orderUtils.executePossibleTrades(symbol, offersBook, 1, tradeHistoryFile, responseSender);
                 }
             }
             else
             {
                 SaleOrder saleOrderBuffer;
-                saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+                saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
                 // Insert new offer on sales orders queue
                 arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
 
                 if (updateAskPrice(saleOrderBuffer, symbol, offersBook))
                 {
-                    orderUtils.executePossibleTrades(symbol, offersBook, 2, tradeHistoryFile);
+                    json jsonObject = {
+                        {"event", "UPDATE_BOOK"},
+                        {"symbol", symbol},
+                        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                        {"bid", (*offersBook)[symbol].bid},
+                        {"ask", (*offersBook)[symbol].ask},
+                        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+                    responseSender->sendResponse(jsonObject);
+                    orderUtils.executePossibleTrades(symbol, offersBook, 2, tradeHistoryFile, responseSender);
                 }
             }
         }

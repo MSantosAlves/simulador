@@ -3,6 +3,7 @@
 #include "StockInfo.h"
 #include "ArrayUtils.h"
 #include "Trader.h"
+#include "ServerResponseSender.h"
 
 #include <string>
 #include <map>
@@ -19,7 +20,7 @@ public:
 	OrderUtils();
 	Order parseOrder(string order, StringUtils stringUtils);
 	void orderMatching(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, Trader *traderAccount, ofstream &trade_history_file);
-	void executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ofstream& tradeHistoryFile);
+	void executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ofstream &tradeHistoryFile, ServerResponseSender *responseSender);
 };
 
 #endif

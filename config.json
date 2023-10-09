@@ -3,5 +3,6 @@
   "dataPath": "/data/b3",
   "targetStocks": [
     "AFSF20"
-  ]
+  ],
+  "simulationSpeed": "NORMAL"
 }

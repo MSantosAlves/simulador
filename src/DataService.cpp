@@ -14,20 +14,31 @@
 
 using namespace std;
 
-DataService::DataService(string _date, string _dataPath, map<string, StockDataInfo> _targetStocksDataInfo, vector<string> _targetStocks)
+DataService::DataService(string _date, string _dataPath, map<string, StockDataInfo> _targetStocksDataInfo, vector<string> _targetStocks, string _simulationSpeed)
 {
     date = _date;
     dataPath = _dataPath;
     targetStocks = _targetStocks;
     targetStocksDataInfo = _targetStocksDataInfo;
+    simulationSpeed = _simulationSpeed;
 }
 
 void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *semaphore, string orderType)
 {
-    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
+    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
     string filePath = dataPath + sysFileChar + date + sysFileChar;
+    int timespanInNs = 100000000; // Default = 100ms
 
-    chrono::nanoseconds timespan(1);
+    if (simulationSpeed == "FAST") {
+        timespanInNs = 1;
+    }
+    else if (simulationSpeed == "NORMAL") {
+        timespanInNs = 100000000; // 100ms
+    }else if(simulationSpeed == "SLOW"){
+        timespanInNs = 1000000000; // 1s
+    }
+
+    chrono::nanoseconds timespan(timespanInNs);
 
     const int nbOfOfferBytes = 230;
     int fileCurrentLine = 0, dataOffset = 0;

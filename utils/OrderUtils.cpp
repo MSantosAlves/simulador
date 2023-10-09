@@ -1,4 +1,7 @@
 #include "OrderUtils.h"
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 using namespace std;
 
@@ -19,7 +22,7 @@ Order OrderUtils::parseOrder(string order, StringUtils stringUtils)
     if (stringSize > 2)
     {
         type = splitedString[stringSize - 1];
-        if (type == "VDA" || type == "CPA")
+        if (type == "VDA" || type == "CPA" || type == "CLIENT")
         {
             orderBuffer->setSessionDate(splitedString[0]);
             orderBuffer->setInstrumentSymbol(splitedString[1]);
@@ -39,7 +42,6 @@ Order OrderUtils::parseOrder(string order, StringUtils stringUtils)
             orderBuffer->setMember(splitedString[15]);
             orderBuffer->setType(type);
             orderBuffer->setArrayOfCalculatedFields(splitedString);
-            return (*orderBuffer);
         }
         else if (type == "NEG")
         {
@@ -63,14 +65,31 @@ Order OrderUtils::parseOrder(string order, StringUtils stringUtils)
             orderBuffer->setSellMember(splitedString[18]);
             orderBuffer->setType(type);
             orderBuffer->setArrayOfCalculatedFields(splitedString);
-            return (*orderBuffer);
         }
+
+        int orderSource = type == "CLIENT" ? 1 : 0;
+        orderBuffer->setOrderSource(orderSource);
+        return (*orderBuffer);
     }
 
     return (*orderBuffer);
 }
 
-void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ofstream& tradeHistoryFile)
+void sendUpdateBookEvent(string symbol, map<string, StockInfo> *offersBook, ServerResponseSender *responseSender)
+{
+    json jsonObject = {
+        {"event", "UPDATE_BOOK"},
+        {"symbol", symbol},
+        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+        {"bid", (*offersBook)[symbol].bid},
+        {"ask", (*offersBook)[symbol].ask},
+        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+    responseSender->sendResponse(jsonObject);
+}
+
+void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ofstream &tradeHistoryFile, ServerResponseSender *responseSender)
 {
     // bookUpdateDirection = 1 new BID price; bookUpdateDirection = 2 new ASK price
     vector<SaleOrder> saleOrders = (*offersBook)[symbol].saleOrders;
@@ -90,12 +109,10 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
     currSaleOrder = (*offersBook)[symbol].saleOrders[0];
     currPurchaseOrder = (*offersBook)[symbol].purchaseOrders[0];
 
-    // Set negotiations loop stop conditions
+    // Set negotiations loop stop condition
     bool bidIsGreaterThanOrEqToAsk = currPurchaseOrder.getOrderPrice() >= currSaleOrder.getOrderPrice();
-    bool currPurchaseOrderWasNotEntirelyFilled = currPurchaseOrder.getTotalQuantityOfOrder() > 0;
-    bool currSaleOrderWasNotEntirelyFilled = currSaleOrder.getTotalQuantityOfOrder() > 0;
 
-    while (bidIsGreaterThanOrEqToAsk && currPurchaseOrderWasNotEntirelyFilled && currSaleOrderWasNotEntirelyFilled)
+    while (bidIsGreaterThanOrEqToAsk)
     {
         /**
          * Three possible scenarios for the orders beeing traded:
@@ -136,7 +153,7 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            (*offersBook)[symbol].historicalPrices.push_back(currSaleOrder.getOrderPrice());
+            (*offersBook)[symbol].lastTradePrice = currSaleOrder.getOrderPrice();
 
             tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
             tradeHistoryFile << tradeString + "\n";
@@ -145,18 +162,47 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             (*offersBook)[symbol].saleOrders.erase((*offersBook)[symbol].saleOrders.begin());
             (*offersBook)[symbol].purchaseOrders.erase((*offersBook)[symbol].purchaseOrders.begin());
 
+            if (currSaleOrder.getOrderSource() == 1)
+            {
+                json jsonObject = {
+                    {"event", "SALE_OFFER_ENTIRELY_FILLED"},
+                    {"qty", tradedQty},
+                    {"id", currSaleOrder.getSequentialOrderNumber()},
+                    {"price", currSaleOrder.getOrderPrice()},
+                    {"symbol", symbol}};
+                responseSender->sendResponse(jsonObject);
+            }
+            else if (currPurchaseOrder.getOrderSource() == 1)
+            {
+                json jsonObject = {
+                    {"event", "PURCHASE_OFFER_ENTIRELY_FILLED"},
+                    {"qty", tradedQty},
+                    {"id", currPurchaseOrder.getSequentialOrderNumber()},
+                    {"price", currSaleOrder.getOrderPrice()},
+                    {"symbol", symbol}};
+                responseSender->sendResponse(jsonObject);
+            }
+
             // Update ASK value and currSale reference
             if ((*offersBook)[symbol].saleOrders.size() > 0)
             {
                 currSaleOrder = (*offersBook)[symbol].saleOrders[0];
-                (*offersBook)[symbol].ask = currSaleOrder.getOrderPrice();
+                if ((*offersBook)[symbol].ask != currSaleOrder.getOrderPrice())
+                {
+                    (*offersBook)[symbol].ask = currSaleOrder.getOrderPrice();
+                    sendUpdateBookEvent(symbol, offersBook, responseSender);
+                }
             }
 
             // Update BID value and currPurchase reference
             if ((*offersBook)[symbol].purchaseOrders.size() > 0)
             {
                 currPurchaseOrder = (*offersBook)[symbol].purchaseOrders[0];
-                (*offersBook)[symbol].bid = currPurchaseOrder.getOrderPrice();
+                if ((*offersBook)[symbol].bid != currPurchaseOrder.getOrderPrice())
+                {
+                    (*offersBook)[symbol].bid = currPurchaseOrder.getOrderPrice();
+                    sendUpdateBookEvent(symbol, offersBook, responseSender);
+                }
             }
 
             // Break loop all sales or all offers were already processed
@@ -175,10 +221,31 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            (*offersBook)[symbol].historicalPrices.push_back(currSaleOrder.getOrderPrice());
+            (*offersBook)[symbol].lastTradePrice = currSaleOrder.getOrderPrice();
 
             tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
             tradeHistoryFile << tradeString + "\n";
+
+            if (currSaleOrder.getOrderSource() == 1)
+            {
+                json jsonObject = {
+                    {"event", "SALE_OFFER_ENTIRELY_FILLED"},
+                    {"qty", tradedQty},
+                    {"id", currSaleOrder.getSequentialOrderNumber()},
+                    {"price", currSaleOrder.getOrderPrice()},
+                    {"symbol", symbol}};
+                responseSender->sendResponse(jsonObject);
+            }
+            else if (currPurchaseOrder.getOrderSource() == 1)
+            {
+                json jsonObject = {
+                    {"event", "PURCHASE_OFFER_PARTIALLY_FILLED"},
+                    {"qty", tradedQty},
+                    {"id", currPurchaseOrder.getSequentialOrderNumber()},
+                    {"price", currSaleOrder.getOrderPrice()},
+                    {"symbol", symbol}};
+                responseSender->sendResponse(jsonObject);
+            }
 
             // Update currPurchase value given that it was not entirely filled yet
             (*offersBook)[symbol].purchaseOrders[0] = currPurchaseOrder;
@@ -190,7 +257,11 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             if ((*offersBook)[symbol].saleOrders.size() > 0)
             {
                 currSaleOrder = (*offersBook)[symbol].saleOrders[0];
-                (*offersBook)[symbol].ask = currSaleOrder.getOrderPrice();
+                if ((*offersBook)[symbol].ask != currSaleOrder.getOrderPrice())
+                {
+                    (*offersBook)[symbol].ask = currSaleOrder.getOrderPrice();
+                    sendUpdateBookEvent(symbol, offersBook, responseSender);
+                }
             }
             else
             {
@@ -209,10 +280,31 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            (*offersBook)[symbol].historicalPrices.push_back(currSaleOrder.getOrderPrice());
+            (*offersBook)[symbol].lastTradePrice = currSaleOrder.getOrderPrice();
 
             tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
             tradeHistoryFile << tradeString + "\n";
+
+            if (currSaleOrder.getOrderSource() == 1)
+            {
+                json jsonObject = {
+                    {"event", "SALE_OFFER_PARTIALLY_FILLED"},
+                    {"qty", tradedQty},
+                    {"id", currSaleOrder.getSequentialOrderNumber()},
+                    {"price", currSaleOrder.getOrderPrice()},
+                    {"symbol", symbol}};
+                responseSender->sendResponse(jsonObject);
+            }
+            else if (currPurchaseOrder.getOrderSource() == 1)
+            {
+                json jsonObject = {
+                    {"event", "PURCHASE_OFFER_ENTIRELY_FILLED"},
+                    {"qty", tradedQty},
+                    {"id", currPurchaseOrder.getSequentialOrderNumber()},
+                    {"price", currSaleOrder.getOrderPrice()},
+                    {"symbol", symbol}};
+                responseSender->sendResponse(jsonObject);
+            }
 
             // Update currSale value given that it was not entirely filled yet
             (*offersBook)[symbol].saleOrders[0] = currSaleOrder;
@@ -224,7 +316,11 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             if ((*offersBook)[symbol].purchaseOrders.size() > 0)
             {
                 currPurchaseOrder = (*offersBook)[symbol].purchaseOrders[0];
-                (*offersBook)[symbol].bid = currPurchaseOrder.getOrderPrice();
+                if ((*offersBook)[symbol].bid != currPurchaseOrder.getOrderPrice())
+                {
+                    (*offersBook)[symbol].bid = currPurchaseOrder.getOrderPrice();
+                    sendUpdateBookEvent(symbol, offersBook, responseSender);
+                }
             }
             else
             {
@@ -233,8 +329,6 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
         }
 
         bidIsGreaterThanOrEqToAsk = currPurchaseOrder.getOrderPrice() >= currSaleOrder.getOrderPrice();
-        currPurchaseOrderWasNotEntirelyFilled = currPurchaseOrder.getTotalQuantityOfOrder() > 0;
-        currSaleOrderWasNotEntirelyFilled = currSaleOrder.getTotalQuantityOfOrder() > 0;
     }
 
     return;
@@ -252,7 +346,7 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
     if (order.getOrderSide() == PURCHASE_ORDER)
     {
         PurchaseOrder purchaseOrderBuffer;
-        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
         // New purchase order has a price higher than stock current ASK price = New negotiation
         if ((*offersBook)[symbol].ask > 0 && purchaseOrderBuffer.getOrderPrice() >= 0 && purchaseOrderBuffer.getOrderPrice() >= (*offersBook)[symbol].ask)
@@ -289,7 +383,7 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                 }
 
                 (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-                (*offersBook)[symbol].historicalPrices.push_back(currSaleOrder.getOrderPrice());
+                (*offersBook)[symbol].lastTradePrice = currSaleOrder.getOrderPrice();
 
                 // Purchase order still have liquidity to be traded and there are other sale offers to be considered
                 if (purchaseOrderBuffer.getTotalQuantityOfOrder() > 0 && (*offersBook)[symbol].saleOrders.size() > 1)
@@ -355,7 +449,7 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
     else if (order.getOrderSide() == SALE_ORDER)
     {
         SaleOrder saleOrderBuffer;
-        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder()));
+        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
         if ((*offersBook)[symbol].bid > 0 && saleOrderBuffer.getOrderPrice() >= 0 && saleOrderBuffer.getOrderPrice() <= (*offersBook)[symbol].bid)
         {
@@ -390,7 +484,7 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                 }
 
                 (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-                (*offersBook)[symbol].historicalPrices.push_back(saleOrderBuffer.getOrderPrice());
+                (*offersBook)[symbol].lastTradePrice = saleOrderBuffer.getOrderPrice();
 
                 // Sale order still have liquidity to be traded and there are other purchase offers to be considered
                 if (saleOrderBuffer.getTotalQuantityOfOrder() > 0 && (*offersBook)[symbol].purchaseOrders.size() > 1)

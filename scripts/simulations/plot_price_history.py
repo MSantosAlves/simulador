@@ -10,7 +10,6 @@ file_list = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.joi
 file_name = file_list[-1]
 
 file_path =  path + '/data/history/' + file_name
-point_nb = 1
 
 data_Y = []
 
@@ -37,4 +36,5 @@ ax.set(xlabel='Ficticious time', ylabel='Price (R$)',
 ax.grid()
 
 filename = path + '/data/history/plots/' + file_name.split('.txt')[0] + "_plot.png"
+print(filename)
 fig.savefig(filename)

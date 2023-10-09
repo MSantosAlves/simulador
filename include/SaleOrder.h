@@ -16,10 +16,11 @@ private:
     long long priorityTimeInteger;
     int totalQuantityOfOrder = 0;
     int tradedQuantityOfOrder = 0;
+    int orderSource = 0;
 
 public:
     SaleOrder();
-    SaleOrder(string sequentialOrderNumber, string secondaryOrderID, string priorityTime, string orderPrice, string totalQuantityOfOrder, string tradedQuantityOfOrder);
+    SaleOrder(string sequentialOrderNumber, string secondaryOrderID, string priorityTime, string orderPrice, string totalQuantityOfOrder, string tradedQuantityOfOrder, int orderSource);
 
     string getSequentialOrderNumber();
     void setSequentialOrderNumber(string sequentialOrderNumber);
@@ -41,6 +42,9 @@ public:
 
     int getTradedQuantityOfOrder();
     void setTradedQuantityOfOrder(int tradedQuantityOfOrder);
+
+    int getOrderSource();
+    void setOrderSource(int orderSource);
 };
 
 #endif

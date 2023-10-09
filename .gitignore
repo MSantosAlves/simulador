@@ -366,3 +366,5 @@ FodyWeavers.xsd
 
 /data/*
 .vscode/settings.json
+/scripts/market-client/execution-history/*
+/scripts/market-client/market-volume/*

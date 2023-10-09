@@ -15,8 +15,8 @@ Config::Config()
 {
     filesystem::path pwd = filesystem::current_path();
     StringUtils stringUtils;
-    string sysFileChar = (_WIN64 || _WIN32) ? "\\" : "/";
-    string targetChar = (_WIN64 || _WIN32) ? "/" : "\\";
+    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
+    string targetChar = "\\"; //(_WIN64 || _WIN32) ? "/" : "\\";
     string pwdString = stringUtils.pathToString(pwd);
     string fullPath = pwdString + sysFileChar + "config.json";
 
@@ -32,6 +32,7 @@ Config::Config()
     json indexStocksJson = json::parse(indexStocksFile);
 
     vector<string> stocks = jsonData["targetStocks"];
+    string simulationSpeed = jsonData["simulationSpeed"];
 
     int size = stocks.size();
     vector<string> targetStocks = {};
@@ -76,6 +77,7 @@ Config::Config()
     setDataPath(dataPath);
     setTargetStocks(targetStocks);
     setTargetStocksDataInfo(targetStocksDataInfo);
+    setSimulationSpeed(simulationSpeed);
 }
 
 void Config::setDate(string _date)
@@ -96,6 +98,16 @@ void Config::setDataPath(string _dataPath)
 string Config::getDataPath()
 {
     return dataPath;
+}
+
+void Config::setSimulationSpeed(string _simulationSpeed)
+{
+    simulationSpeed = _simulationSpeed;
+}
+
+string Config::getSimulationSpeed()
+{
+    return simulationSpeed;
 }
 
 void Config::setTargetStocks(vector<string> _targetStocks)

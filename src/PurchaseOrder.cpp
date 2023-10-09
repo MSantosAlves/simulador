@@ -6,7 +6,8 @@ using namespace std;
 
 PurchaseOrder::PurchaseOrder() {}
 
-PurchaseOrder::PurchaseOrder(string _sequentialOrderNumber, string _secondaryOrderID, string _priorityTime, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder) {
+PurchaseOrder::PurchaseOrder(string _sequentialOrderNumber, string _secondaryOrderID, string _priorityTime, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder, int _source)
+{
     StringUtils stringUtils;
     sequentialOrderNumber = _sequentialOrderNumber;
     secondaryOrderID = _secondaryOrderID;
@@ -15,60 +16,85 @@ PurchaseOrder::PurchaseOrder(string _sequentialOrderNumber, string _secondaryOrd
     orderPrice = stoi(_orderPrice);
     totalQuantityOfOrder = stoi(_totalQuantityOfOrder);
     tradedQuantityOfOrder = stoi(_tradedQuantityOfOrder);
+    orderSource = _source;
 };
 
-string PurchaseOrder::getSequentialOrderNumber(){
+string PurchaseOrder::getSequentialOrderNumber()
+{
     return sequentialOrderNumber;
 }
 
-void PurchaseOrder::setSequentialOrderNumber(string _sequentialOrderNumber){
+void PurchaseOrder::setSequentialOrderNumber(string _sequentialOrderNumber)
+{
     sequentialOrderNumber = _sequentialOrderNumber;
 }
 
-string PurchaseOrder::getSecondaryOrderID() {
+string PurchaseOrder::getSecondaryOrderID()
+{
     return secondaryOrderID;
 }
 
-void PurchaseOrder::setSecondaryOrderID(string _secondaryOrderID){
+void PurchaseOrder::setSecondaryOrderID(string _secondaryOrderID)
+{
     secondaryOrderID = _secondaryOrderID;
 }
 
-string PurchaseOrder::getPriorityTime() {
+string PurchaseOrder::getPriorityTime()
+{
     return priorityTime;
 }
 
-void PurchaseOrder::setPriorityTime(string _priorityTime){
+void PurchaseOrder::setPriorityTime(string _priorityTime)
+{
     priorityTime = _priorityTime;
 }
 
-double PurchaseOrder::getOrderPrice() const {
+double PurchaseOrder::getOrderPrice() const
+{
     return orderPrice;
 }
 
-void PurchaseOrder::setOrderPrice(string _orderPrice){
+void PurchaseOrder::setOrderPrice(string _orderPrice)
+{
     orderPrice = stod(_orderPrice);
 }
 
-long long PurchaseOrder::getPriorityTimeInteger() const {
+long long PurchaseOrder::getPriorityTimeInteger() const
+{
     return priorityTimeInteger;
 }
 
-void PurchaseOrder::setPriorityTimeInteger(long long _priorityTimeInteger){
+void PurchaseOrder::setPriorityTimeInteger(long long _priorityTimeInteger)
+{
     priorityTimeInteger = _priorityTimeInteger;
 }
 
-int PurchaseOrder::getTotalQuantityOfOrder() {
+int PurchaseOrder::getTotalQuantityOfOrder()
+{
     return totalQuantityOfOrder;
 }
 
-void PurchaseOrder::setTotalQuantityOfOrder(int _totalQuantityOfOrder){
+void PurchaseOrder::setTotalQuantityOfOrder(int _totalQuantityOfOrder)
+{
     totalQuantityOfOrder = _totalQuantityOfOrder;
 }
 
-int PurchaseOrder::getTradedQuantityOfOrder() {
+int PurchaseOrder::getTradedQuantityOfOrder()
+{
     return tradedQuantityOfOrder;
 }
 
-void PurchaseOrder::setTradedQuantityOfOrder(int _tradedQuantityOfOrder){
+void PurchaseOrder::setTradedQuantityOfOrder(int _tradedQuantityOfOrder)
+{
     tradedQuantityOfOrder = _tradedQuantityOfOrder;
+}
+
+int PurchaseOrder::getOrderSource()
+{
+    return orderSource;
+}
+
+void PurchaseOrder::setOrderSource(int _orderSource)
+{
+    orderSource = _orderSource;
 }

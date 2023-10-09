@@ -10,9 +10,9 @@ struct StockInfo
     double bid = 0;
     double ask = 0;
     int totalTradedQuantity = 0;
-    vector<double> historicalPrices;
     vector<PurchaseOrder> purchaseOrders;
     vector<SaleOrder> saleOrders;
+    double lastTradePrice = 0;
 };
 
 #endif
