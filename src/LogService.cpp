@@ -178,6 +178,7 @@ map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *o
 {
 
     vector<string> symbols;
+    map<string, vector<StockMarketVolume>> marketVolume = {};
 
     for (const auto &pair : *offersBook)
     {
@@ -186,10 +187,13 @@ map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *o
 
     string symbol = symbols[0];
 
+    if (symbols.size() == 0) {
+        return marketVolume;
+    }
+
     vector<PurchaseOrder> purchaseOrders = (*offersBook)[symbol].purchaseOrders;
     vector<SaleOrder> saleOrders = (*offersBook)[symbol].saleOrders;
 
-    map<string, vector<StockMarketVolume>> marketVolume = {};
     StockMarketVolume stockMarketVolume;
     int lastIdx = 0;
 
