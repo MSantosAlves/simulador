@@ -28,7 +28,6 @@ class TraderAccount:
         return
 
     def onTrade(self, data):
-        print("Strategy onBook")
         event = data["event"]
         symbol = data["symbol"]
         price = data["price"]
@@ -48,8 +47,6 @@ class TraderAccount:
         if self.trade_entirely_filled(event):
             position_value = self.position[symbol] * self.book.stocks[symbol]["last_trade_price"]
             self.profitAndLoss = (self.cash + position_value) / self.INITIAL_CASH
-            print("Book: {}".format(self.book.stocks))
-            print("Trader Account: {}".format(self.to_json()))
 
     def buy(self, data):
         print(data)

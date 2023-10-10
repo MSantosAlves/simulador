@@ -5,6 +5,7 @@ Python:
 - plotly
 - pandas
 - dash
+- tkinter (sudo apt-get install python3-tk)
 
 Parse Data:
 
