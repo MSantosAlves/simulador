@@ -3,7 +3,7 @@ import json
 
 path = os.getcwd()
 
-target_data_path = path + '/data/b3/20191220/NEG/NEG_BMF_20191220.TXT'
+target_data_path = path + '/data/b3/20191220/raw/neg/NEG_BMF_20191220.TXT'
 stock_neg_data = {}
 data_line = []
 
@@ -47,7 +47,7 @@ with open(target_data_path, 'r') as data_file:
                 stock_neg_data[stock_symbol]["prices"][trade_hour][trade_minute]["last_price_seconds"] = trade_seconds
 
 json_object = json.dumps(stock_neg_data, indent=4)
-destiny_path = path + '/data/b3/20191220/PROCESSED/COMPILED/' + "B3_NEG_DATA.json"
+destiny_path = path + '/data/b3/20191220/compiled/B3_NEG_DATA.json'
 
 with open(destiny_path, 'w') as f:
     f.write(json_object)

@@ -25,8 +25,7 @@ DataService::DataService(string _date, string _dataPath, map<string, StockDataIn
 
 void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *semaphore, string orderType)
 {
-    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
-    string filePath = dataPath + sysFileChar + date + sysFileChar;
+    string filePath = dataPath + "/" + date +  "/raw/";
     int timespanInNs = 100000000; // Default = 100ms
 
     if (simulationSpeed == "FAST") {
@@ -62,7 +61,7 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
             fileInfo = orderType == "SALES" ? targetStocksDataInfo[currentStock].vdaFilesInfo[filesToRead[j]] : targetStocksDataInfo[currentStock].cpaFilesInfo[filesToRead[j]];
 
             currentFile = filesToRead[j];
-            currentFilePath = filePath + sysFileChar + currentFile;
+            currentFilePath = filePath + "/" + currentFile;
             ifstream dataFile(currentFilePath);
 
             // Where stock orders starts

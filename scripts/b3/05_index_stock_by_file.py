@@ -3,9 +3,11 @@ import json
 
 path = os.getcwd()
 
-target_data_path = path + '/data/b3/20191220/' + 'PROCESSED'
+target_data_path = path + '/data/b3/20191220/processed'
 
 file_list = [f for f in os.listdir(target_data_path) if os.path.isfile(os.path.join(target_data_path, f))]
+
+file_list.remove(".gitkeep")
 
 final_data = {}
 
@@ -61,8 +63,8 @@ for file_name in file_list:
             else:
                 final_data[stock_symbol]["sell_files"].append(new_file_name)
         
-json_object = json.dumps(final_data, indent=4)
-destiny_path = path + '/data/b3/20191220/PROCESSED/COMPILED/' + "INDEX_STOCK_FILES.json"
+json_object = json.dumps(dict(sorted(final_data.items())), indent=4)
+destiny_path = path + '/data/b3/20191220/compiled/INDEX_STOCK_FILES.json'
 
 with open(destiny_path, 'w') as f:
     f.write(json_object)

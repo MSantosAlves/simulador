@@ -3,9 +3,10 @@ from datetime import datetime
 from filehandler import FileHandler
 
 class Book:
-    def __init__(self):
+    def __init__(self, symbol):
         self.stocks = {}
         self.stocks_last_price = {}
+        self.symbol = symbol
 
         directory_path = "./scripts/market-client/execution-history"
         self.history_file_name = "{}/history_{}.csv".format(directory_path, str(time.time()).split(".")[0])
@@ -40,7 +41,7 @@ class Book:
             
     def update_market_volume(self, data):
         header = "Symbol,Price,Quantity,Direction\n"
-        data_to_write = header + "\n".join(["AFSF20,{},{},{}".format(el["price"], el["quantity"], el["direction"]) for el in  data["market_volume"]["AFSF20"]])
+        data_to_write = header + "\n".join(["{},{},{},{}".format(self.symbol, el["price"], el["quantity"], el["direction"]) for el in  data["market_volume"][self.symbol]])
         self.volume_file_handler.file.seek(0)
         self.volume_file_handler.write_to_file(data_to_write)
         self.volume_file_handler.truncate()

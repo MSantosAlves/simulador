@@ -8,13 +8,18 @@ import plotly.graph_objects as go
 
 class PlotlibServer:
 
-    def __init__(self):
+    def __init__(self, symbol):
+        self.symbol = symbol
         self.app = Dash()
         history_directory_path = "./scripts/market-client/execution-history"
-        self.history_file_path = history_directory_path + "/" + [filename for filename in os.listdir(history_directory_path) if os.path.isfile(os.path.join(history_directory_path, filename))][-1]
+        history_files = [filename for filename in os.listdir(history_directory_path) if os.path.isfile(os.path.join(history_directory_path, filename))]
+        history_files.remove(".gitkeep")
+        self.history_file_path = history_directory_path + "/" + sorted(history_files)[-1]
 
         volume_directory_path = "./scripts/market-client/market-volume"
-        self.volume_file_path = volume_directory_path + "/" + [filename for filename in os.listdir(volume_directory_path) if os.path.isfile(os.path.join(volume_directory_path, filename))][-1]
+        volume_files = [filename for filename in os.listdir(volume_directory_path) if os.path.isfile(os.path.join(volume_directory_path, filename))]
+        volume_files.remove(".gitkeep")
+        self.volume_file_path = volume_directory_path + "/" + sorted(volume_files)[-1]
 
     def start_plotting_thread(self):
         plotting_thread = threading.Thread(target=self.start_plotting)
@@ -42,15 +47,15 @@ class PlotlibServer:
 
             df = pd.read_csv(self.history_file_path)
 
-            # Filter data for symbol 'AFSF20'
-            symbol_data = df[df['Symbol'] == 'AFSF20']
+            # Filter data for target symbol
+            symbol_data = df[df['Symbol'] == self.symbol]
 
             # Convert the 'Time' column to datetime
             symbol_data['Time'] = pd.to_datetime(symbol_data['Time'], format="%H:%M:%S.%f")
             symbol_data['Time'] = symbol_data['Time'].dt.strftime('%H:%M:%S.%f')
 
             # Plot the graph using Plotly Express
-            fig = px.line(symbol_data, x='Time', y='Price', title='AFSF20 Price over Time')
+            fig = px.line(symbol_data, x='Time', y='Price', title='{} Price over Time'.format(self.symbol))
             fig.update_xaxes(title_text='Time', tickformat='%H:%M:%S.%f', tickvals=symbol_data['Time'][::100])
             fig.update_yaxes(title_text='Price')
             
@@ -62,7 +67,7 @@ class PlotlibServer:
 
             df = pd.read_csv(self.volume_file_path)
 
-            df = df[df['Symbol'] == 'AFSF20']
+            df = df[df['Symbol'] == self.symbol]
 
             fig = go.Figure()
 
@@ -74,7 +79,7 @@ class PlotlibServer:
             fig.add_trace(go.Scatter(x=sale_data['Price'], y=sale_data['Quantity'], mode='lines', fill='tozeroy',
                                      line=dict(color='red'), name='Oferta de Venda'))
 
-            fig.update_layout(title='Preço vs Quantidade em oferta',
+            fig.update_layout(title='Preço vs Quantidade em oferta ({})'.format(self.symbol),
                               xaxis_title='Preço',
                               yaxis_title='Quantidade',
                               xaxis=dict(tickformat='.2f'))

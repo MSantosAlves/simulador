@@ -364,7 +364,30 @@ FodyWeavers.xsd
 
 # Local folders
 
-/data/*
+data/b3/20191220/plots/*
+data/b3/20191220/raw/cpa/*
+data/b3/20191220/raw/vda/*
+data/b3/20191220/raw/neg/*
+data/b3/20191220/compiled/*
+data/b3/20191220/processed/*
+data/b3/20191220/raw/*
+
+# exception to the rule
+!data/b3/20191220/raw/cpa
+!data/b3/20191220/raw/vda
+!data/b3/20191220/raw/neg
+!data/b3/20191220/plots/.gitkeep 
+!data/b3/20191220/raw/cpa/.gitkeep 
+!data/b3/20191220/raw/vda/.gitkeep 
+!data/b3/20191220/raw/neg/.gitkeep 
+!data/b3/20191220/compiled/.gitkeep
+!data/b3/20191220/processed/.gitkeep
+
 .vscode/settings.json
+
 /scripts/market-client/execution-history/*
 /scripts/market-client/market-volume/*
+!scripts/market-client/execution-history/.gitkeep
+!scripts/market-client/market-volume/.gitkeep
+
+/build-dir/*
