@@ -55,7 +55,7 @@ class PlotlibServer:
             symbol_data['Time'] = symbol_data['Time'].dt.strftime('%H:%M:%S.%f')
 
             # Plot the graph using Plotly Express
-            fig = px.line(symbol_data, x='Time', y='Price', title='{} Price over Time'.format(self.symbol))
+            fig = px.line(symbol_data, x='Time', y='Price', title='Preço vs Tempo ({})'.format(self.symbol))
             fig.update_xaxes(title_text='Time', tickformat='%H:%M:%S.%f', tickvals=symbol_data['Time'][::100])
             fig.update_yaxes(title_text='Price')
             

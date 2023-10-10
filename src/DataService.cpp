@@ -29,7 +29,7 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
     int timespanInNs = 100000000; // Default = 100ms
 
     if (simulationSpeed == "FAST") {
-        timespanInNs = 1;
+        timespanInNs = 1000000;
     }
     else if (simulationSpeed == "NORMAL") {
         timespanInNs = 100000000; // 100ms

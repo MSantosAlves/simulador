@@ -2,7 +2,7 @@
   "date": "20191220",
   "dataPath": "/data/b3",
   "targetStocks": [
-    "AFSF20"
+    "WING20"
   ],
-  "simulationSpeed": "NORMAL"
+  "simulationSpeed": "FAST"
 }
