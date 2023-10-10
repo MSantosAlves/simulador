@@ -53,3 +53,7 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
 endif()
 
 # TODO: Adicione testes e instale destinos, se necessário.
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+target_link_libraries(simulador PRIVATE Threads::Threads)

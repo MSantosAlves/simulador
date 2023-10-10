@@ -11,10 +11,14 @@ class PlotlibServer:
     def __init__(self):
         self.app = Dash()
         history_directory_path = "./scripts/market-client/execution-history"
-        self.history_file_path = history_directory_path + "/" + [filename for filename in os.listdir(history_directory_path) if os.path.isfile(os.path.join(history_directory_path, filename))][-1]
+        history_files = [filename for filename in os.listdir(history_directory_path) if os.path.isfile(os.path.join(history_directory_path, filename))]
+        history_files.remove(".gitkeep")
+        self.history_file_path = history_directory_path + "/" + sorted(history_files)[-1]
 
         volume_directory_path = "./scripts/market-client/market-volume"
-        self.volume_file_path = volume_directory_path + "/" + [filename for filename in os.listdir(volume_directory_path) if os.path.isfile(os.path.join(volume_directory_path, filename))][-1]
+        volume_files = [filename for filename in os.listdir(volume_directory_path) if os.path.isfile(os.path.join(volume_directory_path, filename))]
+        volume_files.remove(".gitkeep")
+        self.volume_file_path = volume_directory_path + "/" + sorted(volume_files)[-1]
 
     def start_plotting_thread(self):
         plotting_thread = threading.Thread(target=self.start_plotting)

@@ -13,21 +13,17 @@ using namespace std;
 
 Config::Config()
 {
-    filesystem::path pwd = filesystem::current_path();
+    filesystem::path pwd = filesystem::current_path().parent_path();
     StringUtils stringUtils;
-    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
-    string targetChar = "\\"; //(_WIN64 || _WIN32) ? "/" : "\\";
     string pwdString = stringUtils.pathToString(pwd);
-    string fullPath = pwdString + sysFileChar + "config.json";
+    string fullPath = pwdString +"/config.json";
 
     ifstream jsonFile(fullPath);
     json jsonData = json::parse(jsonFile);
 
     string date = jsonData["date"];
-    string dataPath = pwdString + stringUtils.replaceAllstring(jsonData["dataPath"], targetChar, sysFileChar);
 
-    string indexStocksPath = dataPath + sysFileChar + date + sysFileChar + "PROCESSED" + sysFileChar + "COMPILED" + sysFileChar + "INDEX_STOCK_FILES.json";
-
+    string indexStocksPath = pwdString + "/data/b3/compiled/INDEX_STOCK_FILES.json";
     ifstream indexStocksFile(indexStocksPath);
     json indexStocksJson = json::parse(indexStocksFile);
 

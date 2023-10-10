@@ -2,12 +2,13 @@ import os
 import json 
 
 path = os.getcwd()
-target_data_directories = ["CPA", "VDA"]
+
+target_data_directories = ["cpa", "vda"]
 
 for data_dir in target_data_directories:
-    directory_path = path + '/data/b3/20191220/' + data_dir
+    directory_path = path + '/data/b3/20191220/raw/' + data_dir
     file_list = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, f))]
-    file_list = [f for f in file_list if f not in ["CPA_MOCK.txt", "VDA_MOCK.txt"]]
+    file_list = [f for f in file_list if f not in ["CPA_MOCK.txt", "VDA_MOCK.txt", ".gitkeep"]]
 
     for file_name in file_list:
     
@@ -71,7 +72,7 @@ for data_dir in target_data_directories:
         json_object = json.dumps(file_info, indent = 4)
 
         file_name_without_extension = file_name.split(".txt")[0]
-        destiny_path =  path + '/data/b3/20191220/PROCESSED/' + file_name_without_extension + "_processed.json"
+        destiny_path =  path + '/data/b3/20191220/processed/' + file_name_without_extension + "_processed.json"
 
         with open(destiny_path, 'w') as f:
             f.write(json_object)

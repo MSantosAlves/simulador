@@ -5,7 +5,7 @@ import numpy as np
 
 path = os.getcwd()
 
-target_data_path = path + '/data/b3/20191220/PROCESSED/COMPILED/B3_NEG_DATA.json'
+target_data_path = path + '/data/b3/20191220/compiled/B3_NEG_DATA.json'
 stock_neg_data = {}
 data_line = []
 
@@ -36,7 +36,7 @@ ax.set(xlabel='Time (20/12/2019)', ylabel='Price (R$)',
        title='{} Price variation over time'.format(stock_symbol))
 ax.grid()
 
-filename = path + '/data/history/plots/' + stock_symbol + "_price_history_plot.png"
+filename = path + '/data/plots/' + stock_symbol + "_price_history_plot.png"
 fig.savefig(filename)
 
 
