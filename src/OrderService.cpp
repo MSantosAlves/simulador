@@ -4,6 +4,7 @@
 #include "ArrayUtils.h"
 #include "OrderUtils.h"
 #include "StockInfo.h"
+#include "OrderStatuses.h"
 
 #include <iostream>
 #include <fstream>
@@ -56,6 +57,62 @@ bool updateAskPrice(SaleOrder saleOrder, string symbol, map<string, StockInfo> *
     return false;
 }
 
+void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils orderUtils, ServerResponseSender *responseSender)
+{
+    bool isBuyOrder = order.getOrderSide() == "1";
+
+    if (isBuyOrder)
+    {
+        PurchaseOrder purchaseOrderBuffer;
+        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+
+        // Insert new offer on purchases orders queue
+        arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
+
+        if (updateBidPrice(purchaseOrderBuffer, symbol, offersBook))
+        {
+            json jsonObject = {
+                {"event", "UPDATE_BOOK"},
+                {"symbol", symbol},
+                {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                {"bid", (*offersBook)[symbol].bid},
+                {"ask", (*offersBook)[symbol].ask},
+                {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+            responseSender->sendResponse(jsonObject);
+            orderUtils.executePossibleTrades(symbol, offersBook, 1, responseSender);
+        }
+    }
+    else
+    {
+        SaleOrder saleOrderBuffer;
+        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+
+        // Insert new offer on sales orders queue
+        arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
+
+        if (updateAskPrice(saleOrderBuffer, symbol, offersBook))
+        {
+            json jsonObject = {
+                {"event", "UPDATE_BOOK"},
+                {"symbol", symbol},
+                {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                {"bid", (*offersBook)[symbol].bid},
+                {"ask", (*offersBook)[symbol].ask},
+                {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+            responseSender->sendResponse(jsonObject);
+            orderUtils.executePossibleTrades(symbol, offersBook, 2, responseSender);
+        }
+    }
+}
+
+void handleReplacedOrder() {}
+
+void handleCancelOrExpiredOrder() {}
+
 // Class methods
 
 OrderService::OrderService(vector<string> _targetStocks)
@@ -100,64 +157,29 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
         rawOrdersQueue->erase(rawOrdersQueue->begin());
 
-        if (symbol != "" && isTargetSymbol(targetStocks, symbol))
+        order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
+
+        int orderStatus = order.getOrderStatus() == "C" ? 9 : stoi(order.getOrderStatus());
+
+        if (orderStatus == OrderStatuses::Status::REJECTED || orderStatus == OrderStatuses::Status::PARTIALLY_FILLED || orderStatus == OrderStatuses::Status::FILLED)
         {
-            order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
-
-            bool isBuyOrder = order.getOrderSide() == "1";
-
-            if (isBuyOrder)
-            {
-                PurchaseOrder purchaseOrderBuffer;
-                purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
-
-                // Insert new offer on purchases orders queue
-                arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
-
-                if (updateBidPrice(purchaseOrderBuffer, symbol, offersBook))
-                {
-                    json jsonObject = {
-                        {"event", "UPDATE_BOOK"},
-                        {"symbol", symbol},
-                        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
-                        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
-                        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
-                        {"bid", (*offersBook)[symbol].bid},
-                        {"ask", (*offersBook)[symbol].ask},
-                        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
-                    responseSender->sendResponse(jsonObject);
-                    orderUtils.executePossibleTrades(symbol, offersBook, 1, tradeHistoryFile, responseSender);
-                }
-            }
-            else
-            {
-                SaleOrder saleOrderBuffer;
-                saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
-
-                // Insert new offer on sales orders queue
-                arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
-
-                if (updateAskPrice(saleOrderBuffer, symbol, offersBook))
-                {
-                    json jsonObject = {
-                        {"event", "UPDATE_BOOK"},
-                        {"symbol", symbol},
-                        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
-                        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
-                        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
-                        {"bid", (*offersBook)[symbol].bid},
-                        {"ask", (*offersBook)[symbol].ask},
-                        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
-                    responseSender->sendResponse(jsonObject);
-                    orderUtils.executePossibleTrades(symbol, offersBook, 2, tradeHistoryFile, responseSender);
-                }
-            }
+            // Just ignore
+        }
+        else if (orderStatus == OrderStatuses::Status::CANCELLED || orderStatus == OrderStatuses::Status::EXPIRED)
+        {
+            // remove from book
+        }
+        else if (orderStatus == OrderStatuses::Status::REPLACED)
+        {
+        }
+        else if (orderStatus == OrderStatuses::Status::NEW)
+        {
+            handleNewOrder(symbol, order, offersBook, arrayUtils, orderUtils, responseSender);
         }
         else
         {
-            symbol = "";
+            cout << "[ERROR] Unmaped Order Status: " << order.getOrderStatus() << endl;
         }
-
         semaphore->release();
         this_thread::sleep_for(timespan);
     }

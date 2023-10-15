@@ -45,7 +45,7 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
     FileDataStockInfo fileInfo;
     vector<string> filesToRead = {};
 
-    filePath += orderType == "SALES" ? "VDA" : "CPA";
+    filePath += orderType == "SALES" ? "vda" : "cpa";
     string orderSufix = orderType == "SALES" ? ";VDA" : ";CPA";
 
     for (int i = 0; i < targetStocks.size(); i++)

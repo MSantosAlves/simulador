@@ -89,7 +89,7 @@ void sendUpdateBookEvent(string symbol, map<string, StockInfo> *offersBook, Serv
     responseSender->sendResponse(jsonObject);
 }
 
-void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ofstream &tradeHistoryFile, ServerResponseSender *responseSender)
+void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ServerResponseSender *responseSender)
 {
     // bookUpdateDirection = 1 new BID price; bookUpdateDirection = 2 new ASK price
     vector<SaleOrder> saleOrders = (*offersBook)[symbol].saleOrders;
@@ -98,7 +98,6 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
     PurchaseOrder currPurchaseOrder;
     SaleOrder currSaleOrder;
     int tradedQty = 0;
-    string tradeString;
 
     // BID changed, but there is no sale order to be processed OR ASK changed, but there is no purchase order to be processed.
     if ((bookUpdateDirection == 1 && (*offersBook)[symbol].saleOrders.size() == 0) || (bookUpdateDirection == 2 && (*offersBook)[symbol].purchaseOrders.size() == 0))
@@ -155,8 +154,6 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
             (*offersBook)[symbol].lastTradePrice = currSaleOrder.getOrderPrice();
 
-            tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
-            tradeHistoryFile << tradeString + "\n";
 
             // Remove both orders from book, given that both were entirely filled
             (*offersBook)[symbol].saleOrders.erase((*offersBook)[symbol].saleOrders.begin());
@@ -223,8 +220,6 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
             (*offersBook)[symbol].lastTradePrice = currSaleOrder.getOrderPrice();
 
-            tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
-            tradeHistoryFile << tradeString + "\n";
 
             if (currSaleOrder.getOrderSource() == 1)
             {
@@ -282,8 +277,6 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
             (*offersBook)[symbol].lastTradePrice = currSaleOrder.getOrderPrice();
 
-            tradeString = symbol + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
-            tradeHistoryFile << tradeString + "\n";
 
             if (currSaleOrder.getOrderSource() == 1)
             {
@@ -338,7 +331,6 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
 {
     const string PURCHASE_ORDER = "1";
     const string SALE_ORDER = "2";
-    string tradeString = "";
 
     // BID: highest price a buyer will pay to buy a stock
     // ASK: lowest price a seller watns to sell a stock
@@ -368,8 +360,6 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                     purchaseOrderBuffer.setTradedQuantityOfOrder(purchaseOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
                     currSaleOrder.setTotalQuantityOfOrder(0);
                     currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
-                    tradeString = symbol + ";" + to_string(purchaseOrderBuffer.getOrderPrice()) + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
-                    tradeHistoryFile << tradeString + "\n";
                 }
                 else
                 {
@@ -378,8 +368,6 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                     purchaseOrderBuffer.setTradedQuantityOfOrder(purchaseOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
                     currSaleOrder.setTotalQuantityOfOrder(currSaleOrder.getTotalQuantityOfOrder() - tradedQty);
                     currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
-                    tradeString = symbol + ";" + to_string(purchaseOrderBuffer.getOrderPrice()) + ";" + to_string(currSaleOrder.getOrderPrice()) + ";" + to_string(tradedQty);
-                    tradeHistoryFile << tradeString + "\n";
                 }
 
                 (*offersBook)[symbol].totalTradedQuantity += tradedQty;
@@ -469,8 +457,6 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                     saleOrderBuffer.setTradedQuantityOfOrder(saleOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
                     currPurchaseOrder.setTotalQuantityOfOrder(0);
                     currPurchaseOrder.setTradedQuantityOfOrder(currPurchaseOrder.getTradedQuantityOfOrder() + tradedQty);
-                    tradeString = symbol + ";" + to_string(currPurchaseOrder.getOrderPrice()) + ";" + to_string(saleOrderBuffer.getOrderPrice()) + ";" + to_string(tradedQty);
-                    tradeHistoryFile << tradeString + "\n";
                 }
                 else
                 {
@@ -479,8 +465,6 @@ void OrderUtils::orderMatching(string symbol, Order order, map<string, StockInfo
                     saleOrderBuffer.setTradedQuantityOfOrder(saleOrderBuffer.getTradedQuantityOfOrder() + tradedQty);
                     currPurchaseOrder.setTotalQuantityOfOrder(currPurchaseOrder.getTotalQuantityOfOrder() - tradedQty);
                     currPurchaseOrder.setTradedQuantityOfOrder(currPurchaseOrder.getTradedQuantityOfOrder() + tradedQty);
-                    tradeString = symbol + ";" + to_string(currPurchaseOrder.getOrderPrice()) + ";" + to_string(saleOrderBuffer.getOrderPrice()) + ";" + to_string(tradedQty);
-                    tradeHistoryFile << tradeString + "\n";
                 }
 
                 (*offersBook)[symbol].totalTradedQuantity += tradedQty;

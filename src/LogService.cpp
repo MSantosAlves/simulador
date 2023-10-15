@@ -180,6 +180,10 @@ map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *o
     vector<string> symbols;
     map<string, vector<StockMarketVolume>> marketVolume = {};
 
+    if(offersBook->empty()){
+        return marketVolume;
+    }
+
     for (const auto &pair : *offersBook)
     {
         symbols.push_back(pair.first);
