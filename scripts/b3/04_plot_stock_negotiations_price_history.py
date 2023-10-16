@@ -12,7 +12,7 @@ data_line = []
 data_plot_x = []
 data_plot_y = []
 
-stock_symbol = "DOLF20"
+stock_symbol = "WING20"
 with open(target_data_path, 'r') as data_file:
     data = json.load(data_file)
 
@@ -21,7 +21,7 @@ for hour in data[stock_symbol]["prices"].keys():
         hours = "0" + hour if int(hour) < 10 else hour
         minutes = "0" + minute if int(minute) < 10 else minute
         time = hours + ":" + minutes
-        price = float(data[stock_symbol]["prices"][hour][minute]["price"]) / 100.0
+        price = float(data[stock_symbol]["prices"][hour][minute]["price"])
 
         data_plot_x.append(time)
         data_plot_y.append(price)
@@ -30,7 +30,7 @@ fig, ax = plt.subplots()
 ax.plot(data_plot_x, data_plot_y)
 
 plt.xticks(ticks=[data_plot_x[0], data_plot_x[-1]])
-plt.yticks(np.arange(min(data_plot_y), max(data_plot_y), 0.05))
+plt.yticks(np.arange(min(data_plot_y), max(data_plot_y), 50))
 
 ax.set(xlabel='Time (20/12/2019)', ylabel='Price (R$)',
        title='{} Price variation over time'.format(stock_symbol))

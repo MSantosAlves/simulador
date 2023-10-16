@@ -41,6 +41,8 @@ class Book:
             
     def update_market_volume(self, data):
         header = "Symbol,Price,Quantity,Direction\n"
+        if self.symbol not in data["market_volume"]:
+            return
         data_to_write = header + "\n".join(["{},{},{},{}".format(self.symbol, el["price"], el["quantity"], el["direction"]) for el in  data["market_volume"][self.symbol]])
         self.volume_file_handler.file.seek(0)
         self.volume_file_handler.write_to_file(data_to_write)

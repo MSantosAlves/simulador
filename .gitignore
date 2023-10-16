@@ -364,7 +364,7 @@ FodyWeavers.xsd
 
 # Local folders
 
-data/b3/20191220/plots/*
+data/plots/*
 data/b3/20191220/raw/cpa/*
 data/b3/20191220/raw/vda/*
 data/b3/20191220/raw/neg/*
@@ -376,7 +376,7 @@ data/b3/20191220/raw/*
 !data/b3/20191220/raw/cpa
 !data/b3/20191220/raw/vda
 !data/b3/20191220/raw/neg
-!data/b3/20191220/plots/.gitkeep 
+!data/plots/.gitkeep 
 !data/b3/20191220/raw/cpa/.gitkeep 
 !data/b3/20191220/raw/vda/.gitkeep 
 !data/b3/20191220/raw/neg/.gitkeep 
