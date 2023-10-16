@@ -19,7 +19,6 @@ class OrderUtils
 public:
 	OrderUtils();
 	Order parseOrder(string order, StringUtils stringUtils);
-	void orderMatching(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, Trader *traderAccount, ofstream &trade_history_file);
 	void executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ServerResponseSender *responseSender);
 };
 
