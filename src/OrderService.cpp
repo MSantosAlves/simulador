@@ -64,7 +64,7 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
     if (isBuyOrder)
     {
         PurchaseOrder purchaseOrderBuffer;
-        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
         // Market offers
         if(purchaseOrderBuffer.getOrderPrice() == 0){
@@ -92,7 +92,7 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
     else
     {
         SaleOrder saleOrderBuffer;
-        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
         // Market offers
         if(saleOrderBuffer.getOrderPrice() == 0){
@@ -140,7 +140,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             return;
         }
 
-        PurchaseOrder updatedOrder = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+        PurchaseOrder updatedOrder = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
         // Market offers
         if(updatedOrder.getOrderPrice() == 0){
@@ -158,8 +158,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             {
 
                 int newPriority = (*offersBook)[symbol].purchaseOrders[priceLastIndex].getPriorityTimeInteger() + 1;
-                updatedOrder.setPriorityTimeInteger(newPriority);
-                updatedOrder.setPriorityTime(to_string(newPriority));
+                updatedOrder.setPriorityIndicator(newPriority);
 
                 (*offersBook)[symbol].purchaseOrders.insert((*offersBook)[symbol].purchaseOrders.begin() + priceLastIndex, updatedOrder);
             }
@@ -207,7 +206,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             return;
         }
 
-        SaleOrder updatedOrder = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+        SaleOrder updatedOrder = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
 
         // Market offers
         if(updatedOrder.getOrderPrice() == 0){
@@ -224,9 +223,8 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             if (priceLastIndex >= 0)
             {
 
-                int newPriority = (*offersBook)[symbol].saleOrders[priceLastIndex].getPriorityTimeInteger() + 1;
-                updatedOrder.setPriorityTimeInteger(newPriority);
-                updatedOrder.setPriorityTime(to_string(newPriority));
+                long long newPriority = (*offersBook)[symbol].saleOrders[priceLastIndex].getPriorityIndicator() + 1;
+                updatedOrder.setPriorityIndicator(newPriority);
 
                 (*offersBook)[symbol].saleOrders.insert((*offersBook)[symbol].saleOrders.begin() + priceLastIndex, updatedOrder);
             }
@@ -360,17 +358,17 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
 
         order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
 
-        string delimiter = ":";
-        int hourOfTheDay = stoi(stringUtils.split(order.getPriorityTime(), delimiter)[0]);
-        long long sequentialOrderNumber = stoll(order.getSequentialOrderNumber());
+        // string delimiter = ":";
+        // int hourOfTheDay = stoi(stringUtils.split(order.getPriorityTime(), delimiter)[0]);
+        // long long sequentialOrderNumber = stoll(order.getSequentialOrderNumber());
 
         //sequentialOrderNumber < 725370158444
-        if (hourOfTheDay < 9 || hourOfTheDay > 18)
-        {
-            semaphore->release();
-            this_thread::sleep_for(timespan);
-            continue;
-        }
+        // if (hourOfTheDay < 9 || hourOfTheDay > 18)
+        // {
+        //     semaphore->release();
+        //     this_thread::sleep_for(timespan);
+        //     continue;
+        // }
 
         int orderStatus = order.getOrderStatus() == "C" ? 9 : stoi(order.getOrderStatus());
 

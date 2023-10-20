@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     thread readPurchasesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "PURCHASES");
     thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
     thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender);
-    thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
+    //thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
     thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
     thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
 
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     readPurchasesThread.join();
     readSalesThread.join();
     ordersProcessorThread.join();
-    logSystemThread.join();
+    //logSystemThread.join();
     sendDataOnTickThread.join();
 
     return 0;

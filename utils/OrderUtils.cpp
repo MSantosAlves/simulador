@@ -148,7 +148,11 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
+            if((*offersBook)[symbol].lastTradePrice != 0){
+                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice() + (*offersBook)[symbol].lastTradePrice)/3.0;
+            }else{
+                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
+            }
 
             // Remove both orders from book, given that both were entirely filled
             (*offersBook)[symbol].saleOrders.erase((*offersBook)[symbol].saleOrders.begin());
@@ -213,7 +217,11 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
+            if((*offersBook)[symbol].lastTradePrice != 0){
+                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice() + (*offersBook)[symbol].lastTradePrice)/3.0;
+            }else{
+                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
+            }
 
 
             if (currSaleOrder.getOrderSource() == 1)
@@ -270,7 +278,11 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
+            if((*offersBook)[symbol].lastTradePrice != 0){
+                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice() + (*offersBook)[symbol].lastTradePrice)/3.0;
+            }else{
+                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
+            }
 
 
             if (currSaleOrder.getOrderSource() == 1)

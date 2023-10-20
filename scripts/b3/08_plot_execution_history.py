@@ -1,6 +1,8 @@
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import time
+from datetime import datetime
 
 path = os.getcwd()
 
@@ -26,7 +28,7 @@ with open(history_file_path, 'r') as data_file:
         data_plot_y.append(float(data_line[1].strip()))
 
 
-size = 5000
+size = 500#len(data_plot_y)
 
 downsample_factor = len(data_plot_x) // size
 
@@ -40,10 +42,12 @@ ax.plot(x_values,y_values)
 plt.xticks(ticks=[x_values[0], x_values[-1]])
 plt.yticks(np.arange(min(y_values), max(y_values), (max(y_values) - min(y_values)) // 10))
 
-ax.set(xlabel='Time (20/12/2019)', ylabel='Price (R$)',
+ax.set(xlabel='Time (at 20/12/2019)', ylabel='Price (R$)',
        title='{} Price variation over time (Simulation)'.format(stock_symbol))
 ax.grid()
 
-filename = path + '/data/plots/' + stock_symbol + "_execution_history_{}_price_history_plot.png".format(size)
+
+
+filename = path + '/data/plots/' + stock_symbol + "_execution_history_plot_price_" + datetime.utcnow().strftime('%T.%f')[:-3] + ".png"
 print(filename)
 fig.savefig(filename)
