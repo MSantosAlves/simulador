@@ -14,13 +14,15 @@ private:
     string priorityTime;
     double orderPrice = -1;
     long long priorityTimeInteger;
+    long long priorityIndicator;
     int totalQuantityOfOrder = 0;
     int tradedQuantityOfOrder = 0;
     int orderSource = 0;
+    int agressorIndicator = 0;
 
 public:
     PurchaseOrder();
-    PurchaseOrder(string sequentialOrderNumber, string secondaryOrderID, string priorityTime, string orderPrice, string totalQuantityOfOrder, string tradedQuantityOfOrder, int orderSource);
+    PurchaseOrder(string sequentialOrderNumber, string secondaryOrderID, string priorityTime, string priorityIndicator, string orderPrice, string totalQuantityOfOrder, string tradedQuantityOfOrder, int orderSource, string agressorIndicator);
 
     string getSequentialOrderNumber();
     void setSequentialOrderNumber(string sequentialOrderNumber);
@@ -37,6 +39,9 @@ public:
     long long getPriorityTimeInteger() const;
     void setPriorityTimeInteger(long long priorityTimeInteger);
 
+    long long getPriorityIndicator() const;
+    void setPriorityIndicator(long long priorityIndicator);
+
     int getTotalQuantityOfOrder();
     void setTotalQuantityOfOrder(int totalQuantityOfOrder);
 
@@ -45,6 +50,9 @@ public:
 
     int getOrderSource();
     void setOrderSource(int orderSource);
+
+    int getAgressorIndicator();
+    void setAgressorIndicator(string agressorIndicator);
 };
 
 #endif

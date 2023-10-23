@@ -62,6 +62,15 @@ for file_name in file_list:
                 final_data[stock_symbol]["buy_files"].append(new_file_name)
             else:
                 final_data[stock_symbol]["sell_files"].append(new_file_name)
+
+for entry in final_data:
+    if "buy_files" in final_data[entry]:
+        final_data[entry]["buy_files"] = sorted(final_data[entry]["buy_files"])
+    final_data[entry]["buy_files_info"] = dict(sorted(final_data[entry]["buy_files_info"].items()))
+
+    if "sell_files" in final_data[entry]:
+        final_data[entry]["sell_files"] = sorted(final_data[entry]["sell_files"])
+    final_data[entry]["sell_files_info"] = dict(sorted(final_data[entry]["sell_files_info"].items()))
         
 json_object = json.dumps(dict(sorted(final_data.items())), indent=4)
 destiny_path = path + '/data/b3/20191220/compiled/INDEX_STOCK_FILES.json'

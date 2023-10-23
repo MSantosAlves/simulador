@@ -7,7 +7,7 @@ using namespace std;
 
 SaleOrder::SaleOrder() {}
 
-SaleOrder::SaleOrder(string _sequentialOrderNumber, string _secondaryOrderID, string _priorityTime, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder, int _orderSource)
+SaleOrder::SaleOrder(string _sequentialOrderNumber, string _secondaryOrderID, string _priorityTime, string _priorityIndicator, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder, int _orderSource, string _agressorIndicator)
 {
     StringUtils stringUtils;
 
@@ -15,10 +15,12 @@ SaleOrder::SaleOrder(string _sequentialOrderNumber, string _secondaryOrderID, st
     secondaryOrderID = _secondaryOrderID;
     priorityTime = _priorityTime;
     priorityTimeInteger = stringUtils.dateToInt(_priorityTime);
+    priorityIndicator = stoll(_priorityIndicator);
     orderPrice = stoi(_orderPrice);
     totalQuantityOfOrder = stoi(_totalQuantityOfOrder);
     tradedQuantityOfOrder = stoi(_tradedQuantityOfOrder);
     orderSource = _orderSource;
+    agressorIndicator = stoi(_agressorIndicator);
 }
 
 string SaleOrder::getSequentialOrderNumber()
@@ -71,6 +73,17 @@ void SaleOrder::setPriorityTimeInteger(long long _priorityTimeInteger)
     priorityTimeInteger = _priorityTimeInteger;
 }
 
+long long SaleOrder::getPriorityIndicator() const
+{
+    return priorityIndicator;
+}
+
+void SaleOrder::setPriorityIndicator(long long _priorityIndicator)
+{
+    priorityIndicator = _priorityIndicator;
+}
+
+
 int SaleOrder::getTotalQuantityOfOrder()
 {
     return totalQuantityOfOrder;
@@ -99,4 +112,12 @@ int SaleOrder::getOrderSource()
 void SaleOrder::setOrderSource(int _orderSource)
 {
     orderSource = _orderSource;
+}
+
+int SaleOrder::getAgressorIndicator(){
+    return agressorIndicator;
+}
+
+void SaleOrder::setAgressorIndicator(string _agressorIndicator){
+    agressorIndicator = stoi(_agressorIndicator);
 }

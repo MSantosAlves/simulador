@@ -3,7 +3,7 @@ import json
 
 path = os.getcwd()
 
-target_data_path = path + '/data/b3/20191220/raw/neg/NEG_BMF_20191220.TXT'
+target_data_path = path + '/data/b3/20191220/raw/neg/NEG_BMF_20191220_00.txt'
 stock_neg_data = {}
 data_line = []
 
@@ -48,6 +48,11 @@ with open(target_data_path, 'r') as data_file:
 
 json_object = json.dumps(stock_neg_data, indent=4)
 destiny_path = path + '/data/b3/20191220/compiled/B3_NEG_DATA.json'
+
+# Sort the dictionary by traded_qty in descending order
+sorted_symbols = sorted(stock_neg_data.keys(), key=lambda x: stock_neg_data[x]["traded_qty"], reverse=True)
+print(sorted_symbols[0:100])
+
 
 with open(destiny_path, 'w') as f:
     f.write(json_object)

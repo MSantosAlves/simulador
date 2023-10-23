@@ -14,8 +14,8 @@ public:
     ArrayUtils();
     void insertPurchaseOrder(vector<PurchaseOrder> &offers, const PurchaseOrder &newOffer);
     void insertSaleOrder(vector<SaleOrder> &offers, const SaleOrder &newOffer);
-    int searchPurchaseOrdersFirstMatchingIndex(double price);
-    int searchSaleOrdersFirstMatchingIndex(double price);
+    int searchPurchaseOrdersPriceLastIndex(vector<PurchaseOrder> &offers, double price);
+    int searchSaleOrdersPriceLastIndex(vector<SaleOrder> &offers, double price);
 };
 
 #endif

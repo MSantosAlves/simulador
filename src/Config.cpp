@@ -22,8 +22,10 @@ Config::Config()
     json jsonData = json::parse(jsonFile);
 
     string date = jsonData["date"];
+    string dataPath = jsonData["dataPath"];
 
-    string indexStocksPath = pwdString + "/data/b3/compiled/INDEX_STOCK_FILES.json";
+    string fullDataPath =  pwdString + dataPath;
+    string indexStocksPath = pwdString + "/data/b3/" + date + "/compiled/INDEX_STOCK_FILES.json";
     ifstream indexStocksFile(indexStocksPath);
     json indexStocksJson = json::parse(indexStocksFile);
 
@@ -70,7 +72,7 @@ Config::Config()
     }
 
     setDate(date);
-    setDataPath(dataPath);
+    setDataPath(fullDataPath);
     setTargetStocks(targetStocks);
     setTargetStocksDataInfo(targetStocksDataInfo);
     setSimulationSpeed(simulationSpeed);

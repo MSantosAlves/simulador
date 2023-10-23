@@ -45,7 +45,7 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
     FileDataStockInfo fileInfo;
     vector<string> filesToRead = {};
 
-    filePath += orderType == "SALES" ? "VDA" : "CPA";
+    filePath += orderType == "SALES" ? "vda" : "cpa";
     string orderSufix = orderType == "SALES" ? ";VDA" : ";CPA";
 
     for (int i = 0; i < targetStocks.size(); i++)
@@ -57,10 +57,12 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
         // For each stock, loop through files that contains stock orders
         for (int j = 0; j < filesToRead.size(); j++)
         {
+            currentFile = filesToRead[j];
+            cout << "Current file: " << currentFile << endl;
+            
             // First and Last lines where the current stock orders appears in the current file
             fileInfo = orderType == "SALES" ? targetStocksDataInfo[currentStock].vdaFilesInfo[filesToRead[j]] : targetStocksDataInfo[currentStock].cpaFilesInfo[filesToRead[j]];
 
-            currentFile = filesToRead[j];
             currentFilePath = filePath + "/" + currentFile;
             ifstream dataFile(currentFilePath);
 
@@ -96,6 +98,8 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
                 }
             }
         }
+
+        cout << "Last file completely processed: " << filesToRead[filesToRead.size() - 1] << endl;
     }
 
     return;
