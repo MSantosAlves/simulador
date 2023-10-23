@@ -18,10 +18,11 @@ private:
     int totalQuantityOfOrder = 0;
     int tradedQuantityOfOrder = 0;
     int orderSource = 0;
+    int agressorIndicator = 0;
 
 public:
     SaleOrder();
-    SaleOrder(string sequentialOrderNumber, string secondaryOrderID, string priorityTime, string priorityIndicator, string orderPrice, string totalQuantityOfOrder, string tradedQuantityOfOrder, int orderSource);
+    SaleOrder(string sequentialOrderNumber, string secondaryOrderID, string priorityTime, string priorityIndicator, string orderPrice, string totalQuantityOfOrder, string tradedQuantityOfOrder, int orderSource, string agressorIndicator);
 
     string getSequentialOrderNumber();
     void setSequentialOrderNumber(string sequentialOrderNumber);
@@ -49,6 +50,9 @@ public:
 
     int getOrderSource();
     void setOrderSource(int orderSource);
+
+    int getAgressorIndicator();
+    void setAgressorIndicator(string agressorIndicator);
 };
 
 #endif

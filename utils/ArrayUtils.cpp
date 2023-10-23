@@ -16,7 +16,7 @@ bool comparePurchaseOrders(const PurchaseOrder &a, const PurchaseOrder &b)
     }
     else
     {
-        return a.getPriorityIndicator() < b.getPriorityIndicator();
+        return a.getPriorityTimeInteger() > b.getPriorityTimeInteger();
     }
 }
 
@@ -28,7 +28,7 @@ bool compareSaleOrders(const SaleOrder &a, const SaleOrder &b)
     }
     else
     {
-        return a.getPriorityIndicator() < b.getPriorityIndicator();
+        return a.getPriorityTimeInteger() > b.getPriorityTimeInteger();
     }
 }
 

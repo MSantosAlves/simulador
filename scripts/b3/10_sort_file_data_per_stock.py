@@ -30,15 +30,17 @@ def jump_to_line(file_path, line_number, line_length):
         return raw_data
 
 # Example usage
-file_path = path + "/new_data/OFER_VDA_BMF_20191220_00.txt"
+file_path = path + "/data/b3/20191220/raw/vda/OFER_VDA_BMF_20191220_00.txt"
 line_length = 230
-line_number = 746865
+line_number = 746865 
+#930978 CPA
+#746865 VDA
 
 raw_data = jump_to_line(file_path, line_number, line_length)
 
-sorted_data = sorted(raw_data, key=lambda x: x["priority"])
+sorted_data = sorted(raw_data, key=lambda x: x["priority"], reverse=False)
 
-file_path = path + "/new_data/OFER_VDA_BMF_20191220_00_SORTED.txt"
+file_path = path + "/data/b3/20191220/raw/vda/OFER_VDA_BMF_20191220_00_SORTED.txt"
 with open(file_path, 'w') as file:
     for entry in sorted_data:
         file.write(f'{entry["raw"]}')

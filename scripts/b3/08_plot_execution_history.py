@@ -21,7 +21,7 @@ with open(history_file_path, 'r') as data_file:
     for line in data_file:
         data_line = line.split(",")
         if(data_line[0] == "Symbol"):
-            continue;
+            continue
 
         stock_symbol = data_line[0].strip()
         data_plot_x.append(data_line[2].strip())

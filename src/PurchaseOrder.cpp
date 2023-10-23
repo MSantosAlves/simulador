@@ -6,7 +6,7 @@ using namespace std;
 
 PurchaseOrder::PurchaseOrder() {}
 
-PurchaseOrder::PurchaseOrder(string _sequentialOrderNumber, string _secondaryOrderID,  string _priorityTime, string _priorityIndicator, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder, int _source)
+PurchaseOrder::PurchaseOrder(string _sequentialOrderNumber, string _secondaryOrderID,  string _priorityTime, string _priorityIndicator, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder, int _source, string _agressorIndicator)
 {
     StringUtils stringUtils;
     sequentialOrderNumber = _sequentialOrderNumber;
@@ -18,6 +18,7 @@ PurchaseOrder::PurchaseOrder(string _sequentialOrderNumber, string _secondaryOrd
     totalQuantityOfOrder = stoi(_totalQuantityOfOrder);
     tradedQuantityOfOrder = stoi(_tradedQuantityOfOrder);
     orderSource = _source;
+    agressorIndicator = stoi(_agressorIndicator);
 };
 
 string PurchaseOrder::getSequentialOrderNumber()
@@ -108,4 +109,12 @@ int PurchaseOrder::getOrderSource()
 void PurchaseOrder::setOrderSource(int _orderSource)
 {
     orderSource = _orderSource;
+}
+
+int PurchaseOrder::getAgressorIndicator(){
+    return agressorIndicator;
+}
+
+void PurchaseOrder::setAgressorIndicator(string _agressorIndicator){
+    agressorIndicator = stoi(_agressorIndicator);
 }

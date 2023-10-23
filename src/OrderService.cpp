@@ -64,7 +64,7 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
     if (isBuyOrder)
     {
         PurchaseOrder purchaseOrderBuffer;
-        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
 
         // Market offers
         if(purchaseOrderBuffer.getOrderPrice() == 0){
@@ -92,7 +92,7 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
     else
     {
         SaleOrder saleOrderBuffer;
-        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
 
         // Market offers
         if(saleOrderBuffer.getOrderPrice() == 0){
@@ -140,7 +140,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             return;
         }
 
-        PurchaseOrder updatedOrder = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+        PurchaseOrder updatedOrder = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
 
         // Market offers
         if(updatedOrder.getOrderPrice() == 0){
@@ -206,7 +206,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             return;
         }
 
-        SaleOrder updatedOrder = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource()));
+        SaleOrder updatedOrder = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
 
         // Market offers
         if(updatedOrder.getOrderPrice() == 0){
@@ -357,18 +357,6 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         rawOrdersQueue->erase(rawOrdersQueue->begin());
 
         order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
-
-        // string delimiter = ":";
-        // int hourOfTheDay = stoi(stringUtils.split(order.getPriorityTime(), delimiter)[0]);
-        // long long sequentialOrderNumber = stoll(order.getSequentialOrderNumber());
-
-        //sequentialOrderNumber < 725370158444
-        // if (hourOfTheDay < 9 || hourOfTheDay > 18)
-        // {
-        //     semaphore->release();
-        //     this_thread::sleep_for(timespan);
-        //     continue;
-        // }
 
         int orderStatus = order.getOrderStatus() == "C" ? 9 : stoi(order.getOrderStatus());
 

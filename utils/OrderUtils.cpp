@@ -137,6 +137,18 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
         bool bothOffersCanBeEntirelyFilled = currPurchaseOrder.getTotalQuantityOfOrder() == currSaleOrder.getTotalQuantityOfOrder();
         bool currSaleCanBeEntirelyFilled = currPurchaseOrder.getTotalQuantityOfOrder() > currSaleOrder.getTotalQuantityOfOrder();
 
+        double tradePrice = 0.0;
+
+        //TODO: Review price model
+        if ((*offersBook)[symbol].lastTradePrice != 0)
+        {
+            tradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice() + (*offersBook)[symbol].lastTradePrice) / 3.0;
+        }
+        else
+        {
+            tradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice()) / 2.0;
+        }
+
         if (bothOffersCanBeEntirelyFilled)
         {
 
@@ -148,11 +160,7 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            if((*offersBook)[symbol].lastTradePrice != 0){
-                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice() + (*offersBook)[symbol].lastTradePrice)/3.0;
-            }else{
-                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
-            }
+            (*offersBook)[symbol].lastTradePrice = tradePrice;
 
             // Remove both orders from book, given that both were entirely filled
             (*offersBook)[symbol].saleOrders.erase((*offersBook)[symbol].saleOrders.begin());
@@ -217,12 +225,7 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            if((*offersBook)[symbol].lastTradePrice != 0){
-                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice() + (*offersBook)[symbol].lastTradePrice)/3.0;
-            }else{
-                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
-            }
-
+            (*offersBook)[symbol].lastTradePrice = tradePrice;
 
             if (currSaleOrder.getOrderSource() == 1)
             {
@@ -278,12 +281,7 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
-            if((*offersBook)[symbol].lastTradePrice != 0){
-                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice() + (*offersBook)[symbol].lastTradePrice)/3.0;
-            }else{
-                (*offersBook)[symbol].lastTradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice())/2.0;
-            }
-
+            (*offersBook)[symbol].lastTradePrice = tradePrice;
 
             if (currSaleOrder.getOrderSource() == 1)
             {
