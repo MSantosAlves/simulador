@@ -9,6 +9,9 @@ data_line = []
 
 with open(target_data_path, 'r') as data_file:
     for line in data_file:
+        if line.startswith("RH") or line.startswith("RT"):
+            continue
+        
         data_line = line.split(";")
 
         stock_symbol = data_line[1].strip()

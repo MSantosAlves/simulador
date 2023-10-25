@@ -1,5 +1,6 @@
 #include "DataService.h"
 #include "Semaphore.h"
+#include "Clock.h"
 #include "Config.h"
 #include "StringUtils.h"
 
@@ -11,95 +12,97 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <cmath>
 
 using namespace std;
 
-DataService::DataService(string _date, string _dataPath, map<string, StockDataInfo> _targetStocksDataInfo, vector<string> _targetStocks, string _simulationSpeed)
+DataService::DataService(string _date, string _dataPath, map<string, StockDataInfo> _targetStocksDataInfo, vector<string> _targetStocks, string _simulationSpeed, Clock *_clock)
 {
     date = _date;
     dataPath = _dataPath;
     targetStocks = _targetStocks;
     targetStocksDataInfo = _targetStocksDataInfo;
     simulationSpeed = _simulationSpeed;
+    clock = _clock;
 }
 
 void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *semaphore, string orderType)
 {
-    string filePath = dataPath + "/" + date +  "/raw/";
-    int timespanInNs = 100000000; // Default = 100ms
+    string filePath = dataPath + "/" + date + "/raw/";
+    StringUtils stringUtils;
+    int extraOffset = 0;
+    float timespanDownfactor = 1;
 
-    if (simulationSpeed == "FAST") {
-        timespanInNs = 1000000;
+    if (simulationSpeed == "FAST")
+    {
+        timespanDownfactor = 100;
     }
-    else if (simulationSpeed == "NORMAL") {
-        timespanInNs = 100000000; // 100ms
-    }else if(simulationSpeed == "SLOW"){
-        timespanInNs = 1000000000; // 1s
+    else if (simulationSpeed == "SLOW")
+    {
+        timespanDownfactor = 0.1;
     }
-
-    chrono::nanoseconds timespan(timespanInNs);
 
     const int nbOfOfferBytes = 230;
     int fileCurrentLine = 0, dataOffset = 0;
     string currentStock = "", currentFile = "", currentFilePath = "", orderBuffer = "";
     FileDataStockInfo fileInfo;
     vector<string> filesToRead = {};
+    int isFirstOrder = true;
+    string lastPriorityTime;
 
-    filePath += orderType == "SALES" ? "vda" : "cpa";
-    string orderSufix = orderType == "SALES" ? ";VDA" : ";CPA";
-
-    for (int i = 0; i < targetStocks.size(); i++)
+    if (orderType == "BOTH")
     {
-        currentStock = targetStocks[i];
+        filePath += targetStocks[0] + "_SORTED.txt";
 
-        filesToRead = orderType == "SALES" ? targetStocksDataInfo[currentStock].vdaFiles : targetStocksDataInfo[currentStock].cpaFiles;
+        ifstream dataFile(filePath);
 
-        // For each stock, loop through files that contains stock orders
-        for (int j = 0; j < filesToRead.size(); j++)
+        while (getline(dataFile, orderBuffer))
         {
-            currentFile = filesToRead[j];
-            cout << "Current file: " << currentFile << endl;
-            
-            // First and Last lines where the current stock orders appears in the current file
-            fileInfo = orderType == "SALES" ? targetStocksDataInfo[currentStock].vdaFilesInfo[filesToRead[j]] : targetStocksDataInfo[currentStock].cpaFilesInfo[filesToRead[j]];
 
-            currentFilePath = filePath + "/" + currentFile;
-            ifstream dataFile(currentFilePath);
+            vector<string> splitedLine = stringUtils.split(orderBuffer, ';');
+            string priorityTime = splitedLine[6];
+            string orderSide = splitedLine[2];
+            string orderSufix = orderSide == "1" ? ";CPA" : ";VDA";
 
-            // Where stock orders starts
-            dataOffset = (fileInfo.firstLineIndex - 1) * nbOfOfferBytes;
-            dataFile.ignore(dataOffset);
-            fileCurrentLine = fileInfo.firstLineIndex;
+            semaphore->acquire();
 
-            // Loop until file ends or get the last line for the current stock in the current file
-            while (getline(dataFile, orderBuffer) && fileCurrentLine <= fileInfo.lastLineIndex)
+            if (isFirstOrder)
             {
+                clock->setSimulationTime(priorityTime);
+                lastPriorityTime = priorityTime;
+                cout << "Reading file: " << filePath << endl;
+                cout << "Initial Simulation Time: " << clock->getSimulationTimeHumanReadable() << endl;
+                isFirstOrder = false;
+            }
 
-                semaphore->acquire();
-                rawOrdersQueue->push_back(orderBuffer + orderSufix);
-                semaphore->release();
+            rawOrdersQueue->push_back(orderBuffer + orderSufix);
 
-                orderBuffer = "";
+            semaphore->release();
 
-                this_thread::sleep_for(timespan);
-                fileCurrentLine++;
+            orderBuffer = "";
 
-                // File end was reached
-                if (!dataFile)
-                {
-                    dataFile.close();
-                    break;
-                }
+            int64_t timeBetweenOrdersInMs = clock->getTimeBetweenOrdersInMicroseconds(lastPriorityTime, priorityTime);
+            int64_t sleepTimeInMs = simulationSpeed != "NORMAL" ? floor(timeBetweenOrdersInMs / timespanDownfactor) : timeBetweenOrdersInMs;
 
-                // All offers from currentStock in this file where processed and file end was not reached yet
-                if (fileCurrentLine > fileInfo.lastLineIndex)
-                {
-                    dataFile.close();
-                }
+            if (sleepTimeInMs > 0)
+            {
+                this_thread::sleep_for(chrono::milliseconds(sleepTimeInMs));
+            }
+
+            clock->setSimulationTime(priorityTime);
+
+            lastPriorityTime = priorityTime;
+
+            // File end was reached
+            if (!dataFile)
+            {
+                cout << filePath << " end reached.";
+                dataFile.close();
+                break;
             }
         }
 
-        cout << "Last file completely processed: " << filesToRead[filesToRead.size() - 1] << endl;
+        return;
     }
 
     return;

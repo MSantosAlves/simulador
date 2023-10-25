@@ -57,7 +57,7 @@ bool updateAskPrice(SaleOrder saleOrder, string symbol, map<string, StockInfo> *
     return false;
 }
 
-void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils orderUtils, ServerResponseSender *responseSender)
+void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils *orderUtils, ServerResponseSender *responseSender, Clock *clock)
 {
     bool isBuyOrder = order.getOrderSide() == "1";
 
@@ -67,7 +67,8 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
         purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
 
         // Market offers
-        if(purchaseOrderBuffer.getOrderPrice() == 0){
+        if (purchaseOrderBuffer.getOrderPrice() == 0)
+        {
             purchaseOrderBuffer.setOrderPrice(to_string((*offersBook)[symbol].ask));
         }
 
@@ -79,6 +80,8 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
             json jsonObject = {
                 {"event", "UPDATE_BOOK"},
                 {"symbol", symbol},
+                {"direction", "BID"},
+                {"time", clock->getSimulationTimeHumanReadable()},
                 {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
                 {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
                 {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
@@ -86,7 +89,7 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
                 {"ask", (*offersBook)[symbol].ask},
                 {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
             responseSender->sendResponse(jsonObject);
-            orderUtils.executePossibleTrades(symbol, offersBook, 1, responseSender);
+            orderUtils->executePossibleTrades(symbol, offersBook, 1, responseSender);
         }
     }
     else
@@ -95,7 +98,8 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
         saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
 
         // Market offers
-        if(saleOrderBuffer.getOrderPrice() == 0){
+        if (saleOrderBuffer.getOrderPrice() == 0)
+        {
             saleOrderBuffer.setOrderPrice(to_string((*offersBook)[symbol].bid));
         }
 
@@ -107,6 +111,8 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
             json jsonObject = {
                 {"event", "UPDATE_BOOK"},
                 {"symbol", symbol},
+                {"direction", "ASK"},
+                {"time", clock->getSimulationTimeHumanReadable()},
                 {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
                 {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
                 {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
@@ -114,12 +120,12 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
                 {"ask", (*offersBook)[symbol].ask},
                 {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
             responseSender->sendResponse(jsonObject);
-            orderUtils.executePossibleTrades(symbol, offersBook, 2, responseSender);
+            orderUtils->executePossibleTrades(symbol, offersBook, 2, responseSender);
         }
     }
 }
 
-void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils orderUtils, ServerResponseSender *responseSender)
+void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils *orderUtils, ServerResponseSender *responseSender, Clock *clock)
 {
     string sequentialOrderNumber = order.getSequentialOrderNumber();
     int targetIdx = -1;
@@ -143,7 +149,8 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
         PurchaseOrder updatedOrder = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
 
         // Market offers
-        if(updatedOrder.getOrderPrice() == 0){
+        if (updatedOrder.getOrderPrice() == 0)
+        {
             updatedOrder.setOrderPrice(to_string((*offersBook)[symbol].ask));
         }
 
@@ -166,12 +173,13 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             {
                 arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, updatedOrder);
 
-
                 if (updateBidPrice(updatedOrder, symbol, offersBook))
                 {
                     json jsonObject = {
                         {"event", "UPDATE_BOOK"},
                         {"symbol", symbol},
+                        {"direction", "BID"},
+                        {"time", clock->getSimulationTimeHumanReadable()},
                         {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
                         {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
                         {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
@@ -179,7 +187,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
                         {"ask", (*offersBook)[symbol].ask},
                         {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
                     responseSender->sendResponse(jsonObject);
-                    orderUtils.executePossibleTrades(symbol, offersBook, 1, responseSender);
+                    orderUtils->executePossibleTrades(symbol, offersBook, 1, responseSender);
                 }
             }
         }
@@ -209,7 +217,8 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
         SaleOrder updatedOrder = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
 
         // Market offers
-        if(updatedOrder.getOrderPrice() == 0){
+        if (updatedOrder.getOrderPrice() == 0)
+        {
             updatedOrder.setOrderPrice(to_string((*offersBook)[symbol].ask));
         }
 
@@ -237,6 +246,8 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
                     json jsonObject = {
                         {"event", "UPDATE_BOOK"},
                         {"symbol", symbol},
+                        {"direction", "ASK"},
+                        {"time", clock->getSimulationTimeHumanReadable()},
                         {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
                         {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
                         {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
@@ -244,7 +255,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
                         {"ask", (*offersBook)[symbol].ask},
                         {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
                     responseSender->sendResponse(jsonObject);
-                    orderUtils.executePossibleTrades(symbol, offersBook, 2, responseSender);
+                    orderUtils->executePossibleTrades(symbol, offersBook, 2, responseSender);
                 }
             }
         }
@@ -314,15 +325,16 @@ void handleCancelOrExpiredOrder(string symbol, Order order, map<string, StockInf
 
 // Class methods
 
-OrderService::OrderService(vector<string> _targetStocks)
+OrderService::OrderService(vector<string> _targetStocks, Clock *_clock)
 {
     targetStocks = _targetStocks;
+    clock = _clock;
 }
 
 void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
 {
     StringUtils stringUtils;
-    OrderUtils orderUtils;
+    OrderUtils* orderUtils = new OrderUtils(clock);
     Order order;
     ArrayUtils arrayUtils;
     chrono::nanoseconds timespan(1);
@@ -356,7 +368,7 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
         rawOrdersQueue->erase(rawOrdersQueue->begin());
 
-        order = orderUtils.parseOrder(rawCurrOrder, stringUtils);
+        order = orderUtils->parseOrder(rawCurrOrder, stringUtils);
 
         int orderStatus = order.getOrderStatus() == "C" ? 9 : stoi(order.getOrderStatus());
 
@@ -370,11 +382,11 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         }
         else if (orderStatus == OrderStatuses::Status::REPLACED)
         {
-            handleReplacedOrder(symbol, order, offersBook, arrayUtils, orderUtils, responseSender);
+            handleReplacedOrder(symbol, order, offersBook, arrayUtils, orderUtils, responseSender, clock);
         }
         else if (orderStatus == OrderStatuses::Status::NEW)
         {
-            handleNewOrder(symbol, order, offersBook, arrayUtils, orderUtils, responseSender);
+            handleNewOrder(symbol, order, offersBook, arrayUtils, orderUtils, responseSender, clock);
         }
         else
         {

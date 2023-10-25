@@ -1,3 +1,4 @@
+#include "Clock.h"
 #include "DataService.h"
 #include "OrderService.h"
 #include "LogService.h"
@@ -33,6 +34,7 @@ int main(int argc, char *argv[])
     // Instantiate shared variables
     vector<string> rawOrdersQueue;
     map<string, StockInfo> offersBook;
+    Clock* clock = new Clock();
 
     // Get custom configs
     Config *config = new Config();
@@ -43,26 +45,22 @@ int main(int argc, char *argv[])
     map<string, StockDataInfo> targetStocksDataInfo = config->getTargetStocksDataInfo();
    
     // Instantiate services
-    DataService *dataService = new DataService(dataTargetDate, dataPath, targetStocksDataInfo, targetStocks, simulationSpeed);
-    OrderService *orderService = new OrderService(targetStocks);
+    DataService *dataService = new DataService(dataTargetDate, dataPath, targetStocksDataInfo, targetStocks, simulationSpeed, clock);
+    OrderService *orderService = new OrderService(targetStocks, clock);
     LogService *logService = new LogService();
 
     // Setup socket
     Server *server = new Server(PORT);
     ServerResponseSender *responseSender = new ServerResponseSender(server->getClientSocketAddress());
 
-    thread readPurchasesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "PURCHASES");
-    thread readSalesThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "SALES");
+    thread readOrdersThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "BOTH");
     thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender);
-    //thread logSystemThread(&LogService::startLogSystem, logService, &offersBook, semaphore);
     thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
     thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
 
     marketServerThread.join();
-    readPurchasesThread.join();
-    readSalesThread.join();
+    readOrdersThread.join();
     ordersProcessorThread.join();
-    //logSystemThread.join();
     sendDataOnTickThread.join();
 
     return 0;

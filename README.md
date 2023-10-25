@@ -11,8 +11,7 @@ Parse Data:
 
 1. Adicionar os arquivos RAW ao diretorio /raw
 2. Rodar o script 00_split_data_into_chunks.py
-3. Apagar primeira linha do primeiro arquivo e ultima linha do ultimo arquivo (???)
-4. Rodar os scripts (em sequência)
+3. Rodar os scripts (em sequência)
     - 00_split_data_into_chunks.py
     - 01_chunk_data_analysis.py
     - 02_compile_data_information.py

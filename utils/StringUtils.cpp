@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <iostream>
 #include <cstdint>
+#include <ctime>
+#include <iomanip>
 
 using namespace std;
 
@@ -97,4 +99,22 @@ long long StringUtils::dateToInt(string date) {
     long long result = stoll(date);
    
 	return result;
+}
+
+string StringUtils::intToDate(long long date) {
+
+    string inputStr = to_string(date);
+
+    if (inputStr.length() < 12) {
+        inputStr = "0" + inputStr;
+    }
+
+    string hours = inputStr.substr(0, 2);
+    string minutes = inputStr.substr(2, 2);
+    string seconds = inputStr.substr(4, 2);
+    string microseconds = inputStr.substr(6);
+
+    string formattedDate = hours + ":" + minutes + ":" + seconds + "." + microseconds;
+    
+    return formattedDate;
 }

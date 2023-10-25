@@ -28,6 +28,8 @@ for data_dir in target_data_directories:
         with open(file_path, 'r') as file:
             line_idx = 1
             for line in file:
+                if line.startswith("RH") or line.startswith("RT"):
+                    continue
                 line_data = line.split(";")
 
                 stock_symbol = line_data[1].strip()

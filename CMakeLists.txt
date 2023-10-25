@@ -19,6 +19,7 @@ FetchContent_MakeAvailable(json)
 # Create a sources variable with a link to all cpp files to compile
 set(SOURCES
     src/Config.cpp
+    src/Clock.cpp
     src/DataService.cpp
     src/OrderService.cpp
     src/LogService.cpp

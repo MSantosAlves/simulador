@@ -387,7 +387,9 @@ data/b3/20191220/raw/*
 
 /scripts/market-client/execution-history/*
 /scripts/market-client/market-volume/*
+/scripts/market-client/book-history/*
 !scripts/market-client/execution-history/.gitkeep
 !scripts/market-client/market-volume/.gitkeep
+!scripts/market-client/book-history/.gitkeep
 
 /build-dir/*

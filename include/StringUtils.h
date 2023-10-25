@@ -20,6 +20,7 @@ public:
     string pathToString(filesystem::path path);
     string replaceAllstring(string str, const string& from, const string& to);
     long long dateToInt(string date);
+    string intToDate(long long date);
 };
 
 #endif

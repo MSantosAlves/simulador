@@ -52,7 +52,7 @@ class Client:
                         self.monitor.handle_event(res)
                         self.trader_account.handle_event(res)
 
-                        if res["event"] == "UPDATE_BOOK":
+                        if res["event"].startswith("UPDATE_BOOK"):
                             self.book.update_book(res)
 
                         if res["event"] == "UPDATE_MARKET_VOLUME":

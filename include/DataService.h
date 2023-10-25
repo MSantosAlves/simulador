@@ -3,6 +3,7 @@
 #include <map>
 
 #include "Semaphore.h"
+#include "Clock.h"
 #include "StockDataInfo.h"
 
 using namespace std;
@@ -12,15 +13,17 @@ using namespace std;
 
 class DataService
 {
-private:    
+private:
     string date;
     string dataPath;
     map<string, StockDataInfo> targetStocksDataInfo;
     vector<string> targetStocks;
     string simulationSpeed;
+    Clock* clock;
+
 public:
-    DataService(string date, string dataPath, map<string, StockDataInfo> targetStocksDataInfo, vector<string> targetStocks, string simulationSpeed);
-    void startAcquisition(vector<string>* rawOrdersQueue, Semaphore* semaphore, string offerType);
+    DataService(string date, string dataPath, map<string, StockDataInfo> targetStocksDataInfo, vector<string> targetStocks, string simulationSpeed, Clock *clock);
+    void startAcquisition(vector<string> *rawOrdersQueue, Semaphore *semaphore, string offerType);
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include "ArrayUtils.h"
 #include "Trader.h"
 #include "ServerResponseSender.h"
+#include "Clock.h"
 
 #include <string>
 #include <map>
@@ -16,8 +17,10 @@ using namespace std;
 
 class OrderUtils
 {
+private:
+	Clock *clock;
 public:
-	OrderUtils();
+	OrderUtils(Clock *clock);
 	Order parseOrder(string order, StringUtils stringUtils);
 	void executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ServerResponseSender *responseSender);
 };
