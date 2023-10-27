@@ -55,13 +55,13 @@ int main(int argc, char *argv[])
 
     thread readOrdersThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "BOTH");
     thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender);
-    thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
+    // thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
     thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
 
     marketServerThread.join();
     readOrdersThread.join();
     ordersProcessorThread.join();
-    sendDataOnTickThread.join();
+    // sendDataOnTickThread.join();
 
     return 0;
 }

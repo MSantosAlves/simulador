@@ -50,10 +50,10 @@ class Book:
         data_to_write = "{},{},{},{}\n".format(symbol, new_price, update_direction, time)
         self.book_history_file_handler.write_to_file(data_to_write)
 
-        if last_trade_price!= 0 and (symbol not in self.stocks_last_price or self.stocks_last_price[symbol] != last_trade_price):
-            self.stocks_last_price[symbol] = last_trade_price
-            data_to_write = "{},{},{}\n".format(symbol, last_trade_price, time)
-            self.history_file_handler.write_to_file(data_to_write)
+        # if last_trade_price!= 0 and (symbol not in self.stocks_last_price or self.stocks_last_price[symbol] != last_trade_price):
+        #     self.stocks_last_price[symbol] = last_trade_price
+        #     data_to_write = "{},{},{}\n".format(symbol, last_trade_price, time)
+        #     self.history_file_handler.write_to_file(data_to_write)
             
     def update_market_volume(self, data):
         return

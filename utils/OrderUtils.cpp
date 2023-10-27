@@ -5,7 +5,8 @@ using json = nlohmann::json;
 
 using namespace std;
 
-OrderUtils::OrderUtils(Clock *_clock) {
+OrderUtils::OrderUtils(Clock *_clock)
+{
     clock = _clock;
 }
 
@@ -198,7 +199,10 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                 if ((*offersBook)[symbol].ask != currSaleOrder.getOrderPrice())
                 {
                     (*offersBook)[symbol].ask = currSaleOrder.getOrderPrice();
-                    sendUpdateBookEvent(symbol, offersBook, responseSender, "ASK", clock->getSimulationTimeHumanReadable());
+                    if ((*offersBook)[symbol].ask > (*offersBook)[symbol].bid)
+                    {
+                        sendUpdateBookEvent(symbol, offersBook, responseSender, "ASK", clock->getSimulationTimeHumanReadable());
+                    }
                 }
             }
 
@@ -209,7 +213,10 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                 if ((*offersBook)[symbol].bid != currPurchaseOrder.getOrderPrice())
                 {
                     (*offersBook)[symbol].bid = currPurchaseOrder.getOrderPrice();
-                    sendUpdateBookEvent(symbol, offersBook, responseSender, "BID", clock->getSimulationTimeHumanReadable());
+                    if ((*offersBook)[symbol].bid < (*offersBook)[symbol].ask)
+                    {
+                        sendUpdateBookEvent(symbol, offersBook, responseSender, "BID", clock->getSimulationTimeHumanReadable());
+                    }
                 }
             }
 
@@ -265,7 +272,10 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                 if ((*offersBook)[symbol].ask != currSaleOrder.getOrderPrice())
                 {
                     (*offersBook)[symbol].ask = currSaleOrder.getOrderPrice();
-                    sendUpdateBookEvent(symbol, offersBook, responseSender, "ASK", clock->getSimulationTimeHumanReadable());
+                    if ((*offersBook)[symbol].ask > (*offersBook)[symbol].bid)
+                    {
+                        sendUpdateBookEvent(symbol, offersBook, responseSender, "ASK", clock->getSimulationTimeHumanReadable());
+                    }
                 }
             }
             else
@@ -321,7 +331,10 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                 if ((*offersBook)[symbol].bid != currPurchaseOrder.getOrderPrice())
                 {
                     (*offersBook)[symbol].bid = currPurchaseOrder.getOrderPrice();
-                    sendUpdateBookEvent(symbol, offersBook, responseSender, "BID", clock->getSimulationTimeHumanReadable());
+                    if ((*offersBook)[symbol].bid < (*offersBook)[symbol].ask)
+                    {
+                        sendUpdateBookEvent(symbol, offersBook, responseSender, "BID", clock->getSimulationTimeHumanReadable());
+                    }
                 }
             }
             else

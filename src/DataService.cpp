@@ -102,6 +102,8 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
             }
         }
 
+        cout << filePath << " end reached.";
+        dataFile.close();
         return;
     }
 

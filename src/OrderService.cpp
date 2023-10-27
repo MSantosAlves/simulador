@@ -77,18 +77,23 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
 
         if (updateBidPrice(purchaseOrderBuffer, symbol, offersBook))
         {
-            json jsonObject = {
-                {"event", "UPDATE_BOOK"},
-                {"symbol", symbol},
-                {"direction", "BID"},
-                {"time", clock->getSimulationTimeHumanReadable()},
-                {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
-                {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
-                {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
-                {"bid", (*offersBook)[symbol].bid},
-                {"ask", (*offersBook)[symbol].ask},
-                {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
-            responseSender->sendResponse(jsonObject);
+            // If order price is higher than ask price, offer will be immediately executed, and bid price shouldn't be updated
+            if (purchaseOrderBuffer.getOrderPrice() < (*offersBook)[symbol].ask)
+            {
+                json jsonObject = {
+                    {"event", "UPDATE_BOOK"},
+                    {"symbol", symbol},
+                    {"direction", "BID"},
+                    {"time", clock->getSimulationTimeHumanReadable()},
+                    {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                    {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                    {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                    {"bid", (*offersBook)[symbol].bid},
+                    {"ask", (*offersBook)[symbol].ask},
+                    {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+                responseSender->sendResponse(jsonObject);
+            }
+
             orderUtils->executePossibleTrades(symbol, offersBook, 1, responseSender);
         }
     }
@@ -108,18 +113,23 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
 
         if (updateAskPrice(saleOrderBuffer, symbol, offersBook))
         {
-            json jsonObject = {
-                {"event", "UPDATE_BOOK"},
-                {"symbol", symbol},
-                {"direction", "ASK"},
-                {"time", clock->getSimulationTimeHumanReadable()},
-                {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
-                {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
-                {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
-                {"bid", (*offersBook)[symbol].bid},
-                {"ask", (*offersBook)[symbol].ask},
-                {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
-            responseSender->sendResponse(jsonObject);
+            // If order price is lower than bid price, offer will be immediately executed, and ask price shouldn't be updated
+            if (saleOrderBuffer.getOrderPrice() > (*offersBook)[symbol].bid)
+            {
+                json jsonObject = {
+                    {"event", "UPDATE_BOOK"},
+                    {"symbol", symbol},
+                    {"direction", "ASK"},
+                    {"time", clock->getSimulationTimeHumanReadable()},
+                    {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                    {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                    {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                    {"bid", (*offersBook)[symbol].bid},
+                    {"ask", (*offersBook)[symbol].ask},
+                    {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+                responseSender->sendResponse(jsonObject);
+            }
+
             orderUtils->executePossibleTrades(symbol, offersBook, 2, responseSender);
         }
     }
@@ -175,18 +185,23 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
 
                 if (updateBidPrice(updatedOrder, symbol, offersBook))
                 {
-                    json jsonObject = {
-                        {"event", "UPDATE_BOOK"},
-                        {"symbol", symbol},
-                        {"direction", "BID"},
-                        {"time", clock->getSimulationTimeHumanReadable()},
-                        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
-                        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
-                        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
-                        {"bid", (*offersBook)[symbol].bid},
-                        {"ask", (*offersBook)[symbol].ask},
-                        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
-                    responseSender->sendResponse(jsonObject);
+                    // If order price is higher than ask price, offer will be immediately executed, and bid price shouldn't be updated
+                    if (updatedOrder.getOrderPrice() < (*offersBook)[symbol].ask)
+                    {
+                        json jsonObject = {
+                            {"event", "UPDATE_BOOK"},
+                            {"symbol", symbol},
+                            {"direction", "BID"},
+                            {"time", clock->getSimulationTimeHumanReadable()},
+                            {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                            {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                            {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                            {"bid", (*offersBook)[symbol].bid},
+                            {"ask", (*offersBook)[symbol].ask},
+                            {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+                        responseSender->sendResponse(jsonObject);
+                    }
+
                     orderUtils->executePossibleTrades(symbol, offersBook, 1, responseSender);
                 }
             }
@@ -243,18 +258,23 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
 
                 if (updateAskPrice(updatedOrder, symbol, offersBook))
                 {
-                    json jsonObject = {
-                        {"event", "UPDATE_BOOK"},
-                        {"symbol", symbol},
-                        {"direction", "ASK"},
-                        {"time", clock->getSimulationTimeHumanReadable()},
-                        {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
-                        {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
-                        {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
-                        {"bid", (*offersBook)[symbol].bid},
-                        {"ask", (*offersBook)[symbol].ask},
-                        {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
-                    responseSender->sendResponse(jsonObject);
+                    // If order price is lower than bid price, offer will be immediately executed, and ask price shouldn't be updated
+                    if (updatedOrder.getOrderPrice() > (*offersBook)[symbol].bid)
+                    {
+                        json jsonObject = {
+                            {"event", "UPDATE_BOOK"},
+                            {"symbol", symbol},
+                            {"direction", "ASK"},
+                            {"time", clock->getSimulationTimeHumanReadable()},
+                            {"traded_volume", (*offersBook)[symbol].totalTradedQuantity},
+                            {"buy_offers", (*offersBook)[symbol].purchaseOrders.size()},
+                            {"sell_offers", (*offersBook)[symbol].saleOrders.size()},
+                            {"bid", (*offersBook)[symbol].bid},
+                            {"ask", (*offersBook)[symbol].ask},
+                            {"last_trade_price", (*offersBook)[symbol].lastTradePrice}};
+                        responseSender->sendResponse(jsonObject);
+                    }
+
                     orderUtils->executePossibleTrades(symbol, offersBook, 2, responseSender);
                 }
             }
@@ -334,7 +354,7 @@ OrderService::OrderService(vector<string> _targetStocks, Clock *_clock)
 void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
 {
     StringUtils stringUtils;
-    OrderUtils* orderUtils = new OrderUtils(clock);
+    OrderUtils *orderUtils = new OrderUtils(clock);
     Order order;
     ArrayUtils arrayUtils;
     chrono::nanoseconds timespan(1);
