@@ -10,25 +10,26 @@ class Book:
 
         file_time_discriminator = str(time.time()).split(".")[0]
 
-        directory_path = "./scripts/market-client/book-history"
-        self.book_history_file_name = "{}/book_history_{}.csv".format(directory_path, file_time_discriminator)
-        self.book_history_file_handler = FileHandler("{}".format(self.book_history_file_name))
-        self.book_history_file_handler.create_file()
-        self.book_history_file_handler.open_file()
-        self.book_history_file_handler.write_to_file("Symbol,Price,Type,Time\n")
+        # directory_path = "./scripts/market-client/book-history"
+        # self.book_history_file_name = "{}/book_history_{}.csv".format(directory_path, file_time_discriminator)
+        # self.book_history_file_handler = FileHandler("{}".format(self.book_history_file_name))
+        # self.book_history_file_handler.create_file()
+        # self.book_history_file_handler.open_file()
+        # self.book_history_file_handler.write_to_file("Symbol,Price,Type,Time\n")
 
-        directory_path = "./scripts/market-client/execution-history"
-        self.history_file_name = "{}/history_{}.csv".format(directory_path, file_time_discriminator)
-        self.history_file_handler = FileHandler("{}".format(self.history_file_name))
-        self.history_file_handler.create_file()
-        self.history_file_handler.open_file()
-        self.history_file_handler.write_to_file("Symbol,Price,Time\n")
+        # directory_path = "./scripts/market-client/execution-history"
+        # self.history_file_name = "{}/history_{}.csv".format(directory_path, file_time_discriminator)
+        # self.history_file_handler = FileHandler("{}".format(self.history_file_name))
+        # self.history_file_handler.create_file()
+        # self.history_file_handler.open_file()
+        # self.history_file_handler.write_to_file("Symbol,Price,Time\n")
 
-        # directory_path = "./scripts/market-client/market-volume"
-        # self.volume_file_name = "{}/volume_{}.csv".format(directory_path, file_time_discriminator)
-        # self.volume_file_handler = FileHandler("{}".format(self.volume_file_name))
-        # self.volume_file_handler.create_file()
-        # self.volume_file_handler.open_file()
+        directory_path = "./scripts/market-client/market-volume"
+        self.volume_file_name = "{}/volume_{}.csv".format(directory_path, file_time_discriminator)
+        self.volume_file_handler = FileHandler("{}".format(self.volume_file_name))
+        self.volume_file_handler.create_file()
+        self.volume_file_handler.open_file()
+        self.volume_file_handler.write_to_file("BuyInfo,SellInfo,Time\n")
 
     def update_book(self, data):
         symbol = data["symbol"]
@@ -45,10 +46,10 @@ class Book:
             "last_trade_price": last_trade_price,
         }
 
-        new_price = self.stocks[symbol][update_direction.lower()]
+        # new_price = self.stocks[symbol][update_direction.lower()]
 
-        data_to_write = "{},{},{},{}\n".format(symbol, new_price, update_direction, time)
-        self.book_history_file_handler.write_to_file(data_to_write)
+        # data_to_write = "{},{},{},{}\n".format(symbol, new_price, update_direction, time)
+        # self.book_history_file_handler.write_to_file(data_to_write)
 
         # if last_trade_price!= 0 and (symbol not in self.stocks_last_price or self.stocks_last_price[symbol] != last_trade_price):
         #     self.stocks_last_price[symbol] = last_trade_price
@@ -56,12 +57,24 @@ class Book:
         #     self.history_file_handler.write_to_file(data_to_write)
             
     def update_market_volume(self, data):
-        return
-        header = "Symbol,Price,Quantity,Direction\n"
+
         if self.symbol not in data["market_volume"]:
             return
-        data_to_write = header + "\n".join(["{},{},{},{}".format(self.symbol, el["price"], el["quantity"], el["direction"]) for el in  data["market_volume"][self.symbol]])
-        self.volume_file_handler.file.seek(0)
+            
+        mv = data["market_volume"][self.symbol]
+        time = data["time"]
+        buy_data = [item for item in mv if item["direction"] == "BUY"]
+        sale_data = [item for item in mv if item["direction"] == "SALE"]
+        
+        data_to_write = "BUY"
+
+        for buy in buy_data:
+            data_to_write += ";" + str(buy["price"]) + "-" + str(buy["quantity"])
+        data_to_write += ",SELL"
+
+        for sale in sale_data:
+            data_to_write += ";" + str(sale["price"]) + "-" + str(sale["quantity"])
+        data_to_write += "," + time + "\n"
+        
         self.volume_file_handler.write_to_file(data_to_write)
-        self.volume_file_handler.truncate()
 

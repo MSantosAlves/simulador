@@ -13,8 +13,8 @@ private:
 	string date;
 	string dataPath;
 	string simulationSpeed;
-	vector<string> targetStocks;
-	map<string, StockDataInfo> targetStocksDataInfo;
+	string targetStock;
+	StockDataInfo targetStockDataInfo;
 
 public:
 	Config();
@@ -24,10 +24,10 @@ public:
 	string getDataPath();
 	void setSimulationSpeed(string simulationSpeed);
 	string getSimulationSpeed();
-	void setTargetStocks(vector<string> targetStocks);
-	vector<string> getTargetStocks();
-	map<string, StockDataInfo> getTargetStocksDataInfo();
-	void setTargetStocksDataInfo(map<string, StockDataInfo> targetStocksDataInfo);
+	void setTargetStock(string targetStock);
+	string getTargetStock();
+	StockDataInfo getTargetStockDataInfo();
+	void setTargetStockDataInfo(StockDataInfo targetStockDataInfo);
 };
 
 #endif

@@ -14,7 +14,7 @@ user_config_path = path + "/config.json"
 with open(user_config_path, 'r') as json_file:
         data = json.load(json_file)
 
-target_symbol = data["targetStocks"][0]
+target_symbol = data["targetStock"]
 
 server_address = '127.0.0.1'
 server_port = 8080

@@ -11,10 +11,8 @@ using namespace std;
 
 struct StockDataInfo
 {
-    vector<string> vdaFiles;
-    vector<string> cpaFiles;
-    map<string, FileDataStockInfo> vdaFilesInfo;
-    map <string, FileDataStockInfo> cpaFilesInfo;
+    string filename;
+    int nbOfLines;
 };
 
 #endif

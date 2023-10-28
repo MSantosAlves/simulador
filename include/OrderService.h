@@ -16,11 +16,10 @@ using namespace std;
 class OrderService
 {
 private:
-	vector<string> targetStocks;
 	Clock *clock;
 
 public:
-	OrderService(vector<string> targetStocks, Clock *clock);
+	OrderService(Clock *clock);
 	void startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender);
 };
 

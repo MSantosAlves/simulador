@@ -1,4 +1,6 @@
 #include "Semaphore.h"
+#include "Clock.h"
+#include "Context.h"
 #include "StockInfo.h"
 #include "ServerResponseSender.h"
 
@@ -13,9 +15,12 @@ using namespace std;
 class LogService
 {
 public:
-	LogService();
+	LogService(Clock* clock, Context* context);
 	void startLogSystem(map<string, StockInfo> *offersBook, Semaphore *semaphore);
 	void sendDataOnTick(map<string, StockInfo>* offersBook, Semaphore* semaphore, ServerResponseSender* responseSender);
+	void printContextOnTick();
+	Clock* clock;
+	Context* context;
 };
 
 #endif

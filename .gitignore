@@ -371,11 +371,13 @@ data/b3/20191220/raw/neg/*
 data/b3/20191220/compiled/*
 data/b3/20191220/processed/*
 data/b3/20191220/raw/*
+data/b3/20191220/sorted/*
 
 # exception to the rule
 !data/b3/20191220/raw/cpa
 !data/b3/20191220/raw/vda
 !data/b3/20191220/raw/neg
+!data/b3/20191220/sorted/.gitkeep
 !data/plots/.gitkeep 
 !data/b3/20191220/raw/cpa/.gitkeep 
 !data/b3/20191220/raw/vda/.gitkeep 

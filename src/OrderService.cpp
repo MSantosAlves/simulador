@@ -19,20 +19,6 @@
 
 using namespace std;
 
-// Aux methods
-bool isTargetSymbol(vector<string> targetsStocks, string stock)
-{
-    StringUtils stringUtils;
-    return stringUtils.include(targetsStocks, stock) != -1;
-}
-
-string generateFilename()
-{
-    string timestamp = to_string(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
-    string file_name = "trade_history_" + timestamp + ".txt";
-    return file_name;
-}
-
 bool updateBidPrice(PurchaseOrder purchaseOrder, string symbol, map<string, StockInfo> *offersBook)
 {
     StockInfo stockInfo = (*offersBook)[symbol];
@@ -345,9 +331,8 @@ void handleCancelOrExpiredOrder(string symbol, Order order, map<string, StockInf
 
 // Class methods
 
-OrderService::OrderService(vector<string> _targetStocks, Clock *_clock)
+OrderService::OrderService(Clock *_clock)
 {
-    targetStocks = _targetStocks;
     clock = _clock;
 }
 
@@ -360,15 +345,6 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
     chrono::nanoseconds timespan(1);
     string symbol = "";
     string rawCurrOrder;
-
-    filesystem::path pwd = filesystem::current_path();
-    string sysFileChar = "/"; //(_WIN64 || _WIN32) ? "\\" : "/";
-    string pwdString = stringUtils.pathToString(pwd);
-    string file_name = generateFilename();
-    string fullPath = "data" + sysFileChar + "history" + sysFileChar + file_name;
-
-    ofstream tradeHistoryFile;
-    tradeHistoryFile.open(fullPath);
 
     PurchaseOrder purchaseOrderBuffer;
     SaleOrder saleOrderBuffer;
@@ -415,6 +391,4 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         semaphore->release();
         this_thread::sleep_for(timespan);
     }
-
-    tradeHistoryFile.close();
 }

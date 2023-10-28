@@ -13,8 +13,9 @@ using namespace std;
 
 Config::Config()
 {
-    filesystem::path pwd = filesystem::current_path().parent_path();
     StringUtils stringUtils;
+    filesystem::path pwd = filesystem::current_path().parent_path();
+
     string pwdString = stringUtils.pathToString(pwd);
     string fullPath = pwdString +"/config.json";
 
@@ -25,56 +26,21 @@ Config::Config()
     string dataPath = jsonData["dataPath"];
 
     string fullDataPath =  pwdString + dataPath;
-    string indexStocksPath = pwdString + "/data/b3/" + date + "/compiled/INDEX_STOCK_FILES.json";
+    string indexStocksPath = pwdString + "/data/b3/" + date + "/compiled/INDEX_SORTED_STOCK_FILES.json";
     ifstream indexStocksFile(indexStocksPath);
     json indexStocksJson = json::parse(indexStocksFile);
 
-    vector<string> stocks = jsonData["targetStocks"];
+    string targetStock = jsonData["targetStock"];
     string simulationSpeed = jsonData["simulationSpeed"];
 
-    int size = stocks.size();
-    vector<string> targetStocks = {};
-
-    vector<string> cpaFiles = {};
-    vector<string> vdaFiles = {};
-
-    vector<string> auxVector = {};
-
-    string filename = "";
-
-    for (int i = 0; i < stocks.size(); i++)
-    {
-        targetStocks.push_back(stocks[i]);
-
-        targetStocksDataInfo[stocks[i]] = {};
-        targetStocksDataInfo[stocks[i]].cpaFiles = indexStocksJson[stocks[i]]["buy_files"];
-        targetStocksDataInfo[stocks[i]].vdaFiles = indexStocksJson[stocks[i]]["sell_files"];
-
-        auto auxJson = indexStocksJson[stocks[i]]["buy_files_info"];
-        for (auto it = auxJson.begin(); it != auxJson.end(); ++it)
-        {
-            filename = it.key();
-            auto fileInfoValue = it.value();
-            targetStocksDataInfo[stocks[i]].cpaFilesInfo[filename] = {};
-            targetStocksDataInfo[stocks[i]].cpaFilesInfo[filename].firstLineIndex = fileInfoValue["first_line_index"];
-            targetStocksDataInfo[stocks[i]].cpaFilesInfo[filename].lastLineIndex = fileInfoValue["last_line_index"];
-        }
-
-        auxJson = indexStocksJson[stocks[i]]["sell_files_info"];
-        for (auto it = auxJson.begin(); it != auxJson.end(); ++it)
-        {
-            filename = it.key();
-            auto fileInfoValue = it.value();
-            targetStocksDataInfo[stocks[i]].vdaFilesInfo[filename] = {};
-            targetStocksDataInfo[stocks[i]].vdaFilesInfo[filename].firstLineIndex = fileInfoValue["first_line_index"];
-            targetStocksDataInfo[stocks[i]].vdaFilesInfo[filename].lastLineIndex = fileInfoValue["last_line_index"];
-        }
-    }
+    StockDataInfo targetStockDataInfo = {};
+    targetStockDataInfo.filename = indexStocksJson[targetStock]["filename"];
+    targetStockDataInfo.nbOfLines = indexStocksJson[targetStock]["number_of_lines"];
 
     setDate(date);
     setDataPath(fullDataPath);
-    setTargetStocks(targetStocks);
-    setTargetStocksDataInfo(targetStocksDataInfo);
+    setTargetStock(targetStock);
+    setTargetStockDataInfo(targetStockDataInfo);
     setSimulationSpeed(simulationSpeed);
 }
 
@@ -108,22 +74,22 @@ string Config::getSimulationSpeed()
     return simulationSpeed;
 }
 
-void Config::setTargetStocks(vector<string> _targetStocks)
+void Config::setTargetStock(string _targetStock)
 {
-    targetStocks = _targetStocks;
+    targetStock = _targetStock;
 }
 
-vector<string> Config::getTargetStocks()
+string Config::getTargetStock()
 {
-    return targetStocks;
+    return targetStock;
 }
 
-void Config::setTargetStocksDataInfo(map<string, StockDataInfo> _targetStocksDataInfo)
+void Config::setTargetStockDataInfo(StockDataInfo _targetStockDataInfo)
 {
-    targetStocksDataInfo = _targetStocksDataInfo;
+    targetStockDataInfo = _targetStockDataInfo;
 }
 
-map<string, StockDataInfo> Config::getTargetStocksDataInfo()
+StockDataInfo Config::getTargetStockDataInfo()
 {
-    return targetStocksDataInfo;
+    return targetStockDataInfo;
 }

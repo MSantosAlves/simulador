@@ -158,7 +158,11 @@ void printOffersBook(map<string, StockInfo> *offersBook)
     }
 }
 
-LogService::LogService() {}
+LogService::LogService(Clock *_clock, Context *_context)
+{
+    clock = _clock;
+    context = _context;
+}
 
 void LogService::startLogSystem(map<string, StockInfo> *offersBook, Semaphore *semaphore)
 {
@@ -174,13 +178,14 @@ void LogService::startLogSystem(map<string, StockInfo> *offersBook, Semaphore *s
     return;
 }
 
-map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *offersBook)
+map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *offersBook, Context * context)
 {
 
     vector<string> symbols;
     map<string, vector<StockMarketVolume>> marketVolume = {};
 
-    if(offersBook->empty()){
+    if (offersBook->empty() || context->getSimulationExecuted() >= 0.99)
+    {
         return marketVolume;
     }
 
@@ -191,12 +196,18 @@ map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *o
 
     string symbol = symbols[0];
 
-    if (symbols.size() == 0) {
+    if (symbols.size() == 0)
+    {
         return marketVolume;
     }
 
     vector<PurchaseOrder> purchaseOrders = (*offersBook)[symbol].purchaseOrders;
     vector<SaleOrder> saleOrders = (*offersBook)[symbol].saleOrders;
+
+    if (purchaseOrders.size() == 0 || saleOrders.size() == 0)
+    {
+        return marketVolume;
+    }
 
     StockMarketVolume stockMarketVolume;
     int lastIdx = 0;
@@ -255,40 +266,55 @@ map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *o
         }
     }
 
-
     return marketVolume;
 }
 
-void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore* semaphore, ServerResponseSender *responseSender)
+void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
 {
-    chrono::milliseconds tick(5000);
+    chrono::milliseconds tick(1000);
     map<string, vector<StockMarketVolume>> marketVolume;
 
     while (true)
     {
         semaphore->acquire();
 
-        marketVolume = getMarketVolume(offersBook);
+        marketVolume = getMarketVolume(offersBook, context);
 
         // Construct the JSON object manually
         json jsonObject;
         jsonObject["event"] = "UPDATE_MARKET_VOLUME";
         jsonObject["market_volume"] = json::object();
 
-        for (const auto& entry : marketVolume) {
+        for (const auto &entry : marketVolume)
+        {
             jsonObject["market_volume"][entry.first] = json::array();
-            for (const auto& stockVolume : entry.second) {
+            for (const auto &stockVolume : entry.second)
+            {
                 json volumeJson;
                 volumeJson["quantity"] = stockVolume.quantity;
                 volumeJson["price"] = stockVolume.price;
                 volumeJson["direction"] = stockVolume.direction;
                 jsonObject["market_volume"][entry.first].push_back(volumeJson);
+                jsonObject["time"] = clock->getSimulationTimeHumanReadable();
             }
         }
-        
+
         responseSender->sendResponse(jsonObject);
 
         semaphore->release();
+        this_thread::sleep_for(tick);
+    }
+
+    return;
+}
+
+void LogService::printContextOnTick()
+{
+    chrono::milliseconds tick(10000);
+
+    while (true)
+    {
+        cout << "Offers processed: " << context->getSimulationExecutedHumandReadable() << "%" << endl;
         this_thread::sleep_for(tick);
     }
 

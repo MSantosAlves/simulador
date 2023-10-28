@@ -16,19 +16,20 @@
 
 using namespace std;
 
-DataService::DataService(string _date, string _dataPath, map<string, StockDataInfo> _targetStocksDataInfo, vector<string> _targetStocks, string _simulationSpeed, Clock *_clock)
+DataService::DataService(string _date, string _dataPath, StockDataInfo _targetStockDataInfo, string _targetStock, string _simulationSpeed, Clock *_clock, Context *_context)
 {
     date = _date;
     dataPath = _dataPath;
-    targetStocks = _targetStocks;
-    targetStocksDataInfo = _targetStocksDataInfo;
+    targetStock = _targetStock;
+    targetStockDataInfo = _targetStockDataInfo;
     simulationSpeed = _simulationSpeed;
     clock = _clock;
+    context = _context;
 }
 
 void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *semaphore, string orderType)
 {
-    string filePath = dataPath + "/" + date + "/raw/";
+    string filePath = dataPath + "/" + date + "/sorted/";
     StringUtils stringUtils;
     int extraOffset = 0;
     float timespanDownfactor = 1;
@@ -43,16 +44,15 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
     }
 
     const int nbOfOfferBytes = 230;
-    int fileCurrentLine = 0, dataOffset = 0;
-    string currentStock = "", currentFile = "", currentFilePath = "", orderBuffer = "";
-    FileDataStockInfo fileInfo;
-    vector<string> filesToRead = {};
-    int isFirstOrder = true;
+    float nbOfLines = float(targetStockDataInfo.nbOfLines);
+    int fileCurrentLine = 0;
+    bool isFirstOrder = true;
+    string orderBuffer = "";
     string lastPriorityTime;
 
     if (orderType == "BOTH")
     {
-        filePath += targetStocks[0] + "_SORTED.txt";
+        filePath += targetStock + "_SORTED.txt";
 
         ifstream dataFile(filePath);
 
@@ -96,13 +96,14 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
             // File end was reached
             if (!dataFile)
             {
-                cout << filePath << " end reached.";
                 dataFile.close();
                 break;
             }
+
+            fileCurrentLine++;
+            context->setSimulationExecuted(fileCurrentLine/nbOfLines);
         }
 
-        cout << filePath << " end reached.";
         dataFile.close();
         return;
     }

@@ -20,6 +20,7 @@ FetchContent_MakeAvailable(json)
 set(SOURCES
     src/Config.cpp
     src/Clock.cpp
+    src/Context.cpp
     src/DataService.cpp
     src/OrderService.cpp
     src/LogService.cpp
