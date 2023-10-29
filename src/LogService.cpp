@@ -308,9 +308,9 @@ void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *s
     return;
 }
 
-void LogService::printContextOnTick(map<string, StockInfo> *offersBook)
+void LogService::printContextOnTick(map<string, StockInfo> *offersBook, vector<string> *rawOrdersQueue)
 {
-    int lastOrdersRead, currOrdersRead, throughput, purchases, sales = 0;
+    int lastOrdersRead, currOrdersRead, throughput, purchases, sales, ordersQueueSize, bookSize, queueBookRatio = 0;
     int tickSeconds = 10;
     chrono::milliseconds tick(tickSeconds * 1000);
     string targetStock = context->getTargetStock();
@@ -321,11 +321,16 @@ void LogService::printContextOnTick(map<string, StockInfo> *offersBook)
         sales = (*offersBook)[targetStock].saleOrders.size();
         currOrdersRead = context->getOrdersRead();
         lastOrdersRead = context->getLastOrdersReadValue();
+        ordersQueueSize = rawOrdersQueue->size();
+        bookSize = purchases + sales;
+        queueBookRatio = bookSize > 0 ? ordersQueueSize / bookSize : 0;
         throughput = floor((currOrdersRead - lastOrdersRead) / tickSeconds);
         
         cout << endl;
         cout << "Offers processed: " << context->getSimulationExecutedHumandReadable() << "%" << " (" << currOrdersRead <<" orders read)" << endl;
-        cout << "Book Size: " << purchases + sales << " (" << purchases << " C / " << sales << " V)" << endl;
+        cout << "Book Size: " << bookSize << " (" << purchases << " C / " << sales << " V)" << endl;
+        cout << "Orders Queue size: " << ordersQueueSize <<  endl;
+        cout << "Queue/Book: " << queueBookRatio << endl;
         cout << "Throughput: " << throughput << " lines/s" << endl;
         cout << endl;
 

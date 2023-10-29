@@ -342,7 +342,7 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
     OrderUtils *orderUtils = new OrderUtils(clock);
     Order order;
     ArrayUtils arrayUtils;
-    chrono::nanoseconds timespan(1);
+    chrono::milliseconds timespan(1);
     string symbol = "";
     string rawCurrOrder;
 

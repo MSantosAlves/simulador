@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     thread readOrdersThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "BOTH");
     thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender);
     // thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
-    thread printContextThread(&LogService::printContextOnTick, logService, &offersBook);
+    thread printContextThread(&LogService::printContextOnTick, logService, &offersBook, &rawOrdersQueue);
     // thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
 
     // marketServerThread.join();
