@@ -1,4 +1,5 @@
 #include "OrderService.h"
+#include "Context.h"
 #include "Order.h"
 #include "StringUtils.h"
 #include "ArrayUtils.h"
@@ -59,7 +60,9 @@ void handleNewOrder(string symbol, Order *order, map<string, StockInfo> *offersB
         }
 
         // Insert new offer on purchases orders queue
-        arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, purchaseOrderBuffer);
+
+        auto insertionPoint = std::lower_bound((*offersBook)[symbol].purchaseOrders.begin(), (*offersBook)[symbol].purchaseOrders.end(), purchaseOrderBuffer);
+        (*offersBook)[symbol].purchaseOrders.insert(insertionPoint, purchaseOrderBuffer);
 
         if (updateBidPrice(purchaseOrderBuffer, symbol, offersBook))
         {
@@ -95,7 +98,8 @@ void handleNewOrder(string symbol, Order *order, map<string, StockInfo> *offersB
         }
 
         // Insert new offer on sales orders queue
-        arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, saleOrderBuffer);
+        auto insertionPoint = std::lower_bound((*offersBook)[symbol].saleOrders.begin(), (*offersBook)[symbol].saleOrders.end(), saleOrderBuffer);
+        (*offersBook)[symbol].saleOrders.insert(insertionPoint, saleOrderBuffer);
 
         if (updateAskPrice(saleOrderBuffer, symbol, offersBook))
         {
@@ -167,7 +171,9 @@ void handleReplacedOrder(string symbol, Order *order, map<string, StockInfo> *of
             }
             else
             {
-                arrayUtils.insertPurchaseOrder((*offersBook)[symbol].purchaseOrders, updatedOrder);
+
+                auto insertionPoint = std::lower_bound((*offersBook)[symbol].purchaseOrders.begin(), (*offersBook)[symbol].purchaseOrders.end(), updatedOrder);
+                (*offersBook)[symbol].purchaseOrders.insert(insertionPoint, updatedOrder);
 
                 if (updateBidPrice(updatedOrder, symbol, offersBook))
                 {
@@ -240,7 +246,8 @@ void handleReplacedOrder(string symbol, Order *order, map<string, StockInfo> *of
             }
             else
             {
-                arrayUtils.insertSaleOrder((*offersBook)[symbol].saleOrders, updatedOrder);
+                auto insertionPoint = std::lower_bound((*offersBook)[symbol].saleOrders.begin(), (*offersBook)[symbol].saleOrders.end(), updatedOrder);
+                (*offersBook)[symbol].saleOrders.insert(insertionPoint, updatedOrder);
 
                 if (updateAskPrice(updatedOrder, symbol, offersBook))
                 {
@@ -331,12 +338,14 @@ void handleCancelOrExpiredOrder(string symbol, Order *order, map<string, StockIn
 
 // Class methods
 
-OrderService::OrderService(Clock *_clock)
+OrderService::OrderService(Clock *_clock, Context *_context)
 {
     clock = _clock;
+    context = _context;
 }
 
-void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
+
+void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
 {
     StringUtils stringUtils;
     OrderUtils *orderUtils = new OrderUtils(clock);
@@ -349,49 +358,48 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
     SaleOrder saleOrderBuffer;
     int orderStatus;
     Order *orderBuffer = new Order();
+    int ordersProcessed = 0;
 
     while (true)
     {
         semaphore->acquire();
 
-        if (rawOrdersQueue->size() == 0)
+        while (rawOrdersQueue->size() > 10000)
         {
-            semaphore->release();
-            // this_thread::sleep_for(chrono::microseconds(sleepTimeInMicroSeconds));
-            this_thread::sleep_for(chrono::milliseconds(1));
-            continue;
+            rawCurrOrder = rawOrdersQueue->front();
+            symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
+            rawOrdersQueue->pop();
+
+            orderUtils->parseOrder(rawCurrOrder, stringUtils, orderBuffer);
+
+            orderStatus = orderBuffer->getOrderStatus() == "C" ? 9 : stoi(orderBuffer->getOrderStatus());
+
+            if (orderStatus == OrderStatuses::Status::REJECTED || orderStatus == OrderStatuses::Status::PARTIALLY_FILLED || orderStatus == OrderStatuses::Status::FILLED)
+            {
+                // Just ignore
+            }
+            else if (orderStatus == OrderStatuses::Status::CANCELLED || orderStatus == OrderStatuses::Status::EXPIRED)
+            {
+                handleCancelOrExpiredOrder(symbol, orderBuffer, offersBook);
+            }
+            else if (orderStatus == OrderStatuses::Status::REPLACED)
+            {
+                handleReplacedOrder(symbol, orderBuffer, offersBook, arrayUtils, orderUtils, responseSender, clock);
+            }
+            else if (orderStatus == OrderStatuses::Status::NEW)
+            {
+                handleNewOrder(symbol, orderBuffer, offersBook, arrayUtils, orderUtils, responseSender, clock);
+            }
+            else
+            {
+                cout << "[ERROR] Unmaped Order Status: " << orderBuffer->getOrderStatus() << endl;
+            }
+
+            ordersProcessed++;
+            context->setOrdersRead(ordersProcessed);
         }
 
-        rawCurrOrder = rawOrdersQueue->front();
-        symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
-        rawOrdersQueue->erase(rawOrdersQueue->begin());
-
-        orderUtils->parseOrder(rawCurrOrder, stringUtils, orderBuffer);
-
-        orderStatus = orderBuffer->getOrderStatus() == "C" ? 9 : stoi(orderBuffer->getOrderStatus());
-
-        if (orderStatus == OrderStatuses::Status::REJECTED || orderStatus == OrderStatuses::Status::PARTIALLY_FILLED || orderStatus == OrderStatuses::Status::FILLED)
-        {
-            // Just ignore
-        }
-        else if (orderStatus == OrderStatuses::Status::CANCELLED || orderStatus == OrderStatuses::Status::EXPIRED)
-        {
-            handleCancelOrExpiredOrder(symbol, orderBuffer, offersBook);
-        }
-        else if (orderStatus == OrderStatuses::Status::REPLACED)
-        {
-            handleReplacedOrder(symbol, orderBuffer, offersBook, arrayUtils, orderUtils, responseSender, clock);
-        }
-        else if (orderStatus == OrderStatuses::Status::NEW)
-        {
-            handleNewOrder(symbol, orderBuffer, offersBook, arrayUtils, orderUtils, responseSender, clock);
-        }
-        else
-        {
-            cout << "[ERROR] Unmaped Order Status: " << orderBuffer->getOrderStatus() << endl;
-        }
         semaphore->release();
         this_thread::sleep_for(chrono::milliseconds(1));
-        // this_thread::sleep_for(chrono::microseconds(sleepTimeInMicroSeconds));
     }
 }

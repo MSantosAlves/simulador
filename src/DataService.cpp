@@ -13,6 +13,7 @@
 #include <chrono>
 #include <thread>
 #include <cmath>
+#include <queue>
 
 using namespace std;
 
@@ -27,7 +28,7 @@ DataService::DataService(string _date, string _dataPath, StockDataInfo _targetSt
     context = _context;
 }
 
-void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *semaphore, string orderType)
+void DataService::startAcquisition(queue<string> *rawOrdersQueue, Semaphore *semaphore, string orderType)
 {
     string filePath = dataPath + "/" + date + "/sorted/";
     StringUtils stringUtils;
@@ -44,8 +45,6 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
     }
 
     const int nbOfOfferBytes = 230;
-    float nbOfLines = float(targetStockDataInfo.nbOfLines);
-    int fileCurrentLine = 0;
     bool isFirstOrder = true;
     string orderBuffer = "";
     string priorityTime, lastPriorityTime, orderSide, orderSufix;
@@ -79,7 +78,7 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
                 isFirstOrder = false;
             }
 
-            rawOrdersQueue->push_back(orderBuffer + orderSufix);
+            rawOrdersQueue->push(orderBuffer + orderSufix);
 
             orderBuffer = "";
 
@@ -104,9 +103,6 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
                 break;
             }
 
-            fileCurrentLine++;
-            context->setSimulationExecuted(fileCurrentLine/nbOfLines);
-            context->setOrdersRead(fileCurrentLine);
         }
 
         dataFile.close();

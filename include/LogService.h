@@ -6,6 +6,7 @@
 
 #include <string>
 #include <map>
+#include<queue>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
 	LogService(Clock* clock, Context* context);
 	void startLogSystem(map<string, StockInfo> *offersBook, Semaphore *semaphore);
 	void sendDataOnTick(map<string, StockInfo>* offersBook, Semaphore* semaphore, ServerResponseSender* responseSender);
-	void printContextOnTick(map<string, StockInfo> *offersBook, vector<string> *rawOrdersQueue);
+	void printContextOnTick(map<string, StockInfo> *offersBook, queue<string> *rawOrdersQueue);
 	Clock* clock;
 	Context* context;
 };

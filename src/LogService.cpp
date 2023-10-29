@@ -10,6 +10,7 @@
 #include <atomic>
 #include <string>
 #include <vector>
+#include <deque>
 #include <chrono>
 #include <thread>
 #include <fstream>
@@ -184,7 +185,7 @@ map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *o
     vector<string> symbols;
     map<string, vector<StockMarketVolume>> marketVolume = {};
 
-    if (offersBook->empty() || context->getSimulationExecuted() >= 0.99)
+    if (offersBook->empty() || context->getSimulationExecutedHumandReadable() == "100")
     {
         return marketVolume;
     }
@@ -201,8 +202,8 @@ map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *o
         return marketVolume;
     }
 
-    vector<PurchaseOrder> purchaseOrders = (*offersBook)[symbol].purchaseOrders;
-    vector<SaleOrder> saleOrders = (*offersBook)[symbol].saleOrders;
+    deque<PurchaseOrder> purchaseOrders = (*offersBook)[symbol].purchaseOrders;
+    deque<SaleOrder> saleOrders = (*offersBook)[symbol].saleOrders;
 
     if (purchaseOrders.size() == 0 || saleOrders.size() == 0)
     {
@@ -307,7 +308,7 @@ void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *s
     return;
 }
 
-void LogService::printContextOnTick(map<string, StockInfo> *offersBook, vector<string> *rawOrdersQueue)
+void LogService::printContextOnTick(map<string, StockInfo> *offersBook, queue<string> *rawOrdersQueue)
 {
     int lastOrdersRead, currOrdersRead, throughput, purchases, sales, ordersQueueSize, bookSize, queueBookRatio = 0;
     int tickSeconds = 10;
@@ -322,14 +323,12 @@ void LogService::printContextOnTick(map<string, StockInfo> *offersBook, vector<s
         lastOrdersRead = context->getLastOrdersReadValue();
         ordersQueueSize = rawOrdersQueue->size();
         bookSize = purchases + sales;
-        queueBookRatio = bookSize > 0 ? ordersQueueSize / bookSize : 0;
         throughput = floor((currOrdersRead - lastOrdersRead) / tickSeconds);
         
         cout << endl;
-        cout << "Offers processed: " << context->getSimulationExecutedHumandReadable() << "%" << " (" << currOrdersRead <<" orders read)" << endl;
+        cout << "Orders processed: " << context->getSimulationExecutedHumandReadable() << "% " << "(" << context->getOrdersRead() << " orders)" << endl;
+        cout << "Queue Size: " << ordersQueueSize <<  endl;
         cout << "Book Size: " << bookSize << " (" << purchases << " C / " << sales << " V)" << endl;
-        cout << "Orders Queue size: " << ordersQueueSize <<  endl;
-        cout << "Queue/Book: " << queueBookRatio << endl;
         cout << "Throughput: " << throughput << " lines/s" << endl;
         cout << endl;
 

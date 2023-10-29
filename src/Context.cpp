@@ -16,17 +16,19 @@ string Context::getTargetStock()
     return targetStock;
 }
 
-float Context::getSimulationExecuted()
+void Context::setTotalOrdersSize(int _totalOrdersSize)
 {
-    return simulationExecuted;
+    totalOrdersSize = _totalOrdersSize;
 }
 
-void Context::setSimulationExecuted(float _simulationExecuted)
+int Context::getTotalOrdersSize()
 {
-    simulationExecuted = _simulationExecuted;
+    return totalOrdersSize;
 }
+
 string Context::getSimulationExecutedHumandReadable()
 {
+    float simulationExecuted = ordersRead / float(totalOrdersSize);
     int fileReadInPercent = ceil(simulationExecuted * 100);
     return to_string(fileReadInPercent);
 }

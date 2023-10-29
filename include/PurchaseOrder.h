@@ -53,6 +53,8 @@ public:
 
     int getAgressorIndicator();
     void setAgressorIndicator(string agressorIndicator);
+
+    bool operator<(const PurchaseOrder& other) const;
 };
 
 #endif

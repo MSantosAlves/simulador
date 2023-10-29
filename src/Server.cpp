@@ -72,7 +72,7 @@ int waitForConnectionsLoop(int serverSocket, struct sockaddr_in clientAddress, i
     return clientSocketConnection;
 }
 
-void Server::acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaphore)
+void Server::acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semaphore)
 {
     int addrlen = sizeof(serverAddress);
     struct sockaddr_in clientAddress;
@@ -96,7 +96,7 @@ void Server::acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaph
             jsonData = json::parse(buffer);
             orderBuffer = jsonData["offer"];
             semaphore->acquire();
-            rawOrdersQueue->push_back(orderBuffer);
+            rawOrdersQueue->push(orderBuffer);
             semaphore->release();
         }
 

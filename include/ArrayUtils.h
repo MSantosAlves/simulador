@@ -1,5 +1,5 @@
 #include <vector>
-#include <vector>
+#include <deque>
 #include "PurchaseOrder.h"
 #include "SaleOrder.h"
 
@@ -14,8 +14,8 @@ public:
     ArrayUtils();
     void insertPurchaseOrder(vector<PurchaseOrder> &offers, const PurchaseOrder &newOffer);
     void insertSaleOrder(vector<SaleOrder> &offers, const SaleOrder &newOffer);
-    int searchPurchaseOrdersPriceLastIndex(vector<PurchaseOrder> &offers, double price);
-    int searchSaleOrdersPriceLastIndex(vector<SaleOrder> &offers, double price);
+    int searchPurchaseOrdersPriceLastIndex(deque<PurchaseOrder> &offers, double price);
+    int searchSaleOrdersPriceLastIndex(deque<SaleOrder> &offers, double price);
 };
 
 #endif

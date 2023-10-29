@@ -1,4 +1,5 @@
 #include <vector>
+#include <deque>
 #include "PurchaseOrder.h"
 #include "SaleOrder.h"
 
@@ -10,8 +11,8 @@ struct StockInfo
     double bid = 0;
     double ask = 0;
     int totalTradedQuantity = 0;
-    vector<PurchaseOrder> purchaseOrders;
-    vector<SaleOrder> saleOrders;
+    deque<PurchaseOrder> purchaseOrders;
+    deque<SaleOrder> saleOrders;
     double lastTradePrice = 0;
 };
 

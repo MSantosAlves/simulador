@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <queue>
 
 #define PORT 8080
 
@@ -29,7 +30,7 @@ int main(int argc, char *argv[])
     semaphore->release();
 
     // Instantiate shared variables
-    vector<string> rawOrdersQueue;
+    queue<string> rawOrdersQueue;
     map<string, StockInfo> offersBook;
     Clock *clock = new Clock();
     Context *ctx = new Context();
@@ -42,10 +43,11 @@ int main(int argc, char *argv[])
     string targetStock = config->getTargetStock();
     StockDataInfo targetStockDataInfo = config->getTargetStockDataInfo();
     ctx->setTargetStock(targetStock);
+    ctx->setTotalOrdersSize(targetStockDataInfo.nbOfLines);
 
     // Instantiate services
     DataService *dataService = new DataService(dataTargetDate, dataPath, targetStockDataInfo, targetStock, simulationSpeed, clock, ctx);
-    OrderService *orderService = new OrderService(clock);
+    OrderService *orderService = new OrderService(clock, ctx);
     LogService *logService = new LogService(clock, ctx);
 
     // Setup socket
@@ -56,9 +58,9 @@ int main(int argc, char *argv[])
     thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender);
     // thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
     thread printContextThread(&LogService::printContextOnTick, logService, &offersBook, &rawOrdersQueue);
-    // thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
+    thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
 
-    // marketServerThread.join();
+    marketServerThread.join();
     readOrdersThread.join();
     ordersProcessorThread.join();
     // sendDataOnTickThread.join();

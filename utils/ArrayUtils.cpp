@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include <deque>
 #include <algorithm>
 
 using namespace std;
@@ -46,7 +47,7 @@ void ArrayUtils::insertSaleOrder(vector<SaleOrder> &orders, const SaleOrder &new
     orders.insert(it, newOrder);
 }
 
-int ArrayUtils::searchPurchaseOrdersPriceLastIndex(vector<PurchaseOrder> &offers, double price)
+int ArrayUtils::searchPurchaseOrdersPriceLastIndex(deque<PurchaseOrder> &offers, double price)
 {
     int left = 0;
     int right = offers.size() - 1;
@@ -74,7 +75,7 @@ int ArrayUtils::searchPurchaseOrdersPriceLastIndex(vector<PurchaseOrder> &offers
     return lastPriceIndex;
 }
 
-int ArrayUtils::searchSaleOrdersPriceLastIndex(vector<SaleOrder> &offers, double price)
+int ArrayUtils::searchSaleOrdersPriceLastIndex(deque<SaleOrder> &offers, double price)
 {
     int left = 0;
     int right = offers.size() - 1;

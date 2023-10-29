@@ -7,6 +7,20 @@ using namespace std;
 
 SaleOrder::SaleOrder() {}
 
+bool SaleOrder::operator<(const SaleOrder &other) const
+{
+    double otherOrderPrice = other.getOrderPrice();
+
+    if (orderPrice != otherOrderPrice)
+    {
+        return orderPrice < otherOrderPrice;
+    }
+    else
+    {
+        return priorityTimeInteger < other.getPriorityTimeInteger();
+    }
+}
+
 SaleOrder::SaleOrder(string _sequentialOrderNumber, string _secondaryOrderID, string _priorityTime, string _priorityIndicator, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder, int _orderSource, string _agressorIndicator)
 {
     StringUtils stringUtils;

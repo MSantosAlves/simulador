@@ -4,7 +4,7 @@
 #include <arpa/inet.h>
 
 #include <string>
-#include <vector>
+#include <queue>
 #include "Semaphore.h"
 
 using namespace std;
@@ -22,7 +22,7 @@ private:
 
 public:
     Server(int port);
-    void acceptConnections(vector<string> *rawOrdersQueue, Semaphore *semaphore);
+    void acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semaphore);
     int *getClientSocketAddress();
 };
 

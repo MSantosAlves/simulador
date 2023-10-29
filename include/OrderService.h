@@ -3,10 +3,12 @@
 #include "StockInfo.h"
 #include "ServerResponseSender.h"
 #include "Clock.h"
+#include "Context.h"
 
 #include <vector>
 #include <string>
 #include <map>
+#include <queue>
 
 using namespace std;
 
@@ -17,10 +19,11 @@ class OrderService
 {
 private:
 	Clock *clock;
+	Context *context;
 
 public:
-	OrderService(Clock *clock);
-	void startProcessOrders(vector<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender);
+	OrderService(Clock *clock, Context *context);
+	void startProcessOrders(queue<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender);
 };
 
 #endif

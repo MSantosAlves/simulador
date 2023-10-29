@@ -6,7 +6,21 @@ using namespace std;
 
 PurchaseOrder::PurchaseOrder() {}
 
-PurchaseOrder::PurchaseOrder(string _sequentialOrderNumber, string _secondaryOrderID,  string _priorityTime, string _priorityIndicator, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder, int _source, string _agressorIndicator)
+bool PurchaseOrder::operator<(const PurchaseOrder &other) const
+{
+    double otherOrderPrice = other.getOrderPrice();
+
+    if (orderPrice != otherOrderPrice)
+    {
+        return orderPrice > otherOrderPrice;
+    }
+    else
+    {
+        return priorityTimeInteger < other.getPriorityTimeInteger();
+    }
+}
+
+PurchaseOrder::PurchaseOrder(string _sequentialOrderNumber, string _secondaryOrderID, string _priorityTime, string _priorityIndicator, string _orderPrice, string _totalQuantityOfOrder, string _tradedQuantityOfOrder, int _source, string _agressorIndicator)
 {
     StringUtils stringUtils;
     sequentialOrderNumber = _sequentialOrderNumber;
@@ -111,10 +125,12 @@ void PurchaseOrder::setOrderSource(int _orderSource)
     orderSource = _orderSource;
 }
 
-int PurchaseOrder::getAgressorIndicator(){
+int PurchaseOrder::getAgressorIndicator()
+{
     return agressorIndicator;
 }
 
-void PurchaseOrder::setAgressorIndicator(string _agressorIndicator){
+void PurchaseOrder::setAgressorIndicator(string _agressorIndicator)
+{
     agressorIndicator = stoi(_agressorIndicator);
 }

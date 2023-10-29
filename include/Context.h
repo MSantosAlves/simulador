@@ -10,7 +10,7 @@ class Context
 private:
 
     string targetStock;
-    float simulationExecuted = 0;
+    int totalOrdersSize = 0;
     int ordersRead = 0;
     int lastOrdersReadValue = 0;
 
@@ -19,8 +19,8 @@ public:
 
     void setTargetStock(string targetStock);
     string getTargetStock();
-    float getSimulationExecuted();
-    void setSimulationExecuted(float simulationExecuted);
+    void setTotalOrdersSize(int totalOrdersSize);
+    int getTotalOrdersSize();
     string getSimulationExecutedHumandReadable();
     void setOrdersRead(int ordersRead);
     int getOrdersRead();
