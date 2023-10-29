@@ -29,6 +29,7 @@ public:
 
     int64_t getTimeBetweenOrdersInMicroseconds(string lastOrderPriorityTime, string currOrderPriorityTime);
 
+    string getRealTimeHumanReadable();
 };
 
 #endif

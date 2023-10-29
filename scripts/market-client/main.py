@@ -35,5 +35,5 @@ broker = HomeBroker(client)
 broker.start_application_thread()
 
 # Start plotserver
-plotlib_server = PlotlibServer(target_symbol)
-plotlib_server.start_plotting_thread()
+# plotlib_server = PlotlibServer(target_symbol)
+# plotlib_server.start_plotting_thread()

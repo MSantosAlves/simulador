@@ -18,7 +18,7 @@ public:
 	LogService(Clock* clock, Context* context);
 	void startLogSystem(map<string, StockInfo> *offersBook, Semaphore *semaphore);
 	void sendDataOnTick(map<string, StockInfo>* offersBook, Semaphore* semaphore, ServerResponseSender* responseSender);
-	void printContextOnTick();
+	void printContextOnTick(map<string, StockInfo> *offersBook);
 	Clock* clock;
 	Context* context;
 };

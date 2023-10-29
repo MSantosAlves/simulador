@@ -45,7 +45,7 @@ string StringUtils::removeWhiteSpaces(string str) {
     return str;
 }
 
-vector<string> StringUtils::removeWitheSpacesFromSplitedString(vector<string> splitedString)
+vector<string> StringUtils::removeWhiteSpacesFromSplitedString(vector<string> splitedString)
 {
     for (int i = 0; i < splitedString.size(); i++) {
         splitedString[i] = removeWhiteSpaces(splitedString[i]);

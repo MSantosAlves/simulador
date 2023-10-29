@@ -29,9 +29,6 @@ int main(int argc, char *argv[])
     Semaphore *semaphore = new Semaphore();
     semaphore->release();
 
-    // Trader class (strategy)
-    Trader *traderAccount = new Trader(5000.00);
-
     // Instantiate shared variables
     vector<string> rawOrdersQueue;
     map<string, StockInfo> offersBook;
@@ -45,6 +42,7 @@ int main(int argc, char *argv[])
     string simulationSpeed = config->getSimulationSpeed();
     string targetStock = config->getTargetStock();
     StockDataInfo targetStockDataInfo = config->getTargetStockDataInfo();
+    ctx->setTargetStock(targetStock);
 
     // Instantiate services
     DataService *dataService = new DataService(dataTargetDate, dataPath, targetStockDataInfo, targetStock, simulationSpeed, clock, ctx);
@@ -57,14 +55,14 @@ int main(int argc, char *argv[])
 
     thread readOrdersThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "BOTH");
     thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender);
-    thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
-    thread printContextThread(&LogService::printContextOnTick, logService);
-    thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
+    // thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
+    thread printContextThread(&LogService::printContextOnTick, logService, &offersBook);
+    // thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
 
-    marketServerThread.join();
+    // marketServerThread.join();
     readOrdersThread.join();
     ordersProcessorThread.join();
-    sendDataOnTickThread.join();
+    // sendDataOnTickThread.join();
     printContextThread.join();
 
     return 0;

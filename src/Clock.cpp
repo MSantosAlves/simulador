@@ -107,6 +107,21 @@ string Clock::getSimulationTimeHumanReadable()
     return formattedTime;
 }
 
+string Clock::getRealTimeHumanReadable(){
+    // Get the current date and time
+    system_clock::time_point now = system_clock::now();
+
+    // Convert the current time to a time_t value
+    time_t now_time_t = system_clock::to_time_t(now);
+
+    tm timeinfo = *localtime(&now_time_t);
+
+    char buffer[20];
+    strftime(buffer, sizeof(buffer), "%H:%M:%S", &timeinfo);
+
+    return buffer;
+}
+
 int64_t Clock::getTimeBetweenOrdersInMicroseconds(string lastOrderPriorityTime, string currOrderPriorityTime)
 {
     high_resolution_clock::time_point lastTimePoint = timeStringToTimePoint(lastOrderPriorityTime);

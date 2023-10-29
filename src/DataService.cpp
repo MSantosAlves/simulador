@@ -70,8 +70,9 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
             {
                 clock->setSimulationTime(priorityTime);
                 lastPriorityTime = priorityTime;
-                cout << "Reading file: " << filePath << endl;
+                cout << "Initial Real Time: " << clock->getRealTimeHumanReadable() << endl;
                 cout << "Initial Simulation Time: " << clock->getSimulationTimeHumanReadable() << endl;
+                cout << "Reading file: " << filePath << endl;
                 isFirstOrder = false;
             }
 
@@ -102,6 +103,7 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
 
             fileCurrentLine++;
             context->setSimulationExecuted(fileCurrentLine/nbOfLines);
+            context->setOrdersRead(fileCurrentLine);
         }
 
         dataFile.close();

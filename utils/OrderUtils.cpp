@@ -16,7 +16,7 @@ Order OrderUtils::parseOrder(string order, StringUtils stringUtils)
     char const *delimiter = ";";
     int stringSize;
     string type;
-    splitedString = stringUtils.removeWitheSpacesFromSplitedString(stringUtils.split(order, (*delimiter)));
+    splitedString = stringUtils.removeWhiteSpacesFromSplitedString(stringUtils.split(order, (*delimiter)));
 
     stringSize = splitedString.size();
     Order *orderBuffer = new Order();

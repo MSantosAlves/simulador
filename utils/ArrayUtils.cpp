@@ -43,7 +43,6 @@ void ArrayUtils::insertPurchaseOrder(vector<PurchaseOrder> &orders, const Purcha
 void ArrayUtils::insertSaleOrder(vector<SaleOrder> &orders, const SaleOrder &newOrder)
 {
     auto it = lower_bound(orders.begin(), orders.end(), newOrder, compareSaleOrders);
-    bool newAskPrice = false;
     orders.insert(it, newOrder);
 }
 

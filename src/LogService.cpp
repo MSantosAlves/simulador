@@ -308,13 +308,28 @@ void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *s
     return;
 }
 
-void LogService::printContextOnTick()
+void LogService::printContextOnTick(map<string, StockInfo> *offersBook)
 {
-    chrono::milliseconds tick(10000);
+    int lastOrdersRead, currOrdersRead, throughput, purchases, sales = 0;
+    int tickSeconds = 10;
+    chrono::milliseconds tick(tickSeconds * 1000);
+    string targetStock = context->getTargetStock();
 
     while (true)
     {
-        cout << "Offers processed: " << context->getSimulationExecutedHumandReadable() << "%" << endl;
+        purchases = (*offersBook)[targetStock].purchaseOrders.size();
+        sales = (*offersBook)[targetStock].saleOrders.size();
+        currOrdersRead = context->getOrdersRead();
+        lastOrdersRead = context->getLastOrdersReadValue();
+        throughput = floor((currOrdersRead - lastOrdersRead) / tickSeconds);
+        
+        cout << endl;
+        cout << "Offers processed: " << context->getSimulationExecutedHumandReadable() << "%" << " (" << currOrdersRead <<" orders read)" << endl;
+        cout << "Book Size: " << purchases + sales << " (" << purchases << " C / " << sales << " V)" << endl;
+        cout << "Throughput: " << throughput << " lines/s" << endl;
+        cout << endl;
+
+       context->setLastOrdersReadValue(currOrdersRead);
         this_thread::sleep_for(tick);
     }
 
