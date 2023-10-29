@@ -43,14 +43,14 @@ bool updateAskPrice(SaleOrder saleOrder, string symbol, map<string, StockInfo> *
     return false;
 }
 
-void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils *orderUtils, ServerResponseSender *responseSender, Clock *clock)
+void handleNewOrder(string symbol, Order *order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils *orderUtils, ServerResponseSender *responseSender, Clock *clock)
 {
-    bool isBuyOrder = order.getOrderSide() == "1";
+    bool isBuyOrder = order->getOrderSide() == "1";
 
     if (isBuyOrder)
     {
         PurchaseOrder purchaseOrderBuffer;
-        purchaseOrderBuffer = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
+        purchaseOrderBuffer = *(new PurchaseOrder(order->getSequentialOrderNumber(), order->getSecondaryOrderID(), order->getPriorityTime(), order->getPriorityIndicator(), order->getOrderPrice(), order->getTotalQuantityOfOrder(), order->getTradedQuantityOfOrder(), order->getOrderSource(), order->getAggressorIndicator()));
 
         // Market offers
         if (purchaseOrderBuffer.getOrderPrice() == 0)
@@ -86,7 +86,7 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
     else
     {
         SaleOrder saleOrderBuffer;
-        saleOrderBuffer = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
+        saleOrderBuffer = *(new SaleOrder(order->getSequentialOrderNumber(), order->getSecondaryOrderID(), order->getPriorityTime(), order->getPriorityIndicator(), order->getOrderPrice(), order->getTotalQuantityOfOrder(), order->getTradedQuantityOfOrder(), order->getOrderSource(), order->getAggressorIndicator()));
 
         // Market offers
         if (saleOrderBuffer.getOrderPrice() == 0)
@@ -121,12 +121,12 @@ void handleNewOrder(string symbol, Order order, map<string, StockInfo> *offersBo
     }
 }
 
-void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils *orderUtils, ServerResponseSender *responseSender, Clock *clock)
+void handleReplacedOrder(string symbol, Order *order, map<string, StockInfo> *offersBook, ArrayUtils arrayUtils, OrderUtils *orderUtils, ServerResponseSender *responseSender, Clock *clock)
 {
-    string sequentialOrderNumber = order.getSequentialOrderNumber();
+    string sequentialOrderNumber = order->getSequentialOrderNumber();
     int targetIdx = -1;
 
-    if (order.getOrderSide() == "1")
+    if (order->getOrderSide() == "1")
     {
         for (int i = 0; i < (*offersBook)[symbol].purchaseOrders.size(); i++)
         {
@@ -142,7 +142,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             return;
         }
 
-        PurchaseOrder updatedOrder = *(new PurchaseOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
+        PurchaseOrder updatedOrder = *(new PurchaseOrder(order->getSequentialOrderNumber(), order->getSecondaryOrderID(), order->getPriorityTime(), order->getPriorityIndicator(), order->getOrderPrice(), order->getTotalQuantityOfOrder(), order->getTradedQuantityOfOrder(), order->getOrderSource(), order->getAggressorIndicator()));
 
         // Market offers
         if (updatedOrder.getOrderPrice() == 0)
@@ -215,7 +215,7 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
             return;
         }
 
-        SaleOrder updatedOrder = *(new SaleOrder(order.getSequentialOrderNumber(), order.getSecondaryOrderID(), order.getPriorityTime(), order.getPriorityIndicator(), order.getOrderPrice(), order.getTotalQuantityOfOrder(), order.getTradedQuantityOfOrder(), order.getOrderSource(), order.getAggressorIndicator()));
+        SaleOrder updatedOrder = *(new SaleOrder(order->getSequentialOrderNumber(), order->getSecondaryOrderID(), order->getPriorityTime(), order->getPriorityIndicator(), order->getOrderPrice(), order->getTotalQuantityOfOrder(), order->getTradedQuantityOfOrder(), order->getOrderSource(), order->getAggressorIndicator()));
 
         // Market offers
         if (updatedOrder.getOrderPrice() == 0)
@@ -274,12 +274,12 @@ void handleReplacedOrder(string symbol, Order order, map<string, StockInfo> *off
     }
 }
 
-void handleCancelOrExpiredOrder(string symbol, Order order, map<string, StockInfo> *offersBook)
+void handleCancelOrExpiredOrder(string symbol, Order *order, map<string, StockInfo> *offersBook)
 {
-    string sequentialOrderNumber = order.getSequentialOrderNumber();
+    string sequentialOrderNumber = order->getSequentialOrderNumber();
     int targetIdx = -1;
 
-    if (order.getOrderSide() == "1")
+    if (order->getOrderSide() == "1")
     {
         for (int i = 0; i < (*offersBook)[symbol].purchaseOrders.size(); i++)
         {
@@ -340,14 +340,15 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
 {
     StringUtils stringUtils;
     OrderUtils *orderUtils = new OrderUtils(clock);
-    Order order;
     ArrayUtils arrayUtils;
-    chrono::milliseconds timespan(1);
+    int sleepTimeInMicroSeconds = 1000;
     string symbol = "";
     string rawCurrOrder;
 
     PurchaseOrder purchaseOrderBuffer;
     SaleOrder saleOrderBuffer;
+    int orderStatus;
+    Order *orderBuffer = new Order();
 
     while (true)
     {
@@ -356,7 +357,8 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         if (rawOrdersQueue->size() == 0)
         {
             semaphore->release();
-            this_thread::sleep_for(timespan);
+            // this_thread::sleep_for(chrono::microseconds(sleepTimeInMicroSeconds));
+            this_thread::sleep_for(chrono::milliseconds(1));
             continue;
         }
 
@@ -364,9 +366,9 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
         rawOrdersQueue->erase(rawOrdersQueue->begin());
 
-        order = orderUtils->parseOrder(rawCurrOrder, stringUtils);
+        orderUtils->parseOrder(rawCurrOrder, stringUtils, orderBuffer);
 
-        int orderStatus = order.getOrderStatus() == "C" ? 9 : stoi(order.getOrderStatus());
+        orderStatus = orderBuffer->getOrderStatus() == "C" ? 9 : stoi(orderBuffer->getOrderStatus());
 
         if (orderStatus == OrderStatuses::Status::REJECTED || orderStatus == OrderStatuses::Status::PARTIALLY_FILLED || orderStatus == OrderStatuses::Status::FILLED)
         {
@@ -374,21 +376,22 @@ void OrderService::startProcessOrders(vector<string> *rawOrdersQueue, map<string
         }
         else if (orderStatus == OrderStatuses::Status::CANCELLED || orderStatus == OrderStatuses::Status::EXPIRED)
         {
-            handleCancelOrExpiredOrder(symbol, order, offersBook);
+            handleCancelOrExpiredOrder(symbol, orderBuffer, offersBook);
         }
         else if (orderStatus == OrderStatuses::Status::REPLACED)
         {
-            handleReplacedOrder(symbol, order, offersBook, arrayUtils, orderUtils, responseSender, clock);
+            handleReplacedOrder(symbol, orderBuffer, offersBook, arrayUtils, orderUtils, responseSender, clock);
         }
         else if (orderStatus == OrderStatuses::Status::NEW)
         {
-            handleNewOrder(symbol, order, offersBook, arrayUtils, orderUtils, responseSender, clock);
+            handleNewOrder(symbol, orderBuffer, offersBook, arrayUtils, orderUtils, responseSender, clock);
         }
         else
         {
-            cout << "[ERROR] Unmaped Order Status: " << order.getOrderStatus() << endl;
+            cout << "[ERROR] Unmaped Order Status: " << orderBuffer->getOrderStatus() << endl;
         }
         semaphore->release();
-        this_thread::sleep_for(timespan);
+        this_thread::sleep_for(chrono::milliseconds(1));
+        // this_thread::sleep_for(chrono::microseconds(sleepTimeInMicroSeconds));
     }
 }

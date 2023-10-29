@@ -273,6 +273,7 @@ void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *s
 {
     chrono::milliseconds tick(1000);
     map<string, vector<StockMarketVolume>> marketVolume;
+    json jsonObject, volumeJson;
 
     while (true)
     {
@@ -281,7 +282,6 @@ void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *s
         marketVolume = getMarketVolume(offersBook, context);
 
         // Construct the JSON object manually
-        json jsonObject;
         jsonObject["event"] = "UPDATE_MARKET_VOLUME";
         jsonObject["market_volume"] = json::object();
 
@@ -290,7 +290,6 @@ void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *s
             jsonObject["market_volume"][entry.first] = json::array();
             for (const auto &stockVolume : entry.second)
             {
-                json volumeJson;
                 volumeJson["quantity"] = stockVolume.quantity;
                 volumeJson["price"] = stockVolume.price;
                 volumeJson["direction"] = stockVolume.direction;

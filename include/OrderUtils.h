@@ -2,7 +2,6 @@
 #include "StringUtils.h"
 #include "StockInfo.h"
 #include "ArrayUtils.h"
-#include "Trader.h"
 #include "ServerResponseSender.h"
 #include "Clock.h"
 
@@ -21,7 +20,7 @@ private:
 	Clock *clock;
 public:
 	OrderUtils(Clock *clock);
-	Order parseOrder(string order, StringUtils stringUtils);
+	Order parseOrder(string order, StringUtils stringUtils, Order *orderBuffer);
 	void executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ServerResponseSender *responseSender);
 };
 

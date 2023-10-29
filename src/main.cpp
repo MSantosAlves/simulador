@@ -6,7 +6,6 @@
 #include "Semaphore.h"
 #include "Config.h"
 #include "StockInfo.h"
-#include "Trader.h"
 #include "StockDataInfo.h"
 #include "Server.h"
 #include "ServerResponseSender.h"

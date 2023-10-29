@@ -10,7 +10,7 @@ OrderUtils::OrderUtils(Clock *_clock)
     clock = _clock;
 }
 
-Order OrderUtils::parseOrder(string order, StringUtils stringUtils)
+Order OrderUtils::parseOrder(string order, StringUtils stringUtils, Order *orderBuffer)
 {
     vector<string> splitedString;
     char const *delimiter = ";";
@@ -19,7 +19,7 @@ Order OrderUtils::parseOrder(string order, StringUtils stringUtils)
     splitedString = stringUtils.removeWhiteSpacesFromSplitedString(stringUtils.split(order, (*delimiter)));
 
     stringSize = splitedString.size();
-    Order *orderBuffer = new Order();
+    // Order *orderBuffer = new Order();
 
     // stringSize <= 2 => Data header
     if (stringSize > 2)

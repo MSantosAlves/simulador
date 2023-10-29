@@ -48,7 +48,10 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
     int fileCurrentLine = 0;
     bool isFirstOrder = true;
     string orderBuffer = "";
-    string lastPriorityTime;
+    string priorityTime, lastPriorityTime, orderSide, orderSufix;
+    vector<string> splitedLine = {};
+    int64_t timeBetweenOrdersInMs;
+    int64_t sleepTimeInMs;
 
     if (orderType == "BOTH")
     {
@@ -59,10 +62,10 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
         while (getline(dataFile, orderBuffer))
         {
 
-            vector<string> splitedLine = stringUtils.split(orderBuffer, ';');
-            string priorityTime = splitedLine[6];
-            string orderSide = splitedLine[2];
-            string orderSufix = orderSide == "1" ? ";CPA" : ";VDA";
+            splitedLine = stringUtils.split(orderBuffer, ';');
+            priorityTime = splitedLine[6];
+            orderSide = splitedLine[2];
+            orderSufix = orderSide == "1" ? ";CPA" : ";VDA";
 
             semaphore->acquire();
 
@@ -78,12 +81,10 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
 
             rawOrdersQueue->push_back(orderBuffer + orderSufix);
 
-            semaphore->release();
-
             orderBuffer = "";
 
-            int64_t timeBetweenOrdersInMs = clock->getTimeBetweenOrdersInMicroseconds(lastPriorityTime, priorityTime);
-            int64_t sleepTimeInMs = simulationSpeed != "NORMAL" ? floor(timeBetweenOrdersInMs / timespanDownfactor) : timeBetweenOrdersInMs;
+            timeBetweenOrdersInMs = clock->getTimeBetweenOrdersInMicroseconds(lastPriorityTime, priorityTime);
+            sleepTimeInMs = simulationSpeed != "NORMAL" ? floor(timeBetweenOrdersInMs / timespanDownfactor) : timeBetweenOrdersInMs;
 
             if (sleepTimeInMs > 0)
             {
@@ -91,6 +92,8 @@ void DataService::startAcquisition(vector<string> *rawOrdersQueue, Semaphore *se
             }
 
             clock->setSimulationTime(priorityTime);
+
+            semaphore->release();
 
             lastPriorityTime = priorityTime;
 
