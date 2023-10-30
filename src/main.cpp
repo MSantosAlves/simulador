@@ -25,6 +25,8 @@
 
 int main(int argc, char *argv[])
 {
+    high_resolution_clock::time_point startPoint = high_resolution_clock::now();
+    
     // Instantiate application semaphore
     Semaphore *semaphore = new Semaphore();
     semaphore->release();
@@ -34,6 +36,7 @@ int main(int argc, char *argv[])
     map<string, StockInfo> offersBook;
     Clock *clock = new Clock();
     Context *ctx = new Context();
+    ctx->setStartTimePoint(startPoint);
 
     // Get custom configs
     Config *config = new Config();
@@ -55,15 +58,15 @@ int main(int argc, char *argv[])
     ServerResponseSender *responseSender = new ServerResponseSender(server->getClientSocketAddress());
 
     thread readOrdersThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "BOTH");
-    thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender);
-    // thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
+    thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender, server);
+    thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
     thread printContextThread(&LogService::printContextOnTick, logService, &offersBook, &rawOrdersQueue);
     thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
 
     marketServerThread.join();
     readOrdersThread.join();
     ordersProcessorThread.join();
-    // sendDataOnTickThread.join();
+    sendDataOnTickThread.join();
     printContextThread.join();
 
     return 0;

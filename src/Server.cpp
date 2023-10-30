@@ -53,12 +53,14 @@ int *Server::getClientSocketAddress()
     return &clientSocket;
 }
 
-int waitForConnectionsLoop(int serverSocket, struct sockaddr_in clientAddress, int addrlen) {
+int waitForConnectionsLoop(int serverSocket, struct sockaddr_in clientAddress, int addrlen)
+{
     bool conected = false;
     int clientSocketConnection;
 
-    while (!conected) {
-        if ((clientSocketConnection = accept(serverSocket, (struct sockaddr*)&clientAddress, (socklen_t*)&addrlen)) < 0)
+    while (!conected)
+    {
+        if ((clientSocketConnection = accept(serverSocket, (struct sockaddr *)&clientAddress, (socklen_t *)&addrlen)) < 0)
         {
             perror("Accept failed");
             exit(EXIT_FAILURE);
@@ -89,8 +91,6 @@ void Server::acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semapho
         char buffer[1024] = {0};
 
         read(clientSocket, buffer, 1024);
- 
-        
         if (buffer != "")
         {
             jsonData = json::parse(buffer);
@@ -99,6 +99,12 @@ void Server::acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semapho
             rawOrdersQueue->push(orderBuffer);
             semaphore->release();
         }
-
     }
+
+    return;
+}
+
+void Server::closeServer(){
+    ::close(port);
+    _exit(0);
 }

@@ -28,7 +28,7 @@ with open(history_file_path, 'r') as data_file:
         data_plot_y.append(float(data_line[1].strip()))
 
 
-size = 500#len(data_plot_y)
+size = len(data_plot_y)
 
 downsample_factor = len(data_plot_x) // size
 

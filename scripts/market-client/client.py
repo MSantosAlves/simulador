@@ -1,4 +1,6 @@
 from monitor import Monitor
+import signal
+import os
 
 import socket
 import threading
@@ -15,7 +17,7 @@ class Client:
 
     def connect(self):
         self.client_socket.connect((self.server_address, self.server_port))
-        print("Server connected")
+        print("Cliente connected to the server.")
 
     def send_data(self, data):
         self.client_socket.sendall(data.encode())
@@ -25,7 +27,7 @@ class Client:
         return response.decode()
 
     def close(self):
-        print("Server closed")
+        print("Client closed")
         self.client_socket.close()
     
     def start_receive_thread(self):
@@ -55,8 +57,16 @@ class Client:
                         if res["event"].startswith("UPDATE_BOOK"):
                             self.book.update_book(res)
 
+                        if res["event"] == "NEW_NEGOTIATION":
+                            self.book.new_negotiation(res)
+
                         if res["event"] == "UPDATE_MARKET_VOLUME":
                             self.book.update_market_volume(res)
+
+                        if res["event"] == "SIMULATION_END":
+                            self.close()
+                            # Kill plotly server
+                            os.kill(os.getpid(), signal.SIGTERM)
 
             except socket.error:
                 # Handle socket error (e.g., server closed the connection)

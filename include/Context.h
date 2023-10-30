@@ -1,4 +1,5 @@
 #include <string>
+#include <chrono>
 
 using namespace std;
 
@@ -13,6 +14,8 @@ private:
     int totalOrdersSize = 0;
     int ordersRead = 0;
     int lastOrdersReadValue = 0;
+    bool shouldStopSimulation = false;
+    chrono::high_resolution_clock::time_point startTimePoint;
 
 public:
 	Context();
@@ -26,6 +29,10 @@ public:
     int getOrdersRead();
     void setLastOrdersReadValue(int lastOrdersReadValue);
     int getLastOrdersReadValue();
+    chrono::high_resolution_clock::time_point getStartTimePoint();
+    void setStartTimePoint(chrono::high_resolution_clock::time_point startTimePoint);
+    void setShouldStopSimulation(bool value);
+    bool simulationShouldContinue();
 
 };
 

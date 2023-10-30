@@ -168,7 +168,7 @@ LogService::LogService(Clock *_clock, Context *_context)
 void LogService::startLogSystem(map<string, StockInfo> *offersBook, Semaphore *semaphore)
 {
     chrono::milliseconds timespan(3000);
-    while (true)
+    while (context->simulationShouldContinue())
     {
         semaphore->acquire();
         printOffersBook(offersBook);
@@ -276,7 +276,7 @@ void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *s
     map<string, vector<StockMarketVolume>> marketVolume;
     json jsonObject, volumeJson;
 
-    while (true)
+    while (context->simulationShouldContinue())
     {
         semaphore->acquire();
 
@@ -315,7 +315,7 @@ void LogService::printContextOnTick(map<string, StockInfo> *offersBook, queue<st
     chrono::milliseconds tick(tickSeconds * 1000);
     string targetStock = context->getTargetStock();
 
-    while (true)
+    while (context->simulationShouldContinue())
     {
         purchases = (*offersBook)[targetStock].purchaseOrders.size();
         sales = (*offersBook)[targetStock].saleOrders.size();

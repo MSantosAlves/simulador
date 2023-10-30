@@ -66,6 +66,23 @@ Clock::Clock()
 {
 }
 
+string Clock::getTimePointHumanReadable(high_resolution_clock::time_point timePoint)
+{
+
+    time_t time_t_value = high_resolution_clock::to_time_t(timePoint);
+
+    // Extract hours, minutes, seconds, and microseconds
+    tm timeinfo = *localtime(&time_t_value);
+    long long microseconds = chrono::duration_cast<chrono::microseconds>(timePoint.time_since_epoch()).count() % 1000000;
+
+    // Format the time as "HH.MM.SS.mmmmmm"
+    char buffer[20];
+    strftime(buffer, sizeof(buffer), "%H:%M:%S", &timeinfo);
+    string formattedTime = string(buffer) + "." + to_string(microseconds);
+
+    return formattedTime;
+}
+
 void Clock::setSimulationTime(string timeString)
 {
     simulationTime = timeStringToTimePoint(timeString);
@@ -90,20 +107,9 @@ high_resolution_clock::time_point Clock::getUpdatedSimulationTime()
 
 string Clock::getSimulationTimeHumanReadable()
 {
+    high_resolution_clock::time_point simulationTimePoint = getUpdatedSimulationTime();
 
-    high_resolution_clock::time_point myTimePoint = getUpdatedSimulationTime();
-
-    time_t time_t_value = high_resolution_clock::to_time_t(myTimePoint);
-
-    // Extract hours, minutes, seconds, and microseconds
-    tm timeinfo = *localtime(&time_t_value);
-    long long microseconds = chrono::duration_cast<chrono::microseconds>(myTimePoint.time_since_epoch()).count() % 1000000;
-
-    // Format the time as "HH.MM.SS.mmmmmm"
-    char buffer[20];
-    strftime(buffer, sizeof(buffer), "%H:%M:%S", &timeinfo);
-    string formattedTime = string(buffer) + "." + to_string(microseconds);
-
+    string formattedTime = getTimePointHumanReadable(simulationTimePoint);
     return formattedTime;
 }
 

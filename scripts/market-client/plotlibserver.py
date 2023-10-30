@@ -1,3 +1,4 @@
+import signal
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
@@ -55,35 +56,11 @@ class PlotlibServer:
             symbol_data['Time'] = symbol_data['Time'].dt.strftime('%H:%M:%S.%f')
 
             # Plot the graph using Plotly Express
-            fig = px.line(symbol_data, x='Time', y='Price', title='Preço vs Tempo ({})'.format(self.symbol))
-            fig.update_xaxes(title_text='Time', tickformat='%H:%M:%S.%f', tickvals=symbol_data['Time'][::1000])
+            fig = px.line(symbol_data, x='Time', y='Price', line_shape='hv', title='Preço Negociado x Tempo ({})'.format(self.symbol))
+            downsamplefactor = 10000 if len(symbol_data['Time']) > 10000000 else 1000
+            fig.update_xaxes(title_text='Time', tickformat='%H:%M:%S.%f', tickvals=symbol_data['Time'][::downsamplefactor])
             fig.update_yaxes(title_text='Price')
             
             return fig
-        
-        # @callback(Output('stock-market-offers-graph', 'figure'),
-        #               Input('interval-component', 'n_intervals'))
-        # def update_volme_graph_live(n):
-
-        #     df = pd.read_csv(self.volume_file_path)
-
-        #     df = df[df['Symbol'] == self.symbol]
-
-        #     fig = go.Figure()
-
-        #     buy_data = df[df['Direction'] == 'BUY']
-        #     fig.add_trace(go.Scatter(x=buy_data['Price'], y=buy_data['Quantity'], mode='lines', fill='tozeroy',
-        #                              line=dict(color='blue'), name='Oferta de Compra'))
-
-        #     sale_data = df[df['Direction'] == 'SALE']
-        #     fig.add_trace(go.Scatter(x=sale_data['Price'], y=sale_data['Quantity'], mode='lines', fill='tozeroy',
-        #                              line=dict(color='red'), name='Oferta de Venda'))
-
-        #     fig.update_layout(title='Preço vs Quantidade em oferta ({})'.format(self.symbol),
-        #                       xaxis_title='Preço',
-        #                       yaxis_title='Quantidade',
-        #                       xaxis=dict(tickformat='.2f'))
-
-        #     return fig
         
         self.app.run_server(debug=False)

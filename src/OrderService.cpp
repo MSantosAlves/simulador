@@ -344,8 +344,7 @@ OrderService::OrderService(Clock *_clock, Context *_context)
     context = _context;
 }
 
-
-void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
+void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender, Server *server)
 {
     StringUtils stringUtils;
     OrderUtils *orderUtils = new OrderUtils(clock);
@@ -359,9 +358,9 @@ void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string,
     int orderStatus;
     Order *orderBuffer = new Order();
     int ordersProcessed = 0;
-    int nbOfLines = context->getTotalOrdersSize();
+    int lastLine = context->getTotalOrdersSize() - 1;
 
-    while (ordersProcessed <= nbOfLines)
+    while (ordersProcessed < lastLine)
     {
         semaphore->acquire();
 
@@ -402,7 +401,7 @@ void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string,
                 context->setOrdersRead(ordersProcessed);
             }
         }
-        else
+        else if(rawOrdersQueue->size() > 0)
         {
             rawCurrOrder = rawOrdersQueue->front();
             symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
@@ -430,7 +429,7 @@ void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string,
             }
             else
             {
-                std::cout << "[ERROR] Unmaped Order Status: " << orderBuffer->getOrderStatus() << endl;
+                cout << "[ERROR] Unmaped Order Status: " << orderBuffer->getOrderStatus() << endl;
             }
 
             ordersProcessed++;
@@ -438,10 +437,25 @@ void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string,
         }
 
         semaphore->release();
-        this_thread::sleep_for(chrono::milliseconds(1));
+        this_thread::sleep_for(chrono::nanoseconds(1));
     }
+    
+    string finishTimeString = clock->getRealTimeHumanReadable();
+    string startTimeString = clock->getTimePointHumanReadable(context->getStartTimePoint());
 
-    std::cout << "All " << nbOfLines << " orders processed" << endl;
-    std::cout << "Simulation finished at: " << clock->getRealTimeHumanReadable() << endl;
-    std::cout << "Ficticious End time: " << clock->getSimulationTimeHumanReadable() << endl;
+    cout << "All " << lastLine << " orders processed" << endl;
+    cout << "Ficticious End time: " << clock->getSimulationTimeHumanReadable() << endl;
+    cout << "Simulation started at: " << startTimeString << endl;
+    cout << "Simulation finished at: " << finishTimeString << endl;
+
+    context->setShouldStopSimulation(true);
+
+    sleep(3);
+
+    json jsonObject = {{"event", "SIMULATION_END"}};
+    responseSender->sendResponse(jsonObject);
+
+    server->closeServer();
+
+    return;
 }

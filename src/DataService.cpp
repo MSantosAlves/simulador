@@ -37,7 +37,7 @@ void DataService::startAcquisition(queue<string> *rawOrdersQueue, Semaphore *sem
 
     if (simulationSpeed == "FAST")
     {
-        timespanDownfactor = 100;
+        timespanDownfactor = 1000;
     }
     else if (simulationSpeed == "SLOW")
     {
@@ -74,10 +74,9 @@ void DataService::startAcquisition(queue<string> *rawOrdersQueue, Semaphore *sem
             {
                 clock->setSimulationTime(priorityTime);
                 lastPriorityTime = priorityTime;
-                cout << "Simulation started at: " << clock->getRealTimeHumanReadable() << endl;
-                cout << "Ficticious Start Time: " << clock->getSimulationTimeHumanReadable() << endl;
                 cout << "Reading file: " << filePath << endl;
                 cout << "File length: " << fileEndLine << endl;
+                cout << "Ficticious Start Time: " << clock->getSimulationTimeHumanReadable() << endl;
                 isFirstOrder = false;
             }
 
@@ -111,7 +110,6 @@ void DataService::startAcquisition(queue<string> *rawOrdersQueue, Semaphore *sem
 
         }
 
-        return;
     }
 
     return;

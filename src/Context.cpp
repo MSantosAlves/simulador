@@ -1,6 +1,7 @@
 #include <string>
 #include <math.h>
 #include <Context.h>
+#include <chrono>
 
 using namespace std;
 
@@ -51,4 +52,20 @@ void Context::setLastOrdersReadValue(int _lastOrdersReadValue)
 int Context::getLastOrdersReadValue()
 {
     return lastOrdersReadValue;
+}
+
+void Context::setStartTimePoint(chrono::high_resolution_clock::time_point _startTimePoint){
+    startTimePoint = _startTimePoint;
+}
+
+chrono::high_resolution_clock::time_point Context::getStartTimePoint(){
+    return startTimePoint;
+}
+
+void Context::setShouldStopSimulation(bool value){
+    shouldStopSimulation = value;
+}   
+
+bool Context::simulationShouldContinue(){
+    return !shouldStopSimulation;
 }

@@ -94,6 +94,16 @@ void sendUpdateBookEvent(string symbol, map<string, StockInfo> *offersBook, Serv
     responseSender->sendResponse(jsonObject);
 }
 
+void sendNewNegotiationEvent(string symbol, double price, string time, ServerResponseSender *responseSender)
+{
+    json jsonObject = {
+        {"event", "NEW_NEGOTIATION"},
+        {"symbol", symbol},
+        {"price", price},
+        {"time", time}};
+    responseSender->sendResponse(jsonObject);
+}
+
 void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *offersBook, int bookUpdateDirection, ServerResponseSender *responseSender)
 {
     PurchaseOrder currPurchaseOrder;
@@ -177,13 +187,15 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             (*offersBook)[symbol].saleOrders.erase((*offersBook)[symbol].saleOrders.begin());
             (*offersBook)[symbol].purchaseOrders.erase((*offersBook)[symbol].purchaseOrders.begin());
 
+            sendNewNegotiationEvent(symbol, tradePrice, clock->getSimulationTimeHumanReadable(), responseSender);
+
             if (currSaleOrder.getOrderSource() == 1)
             {
                 json jsonObject = {
                     {"event", "SALE_OFFER_ENTIRELY_FILLED"},
                     {"qty", tradedQty},
                     {"id", currSaleOrder.getSequentialOrderNumber()},
-                    {"price", currSaleOrder.getOrderPrice()},
+                    {"price", tradePrice},
                     {"symbol", symbol}};
                 responseSender->sendResponse(jsonObject);
             }
@@ -193,7 +205,7 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"event", "PURCHASE_OFFER_ENTIRELY_FILLED"},
                     {"qty", tradedQty},
                     {"id", currPurchaseOrder.getSequentialOrderNumber()},
-                    {"price", currSaleOrder.getOrderPrice()},
+                    {"price", tradePrice},
                     {"symbol", symbol}};
                 responseSender->sendResponse(jsonObject);
             }
@@ -244,13 +256,15 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
             (*offersBook)[symbol].lastTradePrice = tradePrice;
 
+            sendNewNegotiationEvent(symbol, tradePrice, clock->getSimulationTimeHumanReadable(), responseSender);
+
             if (currSaleOrder.getOrderSource() == 1)
             {
                 json jsonObject = {
                     {"event", "SALE_OFFER_ENTIRELY_FILLED"},
                     {"qty", tradedQty},
                     {"id", currSaleOrder.getSequentialOrderNumber()},
-                    {"price", currSaleOrder.getOrderPrice()},
+                    {"price", tradePrice},
                     {"symbol", symbol}};
                 responseSender->sendResponse(jsonObject);
             }
@@ -260,7 +274,7 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"event", "PURCHASE_OFFER_PARTIALLY_FILLED"},
                     {"qty", tradedQty},
                     {"id", currPurchaseOrder.getSequentialOrderNumber()},
-                    {"price", currSaleOrder.getOrderPrice()},
+                    {"price", tradePrice},
                     {"symbol", symbol}};
                 responseSender->sendResponse(jsonObject);
             }
@@ -300,6 +314,8 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
             currSaleOrder.setTotalQuantityOfOrder(currSaleOrder.getTotalQuantityOfOrder() - tradedQty);
             currSaleOrder.setTradedQuantityOfOrder(currSaleOrder.getTradedQuantityOfOrder() + tradedQty);
 
+            sendNewNegotiationEvent(symbol, tradePrice, clock->getSimulationTimeHumanReadable(), responseSender);
+
             (*offersBook)[symbol].totalTradedQuantity += tradedQty;
             (*offersBook)[symbol].lastTradePrice = tradePrice;
 
@@ -309,7 +325,7 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"event", "SALE_OFFER_PARTIALLY_FILLED"},
                     {"qty", tradedQty},
                     {"id", currSaleOrder.getSequentialOrderNumber()},
-                    {"price", currSaleOrder.getOrderPrice()},
+                    {"price", tradePrice},
                     {"symbol", symbol}};
                 responseSender->sendResponse(jsonObject);
             }
@@ -319,7 +335,7 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"event", "PURCHASE_OFFER_ENTIRELY_FILLED"},
                     {"qty", tradedQty},
                     {"id", currPurchaseOrder.getSequentialOrderNumber()},
-                    {"price", currSaleOrder.getOrderPrice()},
+                    {"price", tradePrice},
                     {"symbol", symbol}};
                 responseSender->sendResponse(jsonObject);
             }

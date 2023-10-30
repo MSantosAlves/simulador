@@ -9,7 +9,7 @@ target_data_path = path + "/data/b3/20191220/raw/tmp/{}".format(target_symbol)
 file_list = sorted([f for f in os.listdir(target_data_path) if os.path.isfile(os.path.join(target_data_path, f))])
 
 filenames = ['file1.txt', 'file2.txt', ...]
-output_file_path = path + "/data/b3/20191220/sorted/" + target_symbol + "_SORTED2.txt"
+output_file_path = path + "/data/b3/20191220/sorted/" + target_symbol + "_SORTED.txt"
 
 with open(output_file_path, 'w') as outfile:
     for fname in file_list:

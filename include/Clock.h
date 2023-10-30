@@ -17,6 +17,8 @@ private:
 
 public:
 	Clock();
+    string getTimePointHumanReadable(high_resolution_clock::time_point timePoint);
+    
 	void setRealStartTime();
 	high_resolution_clock::time_point getRealStartTime();
 

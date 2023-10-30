@@ -46,13 +46,10 @@ with open(target_data_path, 'rb') as data_file:
 
         data_plot_y2.append(float(stock_price))
 
-size = len(data_plot_y1)#500
 
-y_values1 = data_plot_y1[::len(data_plot_y1) // size]
+y_values2 = data_plot_y2
+y_values1 = data_plot_y1
 
-downsample_factor = len(data_plot_y2) // len(y_values1)
-
-y_values2 = data_plot_y2[::downsample_factor]
 x_values = [i for i in range(0, len(y_values1))]
 
 fig, ax = plt.subplots()

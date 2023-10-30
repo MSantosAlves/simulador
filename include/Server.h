@@ -24,6 +24,8 @@ public:
     Server(int port);
     void acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semaphore);
     int *getClientSocketAddress();
+
+    void closeServer();
 };
 
 #endif
