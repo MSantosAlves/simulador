@@ -24,6 +24,7 @@ set(SOURCES
     src/DataService.cpp
     src/OrderService.cpp
     src/LogService.cpp
+    src/MetricsSystem.cpp
     src/Order.cpp
     src/PurchaseOrder.cpp
     src/SaleOrder.cpp

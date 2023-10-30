@@ -22,11 +22,11 @@ bid_data = df[df['Type'] == 'BID']
 
 size = 20
 
-ask_downsample_factor = len(ask_data) // size
-bid_downsample_factor = len(bid_data) // size
+ask_downsample_factor = 1#len(ask_data) // size
+bid_downsample_factor = 1#len(bid_data) // size
 
-ask_data = ask_data[0:20]#[::ask_downsample_factor]
-bid_data = bid_data[0:20]#[::bid_downsample_factor]
+ask_data = ask_data[0:500]#[::ask_downsample_factor]
+bid_data = bid_data[0:500]#[::bid_downsample_factor]
 
 # Create a figure and axis
 fig, ax = plt.subplots()
@@ -35,7 +35,7 @@ fig, ax = plt.subplots()
 # ax.step(ask_data['Time'], ask_data['Price'], label='ASK', color='blue')
 
 # Plot the BID data in red
-ax.step(bid_data['Time'], bid_data['Price'], label='BID', color='red')
+ax.plot(bid_data['Time'], bid_data['Price'], label='BID', color='red')
 
 
 max_ask = ask_data['Price'].max()

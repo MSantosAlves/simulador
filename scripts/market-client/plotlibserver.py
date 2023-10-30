@@ -17,11 +17,6 @@ class PlotlibServer:
         history_files.remove(".gitkeep")
         self.history_file_path = history_directory_path + "/" + sorted(history_files)[-1]
 
-        # volume_directory_path = "./scripts/market-client/market-volume"
-        # volume_files = [filename for filename in os.listdir(volume_directory_path) if os.path.isfile(os.path.join(volume_directory_path, filename))]
-        # volume_files.remove(".gitkeep")
-        # self.volume_file_path = volume_directory_path + "/" + sorted(volume_files)[-1]
-
     def start_plotting_thread(self):
         plotting_thread = threading.Thread(target=self.start_plotting)
         plotting_thread.daemon = True
@@ -56,7 +51,7 @@ class PlotlibServer:
             symbol_data['Time'] = symbol_data['Time'].dt.strftime('%H:%M:%S.%f')
 
             # Plot the graph using Plotly Express
-            fig = px.line(symbol_data, x='Time', y='Price', line_shape='hv', title='Preço Negociado x Tempo ({})'.format(self.symbol))
+            fig = px.line(symbol_data, x='Time', y='Price', title='Preço Negociado x Tempo ({})'.format(self.symbol))
             downsamplefactor = 10000 if len(symbol_data['Time']) > 10000000 else 1000
             fig.update_xaxes(title_text='Time', tickformat='%H:%M:%S.%f', tickvals=symbol_data['Time'][::downsamplefactor])
             fig.update_yaxes(title_text='Price')

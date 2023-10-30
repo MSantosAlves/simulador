@@ -372,8 +372,10 @@ data/b3/20191220/compiled/*
 data/b3/20191220/processed/*
 data/b3/20191220/raw/*
 data/b3/20191220/sorted/*
+metrics/*
 
 # exception to the rule
+!metrics/.gitkeep
 !data/b3/20191220/raw/cpa
 !data/b3/20191220/raw/vda
 !data/b3/20191220/raw/neg

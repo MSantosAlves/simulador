@@ -3,6 +3,7 @@
 #include "DataService.h"
 #include "OrderService.h"
 #include "LogService.h"
+#include "MetricsSystem.h"
 #include "Semaphore.h"
 #include "Config.h"
 #include "StockInfo.h"
@@ -52,6 +53,7 @@ int main(int argc, char *argv[])
     DataService *dataService = new DataService(dataTargetDate, dataPath, targetStockDataInfo, targetStock, simulationSpeed, clock, ctx);
     OrderService *orderService = new OrderService(clock, ctx);
     LogService *logService = new LogService(clock, ctx);
+    MetricsSystem *metricsSystem = new MetricsSystem(clock, ctx, &offersBook, &rawOrdersQueue);
 
     // Setup socket
     Server *server = new Server(PORT);
@@ -59,15 +61,15 @@ int main(int argc, char *argv[])
 
     thread readOrdersThread(&DataService::startAcquisition, dataService, &rawOrdersQueue, semaphore, "BOTH");
     thread ordersProcessorThread(&OrderService::startProcessOrders, orderService, &rawOrdersQueue, &offersBook, semaphore, responseSender, server);
-    thread sendDataOnTickThread(&LogService::sendDataOnTick, logService, &offersBook, semaphore, responseSender);
-    thread printContextThread(&LogService::printContextOnTick, logService, &offersBook, &rawOrdersQueue);
+    thread sendMarketDataOnTickThread(&LogService::sendMarkedDataOnTick, logService, &offersBook, semaphore, responseSender);
     thread marketServerThread(&Server::acceptConnections, server, &rawOrdersQueue, semaphore);
+    thread metricsSystemThread(&MetricsSystem::startMetricsSystem, metricsSystem, semaphore);
 
     marketServerThread.join();
     readOrdersThread.join();
     ordersProcessorThread.join();
-    sendDataOnTickThread.join();
-    printContextThread.join();
+    sendMarketDataOnTickThread.join();
+    metricsSystemThread.join();
 
     return 0;
 }

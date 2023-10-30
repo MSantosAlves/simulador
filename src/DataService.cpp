@@ -90,6 +90,8 @@ void DataService::startAcquisition(queue<string> *rawOrdersQueue, Semaphore *sem
             if (sleepTimeInMs > 0)
             {
                 this_thread::sleep_for(chrono::milliseconds(sleepTimeInMs));
+            }else{
+                this_thread::sleep_for(chrono::microseconds(100));
             }
 
             clock->setSimulationTime(priorityTime);

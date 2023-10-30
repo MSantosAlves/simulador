@@ -30,7 +30,7 @@ int Context::getTotalOrdersSize()
 string Context::getSimulationExecutedHumandReadable()
 {
     float simulationExecuted = ordersRead / float(totalOrdersSize);
-    int fileReadInPercent = ceil(simulationExecuted * 100);
+    float fileReadInPercent = simulationExecuted * 100;
     return to_string(fileReadInPercent);
 }
 

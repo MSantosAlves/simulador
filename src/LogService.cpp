@@ -270,7 +270,7 @@ map<string, vector<StockMarketVolume>> getMarketVolume(map<string, StockInfo> *o
     return marketVolume;
 }
 
-void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
+void LogService::sendMarkedDataOnTick(map<string, StockInfo> *offersBook, Semaphore *semaphore, ServerResponseSender *responseSender)
 {
     chrono::milliseconds tick(1000);
     map<string, vector<StockMarketVolume>> marketVolume;
@@ -302,37 +302,6 @@ void LogService::sendDataOnTick(map<string, StockInfo> *offersBook, Semaphore *s
         responseSender->sendResponse(jsonObject);
 
         semaphore->release();
-        this_thread::sleep_for(tick);
-    }
-
-    return;
-}
-
-void LogService::printContextOnTick(map<string, StockInfo> *offersBook, queue<string> *rawOrdersQueue)
-{
-    int lastOrdersRead, currOrdersRead, throughput, purchases, sales, ordersQueueSize, bookSize, queueBookRatio = 0;
-    int tickSeconds = 10;
-    chrono::milliseconds tick(tickSeconds * 1000);
-    string targetStock = context->getTargetStock();
-
-    while (context->simulationShouldContinue())
-    {
-        purchases = (*offersBook)[targetStock].purchaseOrders.size();
-        sales = (*offersBook)[targetStock].saleOrders.size();
-        currOrdersRead = context->getOrdersRead();
-        lastOrdersRead = context->getLastOrdersReadValue();
-        ordersQueueSize = rawOrdersQueue->size();
-        bookSize = purchases + sales;
-        throughput = floor((currOrdersRead - lastOrdersRead) / tickSeconds);
-        
-        cout << endl;
-        cout << "Orders processed: " << context->getSimulationExecutedHumandReadable() << "% " << "(" << context->getOrdersRead() << " orders)" << endl;
-        cout << "Queue Size: " << ordersQueueSize <<  endl;
-        cout << "Book Size: " << bookSize << " (" << purchases << " C / " << sales << " V)" << endl;
-        cout << "Throughput: " << throughput << " lines/s" << endl;
-        cout << endl;
-
-       context->setLastOrdersReadValue(currOrdersRead);
         this_thread::sleep_for(tick);
     }
 

@@ -18,8 +18,7 @@ class LogService
 public:
 	LogService(Clock* clock, Context* context);
 	void startLogSystem(map<string, StockInfo> *offersBook, Semaphore *semaphore);
-	void sendDataOnTick(map<string, StockInfo>* offersBook, Semaphore* semaphore, ServerResponseSender* responseSender);
-	void printContextOnTick(map<string, StockInfo> *offersBook, queue<string> *rawOrdersQueue);
+	void sendMarkedDataOnTick(map<string, StockInfo>* offersBook, Semaphore* semaphore, ServerResponseSender* responseSender);
 	Clock* clock;
 	Context* context;
 };
