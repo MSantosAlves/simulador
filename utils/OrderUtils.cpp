@@ -144,10 +144,16 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
 
         double tradePrice = 0.0;
 
-        // TODO: Review price model
         if ((*offersBook)[symbol].lastTradePrice != 0)
         {
-            tradePrice = (currPurchaseOrder.getOrderPrice() + currSaleOrder.getOrderPrice() + (*offersBook)[symbol].lastTradePrice) / 3.0;
+            if (abs(currPurchaseOrder.getOrderPrice() - (*offersBook)[symbol].lastTradePrice) > abs(currSaleOrder.getOrderPrice() - (*offersBook)[symbol].lastTradePrice))
+            {
+                tradePrice = currSaleOrder.getOrderPrice();
+            }
+            else
+            {
+                tradePrice = currPurchaseOrder.getOrderPrice();
+            }
         }
         else
         {

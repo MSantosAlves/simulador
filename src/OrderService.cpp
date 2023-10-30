@@ -359,12 +359,50 @@ void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string,
     int orderStatus;
     Order *orderBuffer = new Order();
     int ordersProcessed = 0;
+    int nbOfLines = context->getTotalOrdersSize();
 
-    while (true)
+    while (ordersProcessed <= nbOfLines)
     {
         semaphore->acquire();
 
-        while (rawOrdersQueue->size() > 10000)
+        if (rawOrdersQueue->size() > 10000)
+        {
+            while (rawOrdersQueue->size() > 10000)
+            {
+                rawCurrOrder = rawOrdersQueue->front();
+                symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
+                rawOrdersQueue->pop();
+
+                orderUtils->parseOrder(rawCurrOrder, stringUtils, orderBuffer);
+
+                orderStatus = orderBuffer->getOrderStatus() == "C" ? 9 : stoi(orderBuffer->getOrderStatus());
+
+                if (orderStatus == OrderStatuses::Status::REJECTED || orderStatus == OrderStatuses::Status::PARTIALLY_FILLED || orderStatus == OrderStatuses::Status::FILLED)
+                {
+                    // Just ignore
+                }
+                else if (orderStatus == OrderStatuses::Status::CANCELLED || orderStatus == OrderStatuses::Status::EXPIRED)
+                {
+                    handleCancelOrExpiredOrder(symbol, orderBuffer, offersBook);
+                }
+                else if (orderStatus == OrderStatuses::Status::REPLACED)
+                {
+                    handleReplacedOrder(symbol, orderBuffer, offersBook, arrayUtils, orderUtils, responseSender, clock);
+                }
+                else if (orderStatus == OrderStatuses::Status::NEW)
+                {
+                    handleNewOrder(symbol, orderBuffer, offersBook, arrayUtils, orderUtils, responseSender, clock);
+                }
+                else
+                {
+                    std::cout << "[ERROR] Unmaped Order Status: " << orderBuffer->getOrderStatus() << endl;
+                }
+
+                ordersProcessed++;
+                context->setOrdersRead(ordersProcessed);
+            }
+        }
+        else
         {
             rawCurrOrder = rawOrdersQueue->front();
             symbol = stringUtils.removeWhiteSpaces(stringUtils.split(rawCurrOrder, ';')[1]);
@@ -392,7 +430,7 @@ void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string,
             }
             else
             {
-                cout << "[ERROR] Unmaped Order Status: " << orderBuffer->getOrderStatus() << endl;
+                std::cout << "[ERROR] Unmaped Order Status: " << orderBuffer->getOrderStatus() << endl;
             }
 
             ordersProcessed++;
@@ -402,4 +440,8 @@ void OrderService::startProcessOrders(queue<string> *rawOrdersQueue, map<string,
         semaphore->release();
         this_thread::sleep_for(chrono::milliseconds(1));
     }
+
+    std::cout << "All " << nbOfLines << " orders processed" << endl;
+    std::cout << "Simulation finished at: " << clock->getRealTimeHumanReadable() << endl;
+    std::cout << "Ficticious End time: " << clock->getSimulationTimeHumanReadable() << endl;
 }

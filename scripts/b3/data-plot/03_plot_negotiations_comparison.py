@@ -28,9 +28,13 @@ with open(history_file_path, 'r') as data_file:
 
 
 target_data_path = path + '/data/b3/20191220/raw/neg/NEG_BMF_20191220_00.txt'
-with open(target_data_path, 'r') as data_file:
+with open(target_data_path, 'rb') as data_file:
     for line in data_file:
-        data_line = line.split(";")
+
+        if len(line) < 230:
+            continue
+        
+        data_line = line.decode('utf-8').split(";")
         stock_symbol = data_line[1].strip()
         trade_cancelled = data_line[6] == 2
 
@@ -42,10 +46,7 @@ with open(target_data_path, 'r') as data_file:
 
         data_plot_y2.append(float(stock_price))
 
-size = 500
-
-print(len(data_plot_y1))
-print(len(data_plot_y2))
+size = len(data_plot_y1)#500
 
 y_values1 = data_plot_y1[::len(data_plot_y1) // size]
 
@@ -56,7 +57,7 @@ x_values = [i for i in range(0, len(y_values1))]
 
 fig, ax = plt.subplots()
 
-movement = 80
+movement = 0
 
 x_values1 = [i + movement for i in range(0, len(y_values1))]
 x_values2 = [i for i in range(0, len(y_values2))]

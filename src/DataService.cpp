@@ -51,6 +51,8 @@ void DataService::startAcquisition(queue<string> *rawOrdersQueue, Semaphore *sem
     vector<string> splitedLine = {};
     int64_t timeBetweenOrdersInMs;
     int64_t sleepTimeInMs;
+    int lineCounter = 0;
+    int fileEndLine = context->getTotalOrdersSize();
 
     if (orderType == "BOTH")
     {
@@ -72,9 +74,10 @@ void DataService::startAcquisition(queue<string> *rawOrdersQueue, Semaphore *sem
             {
                 clock->setSimulationTime(priorityTime);
                 lastPriorityTime = priorityTime;
-                cout << "Initial Real Time: " << clock->getRealTimeHumanReadable() << endl;
-                cout << "Initial Simulation Time: " << clock->getSimulationTimeHumanReadable() << endl;
+                cout << "Simulation started at: " << clock->getRealTimeHumanReadable() << endl;
+                cout << "Ficticious Start Time: " << clock->getSimulationTimeHumanReadable() << endl;
                 cout << "Reading file: " << filePath << endl;
+                cout << "File length: " << fileEndLine << endl;
                 isFirstOrder = false;
             }
 
@@ -96,16 +99,18 @@ void DataService::startAcquisition(queue<string> *rawOrdersQueue, Semaphore *sem
 
             lastPriorityTime = priorityTime;
 
+            lineCounter++;
+
             // File end was reached
-            if (!dataFile)
+            if (!dataFile || lineCounter == fileEndLine - 1)
             {
+                cout << "File " << filePath << " fully consumed." << endl;
                 dataFile.close();
                 break;
             }
 
         }
 
-        dataFile.close();
         return;
     }
 
