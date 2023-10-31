@@ -38,7 +38,7 @@ class Client:
     def receive_data_thread(self):
         while True:
             try:
-                response = self.client_socket.recv(int(1024*1e3))
+                response = self.client_socket.recv(int(1024*1e6))
                 if response:
                     responses = response.decode().split("}{")
                 
