@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 #include <chrono>
 #include <thread>
+#include <StringUtils.h>
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -74,7 +75,7 @@ int waitForConnectionsLoop(int serverSocket, struct sockaddr_in clientAddress, i
     return clientSocketConnection;
 }
 
-void Server::acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semaphore)
+void Server::acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semaphore, Clock *clock)
 {
     int addrlen = sizeof(serverAddress);
     struct sockaddr_in clientAddress;
@@ -85,6 +86,7 @@ void Server::acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semapho
     semaphore->acquire();
     clientSocket = waitForConnectionsLoop(serverSocket, clientAddress, addrlen);
     semaphore->release();
+    StringUtils stringUtils;
 
     while (true)
     {
@@ -96,6 +98,7 @@ void Server::acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semapho
             jsonData = json::parse(buffer);
             orderBuffer = jsonData["offer"];
             semaphore->acquire();
+            orderBuffer = stringUtils.replaceAllstring(orderBuffer, "PRIORITY_TIME", clock->getSimulationTimeHumanReadable());
             rawOrdersQueue->push(orderBuffer);
             semaphore->release();
         }

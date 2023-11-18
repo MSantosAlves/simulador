@@ -6,7 +6,7 @@
 #include <string>
 #include <queue>
 #include "Semaphore.h"
-
+#include "Clock.h"
 using namespace std;
 
 #ifndef __SERVER_H__
@@ -22,7 +22,7 @@ private:
 
 public:
     Server(int port);
-    void acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semaphore);
+    void acceptConnections(queue<string> *rawOrdersQueue, Semaphore *semaphore, Clock *clock);
     int *getClientSocketAddress();
 
     void closeServer();

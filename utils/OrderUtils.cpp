@@ -196,7 +196,8 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"qty", tradedQty},
                     {"id", currSaleOrder.getSequentialOrderNumber()},
                     {"price", tradePrice},
-                    {"symbol", symbol}};
+                    {"symbol", symbol},
+                    {"time", clock->getSimulationTimeHumanReadable()}};
                 responseSender->sendResponse(jsonObject);
             }
             else if (currPurchaseOrder.getOrderSource() == 1)
@@ -206,7 +207,8 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"qty", tradedQty},
                     {"id", currPurchaseOrder.getSequentialOrderNumber()},
                     {"price", tradePrice},
-                    {"symbol", symbol}};
+                    {"symbol", symbol},
+                    {"time", clock->getSimulationTimeHumanReadable()}};
                 responseSender->sendResponse(jsonObject);
             }
 
@@ -265,7 +267,8 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"qty", tradedQty},
                     {"id", currSaleOrder.getSequentialOrderNumber()},
                     {"price", tradePrice},
-                    {"symbol", symbol}};
+                    {"symbol", symbol},
+                    {"time", clock->getSimulationTimeHumanReadable()}};
                 responseSender->sendResponse(jsonObject);
             }
             else if (currPurchaseOrder.getOrderSource() == 1)
@@ -275,7 +278,8 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"qty", tradedQty},
                     {"id", currPurchaseOrder.getSequentialOrderNumber()},
                     {"price", tradePrice},
-                    {"symbol", symbol}};
+                    {"symbol", symbol},
+                    {"time", clock->getSimulationTimeHumanReadable()}};
                 responseSender->sendResponse(jsonObject);
             }
 
@@ -326,7 +330,8 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"qty", tradedQty},
                     {"id", currSaleOrder.getSequentialOrderNumber()},
                     {"price", tradePrice},
-                    {"symbol", symbol}};
+                    {"symbol", symbol},
+                    {"time", clock->getSimulationTimeHumanReadable()}};
                 responseSender->sendResponse(jsonObject);
             }
             else if (currPurchaseOrder.getOrderSource() == 1)
@@ -336,7 +341,8 @@ void OrderUtils::executePossibleTrades(string symbol, map<string, StockInfo> *of
                     {"qty", tradedQty},
                     {"id", currPurchaseOrder.getSequentialOrderNumber()},
                     {"price", tradePrice},
-                    {"symbol", symbol}};
+                    {"symbol", symbol},
+                    {"time", clock->getSimulationTimeHumanReadable()}};
                 responseSender->sendResponse(jsonObject);
             }
 

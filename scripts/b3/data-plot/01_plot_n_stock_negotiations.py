@@ -11,11 +11,16 @@ data_line = []
 data_plot_x = []
 data_plot_y = []
 
-target_stock_symbol = "DI1F22"
+target_stock_symbol = "WING20"
 with open(target_data_path, 'r') as data_file:
     for line in data_file:
-        data_line = line.split(";")
+        data_line =  line.split(";")
+
+        if len(data_line) == 1:
+            continue
+
         stock_symbol = data_line[1].strip()
+
         trade_cancelled = data_line[6] == 2
 
         if trade_cancelled or stock_symbol != target_stock_symbol:
@@ -40,8 +45,8 @@ ax.plot(x_values,y_values)
 plt.xticks(ticks=[x_values[0], x_values[-1]])
 plt.yticks(np.arange(min(y_values), max(y_values), (max(y_values) - min(y_values)) / 10))
 
-print('{} Price variation over time (Historic Data)'.format(target_stock_symbol))
-ax.set(xlabel='Time (Downsample factor of {})'.format(downsample_factor), ylabel='Price (R$)',
+print('{} Price variation over time (Real World Data)'.format(target_stock_symbol))
+ax.set(xlabel='Time'.format(downsample_factor), ylabel='Price (R$)',
        title='{} Price x Time (Historic Data)'.format(target_stock_symbol))
 ax.grid()
 

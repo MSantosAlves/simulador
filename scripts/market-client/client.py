@@ -64,6 +64,7 @@ class Client:
                             self.book.update_market_volume(res)
 
                         if res["event"] == "SIMULATION_END":
+                            print(self.trader_account.to_json())
                             self.close()
                             # Kill plotly server
                             os.kill(os.getpid(), signal.SIGTERM)

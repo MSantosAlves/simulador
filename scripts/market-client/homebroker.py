@@ -86,7 +86,7 @@ class HomeBroker:
 
     def build_buy_offer(self, price, qty):
         id = ''.join([str(random.randint(0, 8)) for _ in range(10)])
-        offer = "2019-12-20;{};1;{};0;002;10:27:01.798000;0;{};{};0;2019-12-20;2019-12-20 10:27:01;5;0;0;CLIENT".format(self.symbol, id, price, qty)
+        offer = "2019-12-20;{};1;{};0;002;10:27:01.798000;0;{};{};0;2019-12-20;PRIORITY_TIME:01;0;0;0;CLIENT".format(self.symbol, id, price, qty)
         
         json_data = {
             "offer": offer
@@ -96,7 +96,7 @@ class HomeBroker:
 
     def build_sell_offer(self, price, qty):
         id = ''.join([str(random.randint(0, 8)) for _ in range(10)])
-        offer = "2019-12-20;{};2;{};0;002;10:27:01.798000;0;{};{};0;2019-12-20;2019-12-20 10:27:01;5;0;0;CLIENT".format(self.symbol, id, price, qty)
+        offer = "2019-12-20;{};2;{};0;002;10:27:01.798000;0;{};{};0;2019-12-20;PRIORITY_TIME:01;0;0;0;CLIENT".format(self.symbol, id, price, qty)
 
         json_data = {
             "offer": offer

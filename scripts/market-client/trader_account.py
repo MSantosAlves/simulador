@@ -4,7 +4,7 @@ import json
 TRADE_EVENTS = ["SALE_OFFER_ENTIRELY_FILLED", "SALE_OFFER_PARTIALLY_FILLED", "PURCHASE_OFFER_ENTIRELY_FILLED", "PURCHASE_OFFER_PARTIALLY_FILLED"]
 
 class TraderAccount:
-    def __init__(self, book, initial_cash = 100000):
+    def __init__(self, book, initial_cash = 1000000):
         self.INITIAL_CASH = initial_cash
         self.position = {}
         self.cash = self.INITIAL_CASH
@@ -34,6 +34,8 @@ class TraderAccount:
         qty = data["qty"]
         total = int(qty) * float(price)
 
+        print(data)
+
         if(self.is_buy(event)):
             if symbol in self.position:
                 self.position[symbol] += qty
@@ -47,6 +49,7 @@ class TraderAccount:
         if self.trade_entirely_filled(event):
             position_value = self.position[symbol] * self.book.stocks[symbol]["last_trade_price"]
             self.profitAndLoss = (self.cash + position_value) / self.INITIAL_CASH
+            print(self.to_json())
 
     def buy(self, data):
         print(data)

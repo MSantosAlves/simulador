@@ -12,7 +12,7 @@ data_line = []
 data_plot_x = []
 data_plot_y = []
 
-stock_symbol = "DOLH20P003900"
+stock_symbol = "WDOF20"
 with open(target_data_path, 'r') as data_file:
     data = json.load(data_file)
 
@@ -38,7 +38,7 @@ ax.grid()
 
 filename = path + '/data/plots/' + stock_symbol + "_price_history_plot.png"
 fig.savefig(filename)
-
+print(filename)
 
 if stock_symbol not in data:
     raise Exception("Stock Symbol {} not found in negotiations file.".format(stock_symbol))

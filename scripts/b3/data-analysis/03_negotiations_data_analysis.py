@@ -54,10 +54,11 @@ destiny_path = path + '/data/b3/20191220/compiled/B3_NEG_DATA.json'
 
 # Sort the dictionary by traded_qty in descending order
 sorted_symbols = sorted(stock_neg_data.keys(), key=lambda x: stock_neg_data[x]["traded_qty"], reverse=True)
-print(sorted_symbols[0:100])
+print(sorted_symbols[0:10])
 
 
 with open(destiny_path, 'w') as f:
     f.write(json_object)
+print(destiny_path)
 
 
